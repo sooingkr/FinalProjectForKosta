@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
+
+<!-- 내부 css -->
+<style type="text/css">
+	body{
+		width: 100%;
+	}
+	body:after{
+		content: ""; display:block; clear: both;
+	}
+/* 	<!--  */
+/* 		항상 float를 쓰면 쓰고나서 그 float를 쓴 녀석의 부모 녀석에 after clear:both를 해서 풀어주어야 한다. */
+/* 	--> */
+	#header{
+		width:100%;
+		height:100px;
+		background-color:yellow;
+	}
+	#nav{
+		width:50%;
+		height:400px;
+		background-color:green;
+		float:left; 
+/* 		<!-- 아래로 내려온 것을 옆으로 붙듯이 옮기고 싶을 때 사용된다. left는 왼쪽을 기준으로 배치됨 --> */
+	}
+	#maincontent{
+		float:right;
+		width:50%;
+		height:400px;
+		background-color:aqua;
+	}
+	#footer{
+		clear:both;
+		width:100%;
+		height:100px;
+		background-color:red;
+	}
+	#wrap{
+		width:100%;
+	}
+	#wrap:after{
+		content:""; display:block; clear:both;
+	}
+
+	/* 
+		반응형 설정 : 해상도 최대 400까지는 아래를 적용함
+	 */
+	@media all and (max-width:400px){
+		#nav{
+			width:100%;
+		}
+		#maincontent{
+			width:100%;
+		}
+	}
+</style>
+	
+</head>
+<body>
+<div id="wrap">
+	<div id="header">헤더</div>
+	<div id="nav">네비게이션</div>
+	<div id="maincontent">메인</div>
+	<div id="footer">푸터</div>
+</div>
+</body>
+</html>

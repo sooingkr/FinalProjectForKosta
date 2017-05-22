@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+@font-face{
+	font-family:'myBand';
+	src:url("Band.eot");
+	src:url("Band.ttf") format("truetype");
+	src:url("Band.woff") format("woff");
+}
