@@ -44,6 +44,7 @@ public class NoteController {
 	// 쪽지 보내기(삽입) 처리
 	@RequestMapping(value="/insertNote",method=RequestMethod.POST)
 	public String insertNote(NoteVO vo,RedirectAttributes rttr,BindingResult errors){
+		//^0^ 쪽지쪽지
 		logger.info("확인 : " + vo);
 		String destination = "";
 		HashMap<String,String> error = new HashMap<String,String>();
