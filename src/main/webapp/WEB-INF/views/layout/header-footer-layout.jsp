@@ -18,14 +18,18 @@
 
 <script src="/resources/js/jquery-1.9.0.min.js"></script>
 
-  
+<script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
 <!-- 공통 CSS -->
 <!-- 부트스트랩 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css" />
@@ -50,6 +54,7 @@
         ga('send', 'pageview');
 
  </script> 
+
  <!-- 알림을 위한 polling -->
  <script>
  
@@ -88,10 +93,6 @@
  	
  </script>
 
-<script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-   
    
  <decorator:head />
 </head>
@@ -117,9 +118,7 @@
  </div>
  <!-- END OF div site-holder -->
  
-
-
-<!-- JS Plugin -->
+ <!-- JS Plugin -->
    <!-- 공통 JS -->
 <script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
@@ -128,6 +127,8 @@
     <script type="text/javascript" src="/resources/js/jquery.spritely-0.6.8.js"></script>
     <script src="/resources/js/jquery.fancybox.pack.js" type="text/javascript"></script>
      <script type="text/javascript" src="/resources/js/main.js"></script>
+
+
 </body>
 
 </html> 

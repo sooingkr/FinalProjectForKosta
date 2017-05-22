@@ -22,8 +22,12 @@ public class testController {
 	public String test4(){
 		return "templateLayout/loginForm2";
 	}
-	@RequestMapping("/loginFormTest5")
+	@RequestMapping("/FormTest5")
 	public String test5(){
 		return "templateLayout/modal1";
+	}
+	@RequestMapping("/FormTest6")
+	public String test6(){
+		return "templateLayout/modalTest";
 	}
 }
