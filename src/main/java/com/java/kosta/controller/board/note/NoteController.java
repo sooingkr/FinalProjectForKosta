@@ -27,7 +27,7 @@ public class NoteController {
 	//	황영롱 커밋
 	// Logger
 	Logger logger = LoggerFactory.getLogger(NoteController.class);
-	
+	//추가
 	// service
 	@Inject
 	NoteService service;
