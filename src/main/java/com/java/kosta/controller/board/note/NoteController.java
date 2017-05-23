@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.java.kosta.dto.board.PagingDTO;
 import com.java.kosta.dto.note.NoteVO;
+import com.java.kosta.dto.note.PagingDTO;
 import com.java.kosta.service.note.NoteService;
 import com.java.kosta.validation.ValidationForNote;
 

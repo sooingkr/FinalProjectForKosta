@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.java.kosta.dto.board.PagingDTO;
 import com.java.kosta.dto.note.NoteVO;
+import com.java.kosta.dto.note.PagingDTO;
 
 @Repository
 public class NoteDAOImpl implements NoteDAO {

@@ -2,8 +2,8 @@ package com.java.kosta.dao.note;
 
 import java.util.List;
 
-import com.java.kosta.dto.board.PagingDTO;
 import com.java.kosta.dto.note.NoteVO;
+import com.java.kosta.dto.note.PagingDTO;
 
 public interface NoteDAO {
 

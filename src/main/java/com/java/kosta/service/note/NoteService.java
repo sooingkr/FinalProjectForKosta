@@ -2,8 +2,8 @@ package com.java.kosta.service.note;
 
 import java.util.List;
 
-import com.java.kosta.dto.board.PagingDTO;
 import com.java.kosta.dto.note.NoteVO;
+import com.java.kosta.dto.note.PagingDTO;
 
 public interface NoteService {
 	// 1. 쪽지 보내기(쪽지 내용 insert)

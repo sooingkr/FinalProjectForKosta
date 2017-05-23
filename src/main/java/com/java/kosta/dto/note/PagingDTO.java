@@ -1,4 +1,4 @@
-package com.java.kosta.dto.board;
+package com.java.kosta.dto.note;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;

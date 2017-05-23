@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.java.kosta.dao.note.NoteDAO;
-import com.java.kosta.dto.board.PagingDTO;
 import com.java.kosta.dto.note.NoteVO;
+import com.java.kosta.dto.note.PagingDTO;
 
 @Service
 public class NoteServiceImpl implements NoteService {
