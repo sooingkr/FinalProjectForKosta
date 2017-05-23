@@ -61,10 +61,8 @@ public class NoteController {
 		}else{
 			// 쪽지 table에 추가!
 			service.sendInsert(vo);
-			if(vo.getRecvId().equals("sooingkr")){
-				destination = "note/noteNoti";				
-			}
-			destination = "redirect:/";
+			destination = "note/noteNoti";				
+			
 		}
 		return destination;
 	} // end of insertNote
