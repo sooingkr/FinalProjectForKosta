@@ -13,7 +13,7 @@
 	<!-- START NOTICE SECTION -->
 	<div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
 		<!-- START HEADER -->
-		<header class="site-header yellow"> 
+		<header class="site-header grey"> 
 			<span class="nav-trigger">
 			<span class="nav-trigger-inside"> 
 			<span class="nav-trigger-line"></span></span></span> 

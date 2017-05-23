@@ -25,7 +25,7 @@
 	<!-- START NOTICE BOARD SECTION -->
 	<div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
 		<!-- START HEADER -->
-		<header class="site-header yellow"> <span class="nav-trigger">
+		<header class="site-header grey"> <span class="nav-trigger">
 			<span class="nav-trigger-inside"> <span
 				class="nav-trigger-line"></span>
 		</span>
@@ -109,7 +109,7 @@
 						<!-- <a href="/category/writeForm" >글작성</a> -->
 						<button type="button" onclick="location.href='/notice/writeBoardForm?cateId=${cateDTO.cateId}'">글작성</button>
 					</td></tr>
-				</table>
+				</table><br/><br/>
 		
 			</div>
 		</div>

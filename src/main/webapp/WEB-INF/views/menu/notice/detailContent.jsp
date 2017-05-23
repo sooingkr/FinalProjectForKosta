@@ -15,7 +15,7 @@
 	<!-- START NOTICE SECTION -->
 	<div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
 		<!-- START HEADER -->
-		<header class="site-header yellow"> 
+		<header class="site-header grey"> 
 			<span class="nav-trigger">
 			<span class="nav-trigger-inside"> 
 			<span class="nav-trigger-line"></span></span>
@@ -58,17 +58,17 @@
 				<table align="right">
 					<tr>
 						<td>
-							<button type="button" style="width:65px" onclick="location.href='/notice/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
+							<button type="button" style="width:70px" onclick="location.href='/notice/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
 						</td>
 						<td>
-							&nbsp;<button style="width:65px" type="button" onclick="deleteContent()">글삭제</button>
+							&nbsp;<button style="width:70px" type="button" onclick="deleteContent()">글삭제</button>
 						</td>
 						<td align="right">
-							&nbsp;<button type="button" style="width:65px" onclick="location.href='/notice/boardList?cateId=${cateDTO.cateId}'">목록</button>
+							&nbsp;<button type="button" style="width:70px" onclick="location.href='/notice/boardList?cateId=${cateDTO.cateId}'">목록</button>
 						</td>
 					</tr>
 				</table>
-				<br/><br/>
+				<br/><br/><br/><br/>
 				
 			</div>
 		</div>
