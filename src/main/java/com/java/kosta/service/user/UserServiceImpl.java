@@ -18,4 +18,11 @@ public class UserServiceImpl implements UserService {
 	public UserVO login(UserVO vo) {
 		return dao.login(vo);
 	}
+
+	// 아이디 중복체크
+	@Override
+	public int idCheck(String userId) {
+		return dao.idCheck(userId);
+	}
+	
 }

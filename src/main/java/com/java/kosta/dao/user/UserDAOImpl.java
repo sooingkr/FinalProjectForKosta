@@ -13,8 +13,16 @@ public class UserDAOImpl implements UserDAO {
 	SqlSession sqlSession;
 	private final static String NAMESPACE = "UserMapper";
 
+	// 로그인
 	@Override
 	public UserVO login(UserVO vo) {
 		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
+
+	// 아이디 중복체크
+	@Override
+	public int idCheck(String userId) {
+		return sqlSession.selectOne(NAMESPACE + ".idCheck", userId);
+	}
+	
 }

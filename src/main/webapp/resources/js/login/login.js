@@ -23,7 +23,7 @@ $(document).ready(function() {
          success : function(data) {
             console.log(data);
 
-            if (data.result == "success") {
+            if (data.result == "ok") {
                /*경로 변경해줘야 해 타임라인으로*/
                location.replace("/"); 
                return;
@@ -31,7 +31,6 @@ $(document).ready(function() {
                alert(data.resultMsg);
                return;
             }
-
          },
          error : function(xhr, status, error) {
             console.log(xhr);
