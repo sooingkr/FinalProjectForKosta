@@ -327,15 +327,25 @@ img, iframe { vertical-align: middle; }
 	z-index: 3;
 }
 .main-logo .logo-arrow {
-    background: url(../images/arrow_right.png) left top no-repeat;
-	position: absolute;
-	left: 50%;
-	margin-left: -30px;
-	top: 310px;
+    /* background: url(../images/arrow_right.png) left top no-repeat; */
+   position: absolute;
+   left: 50%;
+   margin-left: -130px;
+   margin-top: 30px;
+   top: 300px;
     height: 67px;
-    width: 67px;
-	z-index: 3;
+    width: 250px;
+   z-index: 3;
 }
+
+.login{
+   width: 230px;
+   background-color: white;
+   color : black;
+   border-color: #FFA648;
+   font-weight: bold;
+}
+
 .flubber {
 	position: absolute;
 	top: 40%;

@@ -1,4 +1,5 @@
 package com.java.kosta.dao.user;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,15 +12,9 @@ public class UserDAOImpl implements UserDAO {
 	@Inject
 	SqlSession sqlSession;
 	private final static String NAMESPACE = "UserMapper";
-	
-	@Override
-	public void insertUser(UserVO vo) {
-		sqlSession.insert(NAMESPACE+".insertUser", vo);
-	}
 
 	@Override
-	public UserVO checkDuplicateId(String userId) {
-		return sqlSession.selectOne(NAMESPACE+".checkDuplicate", userId);
+	public UserVO login(UserVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
-
 }

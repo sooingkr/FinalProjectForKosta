@@ -1,4 +1,5 @@
 package com.java.kosta.service.user;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -11,17 +12,10 @@ public class UserServiceImpl implements UserService {
 
 	@Inject
 	UserDAOImpl dao;
-	
-	// 회원가입 
-	@Override
-	public void insertUser(UserVO vo) {
-		dao.insertUser(vo);
-	}
 
+	// 로그인
 	@Override
-	public UserVO checkDuplicateId(String userId) {
-		// TODO Auto-generated method stub
-		return dao.checkDuplicateId(userId);
+	public UserVO login(UserVO vo) {
+		return dao.login(vo);
 	}
-
 }

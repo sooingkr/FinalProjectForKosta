@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- [ 사용자에 대한 처리를 담당합니다. ] -->
+<mapper namespace="UserMapper">
+
+	<!-- 로그인 (암호화아직 안댔음)-->
+	<select id="login" resultType="UserVO">
+		SELECT * FROM usertable
+		WHERE userId = #{userId} AND userPw = #{userPw}
+	</select>
+	
+</mapper>

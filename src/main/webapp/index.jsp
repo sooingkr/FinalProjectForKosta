@@ -39,9 +39,47 @@
                         </div>
                         <div class="logo-img">
                         </div>
-                        <a href="#about"><span class="logo-arrow"></span></a>
+						 <div class="logo-arrow"> 
+						 	<button type="button" class="btn btn-lg login" data-toggle="modal" data-target="#loginModal">회원 로그인</button>
+						 </div>
                     </div>
+                    <!-- Modal -->
+				      <div class="modal fade" id="loginModal" role="dialog">
+				         <div class="modal-dialog">
+				            <form class="form center-block" action="/login/loginProc" method="post">
+				               <!-- Modal content-->
+				               <div class="modal-content">
+				                  <div class="modal-header">
+				                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+				                     <h1 class="text-center">Login</h1>
+				                  </div>
+				                  
+				                  <div class="modal-body">
+				                     <div class="form-group">
+				                        <input type="text" class="form-control input-lg" placeholder="ID"  id = "userId" name ="userId">
+				                     </div>
+				                     <div class="form-group">
+				                        <input type="password" class="form-control input-lg" placeholder="Password" id ="userPw" name="userPw">
+				                     </div>
+				                     <div class="form-group form col-md-12">
+				                        <span><a href="#">아이디찾기</a></span> / 
+				                        <span><a href="#">비밀번호찾기</a></span>
+				                        <span style="float: right"><input name="useCookie" type="checkbox" id="useCookie">자동로그인</span>
+				                     </div>
+				                  </div>
+				                  <br />
+				                  <div class="modal-footer">
+				                     <div class="col-md-12">
+				                        <a href="/user/subscribeJoin" class="btn btn-info">회원가입</a> 
+				                        <input type="button" class="btn btn-warning"  id="login" value="로그인" />
+				                     </div>
+				                  </div>
+				               </div>
+				            </form>
+				         </div>
+				      </div>
                     <!-- END LOGO -->
+                    
                     <!-- START FLUBBER -->
                     <div class="flubber">
                         <div id="flubber" class="flubber-guy">
