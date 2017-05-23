@@ -7,9 +7,8 @@
 <title>TeamSection</title>
 </head>
 <body class="index page-index">
-			<div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
 <!-- START TEAM SECTION -->
-            <div class="f-page gray-bkg" id="screen-team">
+           <div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
                 <!-- START HEADER -->
                 <header class="site-header grey">
                 <span class="nav-trigger">

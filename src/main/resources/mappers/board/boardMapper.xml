@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.kosta.dao.board.BoardDAO">
+    <sql id="boardCol">
+        bno AS bNo,
+        userId,
+        cateId,
+        btitle AS bTitle,
+        bcontent AS bContent,
+   		value,
+   		isSwap,
+        viewcnt AS viewCnt,
+        bregdate AS bRegDate,
+        bmodifydate AS bModifyDate
+        
+    </sql>
+    
+    <!-- 게시글 한 건 조회 -->
+    <select id="selectBoardOne" resultType="BoardDTO">
+        SELECT <include refid="boardCol"/>
+        FROM board
+        WHERE bno = #{bNo}
+    </select>
+    
+    <!-- 전체 레코드 갯수 조회 -->
+    <select id="selectBoardListTotalCount" resultType="int" >
+        SELECT COUNT(*) 
+        FROM 
+        	board
+        WHERE
+	    	cateId = #{cateId}
+	   		<if test="pagingDTO.searchType == 'titleContent'">
+	    	    AND btitle like CONCAT('%', #{pagingDTO.searchText}, '%') OR bcontent like CONCAT('%', #{pagingDTO.searchText}, '%')
+	    	</if>
+	    	<if test="pagingDTO.searchType == 'writer'">
+	    	    AND userId like CONCAT('%', #{pagingDTO.searchText}, '%')
+	    	</if>
+	    	<if test="pagingDTO.searchType == 'title'">
+	    	    AND btitle like CONCAT('%', #{pagingDTO.searchText}, '%')
+	    	</if>
+    </select>
+    
+    <!-- 게시글 리스트 조회 -->
+    <select id="selectBoardList" resultType="BoardDTO" >
+        SELECT <include refid="boardCol"/>
+        FROM board
+       	WHERE
+        	cateId = #{cateId} 
+	    	<if test="pagingDTO.searchType == 'titleContent'">
+	    	    AND btitle like CONCAT('%', #{pagingDTO.searchText}, '%') OR bcontent like CONCAT('%', #{pagingDTO.searchText}, '%')
+	    	</if>
+	    	<if test="pagingDTO.searchType == 'writer'">
+	    	    AND userId like CONCAT('%', #{pagingDTO.searchText}, '%')
+	    	</if>
+	    	<if test="pagingDTO.searchType == 'title'">
+	    	    AND btitle like CONCAT('%', #{pagingDTO.searchText}, '%')
+	    	</if>
+        ORDER BY bno DESC
+        LIMIT #{pagingDTO.startRow}, #{pagingDTO.endRow}
+    </select>
+ 
+    <!-- 게시글 삽입 -->
+	<insert id="insertBoard" >
+		INSERT INTO board (
+			userId,
+			cateId,
+			btitle,
+			bcontent,
+			value,
+			bmodifydate
+		) VALUES (
+			#{userId}, 
+	    	#{cateId}, 
+	    	#{bTitle}, 
+	    	#{bContent},
+	    	#{value},
+	    	now()
+		)
+    </insert>
+    
+	<!-- 게시글 수정 -->
+    <update id="updateBoard">
+        UPDATE
+ 	    	board
+ 	    SET
+ 	    	btitle =  #{bTitle},
+ 	    	bcontent = #{bContent},
+ 	    	bmodifydate = now()
+ 	    WHERE
+ 	    	bno = #{bNo}
+    </update>
+    
+    <!-- 게시글 조회수 업데이트 -->
+    <update id="updateViewCnt">
+        UPDATE
+        	board
+        SET
+        	viewcnt = viewCnt+1
+        WHERE
+        	bno = #{bNo}
+    </update>
+	
+    <!-- 게시글 삭제 -->
+	<delete id="deleteBoard" >
+	    DELETE FROM board
+ 	    WHERE bno = #{bNo}
+	</delete>
+	
+	<!-- 게시글 삭제시 댓글 전체 삭제 -->
+	<delete id="deleteBoardReplyAll">
+	    DELETE FROM boardreply
+	    WHERE bno = #{bNo}
+	</delete>
+	
+	<!-- 카테고리명 조회 -->
+	<select id="selectCategory" resultType="CategoryDTO">
+	    SELECT *
+	    FROM category
+	    WHERE cateId = #{cateId}
+	</select>
+	
+ 	
+</mapper>
+
+
+
+
+
+

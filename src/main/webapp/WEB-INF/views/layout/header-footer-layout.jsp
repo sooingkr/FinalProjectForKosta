@@ -17,8 +17,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 <script src="/resources/js/jquery-1.9.0.min.js"></script>
-
 <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+    
+
 <!-- 공통 CSS -->
 <!-- 부트스트랩 -->
 
@@ -28,14 +34,12 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css" />
     <!-- Main Style -->
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-<!-- 	 	 	 Responsive -->
+	<!-- Responsive -->
      <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"> 
     <!-- PrettyPhoto -->
     <link rel="stylesheet" type="text/css" href="/resources/css/prettyPhoto.css">
@@ -57,7 +61,7 @@
 
  <!-- 알림을 위한 polling -->
  <script>
- 
+ /* 
 	$(function(){
  		poll();
  	});
@@ -77,7 +81,7 @@
 			})
 		},5000);
 	}
-	
+	 */
  	/* function poll(){ 
  		$.ajax({ 
  		url: "/note/listNotOpen", 
@@ -120,14 +124,12 @@
  
  <!-- JS Plugin -->
    <!-- 공통 JS -->
-<script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/resources/js/mobicom.custom.js"></script>
-    
     <script type="text/javascript" src="/resources/js/jquery.spritely-0.6.8.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
     <script src="/resources/js/jquery.fancybox.pack.js" type="text/javascript"></script>
-     <script type="text/javascript" src="/resources/js/main.js"></script>
-
+    <script type="text/javascript" src="/resources/js/main.js"></script>
 
 </body>
 

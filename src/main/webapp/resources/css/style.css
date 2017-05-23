@@ -317,13 +317,13 @@ img, iframe { vertical-align: middle; }
 	width: 298px;
 }
 .main-logo .logo-img {
-    background: url(../images/logo.png) left top no-repeat;
+    background: url(../images/logo_yellow_small.png) left top no-repeat;
 	position: absolute;
 	left: 50%;
-	margin-left: -113px;
-	top: 35px;
+	margin-left: -250px;
+	top: 100px;
     height: 262px;
-    width: 225px;
+    width: 500px;
 	z-index: 3;
 }
 .main-logo .logo-arrow {
@@ -675,7 +675,7 @@ img, iframe { vertical-align: middle; }
     font-size: 14px;
     border: 1px solid #a5aeaf;    
     padding: 2px 20px 0px;
-    margin-left: -21px;
+    /* margin-left: -21px; */
     outline: none;
     width: 100%;
 }
@@ -689,7 +689,7 @@ img, iframe { vertical-align: middle; }
 #form-contact .call{margin:15px 20px;float:left;color:#000;font-size:18px;}
 #hello {
     font-family: 'proxima-nova';
-    font-size: 640%;
+    font-size: 300%;
     color: #000;
     line-height: 0.8;
     margin: 0px 0px 3%;

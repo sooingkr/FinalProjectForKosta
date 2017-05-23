@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-
+<body class="index page-index">
  <!-- START TALK TO US SECTION -->
-            <div class="f-page yellow-bkg active" class="f-page yellow-bkg" id="screen-talk-to-us">
+            <div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
                 <!-- START HEADER -->
                 <header class="site-header yellow">
                 <span class="nav-trigger">
@@ -72,3 +72,5 @@
 		$("#talktous").attr("class","active");
 	})
 </script>
+</body>
+</html>
