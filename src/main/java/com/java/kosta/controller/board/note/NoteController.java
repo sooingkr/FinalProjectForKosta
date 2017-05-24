@@ -128,7 +128,7 @@ public class NoteController {
 		service.deliteFromReceiverUpdate(mno);
 		// 실재 삭제작업 수행할 수 있는지 해보기
 		service.deleteBoth(mno);
-		return "note/listReceive";
+		return "redirect:/note/listReceive";
 	}; // end of delFromReceiver
 
 	// 보낸 쪽지 보관함에서 삭제하는 경우

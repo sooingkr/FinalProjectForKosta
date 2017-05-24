@@ -60,7 +60,7 @@
 
  <!-- 알림을 위한 polling -->
  <script>
- /* 
+ 
 	$(function(){
  		poll();
  	});
@@ -90,7 +90,7 @@
  		complete: poll, 
  		timeout: 10000
  		}); 
- 	} */
+ 	} 
  </script>
  <script>
  	
