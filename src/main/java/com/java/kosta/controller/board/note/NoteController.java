@@ -25,7 +25,7 @@ import com.java.kosta.validation.ValidationForNote;
 @RequestMapping("/note/*")
 public class NoteController {
 	//	황영롱 커밋
-	// Logger
+	// Logger 
 	Logger logger = LoggerFactory.getLogger(NoteController.class);
 	//추가
 	// service

@@ -21,7 +21,8 @@ import com.java.kosta.service.board.BoardServiceImpl;
 @Controller
 @RequestMapping("/board/category/*")
 public class BoardController {
-
+	// 보드 컨트롤러 수정해봄
+	// 하하하
    @Inject
    BoardServiceImpl service;
    
