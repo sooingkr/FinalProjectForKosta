@@ -24,7 +24,6 @@ import com.java.kosta.validation.ValidationForNote;
 @Controller
 @RequestMapping("/note/*")
 public class NoteController {
-	//	황영롱 커밋
 	// Logger 
 	Logger logger = LoggerFactory.getLogger(NoteController.class);
 	//추가
@@ -86,13 +85,21 @@ public class NoteController {
 	// 안 읽은 쪽지함 목록
 	@RequestMapping(value="listNotOpen")
 	public String listNotOpened(NoteVO vo,PagingDTO page, Model model, HttpServletRequest req) throws Exception{
-		vo.setRecvId("dudfhd13");
+		
+		HttpSession session = req.getSession();
+		
+		vo = (NoteVO) session.getAttribute("loginSession");
+		
 		page.setTotalCount(service.totalCntNotOpen(vo));
+		
 		List<NoteVO> list = service.listNotOpen(vo,page);
-		req.getSession().setAttribute("notOpen", list.size()+"");
-		logger.info("확인 : "+ list);
+		
+		session.setAttribute("notOpen", list.size()+"");
+
 		model.addAttribute("list", list);
+	
 		model.addAttribute("pageMaker", page);
+		
 		return "note/listNotOpen";
 	}
 	
