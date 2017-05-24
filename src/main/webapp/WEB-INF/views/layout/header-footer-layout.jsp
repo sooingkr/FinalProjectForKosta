@@ -80,7 +80,7 @@
 			})
 		},5000);
 	}
-	 */
+	 
  	/* function poll(){ 
  		$.ajax({ 
  		url: "/note/listNotOpen", 
@@ -91,6 +91,7 @@
  		timeout: 10000
  		}); 
  	} 
+ 	*/
  </script>
  <script>
  	
