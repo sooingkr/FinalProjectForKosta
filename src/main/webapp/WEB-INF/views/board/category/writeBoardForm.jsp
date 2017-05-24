@@ -36,7 +36,8 @@
 						</tr>
 						<tr>
 							<th style="width:20%"> 작성자</th>
-							<td><input style="width:100%; border:0;" type="text" name="userId" required/></td>
+							<td>${loginSession.userId}
+								<input style="width:100%; border:0;" type="hidden" name="userId" value="${loginSession.userId}" required/></td>
 						</tr>
 						<tr>
 							<th style="width:20%"> 제목</th>

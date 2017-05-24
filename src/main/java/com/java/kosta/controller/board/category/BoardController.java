@@ -1,8 +1,6 @@
 package com.java.kosta.controller.board.category;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.kosta.common.Constants;
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.BoardReplyDTO;
-import com.java.kosta.dto.board.CategoryDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.board.CategoryDTO;
+import com.java.kosta.dto.user.UserVO;
 import com.java.kosta.service.board.BoardServiceImpl;
 
 @Controller
@@ -45,7 +42,7 @@ public class BoardController {
          List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
          model.addAttribute("boardList", list);
          model.addAttribute("pagingDTO", pagingDTO);
-      
+         
       } catch (Exception e) {
          e.printStackTrace();
       }
@@ -62,8 +59,9 @@ public class BoardController {
          CategoryDTO cateDTO = service.selectCategory(cateId);
          model.addAttribute("cateDTO", cateDTO);
          
-   //      UserVO loggedInUser= req.getSession().getAttribute();   //로그인 세션 가져오기
-   //      model.addAttribute("loggedInUser", loggedInUser);
+         // 로그인 세션 정보 넘기기
+         UserVO loginSession= (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);  
+         model.addAttribute("loginSession", loginSession);
          
       }catch(Exception e){
          e.printStackTrace();
@@ -91,7 +89,7 @@ public class BoardController {
    
    /** 선택 게시글 상세 보기 */
    @RequestMapping("/detailContent")
-   public String detailContent(@RequestParam(value="bno") String bNo, Model model){
+   public String detailContent(@RequestParam(value="bno") String bNo, Model model, HttpServletRequest req){
       try {
          // 게시글 한건 조회
          BoardDTO dto = service.selectBoardOne(bNo);
@@ -103,6 +101,12 @@ public class BoardController {
          //카테고리 조회
          CategoryDTO cateDTO = service.selectCategory(dto.getCateId());
          model.addAttribute("cateDTO", cateDTO);
+         
+         // 로그인 세션 정보 넘기기 
+         //		작성자와 로그인 세션 아이디가 같을 경우만 글삭제/글수정 버튼 보이도록 하기 위해
+         UserVO loginSession= (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);   
+         model.addAttribute("loginSession", loginSession);
+         System.out.println(loginSession.getUserId());
 
       } catch (Exception e) {
          e.printStackTrace();

@@ -37,4 +37,13 @@ public interface BoardDAO {
 
 	/** 게시글 삭제 시 해당 댓글 모두 삭제*/
 	public void deleteBoardReplyAll(String bNo);
+	
+	/** 좋아요 조회 */
+	public int searchFavorite(@Param("userId") String userId, @Param("bNo") String bNo);
+
+	/** 좋아요 */
+	public void favoriteBoard(@Param("userId") String userId, @Param("bNo") String bNo);
+
+	/** 좋아요 취소 */
+	public void unfavoriteBoard(@Param("userId") String userId, @Param("bNo") String bNo);
 }

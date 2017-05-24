@@ -41,4 +41,14 @@ public interface BoardService {
 
 	/** 게시글 삭제 시 해당 댓글 모두 삭제*/
 	public void deleteBoardReplyAll(String bNo);
+	
+	//////////////////////////////// 좋아요////////////////////////////////////////////
+	/** 좋아요 조회 */
+	public int searchFavorite(String userId, String bNo);
+
+	/** 좋아요 */
+	public void favoriteBoard(String userId,String bNo);
+
+	/** 좋아요 취소 */
+	public void unfavoriteBoard(String userId, String bNo);
 }

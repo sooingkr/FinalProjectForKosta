@@ -66,7 +66,33 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public void deleteBoardReplyAll(String bNo) {
-		sqlSession.delete(NameSpace+".deleteBoardReplyAll", bNo);
+		sqlSession.delete(NameSpace + ".deleteBoardReplyAll", bNo);
+	}
+
+	@Override
+	public int searchFavorite(String userId, String bNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bNo", bNo);
+		map.put("userId", userId);
+		return sqlSession.selectOne(NameSpace + ".searchFavorite", map);
+	}
+
+	@Override
+	public void favoriteBoard(String userId, String bNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bNo", bNo);
+		map.put("userId", userId);
+		sqlSession.insert(NameSpace + ".favoriteBoard", map);
+
+	}
+
+	@Override
+	public void unfavoriteBoard(String userId, String bNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bNo", bNo);
+		map.put("userId", userId);
+		sqlSession.delete(NameSpace + ".unfavoriteBoard", map);
+
 	}
 
 }

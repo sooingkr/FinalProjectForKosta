@@ -121,6 +121,37 @@
 	    WHERE cateId = #{cateId}
 	</select>
 	
+	   <!-- 좋아요 조회 -->
+    <select id="searchFavorite" resultType="int">
+       SELECT COUNT(*) 
+        FROM 
+           favorite
+        WHERE
+          bno = #{bNo}
+       AND userId=#{userId}
+    
+    </select>
+    
+       <!-- 좋아요  -->
+   <insert id = "favoriteBoard">
+   
+   INSERT INTO favorite (
+         userId,
+         bno
+      ) VALUES (
+         #{userId},
+         #{bNo} 
+      )
+   
+   </insert>
+   
+   <!-- 좋아요 취소 -->
+   <delete id="unfavoriteBoard" >
+       DELETE FROM favorite
+        WHERE bno = #{bNo} 
+        AND userId=#{userId}
+   </delete>
+	
  	
 </mapper>
 

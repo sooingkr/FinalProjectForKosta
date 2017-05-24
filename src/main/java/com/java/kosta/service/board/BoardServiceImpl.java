@@ -65,5 +65,21 @@ public class BoardServiceImpl implements BoardService{
 	public void deleteBoardReplyAll(String bNo) {
 		bDAO.deleteBoardReplyAll(bNo);
 	}
+	
+	/////////////////////////////////// 좋아요////////////////////////////////////////////
+	@Override
+	public int searchFavorite(String userId, String bNo) {
+		return bDAO.searchFavorite(userId, bNo);
+	}
+
+	@Override
+	public void favoriteBoard(String userId, String bNo) {
+		bDAO.favoriteBoard(userId, bNo);
+	}
+
+	@Override
+	public void unfavoriteBoard(String userId, String bNo) {
+		bDAO.unfavoriteBoard(userId, bNo);
+	}
 
 }

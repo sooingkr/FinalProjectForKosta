@@ -45,44 +45,53 @@
 				<h1 id="hello">${cateDTO.cateName}</h1>
 				<table class="table table-bordered">
 					<tr>
-						<th style="width: 20%">카테고리</th>
+						<th style="width: 20%; background:#aaa; text-align:center; ">카테고리</th>
 						<td >${cateDTO.cateName}<input type="hidden" name="bCategory" value="${boardDTO.cateId}" /></td>
-						<th style="width: 20%">조회수</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">조회수</th>
 						<td>${boardDTO.viewCnt }</td>
 					</tr>
 					<tr>
-						<th style="width: 20%">작성일</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">작성일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }" /> </td>
-						<th style="width: 20%">수정일</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">수정일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bModifyDate }" /> </td>
 					</tr>
 					<tr>
-						<th style="width: 20%">작성자</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">작성자</th>
 						<td colspan="3">${boardDTO.userId}</td>
 					</tr>
 					<tr>
-						<th style="width: 20%">제목</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">제목</th>
 						<td colspan="3">${boardDTO.bTitle}</td>
 					</tr>
 					<tr>
-						<th style="width: 20%">내용</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">내용</th>
 						<td colspan="3"><pre style="height:500px;">${boardDTO.bContent}</pre></td>
 					</tr>
 					<tr>
-						<th style="width: 20%">상품 가치</th>
+						<th style="width: 20%; background:#aaa; text-align:center;">상품 가치</th>
 						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 				</table>
 				<table align="right">
 					<tr>
-						<td>
-							<button type="button" style="width:65px" onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
-						</td>
-						<td>
-							&nbsp;<button style="width:65px" type="button" onclick="deleteContent()">글삭제</button>
-						</td>
+						<td><input type="hidden" name="userId"
+							value="${loginSession.userId}" /> <input type="hidden" id="bNo"
+							value="${boardDTO.bNo}" />
+							<div id="content">
+								<button id="likeBoard" type="button" style="width: 65px"></button>
+							</div></td>
+
+						<c:if test="${loginSession.userId == boardDTO.userId }">
+							<td>
+								<button type="button" style="width:70px" onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
+							</td>
+							<td>
+								&nbsp;<button style="width:70px" type="button" onclick="deleteContent()">글삭제</button>
+							</td>
+						</c:if>
 						<td align="right">
-							&nbsp;<button type="button" style="width:65px" onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}'">목록</button>
+							&nbsp;<button type="button" style="width:70px" onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}'">목록</button>
 						</td>
 					</tr>
 				</table>
@@ -152,6 +161,8 @@
 			
 			//ready 함수
 			$(function(){
+				
+				check();
 				
 				//댓글 리스트 가져와서 뿌려주는 함수
 				showNextReplyList();
@@ -235,6 +246,7 @@
 	        				}
 	        			}
 	        		}); // end of ajax
+	        		
 	        	}); // end of del
 	        	
 	        	// 댓글 수정버튼 클릭시
@@ -269,7 +281,11 @@
 	        		$("#modDiv").hide("slow");
 	        	})
 				
-				
+	            $("#likeBoard").on("click",function(event){
+	                update();
+	             });
+	        	
+	            
 			});	// end of ready
 			
 			/* 다음 댓글 리스트 표시하는 함수 */
@@ -373,8 +389,53 @@
 					}
 					
         		});
-			}
+			}// end of getAllList()
 			
+        	 function check(){
+                 var bno = "${boardDTO.bNo}";
+                 var userId = "${loginSession.userId}";
+                 $.ajax({
+                   type:'get',
+                   url : '/category/checkFavorite?bno='+bno+'&userId='+userId,
+                   headers : {
+                	   "Content-Type" : "application/json",
+       					"X-HTTP-Method-Override" : "GET"
+                   },
+                   dataType:'text',
+                   success:function(result){
+                      if(result == "SUCCESS"){
+                            $("#content button").text("♥");
+                      }
+                      if(result == "FAIL"){
+                            $("#content button").text("♡");
+                      }
+                   }
+                });
+             } // end of check()
+
+      
+            function update(){
+	              var bno = "${boardDTO.bNo}";
+	              var userId = "${loginSession.userId}";
+               $.ajax({
+                  type:'get',
+                  headers:{
+                     "Content-Type":"application/json",
+                     "X-HTTP-Method-Override" : "GET"
+                  },
+                  url:'/category/handlingFavorite?bno='+bno+'&userId='+userId,
+                  dataType:'text',
+                  success:function(data){
+                     
+                     check();
+                     
+                     if ( data == "안뇽" ){
+                        console.log("찍히나용?");
+                     }
+                  }
+               }); // end of ajax from likeBoard Btn Click
+               
+            } // end of update()
 		</script>
 		
 		<script>
