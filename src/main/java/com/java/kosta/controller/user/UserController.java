@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.text.StyleConstants.CharacterConstants;
 
 import org.springframework.stereotype.Controller;
@@ -115,4 +116,17 @@ public class UserController {
 		
 		return res;
 	}
+	
+	
+	/*
+	 * @method Name : Logout
+	 * @Author : 김용래
+	 * @description :  회원 로그아웃
+	 */
+	@RequestMapping("/Logout")
+	public String Logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	   
 }

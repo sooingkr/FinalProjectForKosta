@@ -17,12 +17,12 @@
 </head>
 <body background="">
 	<div align="center">
-		<div align="center" style="margin-top: 5%;">
+		<div align="center" style="margin-top: 7%;">
 			<img src="/resources/images/logo_yellow.png" class="img-responsive">
 		</div>
 	
 		<img src="/resources/images/404.jpg" class="img-responsive"><br/>
-		<button class="btn btn-lg" style="width: 15%; height: 40px; font-weight: bold;" onClick = "location.href='/'">
+		<button class="btn btn-lg" style="width: 12%; height: 40px; font-weight: bold;" onClick = "location.href='/'">
 			메인으로
 		</button>
 	</div>

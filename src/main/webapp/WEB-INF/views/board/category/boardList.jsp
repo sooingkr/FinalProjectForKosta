@@ -40,71 +40,93 @@
 			<div id="form-contact">
 				<h1 id="hello">${cateDTO.cateName}</h1>
 
-				<table class="table table-bordered">
+			<form action="/board/category/boardList" >	
+			<table align="right">
+				<tr>
+					<td>
+						<select name="searchType" class="form-control col-md-3">
+							<option value="titleContent"
+								<c:if test="${pagingDTO.searchType eq 'titleContent'}" > selected="selected" </c:if>>제목+내용</option>
+							<option value="writer"
+								<c:if test="${pagingDTO.searchType eq 'writer'}" > selected="selected" </c:if>>글쓴이</option>
+							<option value="title"
+								<c:if test="${pagingDTO.searchType eq 'title'}" > selected="selected" </c:if>>제목</option>
+						</select> 
+					</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>
+						<div class="input-group" >
+							<input style="width:400px" type="text" name="searchText" class="form-control col-md-3" value="${pagingDTO.searchText }"/> 
+							<input type="hidden" name="cateId" value="${cateDTO.cateId }"/>
+							 <span class="input-group-btn">
+								<button type="submit" class= "btn btn-default"><img src="/resources/images/search.png" style="width: 21px;"></button>
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+			</form>
+		
+			<br/><br/>
+				
+			<table class="table table-bordered">
+				<tr style="background-color: #FFA800;">
+					<th style="width:10%; text-align:center;">No</th>
+					<th style="width:45%; text-align:center;">제목</th>
+					<th style="width:15%; text-align:center;">글쓴이</th>
+					<th style="width:20%; text-align:center;">등록일</th>
+					<th style="width:10%; text-align:center;">조회수</th>
+				</tr>
+				<c:if test="${empty boardList}">
 					<tr>
-						<td colspan="5" align="center">
-							<form action="/board/category/boardList" >
-								검색 : 
-								<select name="searchType">
-									<option value="titleContent"
-										<c:if test="${pagingDTO.searchType eq 'titleContent'}" > selected="selected" </c:if>>제목+내용</option>
-									<option value="writer"
-										<c:if test="${pagingDTO.searchType eq 'writer'}" > selected="selected" </c:if>>글쓴이</option>
-									<option value="title"
-										<c:if test="${pagingDTO.searchType eq 'title'}" > selected="selected" </c:if>>제목</option>
-								</select> 
-								<input style="width:400px" type="text" name="searchText" value="${pagingDTO.searchText }"/> 
-								<input type="hidden" name="cateId" value="${cateDTO.cateId }"/>
-								<input type="submit" value="검색" />
-							</form>
-						</td>
+						<td colspan="5" style="text-align: center">등록된 글이 없습니다.</td>
 					</tr>
-					<tr style="background:#aaa; ">
-						<th style="width:10%; text-align:center;">No</th>
-						<th style="width:45%; text-align:center;">제목</th>
-						<th style="width:15%; text-align:center;">글쓴이</th>
-						<th style="width:20%; text-align:center;">등록일</th>
-						<th style="width:10%; text-align:center;">조회수</th>
+				</c:if>
+				<c:forEach items="${boardList}" var="boardDTO" varStatus="status">
+					<tr style="text-align: center">
+						<td>${status.count }</td>
+						<td><a href="/board/category/detailContent?bno=${boardDTO.bNo}">${boardDTO.bTitle }</a></td>
+						<td>${boardDTO.userId }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }"/></td>
+						<td><span class="badge" style="background-color: #BFC2C3;">${boardDTO.viewCnt}</span></td>
 					</tr>
-					<c:forEach items="${boardList}" var="boardDTO" varStatus="status">
-						<tr>
-							<td>${status.count }</td>
-							<td><a href="/board/category/detailContent?bno=${boardDTO.bNo}">${boardDTO.bTitle }</a></td>
-							<td>${boardDTO.userId }</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }"/></td>
-							<td><span class="badge bg-red">${boardDTO.viewCnt}</span></td>
-						</tr>
-					</c:forEach>
-
-					<tr align="center">
-						<td colspan="5">
-							<c:if
-								test="${pagingDTO.groupNo > 1}">&lt;&lt;
-								<a href="/board/category/boardList?cateId=${cateDTO.cateId }&groupNo=1&searchType=${param.searchType}&searchText=${param.searchText}">처음</a>&nbsp;&nbsp; 
-								<a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${pagingDTO.pageStartNo - 1}&searchType=${param.searchType}&searchText=${param.searchText}">&lt;이전
-								</a>
-							</c:if> <c:forEach var="i" begin="${pagingDTO.pageStartNo}" end="${pagingDTO.pageEndNo}">
-								<c:choose>
-									<c:when test="${pagingDTO.pageNo != i}">
-										<a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${i}&searchType=${param.searchType}&searchText=${param.searchText}">[${i}]</a>
-									</c:when>
-									<c:otherwise> [${i}] </c:otherwise>
-								</c:choose>
-							</c:forEach> 
-							<c:if test="${pagingDTO.groupNo < pagingDTO.totalGroupCount}">
-								<a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${pagingDTO.pageEndNo + 1}"> 다음&gt;</a> &nbsp;&nbsp;
-								<a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${pagingDTO.totalPageCount}&searchType=${param.searchType}&searchText=${param.searchText}">마지막</a>&gt;&gt;
-							</c:if>
-						</td>
-					</tr>
-
+				</c:forEach>
 				</table>
+
+			
 				<table align="right">
-					<tr ><td>
+					<tr><td>
 						<!-- <a href="/category/writeForm" >글작성</a> -->
-						<button type="button" onclick="location.href='/board/category/writeBoardForm?cateId=${cateDTO.cateId}'">글작성</button>
+						<button type="button"  class="btn btn-default" onclick="location.href='/board/category/writeBoardForm?cateId=${cateDTO.cateId}'">
+						<img src="/resources/images/writeBtn.png" style="width: 60px;"></button>
 					</td></tr>
 				</table>
+				
+				<div align = "center">
+					 <ul class="pagination pagination-sm">
+						<c:if test="${pagingDTO.groupNo > 1}">
+							<li>
+								<a href="/board/category/boardList?cateId=${cateDTO.cateId }&groupNo=1&searchType=${param.searchType}&searchText=${param.searchText}">처음</a>
+							</li>
+							<li>
+								<a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${pagingDTO.pageStartNo - 1}&searchType=${param.searchType}&searchText=${param.searchText}">◀</a> 
+							</li>
+						
+						</c:if> 
+						<c:forEach var="i" begin="${pagingDTO.pageStartNo}" end="${pagingDTO.pageEndNo}">
+							<c:choose>
+								<c:when test="${pagingDTO.pageNo != i}">
+									<li><a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${i}&searchType=${param.searchType}&searchText=${param.searchText}">${i}</a></li>
+								</c:when>
+								<c:otherwise> <li><a href="#" style="background-color: #085B86; color: white; font-weight: bold;">&nbsp;${i}&nbsp;</a></li> </c:otherwise>
+							</c:choose>
+						</c:forEach> 
+						<c:if test="${pagingDTO.groupNo < pagingDTO.totalGroupCount}">
+							<li><a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${pagingDTO.pageEndNo + 1}">▶</a></li>
+							<li><a href="/board/category/boardList?cateId=${cateDTO.cateId }&pageNo=${pagingDTO.totalPageCount}&searchType=${param.searchType}&searchText=${param.searchText}">마지막</a></li>
+						</c:if>
+					</ul>
+				</div>
 		
 			</div>
 		</div>

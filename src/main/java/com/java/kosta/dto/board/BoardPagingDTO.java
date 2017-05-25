@@ -7,7 +7,7 @@ public class BoardPagingDTO {
 	public static final int COUNT_PER_RECORD = 10;
 	
 	/** 페이징 그룹 당 보여지는 페이지 갯수 */
-	public static final int COUNT_PER_PAGE_GROUP = 5;
+	public static final int COUNT_PER_PAGE_GROUP = 1;
 	
 	/** 전체 레코드 갯수 */
 	private int totalRecordCount;
