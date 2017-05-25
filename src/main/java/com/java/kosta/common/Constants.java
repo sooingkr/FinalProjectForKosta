@@ -8,7 +8,7 @@ package com.java.kosta.common;
  * */
 
 public class Constants {
-	
+	//d
    // 로그인한 사용자 정보를 저장한다.
    public static final String LOGINSESSION = "loginSession";
    
