@@ -79,7 +79,7 @@
 				return;
 			}
 			var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
-			if(!pattern.test(value)){
+			if(value.trim() == "" || !pattern.test(value)){
 				alert("상품가치는 숫자만 입력 가능합니다.");
 				return;
 			}

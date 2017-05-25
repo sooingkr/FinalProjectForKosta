@@ -37,19 +37,19 @@
 						<tr>
 							<th style="width:20%"> 작성자</th>
 							<td>${loginSession.userId}
-								<input style="width:100%; border:0;" type="hidden" name="userId" value="${loginSession.userId}" required/></td>
+								<input style="width:100%; border:0;" type="hidden" id="userId" name="userId" value="${loginSession.userId}" required/></td>
 						</tr>
 						<tr>
 							<th style="width:20%"> 제목</th>
-							<td><input style="width:100%; border:0;" type="text" name="bTitle" required/></td>
+							<td><input style="width:100%; border:0;" type="text" id="bTitle" name="bTitle" required/></td>
 						</tr>
 						<tr>
 							<th style="width:20%"> 내용</th>
-							<td><textarea name="bContent" rows="100" style="width:100%; border: 0;" required></textarea></td>
+							<td><textarea style="width:100%; border: 0;" id = "bContent" name="bContent" rows="100" required></textarea></td>
 						</tr>
 						<tr>
 							<th style="width:20%"> 상품가치</th>
-							<td><input style="width:200px; text-align: right; " type="text" name="value" required/> 원</td>
+							<td><input style="width:200px; text-align: right; " type="text" id="value" name="value" placeholder="숫자로 입력" required/> 원</td>
 						</tr>
 						<tr>
 							<th style="width:20%"> 파일 업로드</th>
@@ -77,7 +77,7 @@
 			}
 			
 			var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
-			if(!pattern.test(value)){
+			if(value.trim() == "" || !pattern.test(value)){
 				alert("상품가치는 숫자만 입력 가능합니다.");
 				return;
 			}
