@@ -41,6 +41,8 @@
                         </div>
 						 <div class="logo-arrow"> 
 						 	<button type="button" class="btn btn-lg login" data-toggle="modal" data-target="#loginModal">회원 로그인</button>
+						 	<br/><br/>
+						 	<button type="button" class="btn btn-lg googleLogin"></button>
 						 </div>
                     </div>
                     

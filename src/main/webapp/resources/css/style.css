@@ -346,6 +346,12 @@ img, iframe { vertical-align: middle; }
    font-weight: bold;
 }
 
+.googleLogin{
+   width: 240px;
+   height: 50px;
+   background:url(/resources/images/googleBtn.png) no-repeat;
+}
+
 .flubber {
 	position: absolute;
 	top: 40%;
