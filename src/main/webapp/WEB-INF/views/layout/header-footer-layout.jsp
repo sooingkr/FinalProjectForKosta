@@ -59,40 +59,46 @@
  </script> 
 
  <!-- 알림을 위한 polling -->
-<script>
- 
-/* $(function(){
- 		poll();
- 	});
-	
-	function poll(){
-		setTimeout(function(){
-			$.ajax({
-				url : "/note/listNotOpen",
-				type : "POST",
-				success : function(){
-					console.log(new Date());
-				},
-				dateType : "json",
-				complete : poll,
-				timeout : 3000
-				
-			})
-		},5000);
-	} 
-	 
- 	 function poll(){ 
- 		$.ajax({ 
- 		url: "/note/listNotOpen", 
- 		success: function(){
- 		}, 
- 		dataType: "json", 
- 		complete: poll, 
- 		timeout: 10000
- 		}); 
- 	} 
- 	 */
+ <script>
+
+    if(${loginSession != null}){
+       
+//         alert("제 이름은 폴링! 방금 실행되쬬^0^*");
+       $(function(){
+           poll();
+        });
+       
+       function poll(){
+          setTimeout(function(){
+             $.ajax({
+                url : "/note/alarmNote",
+                type : "POST",
+                success : function(){
+                   console.log(new Date());
+                },
+                dateType : "json",
+                complete : poll,
+                timeout : 3000
+                
+             })
+          },5000);
+       }
+           
+     }//if
+    
+    /* function poll(){ 
+       $.ajax({ 
+       url: "/note/listNotOpen", 
+       success: function(){
+       }, 
+       dataType: "json", 
+       complete: poll, 
+       timeout: 10000
+       }); 
+    } 
+    */
  </script>
+
 
 
 
