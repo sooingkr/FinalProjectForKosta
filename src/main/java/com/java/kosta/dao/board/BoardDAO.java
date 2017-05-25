@@ -46,4 +46,7 @@ public interface BoardDAO {
 
 	/** 좋아요 취소 */
 	public void unfavoriteBoard(@Param("userId") String userId, @Param("bNo") String bNo);
+	
+	/** 테이블 삭제시 좋아요 테이블 데이터 삭제 */
+	public void deleteFavorite(String bNo);
 }

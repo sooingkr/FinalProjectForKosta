@@ -82,4 +82,9 @@ public class BoardServiceImpl implements BoardService{
 		bDAO.unfavoriteBoard(userId, bNo);
 	}
 
+	@Override
+	public void deleteFavorite(String bNo) {
+		bDAO.deleteFavorite(bNo);
+	}
+
 }

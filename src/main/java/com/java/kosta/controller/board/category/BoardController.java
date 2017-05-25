@@ -155,6 +155,10 @@ public class BoardController {
 
          // 댓글 table의 bno에 해당하는 댓글들 모두 삭제
          service.deleteBoardReplyAll(bNo);
+         
+         // 좋아요 테이블에 해당 게시글 데이터 삭제
+         service.deleteFavorite(bNo);
+         
          // DB delete
          service.deleteBoard(bNo);
 

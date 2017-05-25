@@ -95,4 +95,9 @@ public class BoardDAOImpl implements BoardDAO{
 
 	}
 
+	@Override
+	public void deleteFavorite(String bNo) {
+		sqlSession.delete(bNo);
+	}
+
 }

@@ -26,7 +26,7 @@
 		<div class="content-frame">
 			<div id="form-contact">
 				<h1 id="hello">${cateDTO.cateName}</h1>
-				<form id="updateForm" action="/board/category/updateContentProc" method="post">
+				<form id="updateForm">
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 20%">카테고리</th>
@@ -45,6 +45,10 @@
 							<td><textarea id="bContent" name="bContent" rows="100" style="width: 100%; border: 0;" required="required">${boardDTO.bContent}</textarea></td>
 						</tr>
 						<tr>
+							<th style="width:20%"> 상품가치</th>
+							<td><input style="width:200px; text-align: right; " type="text" id="value" name="value"  value="${boardDTO.value}" required placeholder="숫자로 입력"/> 원</td>
+						</tr>
+						<tr>
 							<th style="width: 20%">파일 업로드</th>
 							<td><input style="width: 100%" type="file" /></td>
 						</tr>
@@ -52,7 +56,7 @@
 					<table align="center">
 					<tr><td>
 						<input type="hidden" name="bNo" value="${boardDTO.bNo}" />
-						<input type="submit" value="수정하기" />
+						<button type="button" onclick="checkUpdate();" >수정하기</button>
 						<button type="button" onclick="javascript:history.back();">취소</button>
 					</td></tr>
 					</table>
@@ -63,19 +67,27 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-		/* function updateForm(){
-			var cVal = document.getElementById("bContent").getAttribute('value');
-			var tVal = document.getElementById("bTitle").getAttribute('value');
-			if( cVal==null || tVal==null ){
+		/* validation 사용해서 검사해야함.... */
+		function checkUpdate(){
+			var form = document.getElementById("updateForm");
+			var content = document.getElementById("bContent").value;
+			var title = document.getElementById("bTitle").value;
+			var value = document.getElementById("value").value;		// 상품가치 (정규표현식을 위해 가져옴)
+			
+			if( content.trim() == "" || title.trim() == "" ){
 				alert("제목과 내용은 필수 입력사항입니다.");
 				return;
-			}  
-			var form = document.getElementById("updateForm");
-			form.action="/category/updateContentProc";
+			}
+			var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
+			if(!pattern.test(value)){
+				alert("상품가치는 숫자만 입력 가능합니다.");
+				return;
+			}
+			form.action="/board/category/updateContentProc";
 			form.method="post";
 			alert("게시글 수정이 완료되었습니다.");
 			form.submit();
-		} */
+		} 
 	</script>
 	<script>
 		$(document).ready(function(){

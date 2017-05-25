@@ -33,7 +33,7 @@ public interface BoardService {
 	/** 게시판 조회수 증가 */
 	public void updateViewCnt(String bNo) throws Exception;
 	
-//////////////////////////////// 카테고리 //////////////////////////////////////
+	//////////////////////////////// 카테고리 //////////////////////////////////////
 	
 	/** 카테고리명 조회 */
 	public CategoryDTO selectCategory(int cateId) throws Exception;
@@ -51,4 +51,7 @@ public interface BoardService {
 
 	/** 좋아요 취소 */
 	public void unfavoriteBoard(String userId, String bNo);
+	
+	/** 테이블 삭제시 좋아요 테이블 데이터 삭제 */
+	public void deleteFavorite(String bNo);
 }

@@ -134,7 +134,6 @@
     
        <!-- 좋아요  -->
    <insert id = "favoriteBoard">
-   
    INSERT INTO favorite (
          userId,
          bno
@@ -146,12 +145,18 @@
    </insert>
    
    <!-- 좋아요 취소 -->
-   <delete id="unfavoriteBoard" >
-       DELETE FROM favorite
-        WHERE bno = #{bNo} 
-        AND userId=#{userId}
-   </delete>
+	<delete id="unfavoriteBoard" >
+		DELETE FROM favorite
+		WHERE 
+			bno = #{bNo}
+			AND userId=#{userId}
+	</delete>
 	
+	<!-- 게시글 삭제시 좋아요 테이블에서 데이터 삭제 -->
+	<delete id="deleteFavorite">
+	    DELETE FROM favorite
+	    WHERE bno = #{bNo}
+	</delete>
  	
 </mapper>
 
