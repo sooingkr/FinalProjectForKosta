@@ -59,9 +59,9 @@
  </script> 
 
  <!-- 알림을 위한 polling -->
- <script>
+<script>
  
-	$(function(){
+/* $(function(){
  		poll();
  	});
 	
@@ -79,9 +79,9 @@
 				
 			})
 		},5000);
-	}
+	} 
 	 
- 	/* function poll(){ 
+ 	 function poll(){ 
  		$.ajax({ 
  		url: "/note/listNotOpen", 
  		success: function(){
@@ -91,11 +91,10 @@
  		timeout: 10000
  		}); 
  	} 
- 	*/
+ 	 */
  </script>
- <script>
- 	
- </script>
+
+
 
    
  <decorator:head />

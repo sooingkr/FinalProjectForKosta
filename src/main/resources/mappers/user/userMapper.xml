@@ -11,4 +11,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE userId = #{userId} AND userPw = #{userPw}
 	</select>
 	
+	<!-- 아이디 찾기  -->
+	<select id = "idCheck" resultType = "int">
+		SELECT COUNT(*) 
+  		FROM usertable 
+ 		WHERE userId = #{userId} 
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id = "join" resultType="UserVO">
+		INSER INTO usertable
+		VALUES (
+			
+		)
+	</insert>
+	
 </mapper>

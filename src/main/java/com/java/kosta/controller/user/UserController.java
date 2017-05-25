@@ -24,13 +24,21 @@ public class UserController {
    @Inject
    UserServiceImpl service;
    
-   // 로그인 화면
+    /*
+	 * @method Name : login
+	 * @Author : 송아름
+	 * @description : 로그인 화면
+	 */
    @RequestMapping(value="/login", method=RequestMethod.GET)
     public String login(){
         return "/user/login"; 
     }
    
-   // 로그인 처리
+    /*
+	 * @method Name : loginProcAjax
+	 * @Author : 송아름
+	 * @description : 로그인 비동기 처리
+	 */
    @RequestMapping(value="/loginProc", method=RequestMethod.POST)
    @ResponseBody
    public Map<String, Object> loginProcAjax(UserVO vo, HttpServletRequest req) 
@@ -58,13 +66,23 @@ public class UserController {
       return resMap;
    }
 
-   // 회원가입 화면
+	/*
+	 * @method Name : subscribeMethod
+	 * @Author : 송아름
+	 * @description : 회원가입 화면
+	 */
    @RequestMapping(value = "/subscribeJoin", method = RequestMethod.GET)
    public String subscribeMethod() {
-      return "user/subForm"; // 회원가입 폼 호출
+      return "user/join";
    }
    
-   // 아이디 중복체크
+   
+   
+   /*
+	 * @method Name : idCheck
+	 * @Author : 송아름
+	 * @description :  회원가입 시 아이디 중복체크
+	 */
 	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> idCheck(@RequestParam(value = "userId") String userId) {
@@ -82,5 +100,19 @@ public class UserController {
 
 		return res;
 	}
+	
+	
+	/*
+	 * @method Name : idCheck
+	 * @Author : 송아름
+	 * @description :  회원가입 비동기 처리
+	 */
+	@RequestMapping(value = "/joinProc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> joinProc(UserVO vo, HttpServletRequest req) {
 
+		Map<String, Object> res = new HashMap<String, Object>();
+		
+		return res;
+	}
 }
