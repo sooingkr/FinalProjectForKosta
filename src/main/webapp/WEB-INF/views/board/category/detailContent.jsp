@@ -75,16 +75,16 @@
 				</table>
 				<table align="right">
 					<tr>
-						<td><input type="hidden" name="userId"
-							value="${loginSession.userId}" /> <input type="hidden" id="bNo"
-							value="${boardDTO.bNo}" />
+						<c:if test="${loginSession.userId != null }">
+						<td>
 							<div id="content">
-								<button id="likeBoard" type="button" style="width: 65px"></button>
+								<button id="likeBoard" type="button" style="width: 70px"></button>
 							</div></td>
+						</c:if>
 
 						<c:if test="${loginSession.userId == boardDTO.userId }">
 							<td>
-								<button type="button" style="width:70px" onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
+								&nbsp;<button type="button" style="width:70px" onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
 							</td>
 							<td>
 								&nbsp;<button style="width:70px" type="button" onclick="deleteContent()">글삭제</button>
@@ -121,10 +121,11 @@
 				<h4><b>댓글 작성하기</b></h4>
 				<table class="table table-bordered">
 					<tr style="background:#aaa;">
-						<td style="width: 15%">
-							작성자 : <input style="width: 100%; border: 0;" type="text" name="replyId" id="newReplyWriter"/></td>
+						<th style="width: 15%; text-align:center; ">
+							${loginSession.userId }
+							<input style="width: 100%; border: 0;" type="hidden" name="replyId" value="${loginSession.userId }" id="newReplyWriter"/></th>
 						<td>
-							내용 : <input style="width: 100%; border: 0;" type="text" name="rContent" id="newReplyContent"/></td>
+							<input style="width: 100%; border: 0;" type="text" name="rContent" id="newReplyContent"/></td>
 						<td style="width: 10%"><button style="width:50px" id="replyAddBtn" >작성</button></td>
 					</tr>
 				</table><br/>
@@ -162,6 +163,7 @@
 			//ready 함수
 			$(function(){
 				
+				//좋아요 체크
 				check();
 				
 				//댓글 리스트 가져와서 뿌려주는 함수
@@ -174,7 +176,7 @@
 	        		var replyText = $("#newReplyContent").val();
 	        		var bno = "${boardDTO.bNo}";
 	        		
-	        		if(replyer == "" || replyText == ""){
+	        		if(replyText.trim() == ""){
 	        			alert("내용을 작성해주세요.");
 	        			return;
 	        		}
@@ -253,6 +255,11 @@
 	        	$("#replyModBtn").on("click",function(){
 	        		var rno = $(".modal-title").html();
 	        		var replytext = $("#replytext").val();
+	        		
+	        		if(replytext.trim() == ""){
+	        			alert("내용을 작성해주세요.");
+	        			return;
+	        		}
 	        		
 	        		$.ajax({
 	        			type:'put',
@@ -391,6 +398,7 @@
         		});
 			}// end of getAllList()
 			
+			/** 좋아요 체크 */
         	 function check(){
                  var bno = "${boardDTO.bNo}";
                  var userId = "${loginSession.userId}";
@@ -403,6 +411,7 @@
                    },
                    dataType:'text',
                    success:function(result){
+                	  
                       if(result == "SUCCESS"){
                             $("#content button").text("♥");
                       }
@@ -413,7 +422,7 @@
                 });
              } // end of check()
 
-      
+      		/** 좋아요 업데이트 */
             function update(){
 	              var bno = "${boardDTO.bNo}";
 	              var userId = "${loginSession.userId}";
@@ -426,7 +435,11 @@
                   url:'/category/handlingFavorite?bno='+bno+'&userId='+userId,
                   dataType:'text',
                   success:function(data){
-                     
+                	 /* if(result == "notLogin"){
+              		  	alert("로그인 후 이용하세요 :)");
+               			return;
+              	  	 } */
+                	  
                      check();
                      
                      if ( data == "안뇽" ){

@@ -27,7 +27,7 @@
 		<div class="content-frame">
 			<div id="form-contact">
 				<h1 id="hello">${cateDTO.cateName}</h1>
-				<form action="/board/category/writeBoardProc" method="post">
+				<form id="insertForm">
 					<table class="table table-bordered">
 						<tr>
 							<th style="width:20%"> 카테고리</th>
@@ -57,22 +57,37 @@
 						</tr>
 					</table>
 					<table align="center"><tr>
-						<td><input type="submit" value="글쓰기" /></td>
+						<td><button type="button" onclick="checkInsert(); return false;">글쓰기</button></td>
 						<td>&nbsp;&nbsp;<button type="button" onclick="javascript:history.back();">취소</button></td>
 					</tr></table>
 				</form>
 			</div>
 		</div>
 	</section>	
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		function checkInsert(){
-			var form = document.getElementById("insertForm");
-			form.action="/category/writeBoardProc";
+			var form = document.getElementById("insertForm");	// form의 아이디
+			var title = document.getElementById("bTitle").value;		// 제목	(빈 값 검사하기 위해)
+			var content = document.getElementById("bContent").value;	// 내용
+			var value = document.getElementById("value").value;		// 상품가치 (정규표현식을 위해 가져옴)
+			
+			if(title.trim() == "" || content.trim() == ""){		// trim() 앞,뒤 공백 제거
+				alert("제목과 내용은 필수 입력사항입니다.");
+				return;
+			}
+			
+			var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
+			if(!pattern.test(value)){
+				alert("상품가치는 숫자만 입력 가능합니다.");
+				return;
+			}
+			
+			form.action="/board/category/writeBoardProc";
 			form.method="post";
 			alert("게시글 작성이 완료되었습니다.");
 			form.submit();
 		}
-	</script> -->	
+	</script>
 	<script>
 		$(document).ready(function(){
 			$("#portfolio").attr("class","active");
