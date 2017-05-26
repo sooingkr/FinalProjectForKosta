@@ -22,12 +22,17 @@ public class TimelineDTO{
 	private String cateId6;
 	private String cateId7;
 	private String distance;
-	
+	private String cateName;
 //	getter, setter
-	
 	
 	public String getBno() {
 		return bno;
+	}
+	public String getCateName() {
+		return cateName;
+	}
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
 	public void setBno(String bno) {
 		this.bno = bno;

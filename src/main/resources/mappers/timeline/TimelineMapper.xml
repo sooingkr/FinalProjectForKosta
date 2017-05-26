@@ -13,22 +13,22 @@
 		WHERE
 		1=0
 		<if test='UserVO.cateId1 == "Y"'>
-			or cateId = 1
+			or board.cateId = 1
 		</if>
 		<if test='UserVO.cateId2 == "Y"'>
-			or cateId = 2
+			or board.cateId = 2
 		</if>
 		<if test='UserVO.cateId3 == "Y"'>
-			or cateId = 3
+			or board.cateId = 3
 		</if>
 		<if test='UserVO.cateId4 == "Y"'>
-			or cateId = 4
+			or board.cateId = 4
 		</if>
 		<if test='UserVO.cateId5 == "Y"'>
-			or cateId = '5'
+			or board.cateId = '5'
 		</if>
 		<if test='UserVO.cateId6 == "Y"'>
-			or cateId = '6'
+			or board.cateId = '6'
 		</if>
 	</sql>
 
@@ -38,7 +38,8 @@
 		(6371*acos(cos(radians(#{UserVO.lat}))*cos(radians(lat))*cos(radians(lon)
 		-radians(#{UserVO.lon}))+sin(radians(#{UserVO.lat}))*sin(radians(lat))))
 		AS distance
-		FROM board
+		FROM board LEFT OUTER JOIN category 
+		ON board.cateId = category.cateId
 		<include refid="conditional"></include>
 		ORDER BY distance desc, bno desc
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}

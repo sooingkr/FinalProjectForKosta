@@ -22,6 +22,12 @@
 	<script type="text/javascript" src="/resources/js/timelineJS.js"></script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    	ul{
+    	  	 list-style:none;
+  			 padding-left:0px;
+		}
+    </style>
 </head>
 
 <body>
@@ -37,7 +43,7 @@
             </span>
             <nav class="site-menu">
                 <a id="welcome" href="/">Welcome</a>
-                <a id="team" href="/timeLineSection">TimeLine</a>
+                <a id="team" href="/timeline">TimeLine</a>
                 <a id="portfolio" href="/categorySection">Category</a>
                 <a id="talktous" href="/noticeBoardSection?">Notice</a>
                 <a id="about" href="/aboutUsSection">About Us</a>

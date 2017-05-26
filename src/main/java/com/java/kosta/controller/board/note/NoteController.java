@@ -15,10 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.TextMessage;
 
 import com.java.kosta.dto.note.NoteVO;
 import com.java.kosta.dto.note.PagingDTO;
 import com.java.kosta.dto.user.UserVO;
+import com.java.kosta.handler.EchoHandler;
 import com.java.kosta.service.note.NoteService;
 import com.java.kosta.validation.ValidationForNote;
 
@@ -32,6 +34,8 @@ public class NoteController {
    // service
    @Inject
    NoteService service;
+   @Inject
+   EchoHandler echo;
    
    // 쪽지 보내기 폼으로 이동
    @RequestMapping(value="/noteForm")
@@ -60,9 +64,25 @@ public class NoteController {
          destination = "redirect:/note/noteForm#login_form";
          rttr.addFlashAttribute("errors",errorMessage);
       }else{
+         logger.info("echo객체" + echo);
          // 쪽지 table에 추가!
          service.sendInsert(vo);
-         destination = "note/listSend";            
+                  
+         HashMap<String, Object> map = new HashMap<String, Object>();
+         map.put("sendId", vo.getUserId());
+         map.put("title", vo.getMtitle());
+         map.put("content", vo.getMcontent());
+         map.put("recvDate", vo.getDate_sender());
+         echo.EchoNoti(map);
+         try {
+            echo.handleMessage(null, new TextMessage(""));
+            logger.info("try문 들어왔음");
+            session.setAttribute("NotiRecvId", vo.getRecvId());
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+         
+         destination = "note/listForReceive";            
          
       }
       return destination;
