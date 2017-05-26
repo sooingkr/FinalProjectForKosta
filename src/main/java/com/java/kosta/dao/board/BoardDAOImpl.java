@@ -94,10 +94,16 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.delete(NameSpace + ".unfavoriteBoard", map);
 
 	}
-
+	
 	@Override
 	public void deleteFavorite(String bNo) {
 		sqlSession.delete(bNo);
 	}
+	
+	@Override
+	public int countFavorite(String bNo) {
+		return sqlSession.selectOne(NameSpace + ".countFavorite",bNo);
+	}
+
 
 }
