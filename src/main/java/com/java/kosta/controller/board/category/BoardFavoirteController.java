@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,16 +28,19 @@ public class BoardFavoirteController {
 	@RequestMapping(value = "/checkFavorite")
 	@ResponseBody
 	public String checkFavorite(@RequestParam(value = "bno") String bNo,
-			@RequestParam(value = "userId") String userId) {
+			@RequestParam(value = "userId") String userId,Model model) {
 		logger.info("들어오는지 확인" + bNo + userId);
 
 		int fcnt = service.searchFavorite(userId, bNo);
+		int count = service.countFavorite(bNo);
 		String result = "";
 		if (fcnt == 0) {
 			result = "FAIL";
+			model.addAttribute("likeCount",count);
 			// model.addAttribute("favorite","none");
 		} else {
 			result = "SUCCESS";
+			model.addAttribute("likeCount",count);
 			// model.addAttribute("favorite", "exist");
 		}
 
@@ -49,7 +53,7 @@ public class BoardFavoirteController {
 	public String handlingFavorite(@RequestParam(value = "bno") String bNo,
 			@RequestParam(value = "userId") String userId) {
 		logger.info("handlingFavorite" + bNo + userId);
-		
+
 		/*// 로그인 안되어있으면 좋아요 할 수 없음.
 		if (userId == null) {
 			return "notLogin";
@@ -75,6 +79,13 @@ public class BoardFavoirteController {
 
 		} // end of if-else
 		return "안뇽";
+	}
+	//좋아요 개수를 조회
+	@RequestMapping(value="/countFavorite")
+	@ResponseBody
+	public int countFavorite(@RequestParam(value="bno")String bNo){
+		int likeCount = service.countFavorite(bNo);
+		return likeCount;
 	}
 
 }// end of main

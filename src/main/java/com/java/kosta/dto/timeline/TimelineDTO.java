@@ -140,5 +140,13 @@ public class TimelineDTO{
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
+	@Override
+	public String toString() {
+		return "TimelineDTO [bno=" + bno + ", userId=" + userId + ", btitle=" + btitle + ", bcontent=" + bcontent
+				+ ", value=" + value + ", cateId=" + cateId + ", lat=" + lat + ", lon=" + lon + ", viewcnt=" + viewcnt
+				+ ", bmodifydate=" + bmodifydate + ", bregdate=" + bregdate + ", cateId1=" + cateId1 + ", cateId2="
+				+ cateId2 + ", cateId3=" + cateId3 + ", cateId4=" + cateId4 + ", cateId5=" + cateId5 + ", cateId6="
+				+ cateId6 + ", cateId7=" + cateId7 + ", distance=" + distance + "]";
+	}
 	
 }

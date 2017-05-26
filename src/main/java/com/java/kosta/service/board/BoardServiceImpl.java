@@ -87,4 +87,9 @@ public class BoardServiceImpl implements BoardService{
 		bDAO.deleteFavorite(bNo);
 	}
 
+	@Override
+	public int countFavorite(String bNo) {
+		return bDAO.countFavorite(bNo);
+	}
+
 }
