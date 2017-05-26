@@ -53,5 +53,8 @@ public interface BoardService {
 	public void unfavoriteBoard(String userId, String bNo);
 	
 	/** 테이블 삭제시 좋아요 테이블 데이터 삭제 */
-	public void deleteFavorite(String bNo) throws Exception;
+	public void deleteFavorite(String bNo);
+	
+	/**좋아요 개수 조회 */
+	public int countFavorite(String bNo);
 }

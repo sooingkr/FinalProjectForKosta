@@ -83,7 +83,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteFavorite(String bNo) throws Exception {
+	public void deleteFavorite(String bNo){
 		bDAO.deleteFavorite(bNo);
 	}
 
