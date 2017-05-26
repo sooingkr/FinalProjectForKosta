@@ -103,13 +103,13 @@
 <script>
    var sock = null;
    $(document).ready(function(){
-	   alert("노티스크립트 들어옴!")
        sock = new SockJS("/echo-ws");
          sock.onopen=function(){
          }
          sock.onmessage=function(evt){
-        	console.log("즉시실행되야되!");
-            notifyMe(evt.data);
+               notifyMe(evt.data);
+            /* if(${loginSession.userId eq sessionScope.NotiRecvId}){
+            } */
          }
          sock.onclose = function(){
          }      
