@@ -55,7 +55,7 @@ public class EchoHandler extends TextWebSocketHandler{
     * 2. Emit : 서버에 연결되어 있는 클라이언트들에게 메시지 보냄 (message)
     */
    
-   
+   //
    @Override
    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
       String text = map.get("sendId")+"(님)이 쪽지를 보냈습니다.\n"
