@@ -47,7 +47,7 @@ public class BoardReplyServiceImpl implements BoardReplyService{
 	}
 
 	@Override
-	public List<BoardReplyDTO> selectAllReplyList(BoardReplyDTO boardReplyDTO) {
+	public List<BoardReplyDTO> selectAllReplyList(BoardReplyDTO boardReplyDTO) throws Exception {
 		return brDAO.selectAllReplyList(boardReplyDTO);
 	}
 

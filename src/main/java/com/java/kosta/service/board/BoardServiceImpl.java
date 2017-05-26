@@ -62,7 +62,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteBoardReplyAll(String bNo) {
+	public void deleteBoardReplyAll(String bNo) throws Exception{
 		bDAO.deleteBoardReplyAll(bNo);
 	}
 	
@@ -83,7 +83,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteFavorite(String bNo) {
+	public void deleteFavorite(String bNo) throws Exception {
 		bDAO.deleteFavorite(bNo);
 	}
 

@@ -14,7 +14,7 @@ public interface BoardReplyService {
 	public List<BoardReplyDTO> selectBoardReplyList(BoardPagingDTO pagingDTO) throws Exception ;
 	
 	/** 댓글 전체 조회*/
-	public List<BoardReplyDTO> selectAllReplyList(BoardReplyDTO boardReplyDTO);
+	public List<BoardReplyDTO> selectAllReplyList(BoardReplyDTO boardReplyDTO) throws Exception;
 	
 	/** 댓글 총 갯수 */
 	public int selectReplyListTotCount(BoardPagingDTO pagingDTO) throws Exception;

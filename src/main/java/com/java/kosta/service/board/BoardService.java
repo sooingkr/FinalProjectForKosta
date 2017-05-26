@@ -40,7 +40,7 @@ public interface BoardService {
 
 
 	/** 게시글 삭제 시 해당 댓글 모두 삭제*/
-	public void deleteBoardReplyAll(String bNo);
+	public void deleteBoardReplyAll(String bNo) throws Exception;
 	
 	//////////////////////////////// 좋아요////////////////////////////////////////////
 	/** 좋아요 조회 */
@@ -53,5 +53,5 @@ public interface BoardService {
 	public void unfavoriteBoard(String userId, String bNo);
 	
 	/** 테이블 삭제시 좋아요 테이블 데이터 삭제 */
-	public void deleteFavorite(String bNo);
+	public void deleteFavorite(String bNo) throws Exception;
 }
