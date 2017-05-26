@@ -19,6 +19,8 @@
 <script type="text/javascript" src="/resources/sockjs.min.js"/>
 <script src="/resources/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/resources/js/json2.js"></script>
+<script type="text/javascript" src="/resources/sockjs.min.js"></script>
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -62,32 +64,32 @@
  <!-- 알림을 위한 polling -->
  <script>
 
-//     if(${loginSession != null}){
+    if(${loginSession != null}){
        
-// //         alert("제 이름은 폴링! 방금 실행되쬬^0^*");
-//        $(function(){
-//            poll();
-//         });
+///         alert("제 이름은 폴링! 방금 실행되쬬^0^*");
+       $(function(){
+           poll();
+        });
        
-//        function poll(){
-//           setTimeout(function(){
-//              $.ajax({
-//                 url : "/note/alarmNote",
-//                 type : "POST",
-//                 success : function(){
-//                    console.log(new Date());
-//                 },
-//                 dateType : "json",
-//                 complete : poll,
-//                 timeout : 3000
+       function poll(){
+          setTimeout(function(){
+             $.ajax({
+                url : "/note/alarmNote",
+                type : "POST",
+                success : function(){
+                   console.log(new Date());
+                },
+                dateType : "json",
+                complete : poll,
+                timeout : 3000
                 
-//              })
-//           },5000);
-//        }
+             })
+          },5000);
+       }
            
-//      }//if
+     }//if
     
-    /* function poll(){ 
+     function poll(){ 
        $.ajax({ 
        url: "/note/listNotOpen", 
        success: function(){
@@ -97,7 +99,7 @@
        timeout: 10000
        }); 
     } 
-    */
+    
 </script>
  
 <script>
@@ -107,6 +109,7 @@
          sock.onopen=function(){
          }
          sock.onmessage=function(evt){
+        	 	console.log("안들어오나?");
                notifyMe(evt.data);
             /* if(${loginSession.userId eq sessionScope.NotiRecvId}){
             } */
@@ -119,7 +122,19 @@
    var notification = new Notification(title, options);
    
    function notifyMe(data) {
-      
+      console.log("노티함수 : " + data);
+      Notification.requestPermission(function (permission) {
+     	 Notification.requestPermission(function (result) {
+
+     	        //요청을 거절하면,
+     	        if (result === 'denied') {
+     	            return;
+     	        }
+     	        //요청을 허용하면,
+     	        else {
+     	            return;
+     	        }
+     	    });
       var parameter_noti = {
             icon : "https://image-proxy.namuwikiusercontent.com/r/https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2F7%2F7e%2FPatrick_Star.png",
             body: data
@@ -131,6 +146,7 @@
       }
       //사용자가 Notification 사용을 허락했는지 체크
       else if (Notification.permission === "granted") {
+    	  console.log("사용자가 승낙한 경우");
          //허락했다면 Notification을 생성
          var notification = new Notification(parameter_noti.title,{
             icon : parameter_noti.icon,
@@ -140,13 +156,16 @@
       //크롬 브라우저는 permission 속성이 구현되어 있지 않기 때문에
       //사용자가 의도적으로 'denied' 한 경우만 체크
       else if (Notification.permission !== 'denied') {
-         Notification.requestPermission(function (permission) {
+    	  console.log("사용자가 노티 사용 거부한 경우");
+        
             //사용자가 사용 여부를 체크했다면, 크롬 Notification 상태를 갱신
             if(!('permission' in Notification)) {
+            	
                Notification.permission = permission;
             }
             //사용자가 승낙했다면, Notifiation을 생성
             if (permission === "granted") {
+            	console.log("사용자가 노티 승낙했을 경우 들어오는 부분");
                var notification = new Notification(parameter_noti.title,{
                   icon : parameter_noti.icon,
                   body : parameter_noti.body
