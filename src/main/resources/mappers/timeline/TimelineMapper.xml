@@ -40,7 +40,7 @@
 		AS distance
 		FROM board
 		<include refid="conditional"></include>
-		ORDER BY distance
+		ORDER BY distance desc, bno desc
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
 	</select>
 	

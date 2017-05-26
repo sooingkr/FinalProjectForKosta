@@ -63,7 +63,6 @@
 
     if(${loginSession != null}){
        
-//         alert("제 이름은 폴링! 방금 실행되쬬^0^*");
        $(function(){
            poll();
         });
@@ -85,8 +84,8 @@
        }
            
      }//if
-    
-    /* function poll(){ 
+
+     /* function poll(){ 
        $.ajax({ 
        url: "/note/listNotOpen", 
        success: function(){
