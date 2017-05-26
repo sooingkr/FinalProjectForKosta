@@ -8,6 +8,7 @@
  <excludes>
      <pattern>*login*</pattern>
      <pattern>*subscribe*</pattern>
+     <pattern>*timeline*</pattern>
  </excludes>
 
  
