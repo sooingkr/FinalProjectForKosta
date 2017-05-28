@@ -1,6 +1,8 @@
 package com.java.kosta.controller.timeline;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -8,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.kosta.dto.note.PagingDTO;
@@ -33,24 +37,27 @@ public class TimelineController {
 	
 	// 타임라인 리스트 ajax 호출용
 	@RequestMapping(value="/timeline/listPaging")
-	public @ResponseBody List<TimelineDTO> timelineMain(HttpSession session,PagingDTO page){
+	public @ResponseBody Map<String,Object> timelineMain(HttpSession session,PagingDTO page,@RequestParam("keywords") String keywords,Model model){
 		logger.info("타임라인 리스트 ajax 메서드로 이동");
 		UserVO vo = null;
 		List<TimelineDTO> list = null;
 		// 현재 로그인되어 있는 사용자 객체 가져오기
 		vo = (UserVO) session.getAttribute("loginSession");
 		if ( vo != null){
-			page.setTotalCount(service.countTimeline(vo));
-			page.setPerPageNum(10); // 10개씩만 가져오도록...
-			logger.info("너는 누구니?? : " + vo.getUserId());
+			page.setTotalCount(service.countTimeline(vo,keywords));
+			page.setPerPageNum(5); // 5개씩만 가져오도록...
 			
 			// 관심사, 거리에 따른 게시글 목록 가져오기
-			list = service.listMatch(vo,page);
+			list = service.listMatch(vo,page,keywords);
 			
-			logger.info("가져온 값 : " + list);
+			logger.info("넘어온 값 : keywords : " + keywords + " page : " + page.getPage());
 		}
-	
-		return list;
+		logger.info("가져온 값 : " + list);
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("list", list);
+		map.put("pageMaker", page);
+		map.put("keywords", keywords);
+		return map;
 	}//end of timelineMain
 	
 }//end of class

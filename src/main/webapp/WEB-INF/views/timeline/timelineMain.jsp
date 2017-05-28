@@ -83,9 +83,9 @@
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input id="searchId" type="text" class="form-control" placeholder="Search">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button id="searchBtn" type="button" class="btn btn-default">검색</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Link</a></li>

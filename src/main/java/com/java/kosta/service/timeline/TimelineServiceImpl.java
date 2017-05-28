@@ -18,13 +18,13 @@ public class TimelineServiceImpl implements TimelineService {
 	TimelineDAO dao;
 
 	@Override
-	public List<TimelineDTO> listMatch(UserVO vo, PagingDTO pageMaker) {
-		return dao.listMatch(vo, pageMaker);
+	public List<TimelineDTO> listMatch(UserVO vo, PagingDTO pageMaker,String keywords) {
+		return dao.listMatch(vo, pageMaker,keywords);
 	}
 
 	@Override
-	public int countTimeline(UserVO vo) {
-		return dao.countTimeline(vo);
+	public int countTimeline(UserVO vo,String keywords) {
+		return dao.countTimeline(vo,keywords);
 	}
 
 	@Override

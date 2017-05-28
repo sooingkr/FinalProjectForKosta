@@ -8,9 +8,9 @@ import com.java.kosta.dto.user.UserVO;
 
 public interface TimelineDAO {
 	
-	public List<TimelineDTO> listMatch(UserVO vo,PagingDTO pageMaker);
+	public List<TimelineDTO> listMatch(UserVO vo,PagingDTO pageMaker,String keywords);
 	
-	public int countTimeline(UserVO vo);
+	public int countTimeline(UserVO vo,String keywords);
 	
 	public int listAll();
 }

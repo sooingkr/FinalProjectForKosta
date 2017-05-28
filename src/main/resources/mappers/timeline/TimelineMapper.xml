@@ -25,15 +25,20 @@
 			or board.cateId = 4
 		</if>
 		<if test='UserVO.cateId5 == "Y"'>
-			or board.cateId = '5'
+			or board.cateId = 5
 		</if>
 		<if test='UserVO.cateId6 == "Y"'>
-			or board.cateId = '6'
+			or board.cateId = 6
+		</if>
+		<if test="keywords != null">
+			and (board.userId LIKE CONCAT('%',#{keywords},'%')
+					 OR board.bcontent LIKE CONCAT('%',#{keywords},'%')
+					 OR board.btitle LIKE CONCAT('%',#{keywords},'%'))
 		</if>
 	</sql>
 
 	<!-- 거리, 관심사에 따른 타임라인에 쓸 게시글 목록 출력 -->
-	<select id="listMatch" resultType="TimelineDTO" parameterType="UserVO">
+	<select id="listMatch" resultType="TimelineDTO">
 		SELECT *,
 		(6371*acos(cos(radians(#{UserVO.lat}))*cos(radians(lat))*cos(radians(lon)
 		-radians(#{UserVO.lon}))+sin(radians(#{UserVO.lat}))*sin(radians(lat))))
@@ -41,7 +46,7 @@
 		FROM board LEFT OUTER JOIN category 
 		ON board.cateId = category.cateId
 		<include refid="conditional"></include>
-		ORDER BY distance desc, bno desc
+		ORDER BY distance asc, bno desc
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
 	</select>
 	
@@ -49,25 +54,30 @@
 	<select id="countTimeline" resultType="int">
 		SELECT count(*)
 		FROM board
+		
 		WHERE
 		1=0
-		<if test='cateId1 == "Y"'>
+		<if test='UserVO.cateId1 == "Y"'>
 			or cateId = 1
 		</if>
-		<if test='cateId2 == "Y"'>
+		<if test='UserVO.cateId2 == "Y"'>
 			or cateId = 2
 		</if>
-		<if test='cateId3 == "Y"'>
+		<if test='UserVO.cateId3 == "Y"'>
 			or cateId = 3
 		</if>
-		<if test='cateId4 == "Y"'>
+		<if test='UserVO.cateId4 == "Y"'>
 			or cateId = 4
 		</if>
-		<if test='cateId5 == "Y"'>
-			or cateId = '5'
+		<if test='UserVO.cateId5 == "Y"'>
+			or cateId = 5
 		</if>
-		<if test='cateId6 == "Y"'>
-			or cateId = '6'
+		<if test='UserVO.cateId6 == "Y"'>
+			or board.cateId = 6
+		</if>
+		<if test="keywords != null">
+			and (btitle LIKE CONCAT('%',#{keywords},'%') or bcontent LIKE CONCAT('%',#{keywords},'%')
+				or userId LIKE CONCAT('%',#{keywords},'%'))
 		</if>
 	</select>
 
