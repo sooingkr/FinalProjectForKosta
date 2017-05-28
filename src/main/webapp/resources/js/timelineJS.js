@@ -2,6 +2,7 @@ $(document).ready(function(){
 	var page = 1;
 	var keywords;
 	
+	
 	function listAll(pageNum,searchText){
 		var str = "";
 		$.getJSON("/timeline/listPaging?page="+pageNum+"&keywords="+encodeURIComponent(searchText),function(data){
@@ -15,9 +16,6 @@ $(document).ready(function(){
 						+"<div class='label label-danger'>카테고리</div>"
 						+"<div class='well well-sm'>"
 							+"<span>"+ this.cateName +"</span>"
-							+"<span class='time' style='font-size:15px;float:right'>"
-							+"<i class='glyphicon glyphicon-time'></i> 등록일 : "+this.bregdate
-							+"</span>"
 						+"</div>"
 						
 						+"<div class='label label-warning'>거리</div>"
@@ -28,7 +26,9 @@ $(document).ready(function(){
 						+"<div class='label label-warning'>제목</div>"
 						+"<div id='bnoWell' class='well well-sm'>"
 							+"<h3 class='timeline-header'>No.<strong>"+this.bno+"</strong> - "+this.btitle
-								
+								+"<span class='time' style='font-size:15px;float:right'>"
+								+"<i class='glyphicon glyphicon-time'></i> 등록일 : "+this.bregdate
+								+"</span>"
 							+"</h3>" 
 						+"</div>"
 						
@@ -51,7 +51,6 @@ $(document).ready(function(){
 			});// end of each
 			
 			$("#showTimeline").append(str);
-			$("#searchId").val(searchText);
 		});
 	} // end of listAll()
 	
