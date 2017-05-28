@@ -51,6 +51,7 @@ $(document).ready(function(){
 			});// end of each
 			
 			$("#showTimeline").append(str);
+			$("#searchId").val(searchText);
 		});
 	} // end of listAll()
 	

@@ -43,6 +43,7 @@ public class TimelineController {
 		List<TimelineDTO> list = null;
 		// 현재 로그인되어 있는 사용자 객체 가져오기
 		vo = (UserVO) session.getAttribute("loginSession");
+		logger.info("keywords: " + keywords);
 		if ( vo != null){
 			page.setTotalCount(service.countTimeline(vo,keywords));
 			page.setPerPageNum(5); // 5개씩만 가져오도록...

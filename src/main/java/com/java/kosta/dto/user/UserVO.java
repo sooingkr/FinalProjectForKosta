@@ -20,7 +20,8 @@ public class UserVO {
 	private String lat;
 	private String lon;
 	private String cateId;
-
+	
+	
 	public String getCateId() {
 		return cateId;
 	}
