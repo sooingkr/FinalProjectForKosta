@@ -1,7 +1,5 @@
 $(document).ready(function() {
-
    $("#login").click(function() {
-      
       if ($('#userId').val() == "") {
          alert("아이디를 입력하세요.");
          return false;
@@ -25,7 +23,7 @@ $(document).ready(function() {
 
             if (data.result == "ok") {
                /*경로 변경해줘야 해 타임라인으로*/
-               location.replace("/"); 
+               self.location="/timeline";
                return;
             } else {
                alert(data.resultMsg);
