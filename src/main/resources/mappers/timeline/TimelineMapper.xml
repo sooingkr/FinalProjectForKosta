@@ -9,32 +9,41 @@
 		FROM board
 	</select>
 
+	<sql id="search">
+			or (board.userId LIKE CONCAT('%',#{keywords},'%')
+			OR
+			board.bcontent LIKE CONCAT('%',#{keywords},'%')
+			OR board.btitle LIKE CONCAT('%',#{keywords},'%'))
+	</sql>
+
 	<sql id="conditional">
 		WHERE
 		1=0
-		<if test='UserVO.cateId1 == "Y"'>
-			or board.cateId = 1
+		<if test="keywords == 'undefined'">
+			<if test='UserVO.cateId1 == "Y"'>
+				or board.cateId = 1
+			</if>
+			<if test='UserVO.cateId2 == "Y"'>
+				or board.cateId = 2
+			</if>
+			<if test='UserVO.cateId3 == "Y"'>
+				or board.cateId = 3
+			</if>
+			<if test='UserVO.cateId4 == "Y"'>
+				or board.cateId = 4
+			</if>
+			<if test='UserVO.cateId5 == "Y"'>
+				or board.cateId = 5
+			</if>
+			<if test='UserVO.cateId6 == "Y"'>
+				or board.cateId = 6
+			</if>
 		</if>
-		<if test='UserVO.cateId2 == "Y"'>
-			or board.cateId = 2
+	 	<if test="keywords != 'undefined'">
+			<include refid="search"></include>
 		</if>
-		<if test='UserVO.cateId3 == "Y"'>
-			or board.cateId = 3
-		</if>
-		<if test='UserVO.cateId4 == "Y"'>
-			or board.cateId = 4
-		</if>
-		<if test='UserVO.cateId5 == "Y"'>
-			or board.cateId = 5
-		</if>
-		<if test='UserVO.cateId6 == "Y"'>
-			or board.cateId = 6
-		</if>
-		<if test="keywords != null">
-			and (board.userId LIKE CONCAT('%',#{keywords},'%')
-					 OR board.bcontent LIKE CONCAT('%',#{keywords},'%')
-					 OR board.btitle LIKE CONCAT('%',#{keywords},'%'))
-		</if>
+
+ 
 	</sql>
 
 	<!-- 거리, 관심사에 따른 타임라인에 쓸 게시글 목록 출력 -->
@@ -43,44 +52,23 @@
 		(6371*acos(cos(radians(#{UserVO.lat}))*cos(radians(lat))*cos(radians(lon)
 		-radians(#{UserVO.lon}))+sin(radians(#{UserVO.lat}))*sin(radians(lat))))
 		AS distance
-		FROM board LEFT OUTER JOIN category 
-		ON board.cateId = category.cateId
+		FROM board LEFT OUTER JOIN category
+		ON board.cateId =
+		category.cateId
 		<include refid="conditional"></include>
 		ORDER BY distance asc, bno desc
-		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
+		limit #{pageMaker.pageStart},
+		#{pageMaker.perPageNum}
 	</select>
-	
+
 	<!-- 페이징 적용을 위한 관심사에 따른 게시글 수 반환 -->
 	<select id="countTimeline" resultType="int">
 		SELECT count(*)
-		FROM board
-		
-		WHERE
-		1=0
-		<if test='UserVO.cateId1 == "Y"'>
-			or cateId = 1
-		</if>
-		<if test='UserVO.cateId2 == "Y"'>
-			or cateId = 2
-		</if>
-		<if test='UserVO.cateId3 == "Y"'>
-			or cateId = 3
-		</if>
-		<if test='UserVO.cateId4 == "Y"'>
-			or cateId = 4
-		</if>
-		<if test='UserVO.cateId5 == "Y"'>
-			or cateId = 5
-		</if>
-		<if test='UserVO.cateId6 == "Y"'>
-			or board.cateId = 6
-		</if>
-		<if test="keywords != null">
-			and (btitle LIKE CONCAT('%',#{keywords},'%') or bcontent LIKE CONCAT('%',#{keywords},'%')
-				or userId LIKE CONCAT('%',#{keywords},'%'))
-		</if>
-	</select>
+		From board left outer join category
+		on board.cateId = category.cateId
+		<include refid="conditional"></include>
 
+	</select>
 
 
 </mapper>

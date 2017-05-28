@@ -25,6 +25,7 @@ public class TimelineDTO{
 	private String cateName;
 //	getter, setter
 	
+	
 	public String getBno() {
 		return bno;
 	}
