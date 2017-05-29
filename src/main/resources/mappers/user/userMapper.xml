@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 로그인 (암호화아직 안댔음)-->
 	<select id="login" resultType="UserVO">
 		SELECT * FROM usertable
-		WHERE userId = #{userId} AND userPw = #{userPw}
+		WHERE userId = #{userId} AND userPw = PASSWORD(#{userPw})
 	</select>
 	
 	<!-- 아이디 찾기  -->

@@ -2,7 +2,6 @@ $(document).ready(function(){
 	var page = 1;
 	var keywords;
 	
-	
 	function listAll(pageNum,searchText){
 		var str = "";
 		$.getJSON("/timeline/listPaging?page="+pageNum+"&keywords="+encodeURIComponent(searchText),function(data){
