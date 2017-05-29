@@ -9,8 +9,10 @@ import com.java.kosta.dto.user.UserVO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
+	
 	@Inject
 	SqlSession sqlSession;
+	
 	private final static String NAMESPACE = "UserMapper";
 
 	// 로그인
@@ -24,5 +26,26 @@ public class UserDAOImpl implements UserDAO {
 	public int idCheck(String userId) {
 		return sqlSession.selectOne(NAMESPACE + ".idCheck", userId);
 	}
+	
+	//구글 유니크 아이디 중복체크
+	@Override
+	public UserVO googlecheckDuplicateId(String uniqId) {
+		return sqlSession.selectOne(NAMESPACE+".googlecheckDuplicateId", uniqId);//하나만 반환
+	}
+
+	//일반 유저 회원가입
+	@Override
+	public void insertUser(UserVO vo) {
+		 sqlSession.insert(NAMESPACE+".insertUser",vo);
+	}
+
+	//구글 유저 회원가입
+	@Override
+	public void googleinsertUser(UserVO vo) {
+		sqlSession.insert(NAMESPACE+".googleinsertUser",vo);
+	}
+	
+	
+	
 	
 }

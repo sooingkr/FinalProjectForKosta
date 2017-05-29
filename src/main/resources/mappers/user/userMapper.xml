@@ -5,10 +5,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- [ 사용자에 대한 처리를 담당합니다. ] -->
 <mapper namespace="UserMapper">
 
+    
+    <sql id="usercol">
+		userId,
+		userPw,
+		userName,
+		userHp,
+		userEmail,
+		addr1,
+		addr2,
+		cateId1,
+		cateId2,
+		cateId3,
+		cateId4,
+		cateId5,
+		cateId6
+    </sql>
+    
+    
 	<!-- 로그인 (암호화아직 안댔음)-->
 	<select id="login" resultType="UserVO">
 		SELECT * FROM usertable
-		WHERE userId = #{userId} AND userPw = password(#{userPw})
+		WHERE userId = #{userId} AND userPw = PASSWORD(#{userPw})
 	</select>
 	
 	<!-- 아이디 찾기  -->
@@ -18,5 +36,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		WHERE userId = #{userId} 
 	</select>
 	
+<!-- 일반 회원 가입  -->
+	
+<insert id="insertUser">
+insert into usertable(userId,userPw,userName,userHp,userEmail,addr1,addr2,
+cateId1,cateId2,cateId3,cateId4,cateId5,cateId6)values
+(#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
+#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6})
+</insert>
+	
+	
+<!-- 구글 회원 가입  -->
+
+<insert id="googleinsertUser">
+insert into usertable(userId,userPw,userName,userHp,userEmail,addr1,addr2,
+cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId)values
+(#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
+#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},#{uniqId})
+</insert>
+	
+
+<!-- 구글 연동시 유니크 아이디 검사-->
+<select id="googlecheckDuplicateId" resultType="UserVO">
+	    SELECT <include refid="usercol"/> FROM usertable where uniqId=#{uniqId}
+</select>
+
+
+<!-- 구글  유니크 아이디 검사-->
+<select id="uniqIdselect" resultType="String">
+  	SELECT userId from usertable where uniqId=#{uniqId}
+</select>	
 	
 </mapper>

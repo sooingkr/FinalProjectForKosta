@@ -31,6 +31,9 @@
 		</interceptor> 
 		<interceptor>
 			<mapping path="/**/*"/>
+			<exclude-mapping path="/api/google"/>
+			<exclude-mapping path="/Verification"/>
+			<exclude-mapping path="/callback"/>
 			<exclude-mapping path="/"/> <!-- 로그인 가능해야함으로 예외로... -->
 			<exclude-mapping path="/user/**/*"/>
 			<exclude-mapping path="/resources/**/*"/>
