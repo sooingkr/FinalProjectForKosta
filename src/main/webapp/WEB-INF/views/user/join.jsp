@@ -32,6 +32,7 @@
  	@author Areum
   	@Desc 회원가입 form
  -->
+ 
 </head>
 <body>
 
@@ -44,13 +45,15 @@
             <div class="form-group">
                <label class="control-label">아이디</label>
                <div class="input-group">
-                  <input type="text" class="form-control"id="userId" name="userId"  placeholder="아이디를 입력해주세요"> 
+                  <input type="text" class="form-control"id="userId" name="userId"  placeholder="아이디를 입력해주세요"
+                  	value="${UserVO.userId}"/> 
                   <span class="input-group-btn">
                      <input type="button" class="btn btn-warning" id="idcheck" value="중복체크" onclick="idCheck();"/>
                   </span>
                </div>
                <div id="idchk-error"></div>
             </div>
+            
                
  
             <div class="form-group">
@@ -69,7 +72,8 @@
             
             <div class="form-group">
                <label class="control-label">이름</label>
-                <input name="userName" type="text" class="form-control" id="userName" placeholder="이름을 입력해 주세요">
+                <input name="userName" type="text" class="form-control" id="userName" placeholder="이름을 입력해 주세요" 
+                value="${UserVO.userName}">
                 <div id="name-error"></div>
             </div>
             
@@ -83,7 +87,8 @@
             
             <div class="form-group">
                <label class="control-label">이메일  </label>
-               <input type="email" class="form-control" id="userEmail" name="userEmail"  placeholder="이메일을 입력해주세요"> 
+               <input type="email" class="form-control" id="userEmail" name="userEmail"  placeholder="이메일을 입력해주세요"
+                 value="${UserVO.email}"> 
                <div id="email-error"></div>
             </div>
             
@@ -102,8 +107,8 @@
             
          <div class="form-group">
             <label class="control-label">상세주소 </label>
-            <input type="text" id="sample6_address" name="addr1" class="d_form large form-control" readonly>
-            <input type="text" id="sample6_address2" name="addr2" class="form-control" placeholder="상세주소를 입력하세요.">
+            <input type="text" id="addr1" name="addr1" class="d_form large form-control" readonly>
+            <input type="text" id="addr2" name="addr2" class="form-control" placeholder="상세주소를 입력하세요.">
          </div>
 
 
@@ -111,33 +116,38 @@
          <label class="control-label">관심분야 </label> 
          <div class="input-group">
             <label class="checkbox-inline"> 
-               <input type="checkbox" value="">유아/취미/완구
+               <input type="checkbox" name="checkbox" id="cateId1" value="n">유아/취미/완구
             </label> 
             <label class="checkbox-inline"> 
-               <input type="checkbox" value="">뷰티/패션/잡화
+               <input type="checkbox" name="checkbox" id="cateId2" value="n">뷰티/패션/잡화
             </label> 
             <label class="checkbox-inline"> 
-               <input type="checkbox" value="">애완동물 용품
+               <input type="checkbox" name="checkbox" id="cateId3" value="n">애완동물 용품
             </label> 
             
             <br/><br/>
             
             <label class="checkbox-inline"> 
-               <input type="checkbox" id="ex_chk2" value="">홈인테리어/주방용품/생활용품   
+               <input type="checkbox" name="checkbox" id="cateId4" value="n">홈인테리어/주방용품/생활용품   
             </label> 
             <label class="checkbox-inline"> 
-               <input type="checkbox" value="">도서/음반
+               <input type="checkbox" name="checkbox" id="cateId5" value="n">도서/음반
             </label> 
             <label class="checkbox-inline"> 
-               <input type="checkbox" value="">지역 할인 쿠폰
+               <input type="checkbox" name="checkbox" id="cateId6" value="n">지역 할인 쿠폰
             </label>
+            
+             <input type="hidden" name="uniqId" value="${UserVO.uniqId}" id="uniqId">
          </div>
       </div>
 
          <br/><br/>
             <div class="form-group text-center">
                <button id="cancelBtn" type="button" class="btn btn-default">가입취소</button> &nbsp;&nbsp;
-                <button id="subscribeBtn" type="button" class="btn btn-success">회원가입</button>
+                <button id="joinbtn" type="button" class="btn btn-success">회원가입</button>
+                
+                <input name="idCheckboolean" id="idCheckboolean" type="hidden" value="n"> <%--아이디를 제대로 체크했고 중복됬는지 체크 --%>
+            
             </div>
          </form>
       </div>

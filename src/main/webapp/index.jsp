@@ -40,11 +40,9 @@
                         <div class="logo-img">
                         </div>
 						 <div class="logo-arrow"> 
-						 	<c:if test="${loginSession == null }">
-							 	<button type="button" class="btn btn-lg login" data-toggle="modal" data-target="#loginModal">회원 로그인</button>
-							 	<br/><br/>
-							 	<button type="button" class="btn btn-lg googleLogin"></button>
-						 	</c:if>
+						 	<button type="button" class="btn btn-lg login" data-toggle="modal" data-target="#loginModal">회원 로그인</button>
+						 	<br/><br/>
+						 	<button type="button" class="btn btn-lg googleLogin" onclick="javascript:location.href='/api/google'"></button>
 						 </div>
                     </div>
                     
