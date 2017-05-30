@@ -36,13 +36,6 @@
 		    <version>4.2</version>
 		</dependency>
 
-		<!-- Naver API(주소->위도,경도 변환) 용 -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
-		</dependency>
-
 		<!-- JSON2 -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
