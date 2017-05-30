@@ -34,45 +34,39 @@
 		                    <div id="three-columns" class="grid-container">
 			                    <ul class="rig columns-3 gallery2">
                                 <!-- START ITEM -->
-				                    <li><a href="/resources/images/big/001.jpg" class="popup" data-fancybox-group="group2">
+				                    <li><a href="/board/category/boardList?cateId=2">
 					                    <img src="/resources/images/thumb/001.jpg" alt="Portfolio"/></a>
 					                        <h3><a href="/board/category/boardList?cateId=2">도서/음반</a></h3>
-					                        <p>Vivamus at sapien eget tellus sodales tempor. Phasellus et varius magna.</p>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
-				                    <li><a href="/resources/images/big/002.jpg" class="popup" data-fancybox-group="group2">
+				                    <li><a href="/board/category/boardList?cateId=3">
 					                    <img src="/resources/images/thumb/002.jpg" alt="Portfolio"/></a>
 					                        <h3><a href="/board/category/boardList?cateId=3">뷰티/패션/잡화</a></h3>
-					                        <p>Vivamus at sapien eget tellus sodales tempor. Phasellus et varius magna.</p>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
-				                    <li><a href="/resources/images/big/003.jpg" class="popup" data-fancybox-group="group2">
+				                    <li><a href="/board/category/boardList?cateId=4">
 					                    <img src="/resources/images/thumb/003.jpg" alt="Portfolio"/></a>
 					                        <h3><a href="/board/category/boardList?cateId=4">애완동물용품</a></h3>
-					                        <p>Vivamus at sapien eget tellus sodales tempor. Phasellus et varius magna.</p>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
-				                    <li><a href="/resources/images/big/004.jpg" class="popup" data-fancybox-group="group2">
+				                    <li><a href="/board/category/boardList?cateId=5">
 					                    <img src="/resources/images/thumb/004.jpg" alt="Portfolio"/></a>
 					                        <h3><a href="/board/category/boardList?cateId=5">홈인테리어/주방/생활용품</a></h3>
-					                        <p>Vivamus at sapien eget tellus sodales tempor. Phasellus et varius magna.</p>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
-				                    <li><a href="/resources/images/big/005.jpg" class="popup" data-fancybox-group="group2">
+				                    <li><a href="/board/category/boardList?cateId=6">
 					                    <img src="/resources/images/thumb/005.jpg" alt="Portfolio"/></a>
 					                        <h3><a href="/board/category/boardList?cateId=6">유아/취미/완구</a></h3>
-					                        <p>Vivamus at sapien eget tellus sodales tempor. Phasellus et varius magna.</p>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
-				                    <li><a href="/resources/images/big/006.jpg" class="popup" data-fancybox-group="group2">
+				                    <li><a href="/board/category/boardList?cateId=7">
 					                    <img src="/resources/images/thumb/006.jpg" alt="Portfolio" /></a>
 					                        <h3><a href="/board/category/boardList?cateId=7">지역할인쿠폰</a></h3>
-					                        <p>Vivamus at sapien eget tellus sodales tempor. Phasellus et varius magna.</p>
 				                    </li>   
                                 <!-- END ITEM -->                 				
 			                    </ul>
