@@ -41,7 +41,7 @@
 								</tr>
 								<c:if test="${empty list}">
 									<tr>
-										<td colspan="5" style="text-align: center">받은 쪽지가 없습니다.<td>
+										<td colspan="5" style="text-align: center">받은 쪽지가 없습니다.</td>
 									</tr>
 								</c:if>
 								<c:forEach var="NoteVO" items="${list}" varStatus="status">

@@ -113,13 +113,12 @@
 				                     <div class="form-group form col-md-12">
 				                        <span><a href="#">아이디찾기</a></span> / 
 				                        <span><a href="#">비밀번호찾기</a></span>
-				                        <span style="float: right"><input name="useCookie" type="checkbox" id="useCookie">자동로그인</span>
 				                     </div>
 				                  </div>
 				                  <br />
 				                  <div class="modal-footer">
 				                     <div class="col-md-12">
-				                        <a href="/user/subscribeJoin" class="btn btn-info">회원가입</a> 
+				                     	<button type="button" onclick="javascript:location.href='/user/subscribeJoin'" class="btn btn-info">회원가입</button> 
 				                        <input type="button" class="btn btn-warning"  id="login" value="로그인" />
 				                     </div>
 				                  </div>
