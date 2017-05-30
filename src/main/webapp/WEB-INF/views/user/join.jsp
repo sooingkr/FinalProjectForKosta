@@ -109,8 +109,8 @@
             <label class="control-label">상세주소 </label>
             <input type="text" id="addr1" name="addr1" class="d_form large form-control" readonly>
             <input type="text" id="addr2" name="addr2" class="form-control" placeholder="상세주소를 입력하세요.">
-         	<input type="number" id="latId" name="lat"/>
-         	<input type="number" id="lonId" name="lon"/>
+         	<input type="hidden" id="latId" name="lat"/>
+         	<input type="hidden" id="lonId" name="lon"/>
          </div>
 
       <div class="form-group">

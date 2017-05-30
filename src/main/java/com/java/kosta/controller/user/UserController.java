@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,20 @@ public class UserController {
    UserServiceImpl service;
    
    Logger logger=LoggerFactory.getLogger(UserController.class);
-    /*
+   
+   /*
+	 * @method Name : modifyInfo()
+	 * @Author : 황영롱
+	 * @description : 회원가입 수정
+	 */
+   @RequestMapping(value="/modifyInfo", method=RequestMethod.POST)
+   public String modifyInfo(@RequestBody String password){
+	   logger.info("수정으로 넘어오는 비밀번호 : " + password);
+	   return "/user/modifyInfoForm";
+   }
+   
+   
+   /*
 	 * @method Name : login
 	 * @Author : 송아름
 	 * @description : 로그인 화면

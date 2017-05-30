@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 	<title>Welcome Main Page</title>
 	
 	
@@ -43,9 +44,54 @@
 						 	<button type="button" class="btn btn-lg login" data-toggle="modal" data-target="#loginModal">회원 로그인</button>
 						 	<br/><br/>
 						 	<button type="button" class="btn btn-lg googleLogin" onclick="javascript:location.href='/api/google'"></button>
+							<!-- 회원정보 수정 클릭 버튼 -->
+							<!-- Buttons -->
+							<button type="button" data-toggle="modal" data-target="#myModal">회원정보 수정</button>
 						 </div>
                     </div>
                     
+                    <!-- 회원수정 페이지로 이동하기 위한 패스워드 입력 모달창 -->
+					<!-- Modal -->
+					  <div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					    
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">×</button>
+					          <h4 class="modal-title">패스워드 확인창</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p>회원정보를 수정하기 위해 패스워드를 확인해주세요.</p>
+					          <label>비밀번호</label><input id="pwId" type="password" name="userPw" class="form-control"/><br/>
+					        </div>
+					        <div class="modal-footer">
+					          <button id="btnClick" type="button">확인</button>
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+					      
+					    </div>
+					  </div>
+					  <script>
+					  	$(document).ready(function(){
+							$("#btnClick").on("click",function(event){
+								var pwd = $("#pwId").val();
+								$.ajax({
+									type:"post",
+									url:"/user/modifyInfo",
+									dataType:"text",
+									data:{
+										password:pwd
+									},
+									success : function(result){
+										
+									}
+								});// end of ajax()
+							});// end of btnClick
+					  	});// end of ready()
+					  </script>
+
                     <!-- Modal -->
 				      <div class="modal fade" id="loginModal" role="dialog">
 				         <div class="modal-dialog">
@@ -138,5 +184,4 @@
 		$("#welcome").attr("class","active");
 	})
 </script> 
-
 
