@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.kosta.common.Constants;
-import com.java.kosta.dto.board.BoardReplyDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.board.BoardReplyDTO;
+import com.java.kosta.dto.user.UserVO;
 import com.java.kosta.service.board.BoardReplyServiceImpl;
 
 @RestController
@@ -52,8 +53,14 @@ public class BoardReplyController {
    
    /** 댓글 리스트  AJAX로 뿌려주기 */
    @RequestMapping("/boardReplyAjax")
-   public Map<String, Object> boardReplyAjax(BoardPagingDTO pagingDTO) {
+   public Map<String, Object> boardReplyAjax(BoardPagingDTO pagingDTO, HttpServletRequest req) {
       logger.info("detailContentAjax() : 댓글 리스트 Json으로 뿌리기");
+      
+      int num=0;
+      
+      
+      UserVO vo = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
+      String userId = vo.getUserId();
       
       Map<String, Object> resMap = new HashMap<String, Object>();
       resMap.put(Constants.RESULT, Constants.RESULT_FAIL);
@@ -63,6 +70,21 @@ public class BoardReplyController {
          // 해당 게시글의 댓글 리스트 조회
          int cnt = service.selectReplyListTotCount(pagingDTO);
          List<BoardReplyDTO> replyList = service.selectBoardReplyList(pagingDTO);
+         for (BoardReplyDTO dto : replyList) {
+            if (dto.getIsSecret().equals("Y")) {
+               if (userId == null || userId.equals("")) {// 비로그인 상태
+                  dto.setrContent("비밀댓글입니다.");
+               } else {// 로그인 상태
+                  String writer = service.findWriter(pagingDTO.getbNo());
+                  String replyer = dto.getReplyId().toString();
+
+                  if (!userId.equals(writer) && !userId.equals(replyer)) {
+                     dto.setrContent("비밀댓글입니다.");
+                  }
+               }
+            }
+         }
+               
          resMap.put("replyTotCnt", cnt);
          resMap.put("replyList", replyList);
          resMap.put(Constants.RESULT, Constants.RESULT_OK);
@@ -80,8 +102,11 @@ public class BoardReplyController {
    
    /** 댓글 전체 목록 */
    @RequestMapping("/all")
-   public Map<String, Object> boardReplyListAll(BoardReplyDTO brDTO){
+   public Map<String, Object> boardReplyListAll(BoardReplyDTO brDTO, HttpServletRequest req){
       logger.info("boardReplyListAll() : 댓글 전체목록 조회");
+      
+      UserVO vo = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
+      String userId = vo.getUserId();
       
       Map<String, Object> resMap = new HashMap<String, Object>();
       resMap.put(Constants.RESULT, Constants.RESULT_FAIL);
@@ -90,6 +115,19 @@ public class BoardReplyController {
       try {
          // 해당 게시글의 댓글 리스트 조회
          List<BoardReplyDTO> replyAllList = service.selectAllReplyList(brDTO);
+         for (BoardReplyDTO dto : replyAllList) {
+            if (dto.getIsSecret().equals("Y")) {
+               if (userId == null) {//비로그인 상태
+                  dto.setrContent("비밀댓글입니다.");
+               } else {//로그인상태
+                  String writer = service.findWriter(brDTO.getbNo());
+                  String replyer =brDTO.getReplyId();
+                  if (!userId.equals(writer) && !userId.equals(replyer)) {
+                     dto.setrContent("비밀댓글입니다.");
+                  }
+               }
+            }
+         }
          resMap.put("replyAllList", replyAllList);
          resMap.put(Constants.RESULT, Constants.RESULT_OK);
          resMap.put(Constants.RESULT_MSG, "댓글 조회 성공");

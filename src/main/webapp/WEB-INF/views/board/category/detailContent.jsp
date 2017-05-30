@@ -149,6 +149,7 @@
 						</th>
 						<td><input style="width: 100%; border: 0;" type="text"
 							name="rContent" id="newReplyContent" /></td>
+						<td><input type="checkbox" id="secretReply"/>비밀댓글</td>	
 						<td style="width: 10%"><button style="width: 50px"
 								id="replyAddBtn">작성</button></td>
 					</tr>
@@ -195,46 +196,52 @@
 				showNextReplyList();
 		
 				// 댓글 등록 클릭했을 때
-				$("#replyAddBtn").on("click", function() {
-					// 입력한 댓글 값들을 가져옴
-					var replyer = $("#newReplyWriter").val();
-					var replyText = $("#newReplyContent").val();
-					var bno = "${boardDTO.bNo}";
-		
-					if (replyText.trim() == "") {
-						alert("내용을 작성해주세요.");
-						return;
-					}
-		
-					$.ajax({
-						type : "post",
-						url : "/replies/insertBoardReply",
-						headers : {
-							"Content-Type" : "application/json",
-							"X-HTTP-Method-Override" : "POST"
-						},
-						dataType : "json",
-						data : JSON.stringify({
-							bNo : bno,
-							replyId : replyer,
-							rContent : replyText
-						}),
-						success : function(data) {
-							console.log(data);
-							console.log(data.result);
-							if (data.result == "ok") {
-								alert("등록되었습니다.");
-								getAllList(); //전체 목록 뿌리기
-							} else {
-								alert("등록 실패");
-							}
-						}
-					}); // end of ajax
-					// 댓글 초기화
-					$("#newReplyWriter").val("");
-					$("#newReplyContent").val("");
-		
-				}); // end of 댓글등록 클릭
+	            $("#replyAddBtn").on("click", function() {
+	               // 입력한 댓글 값들을 가져옴
+	               var replyer = $("#newReplyWriter").val();
+	               var replyText = $("#newReplyContent").val();
+	               var bno = "${boardDTO.bNo}";
+	               var secretReply="N";
+	               
+	               if($("#secretReply").is(":checked")){
+	                  secretReply="Y";
+	               }
+	      
+	               if (replyText.trim() == "") {
+	                  alert("내용을 작성해주세요.");
+	                  return;
+	               }
+	      
+	               $.ajax({
+	                  type : "post",
+	                  url : "/replies/insertBoardReply",
+	                  headers : {
+	                     "Content-Type" : "application/json",
+	                     "X-HTTP-Method-Override" : "POST"
+	                  },
+	                  dataType : "json",
+	                  data : JSON.stringify({
+	                     bNo : bno,
+	                     replyId : replyer,
+	                     rContent : replyText,
+	                     isSecret : secretReply
+	                  }),
+	                  success : function(data) {
+	                     console.log(data);
+	                     console.log(data.result);
+	                     if (data.result == "ok") {
+	                        alert("등록되었습니다.");
+	                        getAllList(); //전체 목록 뿌리기
+	                     } else {
+	                        alert("등록 실패");
+	                     }
+	                  }
+	               }); // end of ajax
+	               // 댓글 초기화
+	               $("#newReplyWriter").val("");
+	               $("#newReplyContent").val("");
+	      
+	            }); // end of 댓글등록 클릭
 		
 				// 댓글 옆 수정 버튼
 				$("#replyTable").on("click", "#replyDetail", function() {
