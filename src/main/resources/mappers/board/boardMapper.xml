@@ -14,7 +14,6 @@
         viewcnt AS viewCnt,
         bregdate AS bRegDate,
         bmodifydate AS bModifyDate
-        
     </sql>
     
     <!-- 게시글 한 건 조회 -->
