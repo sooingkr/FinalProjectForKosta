@@ -41,6 +41,7 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+
 	
 			<!--구글 api 객체 redirectUrl로 콜백 받은곳으로 감  -->
 	<bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory"> 
@@ -54,5 +55,5 @@
 	      </bean>
 	
 	
-	
+
 </beans>
