@@ -1,12 +1,10 @@
 package com.java.kosta.service.board;
 
 import java.util.List;
-import java.util.Map;
 
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.BoardReplyDTO;
-import com.java.kosta.dto.board.CategoryDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.board.CategoryDTO;
 
 public interface BoardService {
 	
@@ -44,17 +42,30 @@ public interface BoardService {
 	
 	//////////////////////////////// 좋아요////////////////////////////////////////////
 	/** 좋아요 조회 */
-	public int searchFavorite(String userId, String bNo);
+	public int searchFavorite(String userId, String bNo) throws Exception;
 
 	/** 좋아요 */
-	public void favoriteBoard(String userId,String bNo);
+	public void favoriteBoard(String userId,String bNo) throws Exception; 
 
 	/** 좋아요 취소 */
-	public void unfavoriteBoard(String userId, String bNo);
+	public void unfavoriteBoard(String userId, String bNo) throws Exception;
 	
 	/** 테이블 삭제시 좋아요 테이블 데이터 삭제 */
-	public void deleteFavorite(String bNo);
+	public void deleteFavorite(String bNo) throws Exception;
 	
 	/**좋아요 개수 조회 */
-	public int countFavorite(String bNo);
+	public int countFavorite(String bNo) throws Exception;
+	
+	
+	/** 게시글 + 파일 삽입  */
+	public void insertBoardAttach(BoardDTO boardDTO) throws Exception;
+	
+	/** 파일 리스트 가져오기 */
+	public List<String> selectAttach(String bNo) throws Exception;
+	
+	/** 해당 게시글 파일 삭제 */
+	public void deleteBoardAttach(String bNo) throws Exception;
+	
+	/** 게시글 수정 시 파일 테이블 수정 */
+//	public void updateBoardAttach(BoardDTO boardDTO) throws Exception; 
 }

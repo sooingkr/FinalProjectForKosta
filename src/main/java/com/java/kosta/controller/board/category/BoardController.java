@@ -2,12 +2,14 @@ package com.java.kosta.controller.board.category;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,150 +23,164 @@ import com.java.kosta.service.board.BoardServiceImpl;
 @Controller
 @RequestMapping("/board/category/*")
 public class BoardController {
-	// 나 윤지 수정수정수정수정 
-   @Inject
-   BoardServiceImpl service;
-   
-   /** 게시판 보기 */
-   @RequestMapping("/boardList")
-   public String boardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value="cateId") int cateId){
-      try {
-         // 전체 레코드 갯수 획득
-         int totRecord = service.selectBoardListTotalCount(pagingDTO, cateId);
-         // 페이징 계산
-         pagingDTO.calcPage(totRecord);
-         
-         //받아온 cateId로 카테고리명 조회
-         CategoryDTO cateDTO = service.selectCategory(cateId);
-         model.addAttribute("cateDTO", cateDTO);
-         
-         // cateId에 해당하는 board 데이터 리스트로 가져와서 전달하기
-         List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
-         model.addAttribute("boardList", list);
-         model.addAttribute("pagingDTO", pagingDTO);
-         
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      
-      return "/board/category/boardList";
-   }
-   
-   /** 글작성 form */
-   @RequestMapping("/writeBoardForm")
-   public String writePetForm(Model model, HttpServletRequest req, @RequestParam(value="cateId")int cateId){
-      
-      try{
-         //카테고리 조회해서 전달하기
-         CategoryDTO cateDTO = service.selectCategory(cateId);
-         model.addAttribute("cateDTO", cateDTO);
-         
-         // 로그인 세션 정보 넘기기
-         UserVO loginSession= (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);  
-         model.addAttribute("loginSession", loginSession);
-         
-      }catch(Exception e){
-         e.printStackTrace();
-      }
-      return "/board/category/writeBoardForm";
-   }
-   
-   /** 글작성 처리 insert */
-   @RequestMapping("/writeBoardProc")
-   public String writePetProc(BoardDTO boardDTO, RedirectAttributes redir){
-      
-      try {
-         // board 테이블에 데이터 삽입하기
-         service.insertBoard(boardDTO);
-         
-         redir.addAttribute("result", "ok");
-      
-      } catch (Exception e) {
-         redir.addAttribute("result", "fail");
-         e.printStackTrace();
-      }
-      
-      return "redirect:/board/category/boardList?cateId="+boardDTO.getCateId();
-   }
-   
-   /** 선택 게시글 상세 보기 */
-   @RequestMapping("/detailContent")
-   public String detailContent(@RequestParam(value="bno") String bNo, Model model, HttpServletRequest req){
-      try {
-         // 게시글 한건 조회
-         BoardDTO dto = service.selectBoardOne(bNo);
-         
-         // 해당 게시글 조회수 +1
-         service.updateViewCnt(bNo);
-         model.addAttribute("boardDTO", dto);
-         
-         //카테고리 조회
-         CategoryDTO cateDTO = service.selectCategory(dto.getCateId());
-         model.addAttribute("cateDTO", cateDTO);
-         
-         // 로그인 세션 정보 넘기기 
-         //		작성자와 로그인 세션 아이디가 같을 경우만 글삭제/글수정 버튼 보이도록 하기 위해
-         UserVO loginSession= (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);   
-         model.addAttribute("loginSession", loginSession);
-         System.out.println(loginSession.getUserId());
+	@Inject
+	BoardServiceImpl service;
 
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      
-      return "/board/category/detailContent";
-   }
-   
-   /** 선택 게시글 수정 폼*/
-   @RequestMapping("/updateContentForm")
-   public String updateContentForm(BoardDTO boardDTO, Model model){
-      try {
-         // 게시글 한건 조회
-         BoardDTO dto = service.selectBoardOne(boardDTO.getbNo());
-         model.addAttribute("boardDTO", dto);
-         
-         //카테고리 조회
-         CategoryDTO cateDTO = service.selectCategory(dto.getCateId());
-         model.addAttribute("cateDTO", cateDTO);
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return "/board/category/updateContentForm";
-   }
-   
-   /** 선택 게시글 수정 처리 */
-   @RequestMapping("/updateContentProc")
-   public String updateContentProc(BoardDTO boardDTO, Model model){
-      BoardDTO bDTO = null;
-      try {
-         // DB update
-         service.updateBoard(boardDTO);
-         //카테고리 아이디 가져오기 위한 게시글 한건 검색
-         bDTO = service.selectBoardOne(boardDTO.getbNo());   
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return "redirect:/board/category/boardList?cateId="+bDTO.getCateId();
-   }
-   
-   /** 선택 게시글 삭제 처리 */
-   @RequestMapping("/deleteContentProc")
-   public String deleteContentProc(@RequestParam(value="bno") String bNo, @RequestParam(value="cateId")int cateId, Model model){
-      try {
+	/** 게시판 보기 */
+	@RequestMapping("/boardList")
+	public String boardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value = "cateId") int cateId) {
+		try {
+			// 전체 레코드 갯수 획득
+			int totRecord = service.selectBoardListTotalCount(pagingDTO, cateId);
+			// 페이징 계산
+			pagingDTO.calcPage(totRecord);
 
-         // 댓글 table의 bno에 해당하는 댓글들 모두 삭제
-         service.deleteBoardReplyAll(bNo);
-         
-         // 좋아요 테이블에 해당 게시글 데이터 삭제
-         service.deleteFavorite(bNo);
-         
-         // DB delete
-         service.deleteBoard(bNo);
+			// 받아온 cateId로 카테고리명 조회
+			CategoryDTO cateDTO = service.selectCategory(cateId);
+			model.addAttribute("cateDTO", cateDTO);
 
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return "redirect:/board/category/boardList?cateId="+cateId;
-   }
+			// cateId에 해당하는 board 데이터 리스트로 가져와서 전달하기
+			List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
+			model.addAttribute("boardList", list);
+			model.addAttribute("pagingDTO", pagingDTO);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "/board/category/boardList";
+	}
+
+	/** 글작성 form */
+	@RequestMapping("/writeBoardForm")
+	public String writePetForm(Model model, HttpServletRequest req, @RequestParam(value = "cateId") int cateId) {
+
+		try {
+			// 카테고리 조회해서 전달하기
+			CategoryDTO cateDTO = service.selectCategory(cateId);
+			model.addAttribute("cateDTO", cateDTO);
+
+			// 로그인 세션 정보 넘기기
+			UserVO loginSession = (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);
+			model.addAttribute("loginSession", loginSession);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/board/category/writeBoardForm";
+	}
+
+	/** 글작성 처리 insert */
+	@RequestMapping(value = "/writeBoardProc", method = RequestMethod.POST)
+	public String writePetProc(BoardDTO boardDTO, RedirectAttributes redir) {
+
+		try {
+			// 게시글 및 파일 테이블에 삽입
+			service.insertBoardAttach(boardDTO);
+
+			redir.addAttribute("result", "ok");
+
+		} catch (Exception e) {
+			redir.addAttribute("result", "fail");
+			e.printStackTrace();
+		}
+
+		return "redirect:/board/category/boardList?cateId=" + boardDTO.getCateId();
+	}
+
+	/** 선택 게시글 상세 보기 */
+	@RequestMapping("/detailContent")
+	public String detailContent(@RequestParam(value = "bno") String bNo, Model model, HttpServletRequest req) {
+		try {
+			// 게시글 한건 조회
+			BoardDTO dto = service.selectBoardOne(bNo);
+
+			// 해당 게시글 조회수 +1
+			service.updateViewCnt(bNo);
+			model.addAttribute("boardDTO", dto);
+
+			// 카테고리 조회
+			CategoryDTO cateDTO = service.selectCategory(dto.getCateId());
+			model.addAttribute("cateDTO", cateDTO);
+
+			// 로그인 세션 정보 넘기기
+			// 작성자와 로그인 세션 아이디가 같을 경우만 글삭제/글수정 버튼 보이도록 하기 위해
+			UserVO loginSession = (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);
+			model.addAttribute("loginSession", loginSession);
+			System.out.println(loginSession.getUserId());
+
+			// 선택 게시글의 업로드 파일 리스트 가져오기
+			List<String> fileList = service.selectAttach(bNo);
+			model.addAttribute("fileList", fileList); // 해당 게시물의 파일 리스트 넘기기
+//			model.addAttribute("filePath", uploadPath); // 파일경로 넘기기
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "/board/category/detailContent";
+	}
+
+	/** 선택 게시글 수정 폼 */
+	@RequestMapping("/updateContentForm")
+	public String updateContentForm(BoardDTO boardDTO, Model model) {
+		try {
+			// 게시글 한건 조회
+			BoardDTO dto = service.selectBoardOne(boardDTO.getbNo());
+			model.addAttribute("boardDTO", dto);
+			
+			//게시글의 업로드 파일리스트 가져오기
+			List<String> fileList = service.selectAttach(boardDTO.getbNo());
+			model.addAttribute("fileList", fileList); // 해당 게시물의 파일 리스트 넘기기
+
+			// 카테고리 조회
+			CategoryDTO cateDTO = service.selectCategory(dto.getCateId());
+			model.addAttribute("cateDTO", cateDTO);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/board/category/updateContentForm";
+	}
+
+	/** 선택 게시글 수정 처리 */
+	@RequestMapping("/updateContentProc")
+	public String updateContentProc(BoardDTO boardDTO, Model model) {
+		BoardDTO bDTO = null;
+		try {
+			// DB update ( board 테이블, boardfile 테이블)
+			service.updateBoard(boardDTO);
+			
+			
+			// 카테고리 아이디 가져오기 위한 게시글 한건 검색
+			bDTO = service.selectBoardOne(boardDTO.getbNo());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/board/category/boardList?cateId=" + bDTO.getCateId();
+	}
+
+	/** 선택 게시글 삭제 처리 */
+	@RequestMapping("/deleteContentProc")
+	public String deleteContentProc(@RequestParam(value = "bno") String bNo, @RequestParam(value = "cateId") int cateId,
+			Model model) {
+		try {
+
+//			// 댓글 table의 bno에 해당하는 댓글들 모두 삭제
+//			service.deleteBoardReplyAll(bNo);
+//
+//			// 좋아요 테이블에 해당 게시글 데이터 삭제
+//			service.deleteFavorite(bNo);
+
+			// DB delete
+			service.deleteBoard(bNo);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/board/category/boardList?cateId=" + cateId;
+	}
 }

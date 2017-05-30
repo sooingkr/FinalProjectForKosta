@@ -7,8 +7,9 @@
 <head>
 <!-------------------------------------------- category section 게시글 상세보기 ---------------------------------------------->
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${cateDTO.cateName}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>${cateDTO.cateName}</title>
+	<script type="text/javascript" src="/resources/js/fileupload.js"></script>
 <style>
 #modDiv {
 	width: 300px;
@@ -69,11 +70,16 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
-						<td colspan="3"><pre style="height: 500px;">${boardDTO.bContent}</pre></td>
+						<td colspan="3"><pre style="height: 300px;">${boardDTO.bContent}</pre>
+							<c:forEach var="fileName" items="${fileList}">
+							<p>
+								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
+								<img src="/board/displayFile.do?fileName=${fileName}"></img></a></p>
+							</c:forEach>
+						</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">상품
-							가치</th>
+						<th style="width: 20%; background: #aaa; text-align: center;">상품가치</th>
 						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 				</table>
@@ -86,6 +92,7 @@
 										<img id="likeImage" src="" style="width: 10px; height: 10px;" />
 										<span id="likeCount"></span>
 									</button>
+								</div>
 						</c:if>
 
 						<c:if test="${loginSession.userId == boardDTO.userId }">
@@ -142,6 +149,7 @@
 						</th>
 						<td><input style="width: 100%; border: 0;" type="text"
 							name="rContent" id="newReplyContent" /></td>
+						<td><input type="checkbox" id="secretReply"/>비밀댓글</td>	
 						<td style="width: 10%"><button style="width: 50px"
 								id="replyAddBtn">작성</button></td>
 					</tr>
@@ -188,46 +196,52 @@
 				showNextReplyList();
 		
 				// 댓글 등록 클릭했을 때
-				$("#replyAddBtn").on("click", function() {
-					// 입력한 댓글 값들을 가져옴
-					var replyer = $("#newReplyWriter").val();
-					var replyText = $("#newReplyContent").val();
-					var bno = "${boardDTO.bNo}";
-		
-					if (replyText.trim() == "") {
-						alert("내용을 작성해주세요.");
-						return;
-					}
-		
-					$.ajax({
-						type : "post",
-						url : "/replies/insertBoardReply",
-						headers : {
-							"Content-Type" : "application/json",
-							"X-HTTP-Method-Override" : "POST"
-						},
-						dataType : "json",
-						data : JSON.stringify({
-							bNo : bno,
-							replyId : replyer,
-							rContent : replyText
-						}),
-						success : function(data) {
-							console.log(data);
-							console.log(data.result);
-							if (data.result == "ok") {
-								alert("등록되었습니다.");
-								getAllList(); //전체 목록 뿌리기
-							} else {
-								alert("등록 실패");
-							}
-						}
-					}); // end of ajax
-					// 댓글 초기화
-					$("#newReplyWriter").val("");
-					$("#newReplyContent").val("");
-		
-				}); // end of 댓글등록 클릭
+	            $("#replyAddBtn").on("click", function() {
+	               // 입력한 댓글 값들을 가져옴
+	               var replyer = $("#newReplyWriter").val();
+	               var replyText = $("#newReplyContent").val();
+	               var bno = "${boardDTO.bNo}";
+	               var secretReply="N";
+	               
+	               if($("#secretReply").is(":checked")){
+	                  secretReply="Y";
+	               }
+	      
+	               if (replyText.trim() == "") {
+	                  alert("내용을 작성해주세요.");
+	                  return;
+	               }
+	      
+	               $.ajax({
+	                  type : "post",
+	                  url : "/replies/insertBoardReply",
+	                  headers : {
+	                     "Content-Type" : "application/json",
+	                     "X-HTTP-Method-Override" : "POST"
+	                  },
+	                  dataType : "json",
+	                  data : JSON.stringify({
+	                     bNo : bno,
+	                     replyId : replyer,
+	                     rContent : replyText,
+	                     isSecret : secretReply
+	                  }),
+	                  success : function(data) {
+	                     console.log(data);
+	                     console.log(data.result);
+	                     if (data.result == "ok") {
+	                        alert("등록되었습니다.");
+	                        getAllList(); //전체 목록 뿌리기
+	                     } else {
+	                        alert("등록 실패");
+	                     }
+	                  }
+	               }); // end of ajax
+	               // 댓글 초기화
+	               $("#newReplyWriter").val("");
+	               $("#newReplyContent").val("");
+	      
+	            }); // end of 댓글등록 클릭
 		
 				// 댓글 옆 수정 버튼
 				$("#replyTable").on("click", "#replyDetail", function() {
@@ -469,6 +483,7 @@
 		
 			} // end of update()
 		
+			/* 좋아요 갯수 세기 */
 			function count() {
 				var bno = "${boardDTO.bNo}";
 				$.ajax({
@@ -485,6 +500,12 @@
 					}
 				}); // end of ajax from likeBoard Btn Clicks
 			}
+			
+			/* href 클릭 함수 */
+			function hrefFunc(fileName){
+				$("#hrefId").attr("target","_blank");
+				location.href="/board/displayFile?fileName=" + getImageLink(fileName);
+			} 
 		</script>
 
 		<script>
