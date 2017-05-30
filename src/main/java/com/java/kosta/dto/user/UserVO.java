@@ -12,22 +12,28 @@ public class UserVO {
 	private String userEmail;
 	private String addr1;
 	private String addr2;
-	private String interestId;
 	private String sessionKey;
 	private Date sessionLimit; // 쿠키유지
 	private Date userRegdate; // 회원 등록일
 	private boolean useCookie; // 쿠키 사용여부
 	private String lat;
 	private String lon;
-	private String cateId;
+	private String uniqId;//유니크 아이디
+	
+	//카테고리 아이디 체크박스 부분
+	private String cateId1;
+	private String cateId2;
+	private String cateId3;
+	private String cateId4;
+	private String cateId5;
+	private String cateId6;
+	//
+	
+//	private String idCheckboolean;//아이디가 체크되었는지 확인하는거
 	
 	
-	public String getCateId() {
-		return cateId;
-	}
-
-	public void setCateId(String cateId) {
-		this.cateId = cateId;
+	public String getUniqId() {
+		return uniqId;
 	}
 
 	public String getLat() {
@@ -46,15 +52,10 @@ public class UserVO {
 		this.lon = lon;
 	}
 
-	//
-	private String cateId1;
-	private String cateId2;
-	private String cateId3;
-	private String cateId4;
-	private String cateId5;
-	private String cateId6;
-	private String cateId7;
-	//
+	public void setUniqId(String uniqId) {
+		this.uniqId = uniqId;
+	}
+
 
 	public String getCateId1() {
 		return cateId1;
@@ -104,13 +105,6 @@ public class UserVO {
 		this.cateId6 = cateId6;
 	}
 
-	public String getCateId7() {
-		return cateId7;
-	}
-
-	public void setCateId7(String cateId7) {
-		this.cateId7 = cateId7;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -136,13 +130,6 @@ public class UserVO {
 		this.userPw = userPw;
 	}
 
-	public String getUserHp() {
-		return userHp;
-	}
-
-	public void setUserHp(String userHp) {
-		this.userHp = userHp;
-	}
 
 	public String getUserEmail() {
 		return userEmail;
@@ -166,14 +153,6 @@ public class UserVO {
 
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
-	}
-
-	public String getInterestId() {
-		return interestId;
-	}
-
-	public void setInterestId(String interestId) {
-		this.interestId = interestId;
 	}
 
 	public String getSessionKey() {
@@ -207,5 +186,22 @@ public class UserVO {
 	public void setUseCookie(boolean useCookie) {
 		this.useCookie = useCookie;
 	}
+
+	public String getUserHp() {
+		return userHp;
+	}
+
+	public void setUserHp(String userHp) {
+		this.userHp = userHp;
+	}
+	
+
+/*	public String getIdCheckboolean() {
+		return idCheckboolean;
+	}
+
+	public void setIdCheckboolean(String idCheckboolean) {
+		this.idCheckboolean = idCheckboolean;
+	}*/
 
 }

@@ -25,4 +25,20 @@ public class UserServiceImpl implements UserService {
 		return dao.idCheck(userId);
 	}
 	
+	//구글아이디 체크
+	@Override
+	public UserVO googlecheckDuplicateId(String uniqId) {
+		return dao.googlecheckDuplicateId(uniqId);
+	}
+
+	@Override
+	public void insertUser(UserVO vo) {
+		dao.insertUser(vo);
+	}
+
+	@Override
+	public void googleinsertUser(UserVO vo) {
+		dao.googleinsertUser(vo);
+	}
+	
 }
