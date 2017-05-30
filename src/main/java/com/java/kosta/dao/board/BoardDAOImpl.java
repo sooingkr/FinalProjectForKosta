@@ -97,7 +97,7 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	@Override
 	public void deleteFavorite(String bNo) {
-		sqlSession.delete(bNo);
+		sqlSession.delete(NameSpace +".deleteFavorite",bNo);
 	}
 	
 	@Override
@@ -105,5 +105,28 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne(NameSpace + ".countFavorite",bNo);
 	}
 
+	@Override
+	public void addAttach(String bNo, String fullName) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("bNo", bNo);
+		map.put("fullName", fullName);
+		sqlSession.insert(NameSpace + ".addAttach", map);
+	}
+
+	@Override
+	public List<String> selectAttach(String bNo) {
+		return sqlSession.selectList(NameSpace + ".selectAttach", bNo);
+	}
+
+	@Override
+	public void deleteAttach(String bNo) {
+		sqlSession.delete(NameSpace + ".deleteAttach", bNo);
+	}
+/*
+	@Override
+	public void updateAttach(String bNo, String fullName) {
+		
+	}
+*/
 
 }

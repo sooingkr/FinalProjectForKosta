@@ -7,8 +7,9 @@
 <head>
 <!-------------------------------------------- category section 게시글 상세보기 ---------------------------------------------->
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${cateDTO.cateName}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>${cateDTO.cateName}</title>
+	<script type="text/javascript" src="/resources/js/fileupload.js"></script>
 <style>
 #modDiv {
 	width: 300px;
@@ -69,11 +70,16 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
-						<td colspan="3"><pre style="height: 500px;">${boardDTO.bContent}</pre></td>
+						<td colspan="3"><pre style="height: 300px;">${boardDTO.bContent}</pre>
+							<c:forEach var="fileName" items="${fileList}">
+							<p>
+								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
+								<img src="/board/displayFile.do?fileName=${fileName}"></img></a></p>
+							</c:forEach>
+						</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">상품
-							가치</th>
+						<th style="width: 20%; background: #aaa; text-align: center;">상품가치</th>
 						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 				</table>
@@ -86,6 +92,7 @@
 										<img id="likeImage" src="" style="width: 10px; height: 10px;" />
 										<span id="likeCount"></span>
 									</button>
+								</div>
 						</c:if>
 
 						<c:if test="${loginSession.userId == boardDTO.userId }">
@@ -469,6 +476,7 @@
 		
 			} // end of update()
 		
+			/* 좋아요 갯수 세기 */
 			function count() {
 				var bno = "${boardDTO.bNo}";
 				$.ajax({
@@ -485,6 +493,12 @@
 					}
 				}); // end of ajax from likeBoard Btn Clicks
 			}
+			
+			/* href 클릭 함수 */
+			function hrefFunc(fileName){
+				$("#hrefId").attr("target","_blank");
+				location.href="/board/displayFile?fileName=" + getImageLink(fileName);
+			} 
 		</script>
 
 		<script>

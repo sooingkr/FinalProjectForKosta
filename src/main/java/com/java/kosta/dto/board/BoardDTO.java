@@ -14,6 +14,15 @@ public class BoardDTO {
 	Date bRegDate;	//게시 날짜
 	Date bModifyDate;	//수정 날짜
 	
+	private String[] files;	// 파일 업로드 배열
+	
+	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	public String getbNo() {
 		return bNo;
 	}
