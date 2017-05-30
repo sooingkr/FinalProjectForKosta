@@ -5,6 +5,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- [ 사용자에 대한 처리를 담당합니다. ] -->
 <mapper namespace="UserMapper">
 
+<!-- 회원정보 수정을 위해 패스워드 확인하는 쿼리 -->
+<select id="getPwd" resultType="UserVO">
+	SELECT * FROM usertable
+		WHERE userId = #{userId} and userPw=PASSWORD(#{userPw})
+</select>
+
+<!-- 비밀번호 암호화시켜 꺼내기 -->
+<!-- 
+<select id="encapsulation" resultType="string">
+	select password(#{userPw}) from usertable
+</select>
+
+ --><!-- 회원정보 수정 업데이트 -->
+<update id="updateInfo">
+	update usertable
+	set userPw=PASSWORD(#{userPw}),userName=#{userName},userHp=#{userHp},userEmail=#{userEmail},addr1=#{addr1},addr2=#{addr2},lat=#{lat},lon=#{lon},cateId1=#{cateId1},cateId2=#{cateId2},cateId3=#{cateId3},cateId4=#{cateId4},cateId5=#{cateId5},cateId6=#{cateId6}
+</update>
+    
     
     <sql id="usercol">
 		userId,
@@ -44,6 +62,7 @@ cateId1,cateId2,cateId3,cateId4,cateId5,cateId6)values
 (#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
 #{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6})
 </insert>
+	
 	
 	
 <!-- 구글 회원 가입  -->

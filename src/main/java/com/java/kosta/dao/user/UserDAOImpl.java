@@ -44,8 +44,22 @@ public class UserDAOImpl implements UserDAO {
 	public void googleinsertUser(UserVO vo) {
 		sqlSession.insert(NAMESPACE+".googleinsertUser",vo);
 	}
-	
-	
+
+	// 회원 수정 확인을 위해 패스워드 가져오기
+	@Override
+	public UserVO getPwd(UserVO vo) {
+		return sqlSession.selectOne(NAMESPACE+".getPwd",vo);
+	}
+
+	@Override
+	public void updateInfo(UserVO vo) {
+		sqlSession.update(NAMESPACE+".updateInfo",vo);
+	}
+
+	@Override
+	public String encapsulation(String userPw) {
+		return sqlSession.selectOne(NAMESPACE+".encapsulation",userPw);
+	}
 	
 	
 }

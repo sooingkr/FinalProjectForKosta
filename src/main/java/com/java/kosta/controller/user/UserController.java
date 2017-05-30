@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,13 +32,52 @@ public class UserController {
    /*
 	 * @method Name : modifyInfo()
 	 * @Author : 황영롱
-	 * @description : 회원가입 수정
+	 * @description : 회원가입 수정 폼으로 이동
 	 */
    @RequestMapping(value="/modifyInfo", method=RequestMethod.POST)
-   public String modifyInfo(@RequestBody String password){
+   public String modifyInfo(RedirectAttributes rttr,HttpSession session,@RequestParam("password") String password){
 	   logger.info("수정으로 넘어오는 비밀번호 : " + password);
-	   return "/user/modifyInfoForm";
-   }
+	   // 세션에서 현재 회원정보 가져오기
+	   UserVO vo = (UserVO) session.getAttribute("loginSession");
+	   logger.info("세션에 있는 아이디 : " + vo.getUserId());
+	   // 로그인되어 있는 회원의 패스워드 가져오기
+	   UserVO tempVO = new UserVO();
+	   tempVO.setUserId(vo.getUserId());
+	   tempVO.setUserPw(password);
+	   UserVO vo2 = service.getPwd(tempVO); // 암호화된 패스워드가 넘어옴
+	   
+	   if ( vo2 != null ){
+		   logger.info("입력한 암호가 맞는 경우");
+		   // 입력한 암호가 맞는 경우
+		   // 수정페이지로 이동
+		   return "user/modifyInfoForm";
+	   }else{
+		    logger.info("입력한 암호가 틀린 경우");
+		   // 입력한 암호가 잘못된 경우
+		    Map map = new HashMap();
+		    
+		    map.put("msg", "FAIL");
+		   rttr.addFlashAttribute("map",map);
+		   return "redirect:/";
+	   }
+   }// end of modifyInfo()
+   
+   /*
+	 * @method Name : modifyInfoProcess()
+	 * @Author : 황영롱
+	 * @description : 회원가입 수정 처리
+	 */
+   @RequestMapping(value="/modifyInfoProcess", method=RequestMethod.POST)
+   public @ResponseBody HashMap<String,Object> modifyInfoProcess(UserVO vo){
+	   logger.info("넘어온 회원 정보 : " + vo);
+	   
+	   service.updateInfo(vo);
+	   HashMap<String,Object> map = new HashMap<String,Object>();
+	   map.put(Constants.RESULT, Constants.RESULT_OK);
+	   map.put(Constants.RESULT_MSG,"업데이트 되었습니다.");
+	   return map;
+   }// end of modifyInfoProcess()
+   
    
    
    /*
