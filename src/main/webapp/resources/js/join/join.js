@@ -61,6 +61,7 @@ $(document).ready(function(){
 });
 
 
+
 $(function(){
 
 	var reg_pw = /^.*(?=.{6,15})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; //비밀번호 정규표현식(영숫자 조합 6~15)
@@ -174,12 +175,20 @@ $(function(){
 			return false;
 		}
 		
+		// 네이버 api 호출해 위도,경도로 fullAddr를 변환하여, hidden으로 값을 가지고 있게하고
+		// 회원가입시 같이 넘어가게 한다.
+		//jusoCallBack($("#addr1").val()); // 회원가입 직전에 넣어서 보냄
+		
+		var lat = ($("#latId").val() + "");
+		var lon = ($("#lonId").val() + "");
 		
 		//회원가입
 		$.ajax({
 			type : 'POST',  
 			url : '/user/join',  
 			data: {
+			  lat:lat,
+			  lon:lon,
 			  userId:userId,
 			  userPw:pw,
 			  userName:userName,
@@ -261,30 +270,65 @@ function idCheck(){
 	});  
 }
 
+
+/**
+ * @JavaScript : 네이버 api : 주소 -> 위도,경도로 변환(다음주소 api에서 얻어온 fullAddress를 이용해서 변환)
+ * @author 황영롱
+ */
+function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail,
+		roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn) {
+	$.ajax({
+		type : 'post',
+		url : '/address/trans',
+		data : {
+			'address' : encodeURIComponent(roadFullAddr)
+		}, //encodeURIComponent로 인코딩하여 넘깁니다.
+		dataType : 'json',
+		timeout : 10000,
+		cache : false,
+		error : function(x, e) {
+			alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
+		},
+		success : function(data) {
+			console.log(data); //결과값이 JSON으로 파싱되어 넘어옵니다.
+			var lng = data.result.items[0].point.x; //결과의 첫번째 값의 좌표를 가져옵니다. 상세주소 없이 검색된 경우에는 결과가
+			var lat = data.result.items[0].point.y; //여러개로 넘어 올 수 있습니다. 
+			console.log("경도 : " + lng + "type : " + typeof(lng+"")); // 경도
+			console.log("위도 : " + lat + typeof(lat+"")); // 위도
+			document.getElementById("latId").value = (lat+""); // hidden값으로 넣기
+			document.getElementById("lonId").value = (lng+"");
+		}
+	});
+}; // end of jusoCallBack() */
+
+
+
+
 /**
  * @JavaScript : join
  * @author Areum
  * @Desc 다음 api 를 통해 주소 입력
  */
+
 function sample6_execDaumPostcode() {
 	
 	new daum.Postcode({
 		oncomplete : function(data) {
 			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
+			
 			// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 			// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 			var fullAddr = ''; // 최종 주소 변수
 			var extraAddr = ''; // 조합형 주소 변수
-
+			
 			// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 			if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 				fullAddr = data.roadAddress;
-
+				
 			} else { // 사용자가 지번 주소를 선택했을 경우(J)
 				fullAddr = data.jibunAddress;
 			}
-
+			
 			// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
 			if (data.userSelectedType === 'R') {
 				//법정동명이 있을 경우 추가한다.
@@ -299,11 +343,14 @@ function sample6_execDaumPostcode() {
 				// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
 				fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
 			}
-
+			
 			// 우편번호와 주소 정보를 해당 필드에 넣는다.
 			document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
 			document.getElementById('addr1').value = fullAddr;
-
+			
+			// 풀 주소를 가져와 네이버 api를 이용해 위도,경도로 변환하는 메서드 호출
+			jusoCallBack(fullAddr);
+			
 			// 커서를 상세주소 필드로 이동한다.
 			document.getElementById('addr2').focus();
 		}

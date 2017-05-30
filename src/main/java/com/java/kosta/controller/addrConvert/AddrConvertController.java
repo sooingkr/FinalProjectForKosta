@@ -21,13 +21,13 @@ public class AddrConvertController {
 	 * 작성자 : 황영롱
 	 * 내용 : 네이버 api를 이용해 주소를 위도,경도로 변경시켜주는 api 호출하는 메서드입니다.
 	 */
-	 @RequestMapping(value = "/trans")
+	 @RequestMapping(value = "/address/trans")
 	 @ResponseBody
 	 public String addressTrans(String address) {
 	     StringBuilder html = new StringBuilder();
 	     String url = "https://openapi.naver.com/v1/map/geocode?query=" + address; // encodeURIComponent로 인코딩 된 주소
-	     String clientId = "bSiWybzqG6iF5CQHP8Td";
-	     String clientSecret = "DScu8F7QUw";
+	     String clientId = "r1AloS5ItYU3Er32UmEq";
+	     String clientSecret = "DH2YOwugjI";
 
 	     HttpClient client = HttpClientBuilder.create().build();
 	     HttpGet request = new HttpGet(url);
@@ -50,4 +50,9 @@ public class AddrConvertController {
 	  }
 	  return html.toString();
 	 } // end of addressTrans()
+	 
+	 @RequestMapping("/address")
+	 public String testAddressConvert(){
+		 return "testView/addressConvertTest";
+	 }
 }

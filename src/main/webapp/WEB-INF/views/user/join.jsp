@@ -29,7 +29,7 @@
 
 <!-- 
 	@File name : join.jsp
- 	@author Areum
+ 	@author Areum, 황영롱(다음 주소 api -> 네이버 주소->위도,경도 연동)
   	@Desc 회원가입 form
  -->
  
@@ -109,8 +109,9 @@
             <label class="control-label">상세주소 </label>
             <input type="text" id="addr1" name="addr1" class="d_form large form-control" readonly>
             <input type="text" id="addr2" name="addr2" class="form-control" placeholder="상세주소를 입력하세요.">
+         	<input type="number" id="latId" name="lat"/>
+         	<input type="number" id="lonId" name="lon"/>
          </div>
-
 
       <div class="form-group">
          <label class="control-label">관심분야 </label> 

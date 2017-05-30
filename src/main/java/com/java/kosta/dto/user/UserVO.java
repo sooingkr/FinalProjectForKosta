@@ -31,14 +31,10 @@ public class UserVO {
 	
 //	private String idCheckboolean;//아이디가 체크되었는지 확인하는거
 	
+	
 	public String getUniqId() {
 		return uniqId;
 	}
-
-	public void setUniqId(String uniqId) {
-		this.uniqId = uniqId;
-	}
-
 
 	public String getLat() {
 		return lat;
@@ -55,6 +51,11 @@ public class UserVO {
 	public void setLon(String lon) {
 		this.lon = lon;
 	}
+
+	public void setUniqId(String uniqId) {
+		this.uniqId = uniqId;
+	}
+
 
 	public String getCateId1() {
 		return cateId1;

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -118,7 +119,9 @@ public class UserController {
 //  		logger.info("유니크 아이디:"+vo.getUniqId());
 //  		logger.info("유저 아이디:"+vo.getUserId());
   		
-  		int cnt = service.idCheck(vo.getUserId());
+  			logger.info("회원가입시 저장된 위도경도값 : " + vo.getLat() + " : " + vo.getLon());
+  		
+  			int cnt = service.idCheck(vo.getUserId());
   		String str=req.getParameter("idCheckboolean");
   		logger.info("체크:"+str);
   		
@@ -128,14 +131,12 @@ public class UserController {
   			res.put(Constants.RESULT_MSG, "이미 사용중인 아이디입니다.");
   			return res;
   		}
-  		
   		//아이디 체크 버튼을 눌렀는지 안눌렀지 여부
   		else if(str.equals("n")){
   			res.put(Constants.RESULT, Constants.RESULT_FAIL);
   			res.put(Constants.RESULT_MSG,"아이디를 체크를 안눌렀습니다");
   			return res;
   		 }
-  		
   		 else if(vo.getUniqId().equals("")){//일반회원가입 고유아이디가 없을때
   			try{
   				service.insertUser(vo);

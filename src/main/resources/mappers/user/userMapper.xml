@@ -39,9 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 일반 회원 가입  -->
 	
 <insert id="insertUser">
-insert into usertable(userId,userPw,userName,userHp,userEmail,addr1,addr2,
+insert into usertable(lat,lon,userId,userPw,userName,userHp,userEmail,addr1,addr2,
 cateId1,cateId2,cateId3,cateId4,cateId5,cateId6)values
-(#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
+(#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
 #{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6})
 </insert>
 	
@@ -49,9 +49,9 @@ cateId1,cateId2,cateId3,cateId4,cateId5,cateId6)values
 <!-- 구글 회원 가입  -->
 
 <insert id="googleinsertUser">
-insert into usertable(userId,userPw,userName,userHp,userEmail,addr1,addr2,
+insert into usertable(lat,lon,userId,userPw,userName,userHp,userEmail,addr1,addr2,
 cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId)values
-(#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
+(#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
 #{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},#{uniqId})
 </insert>
 	
