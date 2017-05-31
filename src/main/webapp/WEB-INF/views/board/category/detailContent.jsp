@@ -132,6 +132,9 @@
 						<td>
 							<button type="button" id="moreReplyList"
 								onclick="showNextReplyList()">댓글 더보기</button>
+							&nbsp;&nbsp;
+							<button type="button" id="allReplyList"
+								onclick="getAllList()">댓글 전체보기</button>
 						</td>
 					</tr>
 				</table>
@@ -343,9 +346,11 @@
 					dataType : "json",
 					success : function(data) {
 						console.log(data);
+						console.log(data.loginUserId);
 						if (data.result == "ok") {
 							// 댓글 리스트 출력
 							$.each(data.replyList, function(i, rDTO) {
+								
 								var str = "";
 								str += "<tr>";
 								str += "<td width='10%'>" + rDTO.replyId + "</td>";
@@ -354,8 +359,12 @@
 								str += "<td width='20%'>" + rDTO.rModifyDate + "</td>";
 								str += "<td><input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
 								str += "<input type='hidden' id='rContent' value='" + rDTO.rContent + "'/>";
-								str += "<button type='button' id='replyDetail'>수정</button></td>";
-								str += "</tr>"
+								
+								if(data.loginUserId == rDTO.replyId){
+									str += "<button type='button' id='replyDetail'>수정</button>";
+								}
+								
+								str += "</td></tr>"
 		
 								$("#replyTable").append(str);
 							});
@@ -370,6 +379,7 @@
 		
 							} else {
 								$("#moreReplyList").hide();
+								$("#allReplyList").hide();
 							}
 		
 						} else {
@@ -383,7 +393,8 @@
 					}
 				});
 			} // end of showNextReplyList()
-		
+			
+			/**댓글 전체 리스트 보기*/
 			function getAllList() {
 				$.ajax({
 					type : "post",
@@ -408,14 +419,19 @@
 								str += "<td width='20%'>" + rDTO.rModifyDate + "</td>";
 								str += "<td><input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
 								str += "<input type='hidden' id='rContent' value='" + rDTO.rContent + "'/>";
-								str += "<button type='button' id='replyDetail'>수정</button></td>";
-								str += "</tr>"
-		
+								
+								if(data.loginUserId == rDTO.replyId){
+									str += "<button type='button' id='replyDetail'>수정</button>";
+								}
+								
+								str += "</td></tr>"
+								
 								$("#replyTable").append(str);
 							});
 		
 							// 모든 댓글 리스트 출력 후 댓글 더보기 버튼 숨기기
 							$("#moreReplyList").hide();
+							$("#allReplyList").hide();
 		
 						} else {
 							alert(data.resultMag);
