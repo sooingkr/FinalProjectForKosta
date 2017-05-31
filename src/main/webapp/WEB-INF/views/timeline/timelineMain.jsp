@@ -198,6 +198,7 @@ legend.scheduler-border {
 								<option>0</option>
 								<option>10,000원 ~ 30,000원</option>
 								<option>30,000원 ~ 50,000원</option>
+								<option>50,000원 ~ 70,000원</option>
 							</select>
 						</div>
 					</div>
