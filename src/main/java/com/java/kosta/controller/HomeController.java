@@ -79,5 +79,13 @@ public class HomeController {
       return "menu/aboutUsSection";
    }
    
+   @RequestMapping(value = "/handlebarsTest")
+   public String handlebarsTest(Locale locale, Model model) {
+	   logger.info("handlebars Controller");
+	   
+	   return "testView/handlebarsTest";
+   }
+   
+   
    
 }

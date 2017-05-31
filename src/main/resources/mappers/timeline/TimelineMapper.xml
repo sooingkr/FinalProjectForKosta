@@ -42,9 +42,31 @@
 	 	<if test="keywords != 'undefined'">
 			<include refid="search"></include>
 		</if>
-
- 
 	</sql>
+	
+	<!-- 필터링 조건 sql문 (혜연추가) -->
+	<sql id="FilterConditional">
+		WHERE value between #{FilterDTO.fvalue1} and #{FilterDTO.fvalue2}
+		<if test='#{FilterDTO.fcate1} == "Y"'>
+			or cateId = 1
+		</if>
+		<if test='#{FilterDTO.fcate2} == "Y"'>
+			or cateId = 2
+		</if>
+		<if test='#{FilterDTO.fcate3} == "Y"'>
+			or cateId = 3
+		</if>
+		<if test='#{FilterDTO.fcate4} == "Y"'>
+			or cateId = 4
+		</if>
+		<if test='#{FilterDTO.fcate5} == "Y"'>
+			or cateId = 5
+		</if>
+		<if test='#{FilterDTO.fcate6} == "Y"'>
+			or cateId = 6
+		</if>
+	</sql>
+	
 
 	<!-- 거리, 관심사에 따른 타임라인에 쓸 게시글 목록 출력 -->
 	<select id="listMatch" resultType="TimelineDTO">
@@ -69,6 +91,31 @@
 		<include refid="conditional"></include>
 
 	</select>
+	
+	<!-- 필터 적용에 따라서 게시글 반환(혜연추가) -->
+	<select id="listFilter" resultType="TimelineDTO">
+		SELECT *,
+		(6371*acos(cos(radians(#{UserVO.lat}))*cos(radians(lat))*cos(radians(lon)
+		-radians(#{UserVO.lon}))+sin(radians(#{UserVO.lat}))*sin(radians(lat))))
+		AS distance
+		FROM board 
+		<include refid="FilterConditional"></include>
+		ORDER BY distance asc, bno desc
+		limit #{pageMaker.pageStart},#{pageMaker.perPageNum}
+	</select>
+	
+	<!-- 필터 적용된 게시물을 페이징하기 위한 관심사에 따른 게시글 갯수 반환(혜연추가) -->
+	<select id="countFilterList" resultType="int">
+		SELECT count(*)
+		FROM board
+		<include refid="FilterConditional"></include>
+	</select>
+	
+	<!-- 가치 최대값 구하는 쿼리 -->
+	<select id="maxValue" resultType="int">
+		SELECT MAX(value) FROM board
+	</select>
+	
 
 
 </mapper>

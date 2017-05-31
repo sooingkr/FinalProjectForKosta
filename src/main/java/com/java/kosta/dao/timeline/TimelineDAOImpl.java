@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.java.kosta.dto.note.PagingDTO;
+import com.java.kosta.dto.timeline.FilterDTO;
 import com.java.kosta.dto.timeline.TimelineDTO;
 import com.java.kosta.dto.user.UserVO;
 
@@ -41,6 +42,26 @@ public class TimelineDAOImpl implements TimelineDAO {
 		map.put("UserVO", vo);
 		map.put("keywords", keywords);
 		return sqlSession.selectOne("timelineMapper.countTimeline", map);
+	}
+	
+	@Override
+	public int countFilterList(FilterDTO filter) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FilterDTO", filter);
+		return sqlSession.selectOne("timelineMapper.countFilterList", map);
+	}
+
+	@Override
+	public List<TimelineDTO> listFilter(FilterDTO filter, PagingDTO pageMaker) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FilterDTO", filter);
+		map.put("pageMaker", pageMaker);
+		return sqlSession.selectList("timelineMapper.listFilter", map);
+	}
+
+	@Override
+	public int maxValue() {
+		return sqlSession.selectOne("timelineMapper.maxValue");
 	}
 
 }

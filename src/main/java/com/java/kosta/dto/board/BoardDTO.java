@@ -13,6 +13,8 @@ public class BoardDTO {
 	String viewCnt;		//조회수
 	Date bRegDate;	//게시 날짜
 	Date bModifyDate;	//수정 날짜
+	private String lat; // 위도
+	private String lon; // 경도
 	
 	private String[] files;	// 파일 업로드 배열
 	
@@ -22,6 +24,19 @@ public class BoardDTO {
 	}
 	public void setFiles(String[] files) {
 		this.files = files;
+	}
+	
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLon() {
+		return lon;
+	}
+	public void setLon(String lon) {
+		this.lon = lon;
 	}
 	public String getbNo() {
 		return bNo;
