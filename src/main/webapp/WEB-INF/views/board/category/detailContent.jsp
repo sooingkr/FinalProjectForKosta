@@ -53,8 +53,9 @@
 			<div id="form-contact">
 			
 				<!-- GoogleMap API 연동(황영롱) -->
-				<h3>My Google Maps Demo</h3>
+				<h3>글쓴이 위치</h3>
 			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
+			    <br/><br/>
 			    <script>
 			      var address = null;
 			      function getAddr(){
