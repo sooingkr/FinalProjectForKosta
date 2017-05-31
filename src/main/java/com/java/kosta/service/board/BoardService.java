@@ -9,6 +9,7 @@ import com.java.kosta.dto.board.CategoryDTO;
 public interface BoardService {
 	
 //////////////////////////////// 게시판 /////////////////////////////////////
+	public String getAddr(String userId);
 	
 	/** 게시글 정보 조회해서 가져온다  */
 	public BoardDTO selectBoardOne(String bNo) throws Exception;

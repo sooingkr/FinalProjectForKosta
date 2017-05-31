@@ -122,7 +122,7 @@ public class BoardReplyController {
                   dto.setrContent("비밀댓글입니다.");
                } else {//로그인상태
                   String writer = service.findWriter(brDTO.getbNo());
-                  String replyer =brDTO.getReplyId();
+                  String replyer =dto.getReplyId();
                   if (!userId.equals(writer) && !userId.equals(replyer)) {
                      dto.setrContent("비밀댓글입니다.");
                   }
