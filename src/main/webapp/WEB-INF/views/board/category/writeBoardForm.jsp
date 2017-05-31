@@ -79,7 +79,10 @@
 						</tr>
 					</table>
 					<table align="center"><tr>
-						<td><input type="submit" value="글쓰기"></td>
+						<td>
+							<input type="hidden" value="${loginSession.lat }" name="lat" />
+							<input type="hidden" value="${loginSession.lon }" name="lon" />
+							<input type="submit" value="글쓰기"></td>
 						<td>&nbsp;&nbsp;<button type="button" onclick="javascript:history.back();">취소</button></td>
 					</tr></table>
 				</form>
@@ -87,28 +90,6 @@
 		</div>
 	</section>	
 	<script type="text/javascript">
-		/* function checkInsert(){
-			var form = document.getElementById("insertForm");	// form의 아이디
-			var title = document.getElementById("bTitle").value;		// 제목	(빈 값 검사하기 위해)
-			var content = document.getElementById("bContent").value;	// 내용
-			var value = document.getElementById("value").value;		// 상품가치 (정규표현식을 위해 가져옴)
-			
-			if(title.trim() == "" || content.trim() == ""){		// trim() 앞,뒤 공백 제거
-				alert("제목과 내용은 필수 입력사항입니다.");
-				return;
-			}
-			
-			var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
-			if(value.trim() == "" || !pattern.test(value)){
-				alert("상품가치는 숫자만 입력 가능합니다.");
-				return;
-			}
-			
-			form.action="/board/category/writeBoardProc";
-			form.method="post";
-			alert("게시글 작성이 완료되었습니다.");
-			form.submit();
-		} */
 		
 		$("#insertForm").submit(function(event){
 			event.preventDefault ? event.preventDefault() : (event.returnValue = false);

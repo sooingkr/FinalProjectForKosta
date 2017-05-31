@@ -13,7 +13,9 @@
    		isSwap,
         viewcnt AS viewCnt,
         bregdate AS bRegDate,
-        bmodifydate AS bModifyDate
+        bmodifydate AS bModifyDate,
+        lat,
+        lon
     </sql>
     
     <!-- 게시글 한 건 조회 -->
@@ -68,14 +70,18 @@
 			btitle,
 			bcontent,
 			value,
-			bmodifydate
+			bmodifydate,
+			lat,
+			lon
 		) VALUES (
 			#{userId}, 
 	    	#{cateId}, 
 	    	#{bTitle}, 
 	    	#{bContent},
 	    	#{value},
-	    	now()
+	    	now(),
+	    	#{lat},
+	    	#{lon}
 		)
 		<selectKey order="AFTER" keyProperty="bNo" resultType="string">	<!-- 게시글 삽입하고 마지막 no의 값을 반환해옴 -->
 	        SELECT LAST_INSERT_ID()
