@@ -101,6 +101,7 @@
  	    SET
  	    	btitle =  #{bTitle},
  	    	bcontent = #{bContent},
+ 	    	value = #{value},
  	    	bmodifydate = now()
  	    WHERE
  	    	bno = #{bNo}

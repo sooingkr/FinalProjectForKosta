@@ -86,6 +86,7 @@
 					<table align="center">
 					<tr><td>
 						<input type="hidden" name="bNo" value="${boardDTO.bNo}" />
+						<input type="hidden" name="pageNo" value="${param.pageNo}" />
 						<!-- <button type="button" onclick="checkUpdate();" >수정하기</button> -->
 						<input type="submit" value="수정하기"/>
 						<button type="button" onclick="javascript:history.back();">취소</button>

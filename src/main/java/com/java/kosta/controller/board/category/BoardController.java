@@ -128,7 +128,6 @@ public class BoardController {
 			// 선택 게시글의 업로드 파일 리스트 가져오기
 			List<String> fileList = service.selectAttach(bNo);
 			model.addAttribute("fileList", fileList); // 해당 게시물의 파일 리스트 넘기기
-//			model.addAttribute("filePath", uploadPath); // 파일경로 넘기기
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,7 +160,7 @@ public class BoardController {
 
 	/** 선택 게시글 수정 처리 */
 	@RequestMapping("/updateContentProc")
-	public String updateContentProc(BoardDTO boardDTO, Model model) {
+	public String updateContentProc(BoardDTO boardDTO, Model model, @RequestParam(value="pageNo")String pageNo) {
 		BoardDTO bDTO = null;
 		try {
 			// DB update ( board 테이블, boardfile 테이블)
@@ -173,7 +172,7 @@ public class BoardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/board/category/boardList?cateId=" + bDTO.getCateId();
+		return "redirect:/board/category/boardList?cateId=" + bDTO.getCateId()+"&pageNo="+pageNo;
 	}
 
 	/** 선택 게시글 삭제 처리 */

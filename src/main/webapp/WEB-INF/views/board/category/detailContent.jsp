@@ -196,7 +196,7 @@
 						<c:if test="${loginSession.userId == boardDTO.userId }">
 							<td>&nbsp;
 								<button type="button" style="width: 70px"
-									onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
+									onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}&pageNo=${param.pageNo }'">글수정</button>
 							</td>
 							<td>&nbsp;
 								<button style="width: 70px" type="button"
@@ -205,7 +205,7 @@
 						</c:if>
 						<td align="right">&nbsp;
 							<button type="button" style="width: 70px"
-								onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}'">목록</button>
+								onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}&pageNo=${param.pageNo }'">목록</button>
 						</td>
 					</tr>
 				</table>
