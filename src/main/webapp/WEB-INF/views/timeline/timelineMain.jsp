@@ -216,11 +216,8 @@ legend.scheduler-border {
             </div>
             <div class="col-sm-12">
             	<h3><span class="glyphicon glyphicon-tasks" style="color: #CC723D;">&nbsp;Timeline</span></h3>
-
-				<p>
-					<ul id="showTimeline"></ul>
-				</p>
-                </div>
+				<p><ul id="showTimeline"></ul></p>
+            </div>
         </div>
     </div>
 
