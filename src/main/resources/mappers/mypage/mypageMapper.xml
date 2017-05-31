@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.java.kosta.dao.mypage.MyPageDAO">
+
+	<!-- 전체 레코드 갯수 조회 -->
+	<select id="selectMyFavoriteListTotalCount" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		favorite
+		WHERE
+		userId = #{userId}
+	</select>
+	<!-- 내가 누른 좋아요 가져오기 -->
+	<select id="selectMyFavoriteList" resultType="BoardDTO">
+
+		SELECT DISTINCT
+		board.bno,board.cateId, board.btitle, board.userId, board.bregdate
+		FROM
+		board,favorite
+		WHERE
+		favorite.userId = #{userId} AND board.bno =#{bNo}
+		<!-- LIMIT #{pagingDTO.startRow},#{pagingDTO.endRow} -->
+		<!-- SELECT board.cateId, board.btitle, board.userId, board.bregdate FROM 
+			board,favorite WHERE favorite.userId = #{userId} ORDER BY bno DESC -->
+	</select>
+
+
+
+	<!-- 좋아요 조회 -->
+	<select id="searchFavorite" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		favorite
+		WHERE
+		bno = #{bNo}
+		AND userId=#{userId}
+
+	</select>
+	<!-- 내가 누른 좋아요 리스트 -->
+	<select id="searchFavoriteList" resultType="BoardDTO">
+		SELECT
+		favorite.userId, favorite.bno
+		FROM
+		favorite
+		WHERE
+		userId = #{userId}
+	</select>
+
+	<!-- 좋아요 취소 -->
+	<delete id="unfavoriteBoard">
+		DELETE FROM favorite
+		WHERE
+		bno = #{bNo}
+		AND
+		userId=#{userId}
+	</delete>
+
+	<!-- 좋아요 갯수 조회 -->
+	<select id="countMyFavorite" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		favorite
+		WHERE
+		bno = #{bNo}
+	</select>
+
+</mapper>

@@ -480,7 +480,7 @@
 					url : '/category/countFavorite?bno=' + bno,
 					dataType : 'text',
 					success : function(data) {
-						//data-->likeCount1
+						//data-->likeCount
 						$("#likeCount").text(data);
 					}
 				}); // end of ajax from likeBoard Btn Clicks
