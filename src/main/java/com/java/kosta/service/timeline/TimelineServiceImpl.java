@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.java.kosta.dao.timeline.TimelineDAO;
 import com.java.kosta.dto.note.PagingDTO;
+import com.java.kosta.dto.timeline.FilterDTO;
 import com.java.kosta.dto.timeline.TimelineDTO;
 import com.java.kosta.dto.user.UserVO;
 
@@ -31,5 +32,21 @@ public class TimelineServiceImpl implements TimelineService {
 	public int listAll() {
 		return dao.listAll();
 	}
+	
+	@Override
+	public int countFilterList(FilterDTO filter) {
+		return dao.countFilterList(filter);
+	}
+
+	@Override
+	public List<TimelineDTO> listFilter(FilterDTO filter, PagingDTO pageMaker) {
+		return dao.listFilter(filter, pageMaker);
+	}
+
+	@Override
+	public int maxValue() {
+		return dao.maxValue();
+	}
+
 
 }

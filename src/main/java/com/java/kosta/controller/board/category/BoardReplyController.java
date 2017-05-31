@@ -84,7 +84,8 @@ public class BoardReplyController {
                }
             }
          }
-               
+         
+         resMap.put("loginUserId", userId);
          resMap.put("replyTotCnt", cnt);
          resMap.put("replyList", replyList);
          resMap.put(Constants.RESULT, Constants.RESULT_OK);
@@ -128,6 +129,8 @@ public class BoardReplyController {
                }
             }
          }
+         
+         resMap.put("loginUserId", userId);
          resMap.put("replyAllList", replyAllList);
          resMap.put(Constants.RESULT, Constants.RESULT_OK);
          resMap.put(Constants.RESULT_MSG, "댓글 조회 성공");
