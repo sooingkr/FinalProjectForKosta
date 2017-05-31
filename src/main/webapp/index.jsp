@@ -76,6 +76,35 @@
 					    </div>
 					  </div>
 					  
+					  
+					  
+					    <!-- 아이디 모달창 -->
+					  <div class="modal fade" id="id" role="dialog">
+					    <div class="modal-dialog">
+					    
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">×</button>
+					          <h4 class="modal-title">패스워드 확인창</h4>
+					        </div>
+					        <div class="modal-body">
+					          <form id="form1" action="/user/modifyInfo" method="post">
+						          <p>회원정보를 수정하기 위해 패스워드를 확인해주세요.</p>
+						          <label>비밀번호</label><input id="pwId" type="password" name="password" class="form-control"/><br/>
+					          </form>
+					        </div>
+					        <div class="modal-footer">
+					          <button id="btnClick" type="button">확인</button>
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+					      
+					    </div>
+					  </div>
+					   <!-- 아이디 모달창 -->
+					  
+					  
 					 <c:if test="${map.msg eq 'FAIL'}" >
 				 	 <script>
 					 	  	alert("실패했습니다");
@@ -111,8 +140,8 @@
 				                        <input type="password" class="form-control input-lg" placeholder="Password" id ="userPw" name="userPw">
 				                     </div>
 				                     <div class="form-group form col-md-12">
-				                        <span><a href="#">아이디찾기</a></span> / 
-				                        <span><a href="#">비밀번호찾기</a></span>
+				                        <span><a href="/user/Idselect">아이디찾기</a></span> /
+				                        <span><a href="/user/Pwselect">비밀번호찾기</a></span>
 				                     </div>
 				                  </div>
 				                  <br />

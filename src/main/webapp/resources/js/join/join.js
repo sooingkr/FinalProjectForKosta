@@ -4,6 +4,12 @@
  * @Desc 회원가입 유효성 체크
  */
 
+
+
+/**
+ * @JavaScript : 카테고리 버튼 값 변화
+ * @author 김용래
+ */
 $(document).ready(function(){
 	
 	$('#cancelBtn').click(function(){
@@ -104,7 +110,13 @@ $(function(){
 		} 
 	});
 	
-
+	
+	/**
+	 * @JavaScript : ajax를 통한 회원가입
+	 * @author 김용래
+	 * 
+	 */
+	
 	// 회원가입 버튼 클릭 이벤트
 	$('#joinbtn').click(function() {
 		
@@ -125,7 +137,6 @@ $(function(){
 		 var addr1=$('#addr1').val();
 		 var addr2=$('#addr2').val();
 		 
-
 		 
 		if(pw == "") {
 			alert("비밀번호를 입력해주세요.");

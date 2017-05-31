@@ -18,6 +18,7 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 
 	@Override
 	public BoardReplyDTO selectBoardReply(BoardReplyDTO boardReplyDTO) throws Exception {
+
 		return brDAO.selectBoardReply(boardReplyDTO);
 	}
 

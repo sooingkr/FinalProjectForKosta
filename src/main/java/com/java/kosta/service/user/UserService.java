@@ -1,5 +1,7 @@
 package com.java.kosta.service.user;
 
+import java.util.List;
+
 import com.java.kosta.dto.user.UserVO;
 
 public interface UserService {
@@ -25,4 +27,13 @@ public interface UserService {
 	public String encapsulation(String userPw);
 	
 	public void updateInfo(UserVO vo);
+
+	//아이디 찾기
+	public List<UserVO> selectId(UserVO vo);
+	
+	//패스워드 찾기
+	public UserVO selectPw(UserVO vo);
+	
+	public void pwupdate(UserVO vo);
+	
 }

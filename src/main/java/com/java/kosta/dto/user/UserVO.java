@@ -194,6 +194,18 @@ public class UserVO {
 	public void setUserHp(String userHp) {
 		this.userHp = userHp;
 	}
+
+	@Override
+	public String toString() {
+		return "UserVO [userId=" + userId + ", userName=" + userName + ", userPw=" + userPw + ", userHp=" + userHp
+				+ ", userEmail=" + userEmail + ", addr1=" + addr1 + ", addr2=" + addr2 + ", sessionKey=" + sessionKey
+				+ ", sessionLimit=" + sessionLimit + ", userRegdate=" + userRegdate + ", useCookie=" + useCookie
+				+ ", lat=" + lat + ", lon=" + lon + ", uniqId=" + uniqId + ", cateId1=" + cateId1 + ", cateId2="
+				+ cateId2 + ", cateId3=" + cateId3 + ", cateId4=" + cateId4 + ", cateId5=" + cateId5 + ", cateId6="
+				+ cateId6 + "]";
+	}
+	
+	
 	
 
 /*	public String getIdCheckboolean() {

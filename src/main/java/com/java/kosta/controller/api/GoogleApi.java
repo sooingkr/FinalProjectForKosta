@@ -143,6 +143,7 @@ public class GoogleApi {
 		String cateId6=uniqId.getCateId6();
 		String lat=uniqId.getLat();
 		String lon=uniqId.getLon();
+		String sessionkey=uniqId.getSessionKey();
 		
 		logger.info(uniqId.toString());
 		
@@ -162,26 +163,12 @@ public class GoogleApi {
 		userVO.setCateId6(cateId6);
 		userVO.setLat(lat);
 		userVO.setLon(lon);
+		userVO.setSessionKey(sessionkey);
 		
 		session.setAttribute(Constants.LOGINSESSION,userVO);
 		
 		return "redirect:/";
 	}
-	
-	
-/*	
-	@RequestMapping("/sub")
-	public String asd(){
-		
-		return "user/sub";
-	}
-	
-    @RequestMapping("logout")
-    public String logout(HttpSession session) {
-        session.setAttribute("google", null);
-        logger.info("로그아웃:"+session.getAttribute("google"));
-        return "redirect:/sub";
-    }*/
 	
 
 }

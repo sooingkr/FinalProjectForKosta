@@ -1,5 +1,7 @@
 package com.java.kosta.dao.user;
 
+import java.util.List;
+
 import com.java.kosta.dto.user.UserVO;
 
 public interface UserDAO {
@@ -26,4 +28,14 @@ public interface UserDAO {
 	
 	// 회원 정보 수정
 	public void updateInfo(UserVO vo);
+	
+	//회원 아이디 찾기
+	public List<UserVO> selectId(UserVO vo);
+	
+	//패스워드 있는지 찾기
+	public UserVO selectPw(UserVO vo);
+	
+	//패스워드 재설정
+	public void pwupdate(UserVO vo);
+	
 }

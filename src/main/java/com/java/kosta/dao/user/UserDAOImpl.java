@@ -1,5 +1,7 @@
 package com.java.kosta.dao.user;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -45,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
 		sqlSession.insert(NAMESPACE+".googleinsertUser",vo);
 	}
 
-	// 회원 수정 확인을 위해 패스워드 가져오기
+	//패스워드 확인
 	@Override
 	public UserVO getPwd(UserVO vo) {
 		return sqlSession.selectOne(NAMESPACE+".getPwd",vo);
@@ -59,6 +61,22 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public String encapsulation(String userPw) {
 		return sqlSession.selectOne(NAMESPACE+".encapsulation",userPw);
+	}
+
+	//유저 아이디를 찾기
+	@Override
+	public List<UserVO> selectId(UserVO vo) {
+		return sqlSession.selectList(NAMESPACE+".selectId",vo);
+	}
+
+	@Override
+	public UserVO selectPw(UserVO vo){
+		return sqlSession.selectOne(NAMESPACE+".selectPw",vo);
+	}
+
+	@Override
+	public void pwupdate(UserVO vo) {
+		sqlSession.update(NAMESPACE+".pwupdate",vo);
 	}
 	
 	

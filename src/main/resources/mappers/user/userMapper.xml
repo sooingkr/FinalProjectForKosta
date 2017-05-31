@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 회원정보 수정을 위해 패스워드 확인하는 쿼리 -->
 <select id="getPwd" resultType="UserVO">
-	SELECT * FROM usertable
+	SELECT <include refid="usercol"/> FROM usertable
 		WHERE userId = #{userId} and userPw=PASSWORD(#{userPw})
 </select>
 
@@ -37,30 +37,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cateId3,
 		cateId4,
 		cateId5,
-		cateId6
+		cateId6,
+		lat,
+		lon,
+		userRegdate,
+		sessionKey
     </sql>
     
     
 	<!-- 로그인 (암호화아직 안댔음)-->
 	<select id="login" resultType="UserVO">
-		SELECT * FROM usertable
+		SELECT <include refid="usercol"/> FROM usertable
 		WHERE userId = #{userId} AND userPw = PASSWORD(#{userPw})
 	</select>
 	
-	<!-- 아이디 찾기  -->
+	<!-- 아이디  중복 체크  -->
 	<select id = "idCheck" resultType = "int">
 		SELECT COUNT(*) 
   		FROM usertable 
  		WHERE userId = #{userId} 
 	</select>
 	
+	
+	
 <!-- 일반 회원 가입  -->
 	
 <insert id="insertUser">
 insert into usertable(lat,lon,userId,userPw,userName,userHp,userEmail,addr1,addr2,
-cateId1,cateId2,cateId3,cateId4,cateId5,cateId6)values
+cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,sessionKey)values
 (#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
-#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6})
+#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},now())
 </insert>
 	
 	
@@ -69,9 +75,9 @@ cateId1,cateId2,cateId3,cateId4,cateId5,cateId6)values
 
 <insert id="googleinsertUser">
 insert into usertable(lat,lon,userId,userPw,userName,userHp,userEmail,addr1,addr2,
-cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId)values
+cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId,sessionKey)values
 (#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
-#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},#{uniqId})
+#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},#{uniqId},now())
 </insert>
 	
 
@@ -86,4 +92,24 @@ cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId)values
   	SELECT userId from usertable where uniqId=#{uniqId}
 </select>	
 	
+
+<!-- 회원정보 수정을 위해 패스워드 확인하는 쿼리 -->
+<select id="selectId" resultType="UserVO">
+SELECT userId FROM usertable
+WHERE userName=#{userName} and userHp=#{userHp}	
+</select>
+
+
+<!-- 유저 name과 userId로  패스워드를 찾음. -->
+<select id="selectPw" resultType="UserVO">
+SELECT userHp,userPw FROM usertable
+WHERE  userId=#{userId} and userName=#{userName}	 
+</select>
+
+
+<update id="pwupdate">
+ update usertable set userPw=PASSWORD(#{userPw}) where userId=#{userId}
+</update>
+
+
 </mapper>

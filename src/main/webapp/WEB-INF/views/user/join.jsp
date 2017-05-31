@@ -29,7 +29,8 @@
 
 <!-- 
 	@File name : join.jsp
- 	@author Areum, 황영롱(다음 주소 api -> 네이버 주소->위도,경도 연동)
+ 	@author Areum,황영롱(다음 주소 api -> 네이버 주소->위도,경도 연동)
+ 	김용래(구글 api->데이터->회원가입)
   	@Desc 회원가입 form
  -->
  

@@ -92,7 +92,7 @@ public class BoardDAOImpl implements BoardDAO{
 		map.put("bNo", bNo);
 		map.put("userId", userId);
 		sqlSession.delete(NameSpace + ".unfavoriteBoard", map);
-
+		
 	}
 	
 	@Override
