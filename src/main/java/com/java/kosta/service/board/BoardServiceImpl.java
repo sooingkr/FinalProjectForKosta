@@ -151,5 +151,10 @@ public class BoardServiceImpl implements BoardService{
 		bDAO.deleteAttach(bNo);
 	}
 
+	@Override
+	public String getAddr(String userId) {
+		return bDAO.getAddr(userId);
+	}
+
 
 }

@@ -128,5 +128,9 @@ public class BoardDAOImpl implements BoardDAO{
 		
 	}
 */
+	@Override
+	public String getAddr(String userId) {
+		return sqlSession.selectOne(NameSpace+".getAddr",userId);
+	}
 
 }

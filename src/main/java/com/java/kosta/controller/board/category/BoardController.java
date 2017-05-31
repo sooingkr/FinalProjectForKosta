@@ -6,11 +6,14 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.kosta.common.Constants;
@@ -23,12 +26,22 @@ import com.java.kosta.service.board.BoardServiceImpl;
 @Controller
 @RequestMapping("/board/category/*")
 public class BoardController {
+	Logger logger = LoggerFactory.getLogger(BoardController.class);
 	@Inject
 	BoardServiceImpl service;
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
+	// 한글을 넘기기 때문에 produces 를 기술해서 인코딩을 해서 넘겨주었다. 기술안하면 ajax에서 받았을 때 ???로 깨짐!
+	@RequestMapping(value="/board/category/getAddr",method=RequestMethod.POST,produces = "application/text; charset=utf8")
+	public @ResponseBody String getAddr(String userId){
+		logger.info("주소얻기로 넘어온 아이디 : " + userId);
+		String address = service.getAddr(userId);
+		logger.info("얻어온 주소 : " + address);
+		return address;
+	}
+	
 	/** 게시판 보기 */
 	@RequestMapping("/boardList")
 	public String boardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value = "cateId") int cateId) {
