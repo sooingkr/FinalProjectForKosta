@@ -36,37 +36,37 @@
                                 <!-- START ITEM -->
 				                    <li><a href="/board/category/boardList?cateId=2">
 					                    <img src="/resources/images/thumb/001.jpg" alt="Portfolio"/></a>
-					                        <h3><a href="/board/category/boardList?cateId=2">도서/음반</a></h3>
+					                        <h3><a href="/board/category/boardList?cateId=2&pageNo=1">도서/음반</a></h3>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
 				                    <li><a href="/board/category/boardList?cateId=3">
 					                    <img src="/resources/images/thumb/002.jpg" alt="Portfolio"/></a>
-					                        <h3><a href="/board/category/boardList?cateId=3">뷰티/패션/잡화</a></h3>
+					                        <h3><a href="/board/category/boardList?cateId=3&pageNo=1">뷰티/패션/잡화</a></h3>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
 				                    <li><a href="/board/category/boardList?cateId=4">
 					                    <img src="/resources/images/thumb/003.jpg" alt="Portfolio"/></a>
-					                        <h3><a href="/board/category/boardList?cateId=4">애완동물용품</a></h3>
+					                        <h3><a href="/board/category/boardList?cateId=4&pageNo=1">애완동물용품</a></h3>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
 				                    <li><a href="/board/category/boardList?cateId=5">
 					                    <img src="/resources/images/thumb/004.jpg" alt="Portfolio"/></a>
-					                        <h3><a href="/board/category/boardList?cateId=5">홈인테리어/주방/생활용품</a></h3>
+					                        <h3><a href="/board/category/boardList?cateId=5&pageNo=1">홈인테리어/주방/생활용품</a></h3>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
 				                    <li><a href="/board/category/boardList?cateId=6">
 					                    <img src="/resources/images/thumb/005.jpg" alt="Portfolio"/></a>
-					                        <h3><a href="/board/category/boardList?cateId=6">유아/취미/완구</a></h3>
+					                        <h3><a href="/board/category/boardList?cateId=6&pageNo=1">유아/취미/완구</a></h3>
 				                    </li>   
                                 <!-- END ITEM -->       
                                  <!-- START ITEM -->
 				                    <li><a href="/board/category/boardList?cateId=7">
 					                    <img src="/resources/images/thumb/006.jpg" alt="Portfolio" /></a>
-					                        <h3><a href="/board/category/boardList?cateId=7">지역할인쿠폰</a></h3>
+					                        <h3><a href="/board/category/boardList?cateId=7&pageNo=1">지역할인쿠폰</a></h3>
 				                    </li>   
                                 <!-- END ITEM -->                 				
 			                    </ul>
