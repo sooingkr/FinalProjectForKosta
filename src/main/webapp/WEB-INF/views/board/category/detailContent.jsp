@@ -7,8 +7,9 @@
 <head>
 <!-------------------------------------------- category section 게시글 상세보기 ---------------------------------------------->
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${cateDTO.cateName}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>${cateDTO.cateName}</title>
+	<script type="text/javascript" src="/resources/js/fileupload.js"></script>
 <style>
 #modDiv {
 	width: 300px;
@@ -23,6 +24,14 @@
 	padding: 10px;
 	z-index: 1000;
 }
+/* 
+	구글맵 style 적용
+ */
+#map {
+        width: 100%;
+        height: 400px;
+        background-color: grey;
+      }
 </style>
 </head>
 <body class="index page-index">
@@ -42,6 +51,35 @@
 		<section class="site-content full-height">
 		<div class="content-frame">
 			<div id="form-contact">
+			
+				<!-- GoogleMap API 연동(황영롱) -->
+				<h3>My Google Maps Demo</h3>
+			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
+			    <script>
+			      function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
+			    	var latVal = ${boardDTO.lat}; // 게시글 DTO에서 위도값을 가져옴
+			    	var lngVal = ${boardDTO.lon}; // 게시글 DTO에서 경도값을 가져옴
+			        var uluru = {lat: latVal, lng: lngVal}; // 위도, 경도를 가지는 객체를 생성
+			        var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
+			          zoom: 4, // 확대 정도(ZOOM)
+			          center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함
+			        });
+			        var marker = new google.maps.Marker({ // 우리가 지정한 위치에 표시자인 마커 객체를 생성함
+			          position: uluru, // 마커 위치를 지정
+			          map: map
+			        });
+			      }
+			    </script>
+			    <!-- 
+			    	아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함
+			    	key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.
+			     -->
+			    <script async defer
+			    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1I06mbe3rTV903iEx-aOyO4MFTnaDEvw&callback=initMap">
+			    </script>
+				<!-- End of GoogleMap API 연동(황영롱) -->
+				
+			
 				<h1 id="hello">${cateDTO.cateName}</h1>
 				<table class="table table-bordered">
 					<tr>
@@ -69,11 +107,16 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
-						<td colspan="3"><pre style="height: 500px;">${boardDTO.bContent}</pre></td>
+						<td colspan="3"><pre style="height: 300px;">${boardDTO.bContent}</pre>
+							<c:forEach var="fileName" items="${fileList}">
+							<p>
+								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
+								<img src="/board/displayFile.do?fileName=${fileName}"></img></a></p>
+							</c:forEach>
+						</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">상품
-							가치</th>
+						<th style="width: 20%; background: #aaa; text-align: center;">상품가치</th>
 						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 				</table>
@@ -86,6 +129,7 @@
 										<img id="likeImage" src="" style="width: 10px; height: 10px;" />
 										<span id="likeCount"></span>
 									</button>
+								</div>
 						</c:if>
 
 						<c:if test="${loginSession.userId == boardDTO.userId }">
@@ -125,6 +169,9 @@
 						<td>
 							<button type="button" id="moreReplyList"
 								onclick="showNextReplyList()">댓글 더보기</button>
+							&nbsp;&nbsp;
+							<button type="button" id="allReplyList"
+								onclick="getAllList()">댓글 전체보기</button>
 						</td>
 					</tr>
 				</table>
@@ -142,6 +189,7 @@
 						</th>
 						<td><input style="width: 100%; border: 0;" type="text"
 							name="rContent" id="newReplyContent" /></td>
+						<td><input type="checkbox" id="secretReply"/>비밀댓글</td>	
 						<td style="width: 10%"><button style="width: 50px"
 								id="replyAddBtn">작성</button></td>
 					</tr>
@@ -188,46 +236,52 @@
 				showNextReplyList();
 		
 				// 댓글 등록 클릭했을 때
-				$("#replyAddBtn").on("click", function() {
-					// 입력한 댓글 값들을 가져옴
-					var replyer = $("#newReplyWriter").val();
-					var replyText = $("#newReplyContent").val();
-					var bno = "${boardDTO.bNo}";
-		
-					if (replyText.trim() == "") {
-						alert("내용을 작성해주세요.");
-						return;
-					}
-		
-					$.ajax({
-						type : "post",
-						url : "/replies/insertBoardReply",
-						headers : {
-							"Content-Type" : "application/json",
-							"X-HTTP-Method-Override" : "POST"
-						},
-						dataType : "json",
-						data : JSON.stringify({
-							bNo : bno,
-							replyId : replyer,
-							rContent : replyText
-						}),
-						success : function(data) {
-							console.log(data);
-							console.log(data.result);
-							if (data.result == "ok") {
-								alert("등록되었습니다.");
-								getAllList(); //전체 목록 뿌리기
-							} else {
-								alert("등록 실패");
-							}
-						}
-					}); // end of ajax
-					// 댓글 초기화
-					$("#newReplyWriter").val("");
-					$("#newReplyContent").val("");
-		
-				}); // end of 댓글등록 클릭
+	            $("#replyAddBtn").on("click", function() {
+	               // 입력한 댓글 값들을 가져옴
+	               var replyer = $("#newReplyWriter").val();
+	               var replyText = $("#newReplyContent").val();
+	               var bno = "${boardDTO.bNo}";
+	               var secretReply="N";
+	               
+	               if($("#secretReply").is(":checked")){
+	                  secretReply="Y";
+	               }
+	      
+	               if (replyText.trim() == "") {
+	                  alert("내용을 작성해주세요.");
+	                  return;
+	               }
+	      
+	               $.ajax({
+	                  type : "post",
+	                  url : "/replies/insertBoardReply",
+	                  headers : {
+	                     "Content-Type" : "application/json",
+	                     "X-HTTP-Method-Override" : "POST"
+	                  },
+	                  dataType : "json",
+	                  data : JSON.stringify({
+	                     bNo : bno,
+	                     replyId : replyer,
+	                     rContent : replyText,
+	                     isSecret : secretReply
+	                  }),
+	                  success : function(data) {
+	                     console.log(data);
+	                     console.log(data.result);
+	                     if (data.result == "ok") {
+	                        alert("등록되었습니다.");
+	                        getAllList(); //전체 목록 뿌리기
+	                     } else {
+	                        alert("등록 실패");
+	                     }
+	                  }
+	               }); // end of ajax
+	               // 댓글 초기화
+	               $("#newReplyWriter").val("");
+	               $("#newReplyContent").val("");
+	      
+	            }); // end of 댓글등록 클릭
 		
 				// 댓글 옆 수정 버튼
 				$("#replyTable").on("click", "#replyDetail", function() {
@@ -329,9 +383,11 @@
 					dataType : "json",
 					success : function(data) {
 						console.log(data);
+						console.log(data.loginUserId);
 						if (data.result == "ok") {
 							// 댓글 리스트 출력
 							$.each(data.replyList, function(i, rDTO) {
+								
 								var str = "";
 								str += "<tr>";
 								str += "<td width='10%'>" + rDTO.replyId + "</td>";
@@ -340,8 +396,12 @@
 								str += "<td width='20%'>" + rDTO.rModifyDate + "</td>";
 								str += "<td><input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
 								str += "<input type='hidden' id='rContent' value='" + rDTO.rContent + "'/>";
-								str += "<button type='button' id='replyDetail'>수정</button></td>";
-								str += "</tr>"
+								
+								if(data.loginUserId == rDTO.replyId){
+									str += "<button type='button' id='replyDetail'>수정</button>";
+								}
+								
+								str += "</td></tr>"
 		
 								$("#replyTable").append(str);
 							});
@@ -356,6 +416,7 @@
 		
 							} else {
 								$("#moreReplyList").hide();
+								$("#allReplyList").hide();
 							}
 		
 						} else {
@@ -369,7 +430,8 @@
 					}
 				});
 			} // end of showNextReplyList()
-		
+			
+			/**댓글 전체 리스트 보기*/
 			function getAllList() {
 				$.ajax({
 					type : "post",
@@ -394,14 +456,19 @@
 								str += "<td width='20%'>" + rDTO.rModifyDate + "</td>";
 								str += "<td><input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
 								str += "<input type='hidden' id='rContent' value='" + rDTO.rContent + "'/>";
-								str += "<button type='button' id='replyDetail'>수정</button></td>";
-								str += "</tr>"
-		
+								
+								if(data.loginUserId == rDTO.replyId){
+									str += "<button type='button' id='replyDetail'>수정</button>";
+								}
+								
+								str += "</td></tr>"
+								
 								$("#replyTable").append(str);
 							});
 		
 							// 모든 댓글 리스트 출력 후 댓글 더보기 버튼 숨기기
 							$("#moreReplyList").hide();
+							$("#allReplyList").hide();
 		
 						} else {
 							alert(data.resultMag);
@@ -469,6 +536,7 @@
 		
 			} // end of update()
 		
+			/* 좋아요 갯수 세기 */
 			function count() {
 				var bno = "${boardDTO.bNo}";
 				$.ajax({
@@ -485,6 +553,12 @@
 					}
 				}); // end of ajax from likeBoard Btn Clicks
 			}
+			
+			/* href 클릭 함수 */
+			function hrefFunc(fileName){
+				$("#hrefId").attr("target","_blank");
+				location.href="/board/displayFile?fileName=" + getImageLink(fileName);
+			} 
 		</script>
 
 		<script>

@@ -8,34 +8,26 @@
  
 </style>
 
- 				
-	<!-- 			<span>
-				<ul class="nav nav-pills" width="100px">
-  						<li role="presentation" class="clickable">
-  							<a href="/user/subscribeForm" style="font-size:12px">회원가입</a>
-  						</li>
-  						<li role="presentation" class="clickable">
-  							<a href="/user/subscribeForm" style="font-size:12px">로그인</a>
-  						</li>
-  						<li role="presentation" class="clickable">
-  							<a href="/user/subscribeForm" style="font-size:12px">로그아웃</a>
-  						</li>
-				</ul>  	
-				</span> --> 
  			
- 				<nav class="social-bar" style="margin-right: 5%;">    
- 				
- 				<!-- 로그아웃 -->
-				<c:if test="${loginSession.userId != null}">
-					<span style="font-weight: bold;">${loginSession.userId} </span> 
-					<a href="/note/listNotOpen">
-						<!-- 읽지 않은 쪽지 -->
-						<span class="badge" style="background-color: #CB1C05;">알림:${sessionScope.notOpen}</span>
-					</a>&nbsp; ┃ &nbsp;
-					<a href="/user/Logout" style="font-weight: bold;">로그아웃</a>
-				</c:if>
-
+	<nav class="social-bar" style="margin-right: 5%;">    
+	
+		<!-- 로그아웃 -->
+		<c:if test="${loginSession.userId != null}">
+			<span style="font-weight: bold;">${loginSession.userId} </span> 
+			<a href="/note/listNotOpen">
+				<!-- 읽지 않은 쪽지 -->
+				<span class="badge" style="background-color: #CB1C05;">알림:${sessionScope.notOpen}</span>
+			</a>&nbsp; ┃ &nbsp;
+			<a href="/user/Logout" style="font-weight: bold;">로그아웃</a>
+		</c:if>
+		
+		
+		<c:if test="${loginSession.userId == null}">
+			<span class="glyphicon glyphicon-send" aria-hidden="true" style="height: 50px;">
+				<a href="/user/subscribeJoin" style="font-weight: bold;">회원가입</a>
+			</span>
+		</c:if>
 				
-					
+		
 </nav>
                  

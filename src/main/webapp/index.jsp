@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<title>Welcome Main Page</title>
 	
 	
@@ -49,7 +48,8 @@
 							<button type="button" data-toggle="modal" data-target="#myModal">회원정보 수정</button>
 						 </div>
                     </div>
-                    
+                    	
+                     	
                     <!-- 회원수정 페이지로 이동하기 위한 패스워드 입력 모달창 -->
 					<!-- Modal -->
 					  <div class="modal fade" id="myModal" role="dialog">
@@ -62,8 +62,10 @@
 					          <h4 class="modal-title">패스워드 확인창</h4>
 					        </div>
 					        <div class="modal-body">
-					          <p>회원정보를 수정하기 위해 패스워드를 확인해주세요.</p>
-					          <label>비밀번호</label><input id="pwId" type="password" name="userPw" class="form-control"/><br/>
+					          <form id="form1" action="/user/modifyInfo" method="post">
+						          <p>회원정보를 수정하기 위해 패스워드를 확인해주세요.</p>
+						          <label>비밀번호</label><input id="pwId" type="password" name="password" class="form-control"/><br/>
+					          </form>
 					        </div>
 					        <div class="modal-footer">
 					          <button id="btnClick" type="button">확인</button>
@@ -73,21 +75,19 @@
 					      
 					    </div>
 					  </div>
+					  
+					 <c:if test="${map.msg eq 'FAIL'}" >
+				 	 <script>
+					 	  	alert("실패했습니다");
+				 	  	</script>
+				 	 </c:if>
+					  
+					  
 					  <script>
 					  	$(document).ready(function(){
 							$("#btnClick").on("click",function(event){
-								var pwd = $("#pwId").val();
-								$.ajax({
-									type:"post",
-									url:"/user/modifyInfo",
-									dataType:"text",
-									data:{
-										password:pwd
-									},
-									success : function(result){
-										
-									}
-								});// end of ajax()
+								var formId = $("#form1");
+								formId.submit();
 							});// end of btnClick
 					  	});// end of ready()
 					  </script>
@@ -113,13 +113,12 @@
 				                     <div class="form-group form col-md-12">
 				                        <span><a href="#">아이디찾기</a></span> / 
 				                        <span><a href="#">비밀번호찾기</a></span>
-				                        <span style="float: right"><input name="useCookie" type="checkbox" id="useCookie">자동로그인</span>
 				                     </div>
 				                  </div>
 				                  <br />
 				                  <div class="modal-footer">
 				                     <div class="col-md-12">
-				                        <a href="/user/subscribeJoin" class="btn btn-info">회원가입</a> 
+				                     	<button type="button" onclick="javascript:location.href='/user/subscribeJoin'" class="btn btn-info">회원가입</button> 
 				                        <input type="button" class="btn btn-warning"  id="login" value="로그인" />
 				                     </div>
 				                  </div>
@@ -179,9 +178,9 @@
             </div>
             <!-- END ABOUT SECTION -->
             <!-- 메뉴 각 페이지마다 색깔 제어 -->
+				 	  	
 <script>
 	$(document).ready(function(){
 		$("#welcome").attr("class","active");
 	})
 </script> 
-

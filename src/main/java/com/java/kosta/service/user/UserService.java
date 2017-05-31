@@ -18,4 +18,11 @@ public interface UserService {
 	//구글 회원 유저가입
 	public void googleinsertUser(UserVO vo);
 	
+	// 확인을 위한 회원 패스워드 가져오기
+	public UserVO getPwd(UserVO vo);
+	
+	// 비밀번호 암호화해서 가져오기
+	public String encapsulation(String userPw);
+	
+	public void updateInfo(UserVO vo);
 }

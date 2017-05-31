@@ -35,14 +35,19 @@
 								<tr style="background-color: #FFA800">
 									<th style="text-align: center;">No</th>
 									<th style="text-align: center;">보낸사람</th>
-									<th style="width:60%; text-align: center;">제목</th>
+									<th style="width:40%; text-align: center;">제목</th>
 									<th style="text-align: center;">보낸날짜</th>
 									<th style="text-align: center;">삭제</th>
 								</tr>
+								<c:if test="${empty list}">
+									<tr>
+										<td colspan="5" style="text-align: center">받은 쪽지가 없습니다.</td>
+									</tr>
+								</c:if>
 								<c:forEach var="NoteVO" items="${list}" varStatus="status">
 									<tr>
-										<td style="text-align: center;"><a href="/note/readDetail?mno=${NoteVO.mno}">${status.count}</a></td>
-										<td style="text-align: center;"><a href="/note/readDetail?mno=${NoteVO.mno}">${NoteVO.userId}</a></td>
+										<td style="text-align: center;">${status.count}</td>
+										<td style="text-align: center;">${NoteVO.userId}</td>
 										<td style="text-align: center;"><a href="/note/readDetail?mno=${NoteVO.mno}" id="mtitleCheck" >${NoteVO.mtitle}</a></td>
 										<td style="text-align: center;"> 
 											<fmt:formatDate value="${NoteVO.date_sender}" pattern="YY년MM월dd일 "/>

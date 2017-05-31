@@ -18,4 +18,12 @@ public interface UserDAO {
 	//구글유저 insert
 	public void googleinsertUser(UserVO vo);
 	
+	// 확인용 회원 패스워드 얻어오기
+	public UserVO getPwd(UserVO vo);
+	
+	// 비밀번호 암호화
+	public String encapsulation(String userPw);
+	
+	// 회원 정보 수정
+	public void updateInfo(UserVO vo);
 }

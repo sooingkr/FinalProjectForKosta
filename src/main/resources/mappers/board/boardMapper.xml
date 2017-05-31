@@ -13,7 +13,9 @@
    		isSwap,
         viewcnt AS viewCnt,
         bregdate AS bRegDate,
-        bmodifydate AS bModifyDate
+        bmodifydate AS bModifyDate,
+        lat,
+        lon
     </sql>
     
     <!-- 게시글 한 건 조회 -->
@@ -68,15 +70,22 @@
 			btitle,
 			bcontent,
 			value,
-			bmodifydate
+			bmodifydate,
+			lat,
+			lon
 		) VALUES (
 			#{userId}, 
 	    	#{cateId}, 
 	    	#{bTitle}, 
 	    	#{bContent},
 	    	#{value},
-	    	now()
+	    	now(),
+	    	#{lat},
+	    	#{lon}
 		)
+		<selectKey order="AFTER" keyProperty="bNo" resultType="string">	<!-- 게시글 삽입하고 마지막 no의 값을 반환해옴 -->
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
     </insert>
     
 	<!-- 게시글 수정 -->
@@ -158,13 +167,34 @@
 	</delete>
 	
  	<!-- 좋아요 조회  -->
-		<select id="countFavorite" resultType="int">
+	<select id="countFavorite" resultType="int">
  	    SELECT COUNT(*)
  	    FROM
  	    	favorite
  	    WHERE
  	    	bno = #{bNo}
  	</select>
+ 	
+	<!-- 파일 삽입  -->
+	<insert id="addAttach">
+	    INSERT INTO boardfile(bno, fileName) VALUES (#{bNo}, #{fullName}) 
+	</insert>
+	
+	<!-- 선택 게시판의 업로드 파일 정보 가져오기 -->
+	<select id="selectAttach" resultType="string">
+	    SELECT fileName
+	    FROM boardfile
+	    WHERE bNo = #{bNo}
+	</select>
+	
+	<!-- 업로드 파일 삭제 -->
+	<delete id="deleteAttach">
+	    DELETE FROM boardfile WHERE bNo = #{bNo} 
+	</delete>
+	
+	<!-- 업로드 파일 수정(실제로는 다시 삽입) -->
+	
+	
 </mapper>
 
 

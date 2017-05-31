@@ -40,5 +40,20 @@ public class UserServiceImpl implements UserService {
 	public void googleinsertUser(UserVO vo) {
 		dao.googleinsertUser(vo);
 	}
+
+	@Override
+	public UserVO getPwd(UserVO vo) {
+		return dao.getPwd(vo);
+	}
+
+	@Override
+	public void updateInfo(UserVO vo) {
+		dao.updateInfo(vo);
+	}
+
+	@Override
+	public String encapsulation(String userPw) {
+		return dao.encapsulation(userPw);
+	}
 	
 }

@@ -11,11 +11,11 @@ import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.board.BoardReplyDTO;
 
 @Service
-public class BoardReplyServiceImpl implements BoardReplyService{
+public class BoardReplyServiceImpl implements BoardReplyService {
 
 	@Inject
 	BoardReplyDAO brDAO;
-	
+
 	@Override
 	public BoardReplyDTO selectBoardReply(BoardReplyDTO boardReplyDTO) throws Exception {
 		return brDAO.selectBoardReply(boardReplyDTO);
@@ -42,6 +42,11 @@ public class BoardReplyServiceImpl implements BoardReplyService{
 	}
 
 	@Override
+	public String findWriter(String bNo) {
+		return brDAO.findWriter(bNo);
+	}
+
+	@Override
 	public void updateBoardReply(BoardReplyDTO boardReplyDTO) throws Exception {
 		brDAO.updateBoardReply(boardReplyDTO);
 	}
@@ -50,6 +55,5 @@ public class BoardReplyServiceImpl implements BoardReplyService{
 	public List<BoardReplyDTO> selectAllReplyList(BoardReplyDTO boardReplyDTO) throws Exception {
 		return brDAO.selectAllReplyList(boardReplyDTO);
 	}
-
 
 }

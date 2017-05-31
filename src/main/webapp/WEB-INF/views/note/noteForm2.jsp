@@ -28,7 +28,6 @@
 		<!-- END HEADER -->
 		<section class="site-content full-height">
 			<div class="content-frame">
-				<div id="content-frame-mask1" style="right: 17px;"></div>
 				<div class="what-row clearfix image-on-left">
 					<div class="what-row clearfix image-on-right">
 						<div>

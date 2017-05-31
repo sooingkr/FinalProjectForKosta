@@ -9,17 +9,7 @@
 <title>${cateDTO.cateName}</title>
 </head>
 <body class="index page-index">
-	<%-- <c:if test="${result == 'ok'}">
-		<script type="text/javascript">
-			console.log("ok");
-			alert("게시글 작성이 완료되었습니다.");
-		</script>
-	</c:if>
-	<c:if test="${result == 'fail'}">
-		<script type="text/javascript">
-			alert("게시글 작성에 실패하였습니다.");
-		</script>
-	</c:if> --%>
+	
 	<!-- START TALK TO US SECTION -->
 	<div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
 		<!-- START HEADER -->

@@ -53,4 +53,16 @@ public interface BoardDAO {
 	/**좋아요 개수 조회*/
 	public int countFavorite(String bNo);
 	
+	/** 파일 삽입 */
+	public void addAttach(@Param("bNo") String bNo, @Param("fullName") String fullName);
+	
+	/** 파일 리스트 가져오기*/
+	public List<String> selectAttach(String bNo);
+	
+	/** 파일 테이블 삭제 */
+	public void deleteAttach(String bNo);
+	
+	/** 게시글 수정시 파일 업로드 수정 */
+//	public void updateAttach(String bNo, String fullName);
+	
 }
