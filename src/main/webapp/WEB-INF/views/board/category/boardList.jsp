@@ -9,17 +9,7 @@
 <title>${cateDTO.cateName}</title>
 </head>
 <body class="index page-index">
-	<%-- <c:if test="${result == 'ok'}">
-		<script type="text/javascript">
-			console.log("ok");
-			alert("게시글 작성이 완료되었습니다.");
-		</script>
-	</c:if>
-	<c:if test="${result == 'fail'}">
-		<script type="text/javascript">
-			alert("게시글 작성에 실패하였습니다.");
-		</script>
-	</c:if> --%>
+	
 	<!-- START TALK TO US SECTION -->
 	<div class="f-page gray-bkg active" id="screen-about" style="background-color:#f8f8f8;" >
 		<!-- START HEADER -->
@@ -85,7 +75,7 @@
 				<c:forEach items="${boardList}" var="boardDTO" varStatus="status">
 					<tr style="text-align: center">
 						<td>${status.count }</td>
-						<td><a href="/board/category/detailContent?bno=${boardDTO.bNo}">${boardDTO.bTitle }</a></td>
+						<td><a href="/board/category/detailContent?bno=${boardDTO.bNo}&pageNo=${param.pageNo}">${boardDTO.bTitle }</a></td>
 						<td>${boardDTO.userId }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }"/></td>
 						<td><span class="badge" style="background-color: #BFC2C3;">${boardDTO.viewCnt}</span></td>

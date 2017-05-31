@@ -3,6 +3,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.java.kosta.dao.board.BoardDAO">
+
+	<!-- 주소 얻어오기 -->
+	<select id="getAddr" resultType="String">
+		select addr1 from usertable where userId=#{userId}
+	</select>
+
     <sql id="boardCol">
         bno AS bNo,
         userId,
@@ -13,7 +19,9 @@
    		isSwap,
         viewcnt AS viewCnt,
         bregdate AS bRegDate,
-        bmodifydate AS bModifyDate
+        bmodifydate AS bModifyDate,
+        lat,
+        lon
     </sql>
     
     <!-- 게시글 한 건 조회 -->
@@ -68,14 +76,18 @@
 			btitle,
 			bcontent,
 			value,
-			bmodifydate
+			bmodifydate,
+			lat,
+			lon
 		) VALUES (
 			#{userId}, 
 	    	#{cateId}, 
 	    	#{bTitle}, 
 	    	#{bContent},
 	    	#{value},
-	    	now()
+	    	now(),
+	    	#{lat},
+	    	#{lon}
 		)
 		<selectKey order="AFTER" keyProperty="bNo" resultType="string">	<!-- 게시글 삽입하고 마지막 no의 값을 반환해옴 -->
 	        SELECT LAST_INSERT_ID()
@@ -89,6 +101,7 @@
  	    SET
  	    	btitle =  #{bTitle},
  	    	bcontent = #{bContent},
+ 	    	value = #{value},
  	    	bmodifydate = now()
  	    WHERE
  	    	bno = #{bNo}

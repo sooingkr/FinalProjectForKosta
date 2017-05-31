@@ -17,13 +17,9 @@ public class UploadFileUtils {
 	
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws IOException {	//파일 저장 경로, 원본 파일 이름, 파일 데이터
 		
-		//기본 경로 upPath 없으면 생성
-		File upPath = new File(uploadPath);
-		if(! upPath.exists()){
-			upPath.mkdir();
-		}
-		
 		UUID uid = UUID.randomUUID();
+		originalName = originalName.toLowerCase();	//파일 이름을 소문자로 변환
+		
 		String savedName = uid.toString() + "_" + originalName;	// 고유아이디_파일이름
 		String savedPath = calcPath(uploadPath);	// 파일 경로 (/년/월/일) 계산
 		File target = new File(uploadPath + savedPath, savedName);

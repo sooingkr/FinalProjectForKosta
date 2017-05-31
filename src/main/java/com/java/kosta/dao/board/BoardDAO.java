@@ -11,6 +11,9 @@ import com.java.kosta.dto.board.BoardPagingDTO;
 
 public interface BoardDAO {
 	
+	/** 주소 얻어오기 */
+	public String getAddr(String userId);
+	
 	/** 게시글 한건 조회해서 가져온다  */
 	public BoardDTO selectBoardOne(String bNo);
 
