@@ -24,6 +24,14 @@
 	padding: 10px;
 	z-index: 1000;
 }
+/* 
+	구글맵 style 적용
+ */
+#map {
+        width: 100%;
+        height: 400px;
+        background-color: grey;
+      }
 </style>
 </head>
 <body class="index page-index">
@@ -43,6 +51,35 @@
 		<section class="site-content full-height">
 		<div class="content-frame">
 			<div id="form-contact">
+			
+				<!-- GoogleMap API 연동(황영롱) -->
+				<h3>My Google Maps Demo</h3>
+			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
+			    <script>
+			      function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
+			    	var latVal = ${boardDTO.lat}; // 게시글 DTO에서 위도값을 가져옴
+			    	var lngVal = ${boardDTO.lon}; // 게시글 DTO에서 경도값을 가져옴
+			        var uluru = {lat: latVal, lng: lngVal}; // 위도, 경도를 가지는 객체를 생성
+			        var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
+			          zoom: 4, // 확대 정도(ZOOM)
+			          center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함
+			        });
+			        var marker = new google.maps.Marker({ // 우리가 지정한 위치에 표시자인 마커 객체를 생성함
+			          position: uluru, // 마커 위치를 지정
+			          map: map
+			        });
+			      }
+			    </script>
+			    <!-- 
+			    	아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함
+			    	key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.
+			     -->
+			    <script async defer
+			    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1I06mbe3rTV903iEx-aOyO4MFTnaDEvw&callback=initMap">
+			    </script>
+				<!-- End of GoogleMap API 연동(황영롱) -->
+				
+			
 				<h1 id="hello">${cateDTO.cateName}</h1>
 				<table class="table table-bordered">
 					<tr>
