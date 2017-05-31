@@ -3,6 +3,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.java.kosta.dao.board.BoardDAO">
+
+	<!-- 주소 얻어오기 -->
+	<select id="getAddr" resultType="String">
+		select addr1 from usertable where userId=#{userId}
+	</select>
+
     <sql id="boardCol">
         bno AS bNo,
         userId,
@@ -95,6 +101,7 @@
  	    SET
  	    	btitle =  #{bTitle},
  	    	bcontent = #{bContent},
+ 	    	value = #{value},
  	    	bmodifydate = now()
  	    WHERE
  	    	bno = #{bNo}
