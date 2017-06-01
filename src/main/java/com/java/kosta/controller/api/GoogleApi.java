@@ -1,4 +1,5 @@
 package com.java.kosta.controller.api;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -144,6 +145,8 @@ public class GoogleApi {
 		String lat=uniqId.getLat();
 		String lon=uniqId.getLon();
 		String sessionkey=uniqId.getSessionKey();
+		Date date=uniqId.getSessionLimit();
+		
 		
 		logger.info(uniqId.toString());
 		
@@ -164,6 +167,7 @@ public class GoogleApi {
 		userVO.setLat(lat);
 		userVO.setLon(lon);
 		userVO.setSessionKey(sessionkey);
+		userVO.setSessionLimit(date);
 		
 		session.setAttribute(Constants.LOGINSESSION,userVO);
 		

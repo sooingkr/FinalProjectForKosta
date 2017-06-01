@@ -1,6 +1,6 @@
 package com.java.kosta.dto.user;
 
-import java.sql.Date;
+import java.util.Date;
 
 // 사용자 관련 정보 VO 클래스
 public class UserVO {
@@ -167,8 +167,8 @@ public class UserVO {
 		return sessionLimit;
 	}
 
-	public void setSessionLimit(Date sessionLimit) {
-		this.sessionLimit = sessionLimit;
+	public void setSessionLimit(Date date) {
+		this.sessionLimit = date;
 	}
 
 	public Date getUserRegdate() {

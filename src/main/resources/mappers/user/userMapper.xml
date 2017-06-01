@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 회원정보 수정을 위해 패스워드 확인하는 쿼리 -->
 <select id="getPwd" resultType="UserVO">
-	SELECT <include refid="usercol"/> FROM usertable
+	SELECT * FROM usertable
 		WHERE userId = #{userId} and userPw=PASSWORD(#{userPw})
 </select>
 
@@ -20,7 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  --><!-- 회원정보 수정 업데이트 -->
 <update id="updateInfo">
 	update usertable
-	set userPw=PASSWORD(#{userPw}),userName=#{userName},userHp=#{userHp},userEmail=#{userEmail},addr1=#{addr1},addr2=#{addr2},lat=#{lat},lon=#{lon},cateId1=#{cateId1},cateId2=#{cateId2},cateId3=#{cateId3},cateId4=#{cateId4},cateId5=#{cateId5},cateId6=#{cateId6}
+	set userPw=PASSWORD(#{userPw}),userName=#{userName},userHp=#{userHp},
+	userEmail=#{userEmail},addr1=#{addr1},addr2=#{addr2},lat=#{lat},lon=#{lon},
+	cateId1=#{cateId1},cateId2=#{cateId2},cateId3=#{cateId3},cateId4=#{cateId4},
+	cateId5=#{cateId5},cateId6=#{cateId6} where userId=#{userId}
 </update>
     
     
@@ -41,13 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		lat,
 		lon,
 		userRegdate,
-		sessionKey
+		sessionKey,
+		sessionLimit
     </sql>
     
     
 	<!-- 로그인 (암호화아직 안댔음)-->
 	<select id="login" resultType="UserVO">
-		SELECT <include refid="usercol"/> FROM usertable
+		SELECT * FROM usertable
 		WHERE userId = #{userId} AND userPw = PASSWORD(#{userPw})
 	</select>
 	
@@ -59,14 +63,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	
 <!-- 일반 회원 가입  -->
 	
 <insert id="insertUser">
 insert into usertable(lat,lon,userId,userPw,userName,userHp,userEmail,addr1,addr2,
-cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,sessionKey)values
+cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,sessionKey,sessionLimit)values
 (#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
-#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},now())
+#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},now(),now())
 </insert>
 	
 	
@@ -75,9 +78,9 @@ cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,sessionKey)values
 
 <insert id="googleinsertUser">
 insert into usertable(lat,lon,userId,userPw,userName,userHp,userEmail,addr1,addr2,
-cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId,sessionKey)values
+cateId1,cateId2,cateId3,cateId4,cateId5,cateId6,uniqId,sessionKey,sessionLimit)values
 (#{lat},#{lon},#{userId},PASSWORD(#{userPw}),#{userName},#{userHp},#{userEmail},#{addr1},#{addr2},
-#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},#{uniqId},now())
+#{cateId1},#{cateId2},#{cateId3},#{cateId4},#{cateId5},#{cateId6},#{uniqId},now(),now())
 </insert>
 	
 
