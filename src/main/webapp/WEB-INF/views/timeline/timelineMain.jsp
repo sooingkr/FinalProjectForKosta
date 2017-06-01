@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">	
 	<!-- 부가적인 테마 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	
+	<link rel="stylesheet" href="/resources/css/left-sidebar.css"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -206,6 +206,54 @@ legend.scheduler-border {
 
 	</header>
     <div class="container">
+    
+    <section class="app" style="position:fixed; z-index:999; left:0px; bottom:0px">
+      <aside class="side">
+        <ul class="tabs">
+          <li><a href="index.html"><i class="icon-dribbble"></i> Dribbble</a></li>
+          <li class="active"><a href="index.html"><i class="icon-twitter"></i> Twitter</a></li>
+          <li><a href="index.html"><i class="icon-rss"></i> RSS</a></li>
+          <li><a href="index.html"><i class="icon-facebook"></i> Facebook</a></li>
+        </ul>
+        <a href="index.html" class="add"><i class="icon-plus"></i> Add</a>
+      </aside>
+
+      <section class="main">
+        <article class="item">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <footer>
+            <a href="index.html" class="avatar"><img src="/resources/images/pic1.png"></a>
+            <a href="index.html">@someone</a>
+            <time datetime="2012-04-05T10:30:21+00:00" pubdate>4 minutes ago</time>
+          </footer>
+        </article>
+        <article class="item">
+          <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+          <footer>
+            <a href="index.html" class="avatar"><img src="/resources/images/pic3.png"></a>
+            <a href="index.html">@someone</a>
+            <time datetime="2012-04-05T10:26:27+00:00" pubdate>8 minutes ago</time>
+          </footer>
+        </article>
+        <article class="item">
+          <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</p>
+          <footer>
+            <a href="index.html" class="avatar"><img src="/resources/images/pic2.png"></a>
+            <a href="index.html">@someone</a>
+            <time datetime="2012-04-05T10:15:45+00:00" pubdate>15 minutes ago</time>
+          </footer>
+        </article>
+        <article class="item">
+          <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+          <footer>
+            <a href="index.html" class="avatar"><img src="/resources/images/pic4.png"></a>
+            <a href="index.html">@someone</a>
+            <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+          </footer>
+        </article>
+      </section>
+    </section>
+    
         <div class="row">
             <div class="col-sm-12">
                 <h1>Page Title</h1>
