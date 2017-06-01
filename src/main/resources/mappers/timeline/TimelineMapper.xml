@@ -46,7 +46,25 @@
 	
 	<!-- 필터링 조건 sql문 (혜연추가) -->
 	<sql id="FilterConditional">
-		
+		WHERE value between #{FilterDTO.fvalue1} and #{FilterDTO.fvalue2}
+		<if test='#{FilterDTO.fcate1} == "Y"'>
+			or cateId = 1
+		</if>
+		<if test='#{FilterDTO.fcate2} == "Y"'>
+			or cateId = 2
+		</if>
+		<if test='#{FilterDTO.fcate3} == "Y"'>
+			or cateId = 3
+		</if>
+		<if test='#{FilterDTO.fcate4} == "Y"'>
+			or cateId = 4
+		</if>
+		<if test='#{FilterDTO.fcate5} == "Y"'>
+			or cateId = 5
+		</if>
+		<if test='#{FilterDTO.fcate6} == "Y"'>
+			or cateId = 6
+		</if>
 	</sql>
 	
 
@@ -80,29 +98,8 @@
 		(6371*acos(cos(radians(#{UserVO.lat}))*cos(radians(lat))*cos(radians(lon)
 		-radians(#{UserVO.lon}))+sin(radians(#{UserVO.lat}))*sin(radians(lat))))
 		AS distance
-		FROM board LEFT OUTER JOIN category
-		ON board.cateId = category.cateId
-		WHERE 
-		board.value BETWEEN #{FilterDTO.fvalue1} and #{FilterDTO.fvalue2}
-		and 1=0
-		<if test='FilterDTO.fcate1 == "Y"'>
-			or board.cateId = 1
-		</if>
-		<if test='FilterDTO.fcate2 == "Y"'>
-			or board.cateId = 2
-		</if>
-		<if test='FilterDTO.fcate3 == "Y"'>
-			or board.cateId = 3
-		</if>
-		<if test='FilterDTO.fcate4 == "Y"'>
-			or board.cateId = 4
-		</if>
-		<if test='FilterDTO.fcate5 == "Y"'>
-			or board.cateId = 5
-		</if>
-		<if test='FilterDTO.fcate6 == "Y"'>
-			or board.cateId = 6
-		</if>
+		FROM board 
+		<include refid="FilterConditional"></include>
 		ORDER BY distance asc, bno desc
 		limit #{pageMaker.pageStart},#{pageMaker.perPageNum}
 	</select>
@@ -111,27 +108,7 @@
 	<select id="countFilterList" resultType="int">
 		SELECT count(*)
 		FROM board
-		WHERE 
-		value BETWEEN #{fvalue1} and #{fvalue2}
-		and 1=0
-		<if test='fcate1 == "Y"'>
-			or cateId = 1
-		</if>
-		<if test='fcate2 == "Y"'>
-			or cateId = 2
-		</if>
-		<if test='fcate3 == "Y"'>
-			or cateId = 3
-		</if>
-		<if test='fcate4 == "Y"'>
-			or cateId = 4
-		</if>
-		<if test='fcate5 == "Y"'>
-			or cateId = 5
-		</if>
-		<if test='fcate6 == "Y"'>
-			or cateId = 6
-		</if>
+		<include refid="FilterConditional"></include>
 	</select>
 	
 	<!-- 가치 최대값 구하는 쿼리 -->

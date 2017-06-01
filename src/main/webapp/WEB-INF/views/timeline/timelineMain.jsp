@@ -114,24 +114,24 @@ legend.scheduler-border {
 						<br><br>
 						<span class="input-group" style="margin-left: 4%;"> 
 							<label class="checkbox-inline"> 
-								<input type="checkbox" name="checkbox" id="cateId1" >유아/취미/완구
+								<input type="checkbox" name="checkbox" id="cateId1" value="n">유아/취미/완구
 							</label> 
 							<label class="checkbox-inline"> 
-								<input type="checkbox" name="checkbox" id="cateId2" >뷰티/패션/잡화
+								<input type="checkbox" name="checkbox" id="cateId2" value="n">뷰티/패션/잡화
 							</label> 
 							<label class="checkbox-inline"> 
-								<input type="checkbox" name="checkbox" id="cateId3" >애완동물 용품
+								<input type="checkbox" name="checkbox" id="cateId3" value="n">애완동물 용품
 							</label> 
 							<br /> <br /> 
 							
 							<label class="checkbox-inline"> 
-								<input type="checkbox" name="checkbox" id="cateId4" >인테리어/주방/생활용품 
+								<input type="checkbox" name="checkbox" id="cateId4" value="n">인테리어/주방/생활용품 
 							</label>
 							<label class="checkbox-inline"> 
-								<input type="checkbox" name="checkbox" id="cateId5" >도서/음반 
+								<input type="checkbox" name="checkbox" id="cateId5" value="n">도서/음반 
 							</label>
 							<label class="checkbox-inline"> 
-								<input type="checkbox" name="checkbox" id="cateId6" >지역 할인 쿠폰
+								<input type="checkbox" name="checkbox" id="cateId6" value="n">지역 할인 쿠폰
 							</label>
 							
 						</span>
@@ -193,14 +193,17 @@ legend.scheduler-border {
 						</span>
 						<br><br>
 						<div class="input-group">
-                        <input type="text" style="width: 30%;" id="fvalue1">원
-                        ~ 
-                        <input type="text" style="width: 30%;" id="fvalue2">원
-                     </div>
+							<select class="form-control">
+								<option>선택하세요</option>
+								<option>0</option>
+								<option>10,000원 ~ 30,000원</option>
+								<option>30,000원 ~ 50,000원</option>
+								<option>50,000원 ~ 70,000원</option>
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>
-			<input type="button" id="filterBtn" value="확인"/>
 		</fieldset>
 	</div>
 
@@ -221,6 +224,7 @@ legend.scheduler-border {
     <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/resources/js/bootstrap.offcanvas.js"></script>
+
 
 </body>
 

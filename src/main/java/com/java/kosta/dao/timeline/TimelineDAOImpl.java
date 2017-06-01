@@ -46,7 +46,9 @@ public class TimelineDAOImpl implements TimelineDAO {
 	
 	@Override
 	public int countFilterList(FilterDTO filter) {
-		return sqlSession.selectOne("timelineMapper.countFilterList", filter);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FilterDTO", filter);
+		return sqlSession.selectOne("timelineMapper.countFilterList", map);
 	}
 
 	@Override
