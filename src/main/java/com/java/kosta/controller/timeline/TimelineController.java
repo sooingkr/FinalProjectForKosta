@@ -63,17 +63,72 @@ public class TimelineController {
 	}//end of timelineMain
 	
 	//필터된 게시글 ajax 호출용
+			@RequestMapping(value="/timeline/filterList")
+			public @ResponseBody Map<String, Object> filterList(PagingDTO page, @RequestParam(value="fcateArr")List<String> fcateArr, 
+					@RequestParam(value="fvalue1")String fvalue1, @RequestParam(value="fvalue2")String fvalue2){
+				logger.info("필터 ajax 호출되었습니당^0^");
+				FilterDTO filter = new FilterDTO();
+				logger.info("fvalue1 : "+fvalue1);
+				logger.info("fvalue2 : "+fvalue2);
+
+				/* fvalue1 과 fvalue2의 조건문 : 가치에 따른 분류를 위함 */
+				if(!fvalue1.equals("")){
+					filter.setFvalue1(fvalue1);
+				}else{
+					filter.setFvalue1("0");
+				}
+				if(!fvalue2.equals("")){
+					filter.setFvalue2(fvalue2);
+				}else{
+					filter.setFvalue2(Integer.toString(service.maxValue()));
+				}
+				
+				logger.info("fcateArr : "+ fcateArr);
+				
+				for (int i = 0; i < fcateArr.size(); i++) {
+					if(fcateArr.get(i).equals("true")){
+						fcateArr.set(i, "Y");
+					}else fcateArr.set(i, "N");
+				}
+				logger.info("fcateArr Y/N : "+ fcateArr);
+				
+				/* 카테고리에서 가져와서 필터링 */
+				filter.setFcate1(fcateArr.get(0));
+				filter.setFcate2(fcateArr.get(1));
+				filter.setFcate3(fcateArr.get(2));
+				filter.setFcate4(fcateArr.get(3));
+				filter.setFcate5(fcateArr.get(4));
+				filter.setFcate6(fcateArr.get(5));
+
+				//페이징을 위한 작업
+				page.setTotalCount(service.countFilterList(filter));
+				logger.info("필터 전체 수 : "+service.countFilterList(filter));
+				page.setPerPageNum(5);
+				List<TimelineDTO> list = service.listFilter(filter, page);
+				for (int i = 0; i < list.size(); i++) {
+					System.out.println("bno : "+list.get(i).getBno()+", cateId : "+list.get(i).getCateId()+", value : "+list.get(i).getValue());
+				}
+				HashMap<String,Object> map = new HashMap<String,Object>();
+				map.put("list", list);
+				map.put("pageMaker", page);
+				
+				return map;
+				
+			}//end of filterList
+	
+	/*//필터된 게시글 ajax 호출용
 		@RequestMapping(value="/timeline/filterList")
 		public String filterList(PagingDTO page, String fvalue1, String fvalue2){
 //		public @ResponseBody Map<String, Object> filterList(PagingDTO page, String fcateArr[], String fvalue1, String fvalue2){
 			logger.info("필터링된 타임라인 리스트 ajax 메서드로 이동");
 			FilterDTO filter = new FilterDTO();
 			String fcateArr[] = new String[6];
-			fvalue1 = "";
-			fvalue2 = "";
-			/* fvalue1 과 fvalue2의 조건문 : 가치에 따른 분류를 위함 */
+			fvalue1 = "200";
+			fvalue2 = "800";
+			 fvalue1 과 fvalue2의 조건문 : 가치에 따른 분류를 위함 
 			if(!fvalue1.equals("")){
 				filter.setFvalue1(fvalue1);
+				
 			}else{
 				filter.setFvalue1("0");
 //				logger.info(filter.getFvalue1());
@@ -86,13 +141,13 @@ public class TimelineController {
 			}
 			
 			for(int i=0; i<=5; i++){
-				if(i==1 || i==4){
+				if(i==2 || i==3 || i==4 || i==5){
 					fcateArr[i] = "Y";
 				}
 				else fcateArr[i] = "N";
 			}//임시로 cate값을 넣어줌
 			
-			/* 카테고리에서 가져와서 필터링 */
+			 카테고리에서 가져와서 필터링 
 			filter.setFcate1(fcateArr[0]);
 			filter.setFcate2(fcateArr[1]);
 			filter.setFcate3(fcateArr[2]);
@@ -103,7 +158,9 @@ public class TimelineController {
 			page.setTotalCount(service.countFilterList(filter));	
 			page.setPerPageNum(5);
 			List<TimelineDTO> list = service.listFilter(filter, page);
-			logger.info("가져온 값 : " + list);
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println("bno : "+list.get(i).getBno()+", cateId : "+list.get(i).getCateId()+", value : "+list.get(i).getValue());
+			}
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("list", list);
 			map.put("pageMaker", page);
@@ -112,6 +169,6 @@ public class TimelineController {
 //			return map;
 			
 		}//end of filterList
-	
+*/	
 	
 }//end of class
