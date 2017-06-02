@@ -38,9 +38,9 @@ body {
 
 /* Styling */
 .timeline {
-  margin: 4em auto;
   position: relative;
-  max-width: 46em;
+  margin-top: 3%;
+
 }
 .timeline:before {
   background-color: black;
@@ -55,6 +55,8 @@ body {
 
 .timeline-event {
   position: relative;
+  width: 100%;
+  margin-top: 10%;
 }
 .timeline-event:hover .timeline-event-icon {
   -moz-transform: rotate(-45deg);
@@ -70,11 +72,11 @@ body {
 }
 
 .timeline-event-copy {
-  padding: 2em;
+  padding: 1em;
   position: relative;
   top: -1.875em;
   left: 4em;
-  width: 80%;
+  width: 100%;
 }
 .timeline-event-copy h3 {
   font-size: 1.75em;
