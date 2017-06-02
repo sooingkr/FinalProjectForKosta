@@ -1,5 +1,6 @@
 package com.java.kosta.service.user;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -83,7 +84,15 @@ public class UserServiceImpl implements UserService {
 		dao.pwupdate(vo);
 	}
 	
-	
+	 @Override
+	public void keepLogin(String uid, String sessionId, Date next) {
+	    dao.keepLogin(uid, sessionId, next);
+	 }
+	 
+	    @Override
+	public UserVO checkUserWithSessionKey(String sessionId) {
+	     return dao.checkUserWithSessionKey(sessionId);
+	}
 	
 	
 }

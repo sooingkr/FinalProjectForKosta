@@ -12,7 +12,7 @@ import com.java.kosta.dto.board.BoardPagingDTO;
 public interface BoardDAO {
 	
 	/** 주소 얻어오기 */
-	public String getAddr(String userId);
+	public String getAddr(String id);
 	
 	/** 게시글 한건 조회해서 가져온다  */
 	public BoardDTO selectBoardOne(String bNo);
@@ -42,13 +42,13 @@ public interface BoardDAO {
 	public void deleteBoardReplyAll(String bNo);
 	
 	/** 좋아요 조회 */
-	public int searchFavorite(@Param("userId") String userId, @Param("bNo") String bNo);
+	public int searchFavorite( String id, @Param("bNo") String bNo);
 
 	/** 좋아요 */
-	public void favoriteBoard(@Param("userId") String userId, @Param("bNo") String bNo);
+	public void favoriteBoard( String id, @Param("bNo") String bNo);
 
 	/** 좋아요 취소 */
-	public void unfavoriteBoard(@Param("userId") String userId, @Param("bNo") String bNo);
+	public void unfavoriteBoard(String id,String bNo);
 	
 	/** 테이블 삭제시 좋아요 테이블 데이터 삭제 */
 	public void deleteFavorite(String bNo);
@@ -57,7 +57,7 @@ public interface BoardDAO {
 	public int countFavorite(String bNo);
 	
 	/** 파일 삽입 */
-	public void addAttach(@Param("bNo") String bNo, @Param("fullName") String fullName);
+	public void addAttach( String bNo, @Param("fullName") String fullName);
 	
 	/** 파일 리스트 가져오기*/
 	public List<String> selectAttach(String bNo);

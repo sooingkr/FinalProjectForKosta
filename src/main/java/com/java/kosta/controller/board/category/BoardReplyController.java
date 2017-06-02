@@ -70,7 +70,7 @@ public class BoardReplyController {
          // 해당 게시글의 댓글 리스트 조회
          int cnt = service.selectReplyListTotCount(pagingDTO);
          List<BoardReplyDTO> replyList = service.selectBoardReplyList(pagingDTO);
-         for (BoardReplyDTO dto : replyList) {
+         for (BoardReplyDTO dto : replyList) {//for each
             if (dto.getIsSecret().equals("Y")) {
                if (userId == null || userId.equals("")) {// 비로그인 상태
                   dto.setrContent("비밀댓글입니다.");

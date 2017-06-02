@@ -1,5 +1,19 @@
 $(document).ready(function() {
+	
+    $("#useCookie").change(function(){
+        if($("#useCookie").is(":checked")){
+        	 $("#useCookie").val(true);
+        	 alert("자동로그인이 체크되었습니다");
+        }else{
+        	$("#useCookie").val(false);
+        	alert("자동로그인이 해제되었습니다");
+        }
+    });
+	
    $("#login").click(function() {
+	   
+	    var useCookie= $("#useCookie").val();
+	   
       if ($('#userId').val() == "") {
          alert("아이디를 입력하세요.");
          return false;
@@ -15,7 +29,8 @@ $(document).ready(function() {
          url : "user/loginProc",
          data : {
             userId : $("#userId").val(),
-            userPw : $("#userPw").val()
+            userPw : $("#userPw").val(),
+            useCookie:useCookie
          },
          dataType : "json",
          success : function(data) {

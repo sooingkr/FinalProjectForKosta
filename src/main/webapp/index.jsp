@@ -142,6 +142,7 @@
 				                     <div class="form-group form col-md-12">
 				                        <span><a href="/user/Idselect">아이디찾기</a></span> /
 				                        <span><a href="/user/Pwselect">비밀번호찾기</a></span>
+				                        <!-- <span style="margin-left:50px;">자동로그인<input type="checkbox" name="useCookie" id="useCookie" value="false"></span> -->
 				                     </div>
 				                  </div>
 				                  <br />

@@ -97,18 +97,18 @@ public class BoardServiceImpl implements BoardService{
 	
 	/////////////////////////////////// 좋아요////////////////////////////////////////////
 	@Override
-	public int searchFavorite(String userId, String bNo) {
-		return bDAO.searchFavorite(userId, bNo);
+	public int searchFavorite(String id, String bNo) {
+		return bDAO.searchFavorite(id, bNo);
 	}
 
 	@Override
-	public void favoriteBoard(String userId, String bNo) {
-		bDAO.favoriteBoard(userId, bNo);
+	public void favoriteBoard(String id, String bNo) {
+		bDAO.favoriteBoard(id, bNo);
 	}
 
 	@Override
-	public void unfavoriteBoard(String userId, String bNo) {
-		bDAO.unfavoriteBoard(userId, bNo);
+	public void unfavoriteBoard(String id, String bNo) {
+		bDAO.unfavoriteBoard(id, bNo);
 	}
 
 	@Override
@@ -152,8 +152,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public String getAddr(String userId) {
-		return bDAO.getAddr(userId);
+	public String getAddr(String id) {
+		return bDAO.getAddr(id);
 	}
 
 
