@@ -1,67 +1,73 @@
 $(document).ready(function(){
 	var page = 1;
 	var keywords;
+	var login;
 	
 	function listAll(pageNum,searchText){
-		var str = "";
+		 
+	    //핸들바 템플릿 가져온다.
+		var source = $("#entry-template2").html(); 
+		//핸들바 템플릿 컴파일
+		var template = Handlebars.compile(source); 
+		// 붙일 녀석을 가져옴
+	    var placeHolder = $("#showTimeline");  
+		
+	    Handlebars.registerHelper('distanceVal', function (distanceVal) {
+	    	var distanceUp = Math.ceil(distanceVal);
+			  return distanceUp + "m";
+		});
+	    
+	    Handlebars.registerHelper('dateVal', function (dateVal) {
+	    	var d = new Date(dateVal);
+	    	//var str = dateVal.getFullYear() +" " + (dateVal.getMonth()+1) + " " + dateVal.getDate();
+	    	var str = (d.getFullYear() + " " + (d.getMonth()+1) + " " + d.getDate());
+	    	return str;
+	    });
+	    
+	    
+	    
 		$.getJSON("/timeline/listPaging?page="+pageNum+"&keywords="+encodeURIComponent(searchText),function(data){
-			var bno = "";
 			var temp = "";
-			var userId = "${loginSession.userId}";
-			$(data.list).each(function(){
-				bno = this.bno;
-				str += "<li id='timelineList'>"
-					+"<div class='well well-lg'>"
-						+"<div class='label label-danger'>카테고리</div>"
-						+"<div class='well well-sm'>"
-							+"<span>"+ this.cateName +"</span>"
-						+"</div>"
-						
-						+"<div class='label label-warning'>거리</div>"
-						+"<div class='well well-sm'>"
-						+"<span>"+ (this.distance) +"km</span>"
-						+"</div>"
-					
-						+"<div class='label label-warning'>제목</div>"
-						+"<div id='bnoWell' class='well well-sm'>"
-							+"<h3 class='timeline-header'>No.<strong>"+this.bno+"</strong> - "+this.btitle
-								+"<span class='time' style='font-size:15px;float:right'>"
-								+"<i class='glyphicon glyphicon-time'></i> 등록일 : "+this.bregdate
-								+"</span>"
-							+"</h3>" 
-						+"</div>"
-						
-						+"<div class='label label-warning'>글쓴이</div>"
-						+"<div class='well well-sm'>"
-							+ "<span id='user'>"+this.userId+"</span>"
-						+"</div>"
-						+"<div class='label label-warning'>내용</div>"
-						+"<div id='pan' style='background-color:#FFFFFF;'>"
-							+"<div class='panel-body'>"+this.bcontent+"</div>"
-							+"<div>"
-								+"<button id='likeBtn'>"
-									+"<img id='likeImage' src='' style='width:10px;height:10px;' />"
-									+"<span id='likeCount'></span>"
-								+"</button>"
-							+"</div>"
-						+"</div>"
-					+"</div>"
-				+"</li>";
-			});// end of each
 			
-			$("#showTimeline").append(str);
+			$(data.list).each(function(){
+		          var html = template(this);
+		          placeHolder.append(html);
+		         check(this.bno);
+		    });
+			
 			$("#searchId").val(searchText);
 		});
 	} // end of listAll()
+
+/*	
+	/** 좋아요 체크 상태 확인*/
+	function check(bno) {
+		console.log("확인" + bno);
+		var bno = bno;
+		var userId = "${loginSession.userId}";
+		console.log("확인2: " + userId);
+		$.ajax({
+			type : 'get',
+			url : '/category/checkFavorite?bno=' + bno + '&userId=' + userId,
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "GET"
+			},
+			dataType : 'text',
+			success : function(result) {
+				console.log("좋아요 결과 : " + result);
+				if (result == "SUCCESS") {
+					//$("#img"+bno).attr("src", "/resources/images/like2.png");
+					//count();
+				}
+				if (result == "FAIL") {
+					//$("#img"+bno).attr("src", "/resources/images/like1.png");
+					//count();
+				}
+			}
+		});
+	} // end of check()
 	
-	// 전체 검색 버튼 클릭
-	$("#searchBtn").on("click",function(event){
-		var searchText = $("#searchId").val();
-		page = 1;
-		keywords = searchText;
-		$("#showTimeline").empty();
-		listAll(page,keywords);
-	});
 	
 	// 최초, 1페이지 뿌려줌
 	listAll(page,keywords);
@@ -74,7 +80,6 @@ $(document).ready(function(){
 	      listAll(page,keywords);
 	    }
 	});
-	
 	
 	
 });

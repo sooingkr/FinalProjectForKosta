@@ -13,18 +13,27 @@
     <link rel="stylesheet" href="/resources/css/exindex.css" />
     <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  	
+  	<!-- handlebars 추가 -->
+  	<script type="text/javascript" src="/resources/js/handlebars-v4.0.10.js"></script>
+  	
    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <!-- 합쳐지고 최소화된 최신 CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">	
 	<!-- 부가적인 테마 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css" />
+    <link rel="shortcut icon" href="/resources/images/favicon.ico" />
+  
+  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
    
-    <script type="text/javascript" src="/resources/js/timelineJS.js"></script>
+    <script type="text/javascript" src="/resources/js/timelineJS.js?ver=2"></script>
+    
+    
 <style>
 	ul {
 		list-style: none;
@@ -42,6 +51,117 @@ legend.scheduler-border {
     border: none;
     font-size: 14px;
 }
+
+<!-- 타임라인 스타일 추가 -->
+/* Variables */
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.6em;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+/* Layout */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Styling */
+.timeline {
+  margin: 4em auto;
+  position: relative;
+  max-width: 46em;
+}
+.timeline:before {
+  background-color: black;
+  content: '';
+  margin-left: -1px;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 2px;
+  height: 100%;
+}
+
+.timeline-event {
+  position: relative;
+}
+.timeline-event:hover .timeline-event-icon {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  background-color: #a83279;
+}
+.timeline-event:hover .timeline-event-thumbnail {
+  -moz-box-shadow: inset 40em 0 0 0 #a83279;
+  -webkit-box-shadow: inset 40em 0 0 0 #a83279;
+  box-shadow: inset 40em 0 0 0 #a83279;
+}
+
+.timeline-event-copy {
+  padding: 2em;
+  position: relative;
+  top: -1.875em;
+  left: 4em;
+  width: 80%;
+}
+.timeline-event-copy h3 {
+  font-size: 1.75em;
+}
+.timeline-event-copy h4 {
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
+}
+.timeline-event-copy strong {
+  font-weight: 700;
+}
+.timeline-event-copy p:not(.timeline-event-thumbnail) {
+  padding-bottom: 1.2em;
+}
+
+.timeline-event-icon {
+  -moz-transition: -moz-transform 0.2s ease-in;
+  -o-transition: -o-transform 0.2s ease-in;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  background-color: black;
+  outline: 10px solid white;
+  display: block;
+  margin: 0.5em 0.5em 0.5em -0.5em;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 1em;
+  height: 1em;
+}
+
+.timeline-event-thumbnail {
+  -moz-transition: box-shadow 0.5s ease-in 0.1s;
+  -o-transition: box-shadow 0.5s ease-in 0.1s;
+  -webkit-transition: box-shadow 0.5s ease-in;
+  -webkit-transition-delay: 0.1s;
+  transition: box-shadow 0.5s ease-in 0.1s;
+  color: white;
+  font-size: 0.9em;
+  background-color: black;
+  -moz-box-shadow: inset 0 0 0 0em #ef795a;
+  -webkit-box-shadow: inset 0 0 0 0em #ef795a;
+  box-shadow: inset 0 0 0 0em #ef795a;
+  display: inline-block;
+  margin-bottom: 1.2em;
+  padding: 0.25em 1em 0.2em 1em;
+}
+<!-- 타임라인 스타일 -->
 </style>
 </head>
 
@@ -211,15 +331,37 @@ legend.scheduler-border {
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Page Title</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat hendrerit feugiat. In cursus nisl id arcu ullamcorper, eget euismod ante tincidunt. Cras placerat facilisis semper. Nam vel nisl sit amet justo interdum luctus. Mauris eu felis pretium velit mollis molestie. Nam aliquet a tellus ut pretium. Pellentesque fermentum nulla tempus mauris sagittis, eget imperdiet quam tristique. Pellentesque quis mauris mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sodales turpis fringilla ligula rutrum, eget mattis justo bibendum. Integer imperdiet mi non cursus bibendum. Nullam vitae cursus justo. Integer quis elit sit amet arcu pellentesque <a href="http://www.google.com">google</a> sit amet a sapien. Aliquam tincidunt felis eget quam euismod cursus. Suspendisse lobortis ut elit vitae rhoncus. Ut tincidunt, ante eu egestas sodales, dui nulla aliquet mi, a eleifend lacus risus sit amet lacus.</p>
-            </div>
-            <div class="col-sm-12">
             	<h3><span class="glyphicon glyphicon-tasks" style="color: #CC723D;">&nbsp;Timeline</span></h3>
-				<p><ul id="showTimeline"></ul></p>
+				<ul id="showTimeline" class="timeline">
+				<script id="entry-template2" type="text/x-handlebars-template">	 
+						<li class="timeline-event">
+    					<label class="timeline-event-icon"></label>
+    					<div class="timeline-event-copy">
+					      <p class="timeline-event-thumbnail">{{dateVal bregdate}}</p>
+      						<br/>
+							<div class='label label-danger'>카테고리</div>
+							<span><b>{{cateName}}</b></span><br/>
+							<div class='label label-warning'>거리</div>
+							<span><b>{{distanceVal distance}}</b></span><br/>
+							<div class='label label-warning'>금액</div>
+							<span><b>{{value}} 원</b></span>
+							<h2><strong><a href="/board/category/detailContent?bno={{bno}}">{{btitle}}</a></strong></h2>
+							<i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
+							<span><b>{{userId}}</b></span>
+      						<p><strong>{{bcontent}}</strong><br></p><br/>
+							<hr/>
+							<button type="button" onclick="likeBtnClick({{bno}})" src="/resources/images/like1.png" style="border:0px;background-color:#ffffff;">
+								<img id="img{{bno}}" src="/resources/images/like1.png" style="width:15px;height:15px"/>
+							</button>
+    					</div>
+  						</li>
+				</script> 
+	  			</ul> 
+			<!--  	<p><ul id="showTimeline"></ul></p>  -->
             </div>
         </div>
     </div>
+
 
     <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

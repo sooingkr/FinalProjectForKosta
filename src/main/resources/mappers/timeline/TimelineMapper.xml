@@ -4,6 +4,7 @@
 
 <mapper namespace="timelineMapper">
 
+
 	<select id="listAll" resultType="int">
 		SELECT count(*)
 		FROM board

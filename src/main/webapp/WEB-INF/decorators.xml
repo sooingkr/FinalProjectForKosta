@@ -9,6 +9,7 @@
      <pattern>*login*</pattern>
      <pattern>*subscribe*</pattern>
      <pattern>*timeline*</pattern>
+     <pattern>*handlebarsTest*</pattern>
  </excludes>
 
  

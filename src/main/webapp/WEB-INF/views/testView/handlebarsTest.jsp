@@ -4,79 +4,240 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.offcanvas.css" />
+    <link rel="stylesheet" href="/resources/css/exindex.css" />
+    <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+   <!-- í•©ì³ì§€ê³  ìµœì†Œí™”ëœ ìµœì‹  ìë°”ìŠ¤í¬ë¦½íŠ¸ -->
+    <!-- í•©ì³ì§€ê³  ìµœì†Œí™”ëœ ìµœì‹  CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">	
+	<!-- ë¶€ê°€ì ì¸ í…Œë§ˆ -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css" />
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+   <!-- Responsive -->
+     <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"> 
+    <!-- PrettyPhoto -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/prettyPhoto.css">
+    <!-- Fancybox -->
+    <link href="/resources/css/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen">
+    <link rel="shortcut icon" href="/resources/images/favicon.ico" />
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+
 <!-- 
-handlebars js ¶óÀÌºê·¯¸® Ãß°¡
+handlebars js ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€
  -->
 <script type="text/javascript" src="/resources/js/handlebars-v4.0.10.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-3.2.1.min.js"></script>
 <title>Insert title here</title>
+<style>
+/* Variables */
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.6em;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+/* Layout */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Styling */
+.timeline {
+  margin: 4em auto;
+  position: relative;
+  max-width: 46em;
+}
+.timeline:before {
+  background-color: black;
+  content: '';
+  margin-left: -1px;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 2px;
+  height: 100%;
+}
+
+.timeline-event {
+  position: relative;
+}
+.timeline-event:hover .timeline-event-icon {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  background-color: #a83279;
+}
+.timeline-event:hover .timeline-event-thumbnail {
+  -moz-box-shadow: inset 40em 0 0 0 #a83279;
+  -webkit-box-shadow: inset 40em 0 0 0 #a83279;
+  box-shadow: inset 40em 0 0 0 #a83279;
+}
+
+.timeline-event-copy {
+  padding: 2em;
+  position: relative;
+  top: -1.875em;
+  left: 4em;
+  width: 80%;
+}
+.timeline-event-copy h3 {
+  font-size: 1.75em;
+}
+.timeline-event-copy h4 {
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
+}
+.timeline-event-copy strong {
+  font-weight: 700;
+}
+.timeline-event-copy p:not(.timeline-event-thumbnail) {
+  padding-bottom: 1.2em;
+}
+
+.timeline-event-icon {
+  -moz-transition: -moz-transform 0.2s ease-in;
+  -o-transition: -o-transform 0.2s ease-in;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  background-color: black;
+  outline: 10px solid white;
+  display: block;
+  margin: 0.5em 0.5em 0.5em -0.5em;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 1em;
+  height: 1em;
+}
+
+.timeline-event-thumbnail {
+  -moz-transition: box-shadow 0.5s ease-in 0.1s;
+  -o-transition: box-shadow 0.5s ease-in 0.1s;
+  -webkit-transition: box-shadow 0.5s ease-in;
+  -webkit-transition-delay: 0.1s;
+  transition: box-shadow 0.5s ease-in 0.1s;
+  color: white;
+  font-size: 0.9em;
+  background-color: black;
+  -moz-box-shadow: inset 0 0 0 0em #ef795a;
+  -webkit-box-shadow: inset 0 0 0 0em #ef795a;
+  box-shadow: inset 0 0 0 0em #ef795a;
+  display: inline-block;
+  margin-bottom: 1.2em;
+  padding: 0.25em 1em 0.2em 1em;
+}
+
+</style>
+
 </head>
 <body>
+
 	<!-- 
-		handlebars ÅÛÇÃ¸´ ÀÛ¼º
-		: script³»ºÎ¿¡ typeÀ» text/x-handlebars-X ½ÄÀ¸·Î ÀÛ¼ºÇÑ´Ù. XºÎºĞ¿¡´Â ÀÚ½ÅÀÌ ¿øÇÏ´Â ¸íÄªÀ» ³ÖÀ» ¼ö ÀÖ´Ù.
+		handlebars í…œí”Œë¦¿ ì‘ì„±
+		: scriptë‚´ë¶€ì— typeì„ text/x-handlebars-X ì‹ìœ¼ë¡œ ì‘ì„±í•œë‹¤. Xë¶€ë¶„ì—ëŠ” ìì‹ ì´ ì›í•˜ëŠ” ëª…ì¹­ì„ ë„£ì„ ìˆ˜ ìˆë‹¤.
 		ex) type="text/x-handlebars-myTemplate"
-		handlebarsÀÇ ¿äÁ¡)
-			1. handlebars´Â ÅÂ±×¸¦ ÀÌ¿ëÇÑ ÅÛÇÃ¸´À» ±¸¼ºÇÏ°í
-			2. ±× ÅÛÇÃ¸´¿¡ µé¾î°¥ µ¥ÀÌÅÍ¸¦ ±¸¼ºÇÏ°í
-			3. ¸¶Áö¸·À¸·Î µ¥ÀÌÅÍ¸¦ ÅÛÇÃ¸´¿¡ Àû¿ëÇÑ´Ù.
-			ÀÌ¶§, ÅÛÇÃ¸´¿¡ µ¥ÀÌÅÍ°¡ µé¾î°¥ ÀÚ¸®¿¡´Â {{ }} ÀÌ ¾È¿¡ º¯¼ö¸íÀ» Ç¥½ÃÇØÁÖ°Ô µÈ´Ù.
+		handlebarsì˜ ìš”ì )
+			1. handlebarsëŠ” íƒœê·¸ë¥¼ ì´ìš©í•œ í…œí”Œë¦¿ì„ êµ¬ì„±í•˜ê³ 
+			2. ê·¸ í…œí”Œë¦¿ì— ë“¤ì–´ê°ˆ ë°ì´í„°ë¥¼ êµ¬ì„±í•˜ê³ 
+			3. ë§ˆì§€ë§‰ìœ¼ë¡œ ë°ì´í„°ë¥¼ í…œí”Œë¦¿ì— ì ìš©í•œë‹¤.
+			ì´ë•Œ, í…œí”Œë¦¿ì— ë°ì´í„°ê°€ ë“¤ì–´ê°ˆ ìë¦¬ì—ëŠ” {{ }} ì´ ì•ˆì— ë³€ìˆ˜ëª…ì„ í‘œì‹œí•´ì£¼ê²Œ ëœë‹¤.
 			
-			¾Æ·¡ÀÇ ÅÛÇÃ¸´¿¡¼­ {{#users}} {{/users}} ºÎºĞÀº : users ¹è¿­°ú °°Àº °´Ã¼ÀÇ ±æÀÌ°¡ µé¾î¿Í ÇØ´ç ±æÀÌ¸¸Å­ ¹İº¹¹®À» µ¹°ÔµÈ´Ù.
-			¿¹¸¦µé¾î users={{name:'abc',id:'sooingkr'},{name:'ccc',id:'ddd'}}; ¶ó´Â users ¹è¿­ÀÌ ÀÖÀ¸¸é 2¹ø µ¹¸é¼­ Âï°ÔµÈ´Ù.
+			ì•„ë˜ì˜ í…œí”Œë¦¿ì—ì„œ {{#users}} {{/users}} ë¶€ë¶„ì€ : users ë°°ì—´ê³¼ ê°™ì€ ê°ì²´ì˜ ê¸¸ì´ê°€ ë“¤ì–´ì™€ í•´ë‹¹ ê¸¸ì´ë§Œí¼ ë°˜ë³µë¬¸ì„ ëŒê²Œëœë‹¤.
+			ì˜ˆë¥¼ë“¤ì–´ users={{name:'abc',id:'sooingkr'},{name:'ccc',id:'ddd'}}; ë¼ëŠ” users ë°°ì—´ì´ ìˆìœ¼ë©´ 2ë²ˆ ëŒë©´ì„œ ì°ê²Œëœë‹¤.
 			
-			{{#users}} {{/users}} ³»ºÎ¿¡ {{name}}, {{id}} ºÎºĞ¿¡´Â users ¹è¿­ÀÇ °¢ ÀÎµ¦½º°¡ °¡¸®Å°´Â º¯¼ö¸íÀ» ±âÀçÇØÁÖ¸é µÈ´Ù.
+			{{#users}} {{/users}} ë‚´ë¶€ì— {{name}}, {{id}} ë¶€ë¶„ì—ëŠ” users ë°°ì—´ì˜ ê° ì¸ë±ìŠ¤ê°€ ê°€ë¦¬í‚¤ëŠ” ë³€ìˆ˜ëª…ì„ ê¸°ì¬í•´ì£¼ë©´ ëœë‹¤.
 	 -->
-	<script id="entry-template" type="text/x-handlebars-template">
-	<table>
-    	<thead> 
-        	<th>ÀÌ¸§</th> 
-        	<th>¾ÆÀÌµğ</th> 
-        	<th>¸ŞÀÏÁÖ¼Ò</th> 
-    	</thead> 
-    	<tbody> 
-       	 	{{#users}} 
-       	 	<tr> 
-        	    <td>{{name}}</td> 
-            	<td>{{id}}</td> 
-            
-            {{!-- »ç¿ëÀÚ Á¤ÀÇ ÇïÆÛÀÎ email¿¡ id¸¦ ÀÎÀÚ·Î ³Ñ±ä´Ù --}}
-            	<td><a href="mailto:{{email id}}">{{email id}}</a></td> 
-        	</tr> 
-        	{{/users}} 
-    	</tbody> 
-	</table>
-	</script>
+	 
+	 
+<script id="entry-template2" type="text/x-handlebars-template">	 
+	<ul class="timeline">
+  <li class="timeline-event">
+    <label class="timeline-event-icon"></label>
+    <div class="timeline-event-copy">
+      <p class="timeline-event-thumbnail">April 2011 - heute</p>
+      <h3>Geil,Danke! GmbH</h3>
+      <h4>GeschÃ¤ftsfÃ¼hrerin eines Web-Studios</h4>
+      <p><strong>Schwerpunkt: Frontend-Entwicklung</strong><br>Entwickeln von anspruchsvollen, animierten, responsive und adaptive Webseiten mit HTML5, SCSS, jQuery; fuÌˆr alle Browser, optimiert fuÌˆr Desktop, Notebook, Smartphones und Tablets (iOS, Android, Windows).</p>
+      <p><strong>Projektmanagement mit Scrum</strong><br>StÃ¤ndiges Verbessern des agilen Entwicklungsprozesses beispielsweise durch Grunt, Yeoman, GIT, JIRA und BrowserStack.</p>
+    </div>
+  </li>
+  <li class="timeline-event">
+    <label class="timeline-event-icon"></label>
+    <div class="timeline-event-copy">
+      <p class="timeline-event-thumbnail">November 2009 - MÃ¤rz 2011</p>
+      <h3>Freelancer</h3>
+      <h4>Designer und Autor</h4>
+      <p>Konzeption, Design und Produktion von Digitalen Magazinen mit InDesign, der Adobe Digital Publishing Suite und HTML5. Co-Autorin der FachbuÌˆcher "Digitales Publizieren fuÌˆr Tablets" und "Adobe Digital Publishing Suite" erschienen im dpunkt.verlag.</p>
+    </div>
+  </li>
+  <li class="timeline-event">
+    <label class="timeline-event-icon"></label>
+    <div class="timeline-event-copy">
+      <p class="timeline-event-thumbnail">April 2011 - heute</p>
+      <h3>konplan gmbh</h3>
+      <h4>IT-Consultant</h4>
+      <p><strong>Systemarchitektur, Consulting</strong><br>Konzeption und Modellierung von Systemen und APIs fuÌˆr Digital Publishing und Entitlement nach SOA</p>
+    </div>
+  </li>
+</ul>  
+</script> 
+	 
+	 
+	
 	<script>
-		// [	handlebars Àû¿ëÇÏ±â	]
+		// [	handlebars ì ìš©í•˜ê¸°	]
 	
-		//ÇÚµé¹Ù ÅÛÇÃ¸´ °¡Á®¿Â´Ù.
-		var source = $("#entry-template").html(); 
+		//í•¸ë“¤ë°” í…œí”Œë¦¿ ê°€ì ¸ì˜¨ë‹¤.
+		var source = $("#entry-template2").html(); 
 	
-		//ÇÚµé¹Ù ÅÛÇÃ¸´ ÄÄÆÄÀÏ
+		//í•¸ë“¤ë°” í…œí”Œë¦¿ ì»´íŒŒì¼
 		var template = Handlebars.compile(source); 
 	
-		//ÇÚµé¹Ù ÅÛÇÃ¸´¿¡ ¹ÙÀÎµùÇÒ µ¥ÀÌÅÍ
+		//í•¸ë“¤ë°” í…œí”Œë¦¿ì— ë°”ì¸ë”©í•  ë°ì´í„°
 		var data = {
 		    	users: [
-		            { name: "È«±æµ¿1", id: "aaa1" },
-		            { name: "È«±æµ¿2", id: "aaa2" },
-		            { name: "È«±æµ¿3", id: "aaa3" },
-		            { name: "È«±æµ¿4", id: "aaa4" },
-		            { name: "È«±æµ¿5", id: "aaa5" }
+		            { name: "í™ê¸¸ë™1", id: "aaa1" },
+		            { name: "í™ê¸¸ë™2", id: "aaa2" },
+		            { name: "í™ê¸¸ë™3", id: "aaa3" },
+		            { name: "í™ê¸¸ë™4", id: "aaa4" },
+		            { name: "í™ê¸¸ë™5", id: "aaa5" }
 		        ]
 		}; 
 	
-		//Ä¿½ºÅÒ ÇïÆÛ µî·Ï (id¸¦ ÀÎÀÚ·Î ¹Ş¾Æ¼­ ÀüÃ¼ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ¹İÈ¯)
-		// À§¿¡¼­ {{email id}} ¿¡¼­ emailºÎºĞ¿¡ id¸¦ ÀÎÀÚ·Î ³Ñ±â°Ô µÇ´Â °Í!
-		// ±×·³ id@daum.netÀ» ¹İÈ¯ÇØ¼­ µé¾î°¡°Ô µÊ.
+		//ì»¤ìŠ¤í…€ í—¬í¼ ë“±ë¡ (idë¥¼ ì¸ìë¡œ ë°›ì•„ì„œ ì „ì²´ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë°˜í™˜)
+		// ìœ„ì—ì„œ {{email id}} ì—ì„œ emailë¶€ë¶„ì— idë¥¼ ì¸ìë¡œ ë„˜ê¸°ê²Œ ë˜ëŠ” ê²ƒ!
+		// ê·¸ëŸ¼ id@daum.netì„ ë°˜í™˜í•´ì„œ ë“¤ì–´ê°€ê²Œ ë¨.
 		Handlebars.registerHelper('email', function (id) {
 		  return id + "@daum.net";
 		});
 	
-		//ÇÚµé¹Ù ÅÛÇÃ¸´¿¡ µ¥ÀÌÅÍ¸¦ ¹ÙÀÎµùÇØ¼­ HTML »ı¼º
+		//í•¸ë“¤ë°” í…œí”Œë¦¿ì— ë°ì´í„°ë¥¼ ë°”ì¸ë”©í•´ì„œ HTML ìƒì„±
 		var html = template(data);
 	
-		//»ı¼ºµÈ HTMLÀ» DOM¿¡ ÁÖÀÔ
+		//ìƒì„±ëœ HTMLì„ DOMì— ì£¼ì…
 		$('body').append(html);
 	</script>
 </body>
