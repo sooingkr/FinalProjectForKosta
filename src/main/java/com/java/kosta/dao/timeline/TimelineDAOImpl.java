@@ -15,53 +15,51 @@ import com.java.kosta.dto.user.UserVO;
 
 @Repository
 public class TimelineDAOImpl implements TimelineDAO {
-	
-	@Inject
-	SqlSession sqlSession;
+   
+   @Inject
+   SqlSession sqlSession;
 
-	Logger logger = LoggerFactory.getLogger(TimelineDAOImpl.class);
-	
-	@Override
-	public List<TimelineDTO> listMatch(UserVO vo,PagingDTO pageMaker,String keywords) {
-		HashMap<String,Object> map = new HashMap<String, Object>();
-		map.put("UserVO", vo);
-		map.put("pageMaker", pageMaker);
-		map.put("keywords", keywords);
-		logger.info("dao에서 받은값 : " + keywords);
-		return sqlSession.selectList("timelineMapper.listMatch", map);
-	}
+   Logger logger = LoggerFactory.getLogger(TimelineDAOImpl.class);
+   
+   @Override
+   public List<TimelineDTO> listMatch(UserVO vo,PagingDTO pageMaker,String keywords) {
+      HashMap<String,Object> map = new HashMap<String, Object>();
+      map.put("UserVO", vo);
+      map.put("pageMaker", pageMaker);
+      map.put("keywords", keywords);
+      logger.info("dao에서 받은값 : " + keywords);
+      return sqlSession.selectList("timelineMapper.listMatch", map);
+   }
 
-	@Override
-	public int listAll() {
-		return sqlSession.selectOne("timelineMapper.listAll");
-	}
+   @Override
+   public int listAll() {
+      return sqlSession.selectOne("timelineMapper.listAll");
+   }
 
-	@Override
-	public int countTimeline(UserVO vo,String keywords) {
-		HashMap<String,Object> map = new HashMap<String, Object>();
-		map.put("UserVO", vo);
-		map.put("keywords", keywords);
-		return sqlSession.selectOne("timelineMapper.countTimeline", map);
-	}
-	
-	@Override
-	public int countFilterList(FilterDTO filter) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("FilterDTO", filter);
-		return sqlSession.selectOne("timelineMapper.countFilterList", map);
-	}
+   @Override
+   public int countTimeline(UserVO vo,String keywords) {
+      HashMap<String,Object> map = new HashMap<String, Object>();
+      map.put("UserVO", vo);
+      map.put("keywords", keywords);
+      return sqlSession.selectOne("timelineMapper.countTimeline", map);
+   }
+   
+   @Override
+   public int countFilterList(FilterDTO filter) {
+      return sqlSession.selectOne("timelineMapper.countFilterList", filter);
+   }
 
-	@Override
-	public List<TimelineDTO> listFilter(FilterDTO filter, PagingDTO pageMaker) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("FilterDTO", filter);
-		map.put("pageMaker", pageMaker);
-		return sqlSession.selectList("timelineMapper.listFilter", map);
-	}
+   @Override
+   public List<TimelineDTO> listFilter(FilterDTO filter, PagingDTO pageMaker) {
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("FilterDTO", filter);
+      map.put("pageMaker", pageMaker);
+      return sqlSession.selectList("timelineMapper.listFilter", map);
+   }
 
-	@Override
-	public int maxValue() {
-		return sqlSession.selectOne("timelineMapper.maxValue");
-	}
+   @Override
+   public int maxValue() {
+      return sqlSession.selectOne("timelineMapper.maxValue");
+   }
 
 }

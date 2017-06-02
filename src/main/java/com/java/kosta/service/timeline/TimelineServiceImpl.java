@@ -19,20 +19,20 @@ public class TimelineServiceImpl implements TimelineService {
 	TimelineDAO dao;
 
 	@Override
-	public List<TimelineDTO> listMatch(UserVO vo, PagingDTO pageMaker,String keywords) {
-		return dao.listMatch(vo, pageMaker,keywords);
+	public List<TimelineDTO> listMatch(UserVO vo, PagingDTO pageMaker, String keywords) {
+		return dao.listMatch(vo, pageMaker, keywords);
 	}
 
 	@Override
-	public int countTimeline(UserVO vo,String keywords) {
-		return dao.countTimeline(vo,keywords);
+	public int countTimeline(UserVO vo, String keywords) {
+		return dao.countTimeline(vo, keywords);
 	}
 
 	@Override
 	public int listAll() {
 		return dao.listAll();
 	}
-	
+
 	@Override
 	public int countFilterList(FilterDTO filter) {
 		return dao.countFilterList(filter);
@@ -47,6 +47,5 @@ public class TimelineServiceImpl implements TimelineService {
 	public int maxValue() {
 		return dao.maxValue();
 	}
-
 
 }
