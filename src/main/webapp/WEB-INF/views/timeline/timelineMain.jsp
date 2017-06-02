@@ -88,112 +88,119 @@
                 </div>
             </div>
         </nav>
-
-   <div class="col-sm-10 col-sm-offset-1">
-      <fieldset class="scheduler-border">
-         <legend class="scheduler-border">
-            <h4>
-               <span class="glyphicon glyphicon-check">&nbsp;검색조건&nbsp;</span>
-            </h4>
-         </legend>
-         <div class="control-group">
-            <div class="controls bootstrap-timepicker">
-               <div class="form-group" style="float: left; margin-left: 3%; width: 34%;">
-                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
-                     <label class="control-label">관심분야 </label> 
-                  </span>
-                  <br><br>
-                  <span class="input-group" style="margin-left: 4%;"> 
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId1" >유아/취미/완구
-                     </label> 
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId2" >뷰티/패션/잡화
-                     </label> 
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId3" >애완동물 용품
-                     </label> 
-                     <br /> <br /> 
-                     
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId4" >인테리어/주방/생활용품 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId5" >도서/음반 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId6" >지역 할인 쿠폰
-                     </label>
-                     
-                  </span>
-               </div>
-
-               <div class="form-group" style="float: left; margin-left: 3%; width: 40%;">
-                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
-                     <label class="control-label">지역</label> 
-                  </span>
-                  <br><br>
-                  <span class="input-group" style="margin-left: 4%;">
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">서울 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">부산 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">대구 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">인천 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">광주 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">대전 
-                     </label>
-                     <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" value="n">울산 
-                     </label>
-                        <br /><br /> 
-                        
-                     <label class="checkbox-inline">
-                        <input type="checkbox" name="checkbox" value="n">경기도
-                     </label>
-                     <label class="checkbox-inline">
-                        <input type="checkbox" name="checkbox" value="n">강원도
-                     </label>
-                     <label class="checkbox-inline">
-                        <input type="checkbox" name="checkbox" value="n">충청도 
-                     </label>
-                     <label class="checkbox-inline">
-                        <input type="checkbox" name="checkbox" value="n">전라도 
-                     </label>
-                     <label class="checkbox-inline">
-                        <input type="checkbox" name="checkbox" value="n">경상도
-                     </label>
-                     <label class="checkbox-inline">
-                        <input type="checkbox" name="checkbox" value="n">제주도 
-                     </label>                     
-                  </span>
-               </div>
-
-               <div class="form-group" style="margin: 1%;">
-                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
-                     <label class="control-label">상품가치 </label> 
-                  </span>
-                  <br><br>
-                  <div class="input-group">
-                        <input type="text" style="width: 30%;" id="fvalue1">원
-                        ~ 
-                        <input type="text" style="width: 30%;" id="fvalue2">원
-                     </div>
-               </div>
-            </div>
-         </div>
-         <input type="button" id="filterBtn" value="확인"/>
-      </fieldset>
-   </div>
+        
+        
+<div class="container">     
+        <div class="row">
+		   <div class="col-sm-12">
+		   <h3><span class="glyphicon glyphicon-tasks" style="color: #CC723D;">&nbsp;Timeline</span></h3>
+		   <br/><br/>
+		      <fieldset class="scheduler-border">
+		         <legend class="scheduler-border">
+		            <h4>
+		               <span class="glyphicon glyphicon-check">&nbsp;검색조건&nbsp;</span>
+		            </h4>
+		         </legend>
+		         <div class="control-group">
+		            <div class="controls bootstrap-timepicker">
+		               <div class="form-group" style="float: left; margin-left: 3%; width: 34%;">
+		                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
+		                     <label class="control-label">관심분야 </label> 
+		                  </span>
+		                  <br><br>
+		                  <span class="input-group" style="margin-left: 4%;"> 
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" id="cateId1" >유아/취미/완구
+		                     </label> 
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" id="cateId2" >뷰티/패션/잡화
+		                     </label> 
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" id="cateId3" >애완동물 용품
+		                     </label> 
+		                     <br /> <br /> 
+		                     
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" id="cateId4" >인테리어/주방/생활용품 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" id="cateId5" >도서/음반 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" id="cateId6" >지역 할인 쿠폰
+		                     </label>
+		                     
+		                  </span>
+		               </div>
+		
+		               <div class="form-group" style="float: left; margin-left: 3%; width: 40%;">
+		                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
+		                     <label class="control-label">지역</label> 
+		                  </span>
+		                  <br><br>
+		                  <span class="input-group" style="margin-left: 4%;">
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">서울 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">부산 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">대구 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">인천 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">광주 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">대전 
+		                     </label>
+		                     <label class="checkbox-inline"> 
+		                        <input type="checkbox" name="checkbox" value="n">울산 
+		                     </label>
+		                        <br /><br /> 
+		                        
+		                     <label class="checkbox-inline">
+		                        <input type="checkbox" name="checkbox" value="n">경기도
+		                     </label>
+		                     <label class="checkbox-inline">
+		                        <input type="checkbox" name="checkbox" value="n">강원도
+		                     </label>
+		                     <label class="checkbox-inline">
+		                        <input type="checkbox" name="checkbox" value="n">충청도 
+		                     </label>
+		                     <label class="checkbox-inline">
+		                        <input type="checkbox" name="checkbox" value="n">전라도 
+		                     </label>
+		                     <label class="checkbox-inline">
+		                        <input type="checkbox" name="checkbox" value="n">경상도
+		                     </label>
+		                     <label class="checkbox-inline">
+		                        <input type="checkbox" name="checkbox" value="n">제주도 
+		                     </label>                     
+		                  </span>
+		               </div>
+		
+		               <div class="form-group" style="margin: 1%;">
+		                  <span class="glyphicon glyphicon-hand-right" aria-hidden="true">
+		                     <label class="control-label">상품가치 </label> 
+		                  </span>
+		                  <br><br>
+		                  <div class="input-group">
+		                        <input type="text" style="width: 30%;" id="fvalue1">원
+		                        ~ 
+		                        <input type="text" style="width: 30%;" id="fvalue2">원
+		                     </div>
+		               </div>
+		            </div>
+		         </div>
+		         <input type="button" id="filterBtn" value="확인"/>
+		      </fieldset>
+		   </div>
+	  </div>
+  </div>
    
    
    </header>
@@ -349,8 +356,8 @@
     <!--  -->
  <div class="container">     
         <div class="row">
-            <div class="col-sm-12">
-               <h3><span class="glyphicon glyphicon-tasks" style="color: #CC723D;">&nbsp;Timeline</span></h3>
+            <div class="col-sm-12" style="border: solid 1px #DDD !important; margin-top: 3%;">
+               
             <ul id="showTimeline" class="timeline" style="width:60%;">
             <script id="entry-template2" type="text/x-handlebars-template">    
                   <li class="timeline-event">
