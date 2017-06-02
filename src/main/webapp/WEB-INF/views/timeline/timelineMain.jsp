@@ -105,7 +105,7 @@
                   <br><br>
                   <span class="input-group" style="margin-left: 4%;"> 
                      <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId1" >유아/취미/완구
+                        <input type="checkbox" name="checkbox" id="cateId1" >도서/음반
                      </label> 
                      <label class="checkbox-inline"> 
                         <input type="checkbox" name="checkbox" id="cateId2" >뷰티/패션/잡화
@@ -119,7 +119,7 @@
                         <input type="checkbox" name="checkbox" id="cateId4" >인테리어/주방/생활용품 
                      </label>
                      <label class="checkbox-inline"> 
-                        <input type="checkbox" name="checkbox" id="cateId5" >도서/음반 
+                        <input type="checkbox" name="checkbox" id="cateId5" >유아/취미/완구 
                      </label>
                      <label class="checkbox-inline"> 
                         <input type="checkbox" name="checkbox" id="cateId6" >지역 할인 쿠폰
