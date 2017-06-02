@@ -60,7 +60,7 @@ legend.scheduler-border {
                 <a id="welcome" href="/">Welcome</a>
                 <a id="team" href="/timeline">TimeLine</a>
                 <a id="portfolio" href="/categorySection">Category</a>
-                <a id="talktous" href="/noticeBoardSection?">Notice</a>
+                <a id="talktous" href="/noticeBoardSection?cateId=1&pageNo=1">Notice</a>
                 <a id="about" href="/aboutUsSection">About Us</a>
             </nav>
 

@@ -5,16 +5,17 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.java.kosta.common.Constants;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.board.CategoryDTO;
+import com.java.kosta.dto.user.UserVO;
 import com.java.kosta.service.board.BoardService;
 
 @Controller
@@ -24,30 +25,30 @@ public class NoticeBoardController {
    @Inject
    BoardService service;
    
-   /** 게시판 보기 */
-   @RequestMapping("/boardList")
-   public String noticeBoardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value="cateId") int cateId){
-      try {
-         // 전체 레코드 갯수 획득
-         int totRecord = service.selectBoardListTotalCount(pagingDTO, cateId);
-         // 페이징 계산
-         pagingDTO.calcPage(totRecord);
-
-         //받아온 cateId로 카테고리명 조회
-         CategoryDTO cateDTO = service.selectCategory(cateId);
-         model.addAttribute("cateDTO", cateDTO);
-         
-         // cateId에 해당하는 board 데이터 리스트로 가져와서 전달하기
-         List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
-         model.addAttribute("boardList", list);
-         model.addAttribute("pagingDTO", pagingDTO);
-      
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      
-      return "menu/notice/boardList";
-   }
+//   /** 게시판 보기 */
+//   @RequestMapping("/boardList")
+//   public String noticeBoardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value="cateId") int cateId){
+//      try {
+//         // 전체 레코드 갯수 획득
+//         int totRecord = service.selectBoardListTotalCount(pagingDTO, cateId);
+//         // 페이징 계산
+//         pagingDTO.calcPage(totRecord);
+//
+//         //받아온 cateId로 카테고리명 조회
+//         CategoryDTO cateDTO = service.selectCategory(cateId);
+//         model.addAttribute("cateDTO", cateDTO);
+//         
+//         // cateId에 해당하는 board 데이터 리스트로 가져와서 전달하기
+//         List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
+//         model.addAttribute("boardList", list);
+//         model.addAttribute("pagingDTO", pagingDTO);
+//      
+//      } catch (Exception e) {
+//         e.printStackTrace();
+//      }
+//      
+//      return "menu/notice/boardList";
+//   }
    
    /** 글작성 form */
    @RequestMapping("/writeBoardForm")
@@ -58,8 +59,8 @@ public class NoticeBoardController {
          CategoryDTO cateDTO = service.selectCategory(cateId);
          model.addAttribute("cateDTO", cateDTO);
          
-   //      UserVO loggedInUser= req.getSession().getAttribute();   //로그인 세션 가져오기
-   //      model.addAttribute("loggedInUser", loggedInUser);
+         UserVO loginSession= (UserVO) req.getSession().getAttribute(Constants.LOGINSESSION);   //로그인 세션 가져오기
+         model.addAttribute("loginSession", loginSession);
          
       }catch(Exception e){
          e.printStackTrace();
@@ -127,7 +128,7 @@ public class NoticeBoardController {
    
    /** 선택 게시글 수정 처리 */
    @RequestMapping("/updateContentProc")
-   public String updateContentProc(BoardDTO boardDTO, Model model){
+   public String updateContentProc(BoardDTO boardDTO, Model model, @RequestParam(value="pageNo")String pageNo){
       BoardDTO bDTO = null;
       try {
          // DB update
@@ -137,7 +138,7 @@ public class NoticeBoardController {
       } catch (Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/notice/boardList?cateId="+bDTO.getCateId();
+      return "redirect:/notice/boardList?cateId="+bDTO.getCateId()+"&pageNo="+pageNo;
    }
    
    /** 선택 게시글 삭제 처리 */
