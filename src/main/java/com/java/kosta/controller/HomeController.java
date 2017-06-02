@@ -31,11 +31,11 @@ public class HomeController {
    
    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
    
-   @RequestMapping(value = "/timeLineSection", method = RequestMethod.GET)
+   @RequestMapping(value = "/timelineSection", method = RequestMethod.GET)
    public String timeLineSection(Locale locale, Model model) {
       logger.info("timeLineSection Controller");
       
-      return "menu/timeLineSection";
+      return "timeline/timelineMain";
    }
    
    @RequestMapping(value = "/categorySection", method = RequestMethod.GET)

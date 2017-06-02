@@ -58,13 +58,13 @@
 				<table align="right">
 					<tr>
 						<td>
-							<button type="button" style="width:70px" onclick="location.href='/notice/updateContentForm?bNo=${boardDTO.bNo}'">글수정</button>
+							<button type="button" style="width:70px" onclick="location.href='/notice/updateContentForm?bNo=${boardDTO.bNo}&pageNo=${param.pageNo }'">글수정</button>
 						</td>
 						<td>
 							&nbsp;<button style="width:70px" type="button" onclick="deleteContent()">글삭제</button>
 						</td>
 						<td align="right">
-							&nbsp;<button type="button" style="width:70px" onclick="location.href='/notice/boardList?cateId=${cateDTO.cateId}'">목록</button>
+							&nbsp;<button type="button" style="width:70px" onclick="location.href='/notice/boardList?cateId=${cateDTO.cateId}&pageNo=${param.pageNo }'">목록</button>
 						</td>
 					</tr>
 				</table>

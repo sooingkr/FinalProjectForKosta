@@ -78,7 +78,7 @@
 					<c:forEach items="${boardList}" var="boardDTO" varStatus="status">
 						<tr style="text-align: center">
 							<td>${status.count }</td>
-							<td><a href="/notice/detailContent?bno=${boardDTO.bNo}">${boardDTO.bTitle }</a></td>
+							<td><a href="/notice/detailContent?bno=${boardDTO.bNo}&pageNo=${param.pageNo }">${boardDTO.bTitle }</a></td>
 							<td>${boardDTO.userId }</td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }"/></td>
 							<td><span class="badge" style="background-color: #BFC2C3;">${boardDTO.viewCnt}</span></td>
@@ -102,7 +102,7 @@
 						</c:if> <c:forEach var="i" begin="${pagingDTO.pageStartNo}" end="${pagingDTO.pageEndNo}">
 							<c:choose>
 								<c:when test="${pagingDTO.pageNo != i}">
-									<li><a href="/category/boardList?cateId=${cateDTO.cateId }&pageNo=${i}&searchType=${param.searchType}&searchText=${param.searchText}">${i}</a></li>
+									<li><a href="/notice/boardList?cateId=${cateDTO.cateId }&pageNo=${i}&searchType=${param.searchType}&searchText=${param.searchText}">${i}</a></li>
 								</c:when>
 								<c:otherwise> <li><a href="#" style="background-color: #085B86; color: white; font-weight: bold;">&nbsp;${i}&nbsp;</a></li> </c:otherwise>
 							</c:choose>
