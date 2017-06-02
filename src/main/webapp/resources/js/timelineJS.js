@@ -4,7 +4,6 @@ $(document).ready(function(){
 	var login;
 	var statueFilter = false; //필터를 적용했는지 확인하기 위한 전역변수
     var allData; // 필터조건을 controller에 넘겨주기 위한 전역변수
-	
     // 핸들바스 가져오기
     //핸들바 템플릿 가져온다.
 	var source = $("#entry-template2").html(); 
@@ -20,7 +19,6 @@ $(document).ready(function(){
     
     Handlebars.registerHelper('dateVal', function (dateVal) {
     	var d = new Date(dateVal);
-    	//var str = dateVal.getFullYear() +" " + (dateVal.getMonth()+1) + " " + dateVal.getDate();
     	var str = (d.getFullYear() + " " + (d.getMonth()+1) + " " + d.getDate());
     	return str;
     });
@@ -127,5 +125,13 @@ $(document).ready(function(){
 	            }); //ajax
 	         }//end of listFilter
 	
+	         $("#searchBtn").on("click",function(event){
+	             var searchText = $("#searchId").val();
+	             page = 1;
+	             keywords = searchText;
+	             $("#showTimeline").empty();
+	             listAll(page,keywords);
+	          });
+	         
 }); // end of ready()
 

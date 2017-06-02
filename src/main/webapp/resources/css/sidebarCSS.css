@@ -1,7 +1,139 @@
 @CHARSET "UTF-8";
 
-/** 타임라인 사이드바 추가 스타일 */
+ ul {
+      list-style: none;
+      padding-left: 0px;
+   }
+   
+   fieldset.scheduler-border {
+    border: solid 2px #DDD !important;
+    padding: 0 10px 10px 10px;
+    border-bottom: none;
+}
 
+legend.scheduler-border {
+    width: auto !important;
+    border: none;
+    font-size: 14px;
+}
+
+<!-- 타임라인 스타일 추가 -->
+/* Variables */
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.6em;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+/* Layout */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Styling */
+.timeline {
+  margin: 4em auto;
+  position: relative;
+  max-width: 46em;
+}
+.timeline:before {
+  background-color: black;
+  content: '';
+  margin-left: -1px;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 2px;
+  height: 100%;
+}
+
+.timeline-event {
+  position: relative;
+}
+.timeline-event:hover .timeline-event-icon {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  background-color: #a83279;
+}
+.timeline-event:hover .timeline-event-thumbnail {
+  -moz-box-shadow: inset 40em 0 0 0 #a83279;
+  -webkit-box-shadow: inset 40em 0 0 0 #a83279;
+  box-shadow: inset 40em 0 0 0 #a83279;
+}
+
+.timeline-event-copy {
+  padding: 2em;
+  position: relative;
+  top: -1.875em;
+  left: 4em;
+  width: 80%;
+}
+.timeline-event-copy h3 {
+  font-size: 1.75em;
+}
+.timeline-event-copy h4 {
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
+}
+.timeline-event-copy strong {
+  font-weight: 700;
+}
+.timeline-event-copy p:not(.timeline-event-thumbnail) {
+  padding-bottom: 1.2em;
+}
+
+.timeline-event-icon {
+  -moz-transition: -moz-transform 0.2s ease-in;
+  -o-transition: -o-transform 0.2s ease-in;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  background-color: black;
+  outline: 10px solid white;
+  display: block;
+  margin: 0.5em 0.5em 0.5em -0.5em;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 1em;
+  height: 1em;
+}
+
+.timeline-event-thumbnail {
+  -moz-transition: box-shadow 0.5s ease-in 0.1s;
+  -o-transition: box-shadow 0.5s ease-in 0.1s;
+  -webkit-transition: box-shadow 0.5s ease-in;
+  -webkit-transition-delay: 0.1s;
+  transition: box-shadow 0.5s ease-in 0.1s;
+  color: white;
+  font-size: 0.9em;
+  background-color: black;
+  -moz-box-shadow: inset 0 0 0 0em #ef795a;
+  -webkit-box-shadow: inset 0 0 0 0em #ef795a;
+  box-shadow: inset 0 0 0 0em #ef795a;
+  display: inline-block;
+  margin-bottom: 1.2em;
+  padding: 0.25em 1em 0.2em 1em;
+}
+<!-- 타임라인 스타일 -->
+
+
+
+
+
+
+<!-- 사이드바 스타일 -->
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -102,38 +234,30 @@ table {
   margin: 0 -1px;
 }
 
-/*
- * Copyright (c) 2012-2013 Thibaut Courouble
- * http://www.cssflow.com
- *
- * Licensed under the MIT License:
- * http://www.opensource.org/licenses/mit-license.php
- */
+
 body {
   font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
   color: #404040;
-  background: #2e5270;
 }
 
 a {
-  color: #5d79ae;
+  color: #2e5270 ;
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
 }
 
-.container {
-  margin: 50px auto;
-  width: 640px;
-}
 
 .app {
-  position: relative;
-  margin: 0 auto;
-  width: 320px;
+  position: fixed;
+  margin: 0 0 0 80%;
+  width:15%;
+  right:0px;
+  bottom:0px;
+  height: 50%;
   overflow: hidden;
-  background: #59afd2;
+  background: #fff ;
   border-radius: 3px;
   -webkit-box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.5);
@@ -166,28 +290,28 @@ a:hover {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #2f8aaf;
-  border-top: 1px solid #2a7a9b;
+  background: #a8e5d0 ;
+  border-top: 0px ;
   border-radius: 0 0 0 4px;
   -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.15);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.15);
 }
 .side .add:hover {
-  background: #3497bf;
-  border-color: #2f8aaf;
+  background: #94CFBB ;
+  border: 0px;
 }
 
 .tabs {
-  border-bottom: 1px solid #79bedb;
+  border-bottom: 1px solid #94CFBB;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 .tabs a {
-  border-top: 1px solid #79bedb;
+  border-top: 1px solid #94CFBB;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  border-bottom: 1px solid #3497bf;
+  border-bottom: 1px solid #94CFBB;
 }
 .tabs a:hover {
-  background: #79bedb;
+  background: #a8e5d0;
 }
 .tabs li:first-child a {
   border-top: 0;
@@ -195,7 +319,7 @@ a:hover {
 }
 .tabs .active a, .tabs a:active {
   z-index: 2;
-  background: #dee5f4;
+  background: #94CFBB;
   cursor: default;
 }
 .tabs .active a i, .tabs a:active i {
@@ -211,8 +335,8 @@ a:hover {
 .main {
   position: relative;
   margin-left: 35px;
-  background: #dee5f4;
-  border-left: 1px solid #2a7a9b;
+  background: #a8e5d0;
+  border-left: 1px solid #94CFBB ;
   border-radius: 0 3px 3px 0;
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
@@ -225,13 +349,9 @@ a:hover {
   font-size: 11px;
   color: #626c80;
   text-shadow: 0 1px rgba(255, 255, 255, 0.7);
-  background: #dee5f4;
-  border-top: 1px solid #e9eef8;
-  border-bottom: 1px solid #cbd6ee;
-  background-image: -webkit-linear-gradient(bottom left, #dee5f4 85%, #c7d3ec);
-  background-image: -moz-linear-gradient(bottom left, #dee5f4 85%, #c7d3ec);
-  background-image: -o-linear-gradient(bottom left, #dee5f4 85%, #c7d3ec);
-  background-image: linear-gradient(to top right, #dee5f4 85%, #c7d3ec);
+  background: #fff;
+  border-bottom: 1px solid #c9e8de;
+
   -webkit-transition: background 0.15s;
   -moz-transition: background 0.15s;
   -o-transition: background 0.15s;
@@ -250,7 +370,7 @@ a:hover {
   font-size: 10px;
 }
 .item time {
-  color: #92a9db;
+  color: #94CFBB ;
 }
 .item .avatar {
   display: block;
@@ -279,11 +399,11 @@ a:hover {
 }
 .item:hover {
   z-index: 2;
-  background: #cfd9ef;
-  border-color: #bfcdea;
+  background: #c9e8de ;
+  border-color: #c9e8de;
   cursor: pointer;
-  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.25), 0 1px #dae2f3, 0 -1px #dee5f4;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.25), 0 1px #dae2f3, 0 -1px #dee5f4;
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.25), 0 1px #c9e8de, 0 -1px #c9e8de;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.25), 0 1px #dae2f3, 0 -1px #c9e8de;
 }
 .item:active, .item.selected {
   z-index: 3;
@@ -302,7 +422,7 @@ a:hover {
   left: 35px;
 }
 
-[class*="icon-"] {
+.icon2 {
   display: block;
   width: 20px;
   height: 20px;
@@ -332,3 +452,4 @@ a:hover {
 .icon-plus {
   background-position: -80px 0;
 }
+

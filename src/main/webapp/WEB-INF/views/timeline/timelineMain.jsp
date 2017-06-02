@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="/resources/css/exindex.css" />
     <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  	
-  	<!-- handlebars 추가 -->
-  	<script type="text/javascript" src="/resources/js/handlebars-v4.0.10.js"></script>
-  	
+     
+     <!-- handlebars 추가 -->
+     <script type="text/javascript" src="/resources/js/handlebars-v4.0.10.js"></script>
+     
    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <!-- 합쳐지고 최소화된 최신 CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">	
-	<!-- 부가적인 테마 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">   
+   <!-- 부가적인 테마 -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css" />
     <link rel="shortcut icon" href="/resources/images/favicon.ico" />
@@ -33,136 +33,7 @@
    
     <script type="text/javascript" src="/resources/js/timelineJS.js?ver=2"></script>
     
-    
-<style>
-	ul {
-		list-style: none;
-		padding-left: 0px;
-	}
-	
-	fieldset.scheduler-border {
-    border: solid 2px #DDD !important;
-    padding: 0 10px 10px 10px;
-    border-bottom: none;
-}
-
-legend.scheduler-border {
-    width: auto !important;
-    border: none;
-    font-size: 14px;
-}
-
-<!-- 타임라인 스타일 추가 -->
-/* Variables */
-/* Fonts */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);
-body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 1.6em;
-  font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: 0.05em;
-}
-
-/* Layout */
-* {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-/* Styling */
-.timeline {
-  margin: 4em auto;
-  position: relative;
-  max-width: 46em;
-}
-.timeline:before {
-  background-color: black;
-  content: '';
-  margin-left: -1px;
-  position: absolute;
-  top: 0;
-  left: 2em;
-  width: 2px;
-  height: 100%;
-}
-
-.timeline-event {
-  position: relative;
-}
-.timeline-event:hover .timeline-event-icon {
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  background-color: #a83279;
-}
-.timeline-event:hover .timeline-event-thumbnail {
-  -moz-box-shadow: inset 40em 0 0 0 #a83279;
-  -webkit-box-shadow: inset 40em 0 0 0 #a83279;
-  box-shadow: inset 40em 0 0 0 #a83279;
-}
-
-.timeline-event-copy {
-  padding: 2em;
-  position: relative;
-  top: -1.875em;
-  left: 4em;
-  width: 80%;
-}
-.timeline-event-copy h3 {
-  font-size: 1.75em;
-}
-.timeline-event-copy h4 {
-  font-size: 1.2em;
-  margin-bottom: 1.2em;
-}
-.timeline-event-copy strong {
-  font-weight: 700;
-}
-.timeline-event-copy p:not(.timeline-event-thumbnail) {
-  padding-bottom: 1.2em;
-}
-
-.timeline-event-icon {
-  -moz-transition: -moz-transform 0.2s ease-in;
-  -o-transition: -o-transform 0.2s ease-in;
-  -webkit-transition: -webkit-transform 0.2s ease-in;
-  transition: transform 0.2s ease-in;
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  background-color: black;
-  outline: 10px solid white;
-  display: block;
-  margin: 0.5em 0.5em 0.5em -0.5em;
-  position: absolute;
-  top: 0;
-  left: 2em;
-  width: 1em;
-  height: 1em;
-}
-
-.timeline-event-thumbnail {
-  -moz-transition: box-shadow 0.5s ease-in 0.1s;
-  -o-transition: box-shadow 0.5s ease-in 0.1s;
-  -webkit-transition: box-shadow 0.5s ease-in;
-  -webkit-transition-delay: 0.1s;
-  transition: box-shadow 0.5s ease-in 0.1s;
-  color: white;
-  font-size: 0.9em;
-  background-color: black;
-  -moz-box-shadow: inset 0 0 0 0em #ef795a;
-  -webkit-box-shadow: inset 0 0 0 0em #ef795a;
-  box-shadow: inset 0 0 0 0em #ef795a;
-  display: inline-block;
-  margin-bottom: 1.2em;
-  padding: 0.25em 1em 0.2em 1em;
-}
-<!-- 타임라인 스타일 -->
-</style>
+    <link rel="stylesheet" href="/resources/css/sidebarCSS.css" />
 </head>
 
 <body>
@@ -218,7 +89,7 @@ body {
             </div>
         </nav>
 
-	<div class="col-sm-10 col-sm-offset-1">
+   <div class="col-sm-10 col-sm-offset-1">
       <fieldset class="scheduler-border">
          <legend class="scheduler-border">
             <h4>
@@ -325,40 +196,191 @@ body {
    </div>
    
    
-	</header>
-    <div class="container">
+   </header>
+
+  
+    <!-- 사이드바 추가 -->
+     <section class="app">
+            <aside class="side">
+                <ul class="tabs">
+                    <li><a href="index.html"><i class="icon-dribbble icon2"></i> Dribbble</a></li>
+                    
+                    
+                    <li class="active"><a href="index.html"><i class="icon-twitter icon2"></i> Twitter</a></li>
+                    
+                    
+                    <li><a href="index.html"><i class="icon-rss icon2"></i> RSS</a></li>
+                    
+                    
+                    <li><a href="index.html"><i class="icon-facebook icon2"></i> Facebook</a></li>
+                </ul>
+                <a href="index.html" class="add"><i class="icon-plus icon2"></i> Add</a>
+            </aside>
+
+            <section class="main">
+                <article class="item">
+                    <p>혜연바보</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic1.png"></a>
+                        <a href="index.html">@한혜연</a>
+                        <time datetime="2012-04-05T10:30:21+00:00" pubdate>4 minutes ago</time>
+                    </footer>
+                </article>
+                <article class="item">
+                    <p>주희는 진짜로 천재같다..</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic3.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:26:27+00:00" pubdate>8 minutes ago</time>
+                    </footer>
+                </article>
+                <article class="item">
+                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic2.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:15:45+00:00" pubdate>15 minutes ago</time>
+                    </footer>
+                </article>
+                <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article>
+                <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article>
+                <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article>
+                <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article> <article class="item">
+                    <p>Praesent arcu in mauris bibendum id ornare tortor scelerisque.</p>
+                    <footer>
+                        <a href="index.html" class="avatar"><img src="resources/images/pic4.png"></a>
+                        <a href="index.html">@someone</a>
+                        <time datetime="2012-04-05T10:14:01+00:00" pubdate>16 minutes ago</time>
+                    </footer>
+                </article>
+            </section>
+    </section>
+    <!--  -->
+ <div class="container">     
         <div class="row">
             <div class="col-sm-12">
-            	<h3><span class="glyphicon glyphicon-tasks" style="color: #CC723D;">&nbsp;Timeline</span></h3>
-				<ul id="showTimeline" class="timeline">
-				<script id="entry-template2" type="text/x-handlebars-template">	 
-						<li class="timeline-event">
-    					<label class="timeline-event-icon"></label>
-    					<div class="timeline-event-copy">
-					      <p class="timeline-event-thumbnail">{{dateVal bregdate}}</p>
-      						<br/>
-							<div class='label label-danger'>카테고리</div>
-							<span><b>{{cateName}}</b></span><br/>
-							<div class='label label-warning'>거리</div>
-							<span><b>{{distanceVal distance}}</b></span><br/>
-							<div class='label label-warning'>금액</div>
-							<span><b>{{value}} 원</b></span>
-							<h2><strong><a href="/board/category/detailContent?bno={{bno}}">{{btitle}}</a></strong></h2>
-							<i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
-							<span><b>{{userId}}</b></span>
-      						<p><strong><pre style="background:#ffffff;border:0px;">{{bcontent}}</pre></strong><br></p><br/>
-							<hr/>
-							<button type="button" onclick="likeBtnClick({{bno}})" src="/resources/images/like1.png" style="border:0px;background-color:#ffffff;">
-								<img id="img{{bno}}" src="/resources/images/like1.png" style="width:15px;height:15px"/>
-							</button>
-    					</div>
-  						</li>
-				</script> 
-	  			</ul> 
-			<!--  	<p><ul id="showTimeline"></ul></p>  -->
+               <h3><span class="glyphicon glyphicon-tasks" style="color: #CC723D;">&nbsp;Timeline</span></h3>
+            <ul id="showTimeline" class="timeline" style="width:60%;">
+            <script id="entry-template2" type="text/x-handlebars-template">    
+                  <li class="timeline-event">
+                   <label class="timeline-event-icon"></label>
+                   <div class="timeline-event-copy">
+                     <p class="timeline-event-thumbnail">{{dateVal bregdate}}</p>
+                        <br/>
+                     <div class='label label-danger'>카테고리</div>
+                     <span><b>{{cateName}}</b></span><br/>
+                     <div class='label label-warning'>거리</div>
+                     <span><b>{{distanceVal distance}}</b></span><br/>
+                     <div class='label label-warning'>금액</div>
+                     <span><b>{{value}} 원</b></span>
+                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}">{{btitle}}</a></strong></h2>
+                     <i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
+                     <span><b>{{userId}}</b></span>
+                        <p><strong><pre style="background:#ffffff;border:0px;">{{bcontent}}</pre></strong><br></p><br/>
+                     <hr/>
+                     <button type="button" onclick="likeBtnClick({{bno}})" src="/resources/images/like1.png" style="border:0px;background-color:#ffffff;">
+                        <img id="img{{bno}}" src="/resources/images/like1.png" style="width:15px;height:15px"/>
+                     </button>
+                   </div>
+                    </li>
+            </script> 
+              </ul> 
+         <!--     <p><ul id="showTimeline"></ul></p>  -->
             </div>
         </div>
-    </div>
+   </div>
+   
 
 
     <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
