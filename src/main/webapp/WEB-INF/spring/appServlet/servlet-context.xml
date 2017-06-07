@@ -40,6 +40,7 @@
 			<exclude-mapping path="/board/category/boardList"/> <!-- 전체 게시글은 읽을 수 있어야함으로 예외로 등록... -->
 			<exclude-mapping path="/categorySection"/>
 			<exclude-mapping path="/address/*"/> <!-- 네이버 주소->위도경도 변환용 예외처리 -->
+			<exclude-mapping path="/handlebarsTest"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

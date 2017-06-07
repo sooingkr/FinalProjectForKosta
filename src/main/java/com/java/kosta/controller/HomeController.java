@@ -7,6 +7,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.CategoryDTO;
@@ -86,6 +89,22 @@ public class HomeController {
 	   return "testView/handlebarsTest";
    }
    
-   
-   
+/*
+ * 안드로이드 연동 연습용(테스트 코드)
+   @RequestMapping(value="/simpleTest",method=RequestMethod.POST,produces="application/json;charset=utf-8")
+   public @ResponseBody JSONObject me() throws Exception{
+	   
+	   JSONObject objMain = new JSONObject();
+	   List<BoardDTO> list = service.selectBoardList(null, 0);
+	   JSONArray jr = new JSONArray();
+	   for(int i=0; i<list.size(); i++){
+		   JSONObject obj = new JSONObject();
+		   BoardDTO dto = list.get(i);
+		   obj.put("bcontent", dto.getbContent());
+		   obj.put("bno", dto.getbNo());
+		   jr.add(i,obj);
+	   }
+	   objMain.put("sendData", jr);
+	   return objMain;
+   }*/
 }
