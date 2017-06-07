@@ -20,7 +20,6 @@
 <script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/json2.js"></script>
-<script type="text/javascript" src="/resources/sockjs.min.js"></script>
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
