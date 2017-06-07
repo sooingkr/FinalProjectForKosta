@@ -17,7 +17,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 <script type="text/javascript" src="/resources/sockjs.min.js"/>
-<script src="/resources/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/json2.js"></script>
 <script type="text/javascript" src="/resources/sockjs.min.js"></script>

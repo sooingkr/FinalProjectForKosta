@@ -47,13 +47,12 @@
 	<bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory"> 
 	    <constructor-arg value="657001653099-sv5ja1o8jp4omoannt4jvogi6bjgi8fs.apps.googleusercontent.com" />
 	     <constructor-arg value="Dz_jcxJTpqKMxExy8v3CmoKM" /> 
-	     </bean> 
-	     <bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
-	         <property name="scope" value="https://www.googleapis.com/auth/plus.login 
-               https://www.googleapis.com/auth/userinfo.email"/>
-	           <property name="redirectUri" value="http://localhost:8080/callback"/> 
-	      </bean>
-	
+    </bean> 
+    <bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="https://www.googleapis.com/auth/plus.login 
+             https://www.googleapis.com/auth/userinfo.email"/>
+          <property name="redirectUri" value="http://localhost:8080/callback"/> 
+     </bean>
 	
 
 </beans>

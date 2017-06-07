@@ -3,11 +3,11 @@ package com.java.kosta.dao.board;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
+import com.java.kosta.dto.board.BoardAttachDTO;
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.CategoryDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.board.CategoryDTO;
 
 public interface BoardDAO {
 	
@@ -57,15 +57,13 @@ public interface BoardDAO {
 	public int countFavorite(String bNo);
 	
 	/** 파일 삽입 */
-	public void addAttach( String bNo, @Param("fullName") String fullName);
+	public void addAttach(BoardAttachDTO boardAttachDTO);
 	
 	/** 파일 리스트 가져오기*/
-	public List<String> selectAttach(String bNo);
+	public List<BoardAttachDTO> selectAttach(String bNo);
 	
 	/** 파일 테이블 삭제 */
 	public void deleteAttach(String bNo);
 	
-	/** 게시글 수정시 파일 업로드 수정 */
-//	public void updateAttach(String bNo, String fullName);
 	
 }

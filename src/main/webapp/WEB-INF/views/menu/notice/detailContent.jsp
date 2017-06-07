@@ -78,7 +78,7 @@
 			//게시글 삭제 버튼 클릭시
 			function deleteContent(){
 				if(confirm("정말 삭제하시겠습니까?")){
-					location.href="/notice/deleteContentProc?bno=${boardDTO.bNo}&cateId=${cateDTO.cateId}";
+					location.href="/notice/deleteContentProc?bno=${boardDTO.bNo}&cateId=${cateDTO.cateId}&pageNo=${param.pageNo}";
 				}else{
 					return;
 				} 

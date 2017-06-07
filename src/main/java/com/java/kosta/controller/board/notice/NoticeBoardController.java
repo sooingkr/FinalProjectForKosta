@@ -25,30 +25,30 @@ public class NoticeBoardController {
    @Inject
    BoardService service;
    
-//   /** 게시판 보기 */
-//   @RequestMapping("/boardList")
-//   public String noticeBoardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value="cateId") int cateId){
-//      try {
-//         // 전체 레코드 갯수 획득
-//         int totRecord = service.selectBoardListTotalCount(pagingDTO, cateId);
-//         // 페이징 계산
-//         pagingDTO.calcPage(totRecord);
-//
-//         //받아온 cateId로 카테고리명 조회
-//         CategoryDTO cateDTO = service.selectCategory(cateId);
-//         model.addAttribute("cateDTO", cateDTO);
-//         
-//         // cateId에 해당하는 board 데이터 리스트로 가져와서 전달하기
-//         List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
-//         model.addAttribute("boardList", list);
-//         model.addAttribute("pagingDTO", pagingDTO);
-//      
-//      } catch (Exception e) {
-//         e.printStackTrace();
-//      }
-//      
-//      return "menu/notice/boardList";
-//   }
+   /** 게시판 보기 */
+   @RequestMapping("/boardList")
+   public String noticeBoardList(BoardPagingDTO pagingDTO, Model model, @RequestParam(value="cateId") int cateId){
+      try {
+         // 전체 레코드 갯수 획득
+         int totRecord = service.selectBoardListTotalCount(pagingDTO, cateId);
+         // 페이징 계산
+         pagingDTO.calcPage(totRecord);
+
+         //받아온 cateId로 카테고리명 조회
+         CategoryDTO cateDTO = service.selectCategory(cateId);
+         model.addAttribute("cateDTO", cateDTO);
+         
+         // cateId에 해당하는 board 데이터 리스트로 가져와서 전달하기
+         List<BoardDTO> list = service.selectBoardList(pagingDTO, cateId);
+         model.addAttribute("boardList", list);
+         model.addAttribute("pagingDTO", pagingDTO);
+      
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      
+      return "menu/notice/boardList";
+   }
    
    /** 글작성 form */
    @RequestMapping("/writeBoardForm")
@@ -143,7 +143,8 @@ public class NoticeBoardController {
    
    /** 선택 게시글 삭제 처리 */
    @RequestMapping("/deleteContentProc")
-   public String deleteContentProc(@RequestParam(value="bno") String bNo, @RequestParam(value="cateId")int cateId, Model model){
+   public String deleteContentProc(@RequestParam(value="bno") String bNo, @RequestParam(value="cateId")int cateId
+		   , @RequestParam(value="pageNo")String pageNo, Model model){
       try {
 
          // 댓글 table의 bno에 해당하는 댓글들 모두 삭제
@@ -154,6 +155,6 @@ public class NoticeBoardController {
       } catch (Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/notice/boardList?cateId="+cateId;
+      return "redirect:/notice/boardList?cateId="+cateId+"&pagNo="+pageNo;
    }
 }

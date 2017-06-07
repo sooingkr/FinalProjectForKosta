@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.java.kosta.dto.board.BoardAttachDTO;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.board.CategoryDTO;
@@ -106,15 +107,12 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public void addAttach(String bNo, String fullName) {
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("bNo", bNo);
-		map.put("fullName", fullName);
-		sqlSession.insert(NameSpace + ".addAttach", map);
+	public void addAttach(BoardAttachDTO boardAttachDTO) {
+		sqlSession.insert(NameSpace + ".addAttach", boardAttachDTO);
 	}
 
 	@Override
-	public List<String> selectAttach(String bNo) {
+	public List<BoardAttachDTO> selectAttach(String bNo) {
 		return sqlSession.selectList(NameSpace + ".selectAttach", bNo);
 	}
 

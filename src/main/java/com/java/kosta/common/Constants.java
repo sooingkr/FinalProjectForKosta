@@ -17,6 +17,9 @@ public class Constants {
    public static final String RESULT_OK = "ok";
    public static final String RESULT_FAIL = "fail";
    
-   /** 파일 타입이 게시판에 저장되는 형식일 경우 사용됨 */
-   public static final String FILE_TYPE_BOARD = "1";
+   /** 파일타입이 게시판에 저장되는 형식일 경우 사용됨 */
+	public static final String FILE_TYPE_BOARD = "1";
+	
+	/** 이미지 타입이 게시판에 저장되는 형식일 경우 사용됨 */
+	public static final String IMG_TYPE_BOARD = "2";
 }
