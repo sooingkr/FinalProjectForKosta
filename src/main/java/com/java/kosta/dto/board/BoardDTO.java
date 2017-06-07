@@ -16,16 +16,60 @@ public class BoardDTO {
 	private String lat; // 위도
 	private String lon; // 경도
 	
-	private String[] files;	// 파일 업로드 배열
+	private String imgPath[];
+	private String imgOriginName[];
+	private String imgSize[];
+	
+	private String filePath[];
+	private String fileOriginName[];
+	private String fileSize[];
+	
+//	private String[] files;	// 파일 업로드 배열
 	
 	
-	public String[] getFiles() {
+	public String[] getImgPath() {
+		return imgPath;
+	}
+	public String[] getImgOriginName() {
+		return imgOriginName;
+	}
+	public String[] getImgSize() {
+		return imgSize;
+	}
+	public String[] getFilePath() {
+		return filePath;
+	}
+	public String[] getFileOriginName() {
+		return fileOriginName;
+	}
+	public String[] getFileSize() {
+		return fileSize;
+	}
+	public void setImgPath(String[] imgPath) {
+		this.imgPath = imgPath;
+	}
+	public void setImgOriginName(String[] imgOriginName) {
+		this.imgOriginName = imgOriginName;
+	}
+	public void setImgSize(String[] imgSize) {
+		this.imgSize = imgSize;
+	}
+	public void setFilePath(String[] filePath) {
+		this.filePath = filePath;
+	}
+	public void setFileOriginName(String[] fileOriginName) {
+		this.fileOriginName = fileOriginName;
+	}
+	public void setFileSize(String[] fileSize) {
+		this.fileSize = fileSize;
+	}
+	/*public String[] getFiles() {
 		return files;
 	}
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
-	
+	*/
 	public String getLat() {
 		return lat;
 	}

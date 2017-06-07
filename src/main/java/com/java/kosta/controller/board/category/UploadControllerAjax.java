@@ -1,4 +1,4 @@
-package com.java.kosta.controller.board.category;
+/*package com.java.kosta.controller.board.category;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +42,7 @@ public class UploadControllerAjax {
 	}
 	
 	
-	/** 파일 화면에 표시하기 */
+	*//** 파일 화면에 표시하기 *//*
 	@RequestMapping(value="/displayFile")
 	@ResponseBody
 	public ResponseEntity<byte[]> displayFile(String fileName) throws IOException{
@@ -81,7 +81,7 @@ public class UploadControllerAjax {
 	}
 	
 	
-	/** 이미지 파일 삭제(썸네일에서 X 표시 눌렀을 때) */
+	*//** 이미지 파일 삭제(썸네일에서 X 표시 눌렀을 때) *//*
 	@RequestMapping(value="/deleteFile")
 	@ResponseBody
 	public String deleteFile(String fileName){
@@ -102,3 +102,4 @@ public class UploadControllerAjax {
 		return "deleted";
 	}
 }
+*/

@@ -2,6 +2,7 @@ package com.java.kosta.service.board;
 
 import java.util.List;
 
+import com.java.kosta.dto.board.BoardAttachDTO;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.board.CategoryDTO;
@@ -59,14 +60,17 @@ public interface BoardService {
 	
 	
 	/** 게시글 + 파일 삽입  */
-	public void insertBoardAttach(BoardDTO boardDTO) throws Exception;
+//	public void insertBoardAttach(BoardDTO boardDTO) throws Exception;
 	
 	/** 파일 리스트 가져오기 */
-	public List<String> selectAttach(String bNo) throws Exception;
+	public List<BoardAttachDTO> selectAttach(String bNo) throws Exception;
 	
 	/** 해당 게시글 파일 삭제 */
 	public void deleteBoardAttach(String bNo) throws Exception;
 	
-	/** 게시글 수정 시 파일 테이블 수정 */
-//	public void updateBoardAttach(BoardDTO boardDTO) throws Exception; 
+	/** 다음에디터 이용한 게시글 삽입 처리 */
+	public void insertBoardDaumAttach(BoardDTO boardDTO) throws Exception;
+	
+	/** 다음에디터 이용한 게시글 수정 처리*/
+	public void updateBoardDaumAttach(BoardDTO boardDTO) throws Exception;
 }

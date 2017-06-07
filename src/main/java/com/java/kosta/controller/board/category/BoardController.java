@@ -1,6 +1,8 @@
 package com.java.kosta.controller.board.category;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.kosta.common.Constants;
+import com.java.kosta.dto.board.BoardAttachDTO;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.board.CategoryDTO;
@@ -30,8 +33,8 @@ public class BoardController {
 	@Inject
 	BoardServiceImpl service;
 
-	@Resource(name = "uploadPath")
-	private String uploadPath;
+//	@Resource(name = "uploadPath")
+//	private String uploadPath;
 
 	// 한글을 넘기기 때문에 produces 를 기술해서 인코딩을 해서 넘겨주었다. 기술안하면 ajax에서 받았을 때 ???로 깨짐!
 	@RequestMapping(value="/board/category/getAddr",method=RequestMethod.POST,produces = "application/text; charset=utf8")
@@ -40,6 +43,11 @@ public class BoardController {
 		String address = service.getAddr(userId);
 		logger.info("얻어온 주소 : " + address);
 		return address;
+	}
+	
+	@RequestMapping(value="/testEditor")
+	public String testEditor(){
+		return "/board/category/testEditor";
 	}
 	
 	/** 게시판 보기 */
@@ -87,21 +95,44 @@ public class BoardController {
 	}
 
 	/** 글작성 처리 insert */
+//	@RequestMapping(value = "/writeBoardProc", method = RequestMethod.POST)
+//	public String writePetProc(BoardDTO boardDTO, RedirectAttributes redir) {
+//
+//		try {
+//			// 게시글 및 파일 테이블에 삽입
+//			service.insertBoardAttach(boardDTO);
+//
+//			redir.addAttribute("result", "ok");
+//
+//		} catch (Exception e) {
+//			redir.addAttribute("result", "fail");
+//			e.printStackTrace();
+//		}
+//
+//		return "redirect:/board/category/boardList?cateId=" + boardDTO.getCateId();
+//	}
+	
+	/** 글작성 처리 insert */
 	@RequestMapping(value = "/writeBoardProc", method = RequestMethod.POST)
-	public String writePetProc(BoardDTO boardDTO, RedirectAttributes redir) {
+	@ResponseBody
+	public Map<String,Object> writeBoardProc(BoardDTO boardDTO) {
 
+		Map<String,Object> resMap = new HashMap<String, Object>();
+		
 		try {
 			// 게시글 및 파일 테이블에 삽입
-			service.insertBoardAttach(boardDTO);
+//			service.insertBoardAttach(boardDTO);
+			
+			service.insertBoardDaumAttach(boardDTO);
 
-			redir.addAttribute("result", "ok");
-
+			resMap.put(Constants.RESULT, Constants.RESULT_OK);
+			resMap.put("bNo", boardDTO.getbNo());
 		} catch (Exception e) {
-			redir.addAttribute("result", "fail");
+			resMap.put(Constants.RESULT, Constants.RESULT_FAIL);
 			e.printStackTrace();
 		}
 
-		return "redirect:/board/category/boardList?cateId=" + boardDTO.getCateId();
+		return resMap;
 	}
 
 	/** 선택 게시글 상세 보기 */
@@ -126,8 +157,8 @@ public class BoardController {
 			System.out.println(loginSession.getUserId());
 
 			// 선택 게시글의 업로드 파일 리스트 가져오기
-			List<String> fileList = service.selectAttach(bNo);
-			model.addAttribute("fileList", fileList); // 해당 게시물의 파일 리스트 넘기기
+			List<BoardAttachDTO> baList = service.selectAttach(bNo);
+			model.addAttribute("baList", baList); // 해당 게시물의 파일 리스트 넘기기
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,8 +176,8 @@ public class BoardController {
 			model.addAttribute("boardDTO", dto);
 			
 			//게시글의 업로드 파일리스트 가져오기
-			List<String> fileList = service.selectAttach(boardDTO.getbNo());
-			model.addAttribute("fileList", fileList); // 해당 게시물의 파일 리스트 넘기기
+			List<BoardAttachDTO> baList = service.selectAttach(boardDTO.getbNo());
+			model.addAttribute("baList", baList); // 해당 게시물의 파일 리스트 넘기기
 
 			// 카테고리 조회
 			CategoryDTO cateDTO = service.selectCategory(dto.getCateId());
@@ -157,35 +188,51 @@ public class BoardController {
 		}
 		return "/board/category/updateContentForm";
 	}
+	
+	/** 글 수정 처리  */
+	@RequestMapping(value = "/updateBoardProc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateBoardProc(BoardDTO boardDTO, @RequestParam(value="pageNo")String pageNo) {
 
-	/** 선택 게시글 수정 처리 */
-	@RequestMapping("/updateContentProc")
-	public String updateContentProc(BoardDTO boardDTO, Model model, @RequestParam(value="pageNo")String pageNo) {
-		BoardDTO bDTO = null;
+		Map<String,Object> resMap = new HashMap<String, Object>();
+		
 		try {
-			// DB update ( board 테이블, boardfile 테이블)
-			service.updateBoard(boardDTO);
+			// 게시글 및 파일 테이블 update
+			service.updateBoardDaumAttach(boardDTO);
 			
-			
-			// 카테고리 아이디 가져오기 위한 게시글 한건 검색
-			bDTO = service.selectBoardOne(boardDTO.getbNo());
+			resMap.put(Constants.RESULT, Constants.RESULT_OK);
+			resMap.put("bNo", boardDTO.getbNo());
+			resMap.put("pageNo", pageNo);
 		} catch (Exception e) {
+			resMap.put(Constants.RESULT, Constants.RESULT_FAIL);
 			e.printStackTrace();
 		}
-		return "redirect:/board/category/boardList?cateId=" + bDTO.getCateId()+"&pageNo="+pageNo;
+
+		return resMap;
 	}
+
+	/** 선택 게시글 수정 처리 */
+//	@RequestMapping("/updateContentProc")
+//	public String updateContentProc(BoardDTO boardDTO, Model model, @RequestParam(value="pageNo")String pageNo) {
+//		BoardDTO bDTO = null;
+//		try {
+//			// DB update ( board 테이블, boardfile 테이블)
+//			service.updateBoard(boardDTO);
+//			
+//			
+//			// 카테고리 아이디 가져오기 위한 게시글 한건 검색
+//			bDTO = service.selectBoardOne(boardDTO.getbNo());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "redirect:/board/category/boardList?cateId=" + bDTO.getCateId()+"&pageNo="+pageNo;
+//	}
 
 	/** 선택 게시글 삭제 처리 */
 	@RequestMapping("/deleteContentProc")
 	public String deleteContentProc(@RequestParam(value = "bno") String bNo, @RequestParam(value = "cateId") int cateId,
-			Model model) {
+			@RequestParam(value="pageNo")String pageNo, Model model) {
 		try {
-
-//			// 댓글 table의 bno에 해당하는 댓글들 모두 삭제
-//			service.deleteBoardReplyAll(bNo);
-//
-//			// 좋아요 테이블에 해당 게시글 데이터 삭제
-//			service.deleteFavorite(bNo);
 
 			// DB delete
 			service.deleteBoard(bNo);
@@ -193,6 +240,6 @@ public class BoardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/board/category/boardList?cateId=" + cateId;
+		return "redirect:/board/category/boardList?cateId=" + cateId+"&pageNo="+pageNo;
 	}
 }

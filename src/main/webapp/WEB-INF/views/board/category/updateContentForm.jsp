@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>${cateDTO.cateName}</title>
 	<script type="text/javascript" src="/resources/js/fileupload.js"></script>
-	<style>
+	<link rel="stylesheet" type="text/css" href="/resources/daumEditor/css/editor.css"></link>
+	<script src="/resources/daumEditor/js/editor_loader.js?environment=production" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
+	<!-- <style>
 		.fileDrop{
 			width: 90%;
 			height: 200px;
@@ -24,7 +29,7 @@
 		small:hover{
 			color:red;
 		}
-	</style>
+	</style> -->
 </head>
 <body class="index page-index">
 	<!-- START TALK TO US SECTION -->
@@ -46,7 +51,7 @@
 		<div class="content-frame">
 			<div id="form-contact" >
 				<h1 id="hello">${cateDTO.cateName}</h1>
-				<form id="updateForm" action="/board/category/updateContentProc" method="post">
+				<form name="tx_editor_form" id="tx_editor_form" method="post" enctype="multipart/form-data">
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 20%">카테고리</th>
@@ -61,14 +66,15 @@
 							<td><input id="bTitle" style="width: 100%; border: 0;" type="text" name="bTitle" value="${boardDTO.bTitle}" required="required"/></td>
 						</tr>
 						<tr>
-							<th style="width: 20%">내용</th>
-							<td><textarea id="bContent" name="bContent" rows="100" style="width: 100%; border: 0;" required="required">${boardDTO.bContent}</textarea></td>
+							<th style="width:20%"> 내용</th>
+							<!-- <td><textarea style="width:100%; border: 0;" id = "bContent" name="bContent" rows="100" ></textarea></td> -->
+							<td id="editor_frame" ></td>
 						</tr>
 						<tr>
 							<th style="width:20%"> 상품가치</th>
 							<td><input style="width:200px; text-align: right; " type="text" id="value" name="value"  value="${boardDTO.value}" required placeholder="숫자로 입력"/> 원</td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<th colspan = "2" style="text-align:center">
 								&nbsp;&nbsp;&nbsp; 업로드할 파일을 여기에 끌어다 놓아주세요 (이미지파일 : jpg/png/gif)만 가능
 								<div class="fileDrop">
@@ -81,47 +87,284 @@
 									</c:forEach>
 								</div>
 							<th/>
-						</tr>
+						</tr> --%>
 					</table>
 					<table align="center">
 					<tr><td>
 						<input type="hidden" name="bNo" value="${boardDTO.bNo}" />
 						<input type="hidden" name="pageNo" value="${param.pageNo}" />
 						<!-- <button type="button" onclick="checkUpdate();" >수정하기</button> -->
-						<input type="submit" value="수정하기"/>
+						<!-- <input type="submit" value="수정하기"/> -->
+						<input type="button" id="save" value="수정하기" onclick="updateBoard(); return false;"/>
 						<button type="button" onclick="javascript:history.back();">취소</button>
 					</td></tr>
 					</table>
 				</form>
-
+				<br/><br/><br/>
 
 			</div>
 		</div>
 	</section>
 	<script type="text/javascript">
-		/* validation 사용해서 검사해야함.... */
-		/* function checkUpdate(){
-			var form = document.getElementById("updateForm");
-			var content = document.getElementById("bContent").value;
-			var title = document.getElementById("bTitle").value;
-			var value = document.getElementById("value").value;		// 상품가치 (정규표현식을 위해 가져옴)
-			
-			if( content.trim() == "" || title.trim() == "" ){
-				alert("제목과 내용은 필수 입력사항입니다.");
-				return;
-			}
-			var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
-			if(value.trim() == "" || !pattern.test(value)){
-				alert("상품가치는 숫자만 입력 가능합니다.");
-				return;
-			}
-			form.action="/board/category/updateContentProc";
-			form.method="post";
-			alert("게시글 수정이 완료되었습니다.");
-			form.submit();
-		} */ 
+	var editorObj;
+	
+	$(function() {
 		
-		$("#updateForm").submit(function(event){
+		$.ajax({
+		    type:"get", 
+			url : "/resources/daumEditor/editor_template.html",
+	        success : function(data){
+	            $("#editor_frame").html(data);
+	            // 에디터UI load
+	            var config = {
+	                /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
+	                txHost: '',
+	                /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
+	                txPath: '',
+	                /* 수정필요없음. */
+	                txService: 'sample',
+	                /* 수정필요없음. 프로젝트가 여러개일 경우만 수정한다. */
+	                txProject: 'sample',
+	                /* 대부분의 경우에 빈문자열 */
+	                initializedId: "",
+	                /* 에디터를 둘러싸고 있는 레이어 이름(에디터 컨테이너) */
+	                wrapper: "tx_trex_container",
+	                /* 등록하기 위한 Form 이름 */
+	                form: "tx_editor_form",
+	                /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
+	                txIconPath: "/resources/daumEditor/images/icon/editor/",
+	                /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
+	                txDecoPath: "/resources/daumEditor/images/deco/contents/",
+	                canvas: {
+	                    minHeight: 100,
+	                    maxHeight:  500,
+	                    autoSize: true,
+	                    exitEditor:{
+	                        /*
+	                        desc:'빠져 나오시려면 shift+b를 누르세요.',
+	                        hotKey: {
+	                            shiftKey:true,
+	                            keyCode:66
+	                        },
+	                        nextElement: document.getElementsByTagName('button')[0]
+	                        */
+	                    },
+	                    styles: {
+	                        color: "#123456", /* 기본 글자색 */
+	                        fontFamily: "굴림", /* 기본 글자체 */
+	                        fontSize: "10pt", /* 기본 글자크기 */
+	                        backgroundColor: "#fff", /*기본 배경색 */
+	                        lineHeight: "1.5", /*기본 줄간격 */
+	                        padding: "8px" /* 위지윅 영역의 여백 */
+	                    },
+	                    showGuideArea: false
+	                },
+	                events: {
+	                    preventUnload: false
+	                },
+	                sidebar: {
+	                    attachbox: {
+	                        show: true,
+	                        confirmForDeleteAll: true
+	                    },
+	                    attacher: {
+	                        file: {
+	                           boxonly: true
+	                        }
+	                     }
+	                },
+	                size: {
+	                    contentWidth: 850 /* 지정된 본문영역의 넓이가 있을 경우에 설정 */
+	                }
+	            };
+	            EditorJSLoader.ready(function(Editor) { 
+	            	//에디터내에 환경설정 적용하기
+	            	editorObj = new Editor(config);
+	                Editor.modify({
+	                    content: '${boardDTO.bContent}',
+	                    attachments:[
+	                      <c:forEach items="${baList}" var="imgList" varStatus="status" >
+	                      	<c:if test="${imgList.attachType == '2'}" >
+	                      	{
+	                        	attacher: 'image', 
+	                            data: {
+	                              	thumburl: "${imgList.fileName}",
+	                               	imageurl: "${imgList.fileName}",
+	                            	originalurl: "${imgList.fileName}",
+	                             	exifurl: "${imgList.fileName}",
+	                             	attachurl: "${imgList.fileName}",
+	                             	filename: "${imgList.originName}",
+	                             	filesize: "${imgList.fileSize}"
+	                             }
+	                         },
+	                         </c:if>
+	                      </c:forEach>
+	                      <c:forEach items="${baList}" var="fileList" varStatus="status" >
+	                      	<c:if test="${fileList.attachType == '1'}" >
+	                      	{
+	    						attacher: 'file', 
+	                            data: {
+	                              	thumburl: "${fileList.fileName}",
+	                               	imageurl: "${fileList.fileName}",
+	                              	originalurl: "${fileList.fileName}",
+	                               	exifurl: "${fileList.fileName}",
+	                               	attachurl: "${fileList.fileName}",
+	                              	filename: "${fileList.originName}",
+	                              	filesize: "${fileList.fileSize}"
+	    						}
+	                      	},
+	                      </c:if>
+	                      </c:forEach>
+	                      {}
+	                    ]
+	                });// end modify
+	            });
+
+	        }
+	    });//end Ajax
+		
+	    
+	});
+	
+	/**
+	 * Editor.save()를 호출한 경우 데이터가 유효한지 검사하기 위해 부르는 콜백함수로
+	 * 상황에 맞게 수정하여 사용한다.
+	 * 모든 데이터가 유효할 경우에 true를 리턴한다.
+	 * @function
+	 * @param {Object} editor - 에디터에서 넘겨주는 editor 객체
+	 * @returns {Boolean} 모든 데이터가 유효할 경우에 true
+	 */
+	function validForm(editor) {
+		// Place your validation logic here
+		var title = $("#bTitle").val();		// 제목	(빈 값 검사하기 위해)
+		var value = $("#value").val();		// 상품가치 (정규표현식을 위해 가져옴)
+		
+		if(title.trim() == "" /* || content.trim() == "" */){		// trim() 앞,뒤 공백 제거
+			alert("제목은 필수 입력사항입니다.");
+			return false;
+		}
+		
+		// sample : validate that content exists
+		var validator = new Trex.Validator();
+		var content = editor.getContent();
+		if (!validator.exists(content)) {
+			alert('내용을 입력하세요');
+			return false;
+		}
+		
+		var pattern = /^[0-9]*$/;	// 정규표현식 숫자만
+		if(value.trim() == "" || !pattern.test(value)){
+			alert("상품가치는 숫자만 입력 가능합니다.");
+			return false;
+		}
+		return true;
+	}
+
+	 /**
+	 * Editor.save()를 호출한 경우 validForm callback 이 수행된 이후
+	 * 실제 form submit을 위해 form 필드를 생성, 변경하기 위해 부르는 콜백함수로
+	 * 각자 상황에 맞게 적절히 응용하여 사용한다.
+	 * @function
+	 * @param {Object} editor - 에디터에서 넘겨주는 editor 객체
+	 * @returns {Boolean} 정상적인 경우에 true
+	 */
+	function setForm(editor) {
+        var i, input;
+        var form = editor.getForm();
+        var content = editor.getContent();
+
+        // 본문 내용을 필드를 생성하여 값을 할당하는 부분
+        var textarea = document.createElement('textarea');
+        textarea.name = 'bContent';
+        textarea.style='"display: none;"';
+        textarea.value = content;
+        form.createField(textarea);
+
+        /* 아래의 코드는 첨부된 데이터를 필드를 생성하여 값을 할당하는 부분으로 상황에 맞게 수정하여 사용한다.
+         첨부된 데이터 중에 주어진 종류(image,file..)에 해당하는 것만 배열로 넘겨준다. */
+        var images = editor.getAttachments('image',true);
+        for (i = 0; i < images.length; i++) {
+            // existStage는 현재 본문에 존재하는지 여부
+            if (images[i].existStage) {
+                // data는 팝업에서 execAttach 등을 통해 넘긴 데이터
+                //alert('attachment information - image[' + i + '] \r\n' + JSON.stringify(images[i].data));
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'imgPath';
+                input.value = images[i].data.imageurl;  // 이미지 경로
+                form.createField(input);
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'imgOriginName';
+                input.value = images[i].data.filename  // 이미지 원본 이름
+                form.createField(input);
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'imgSize';
+                input.value = images[i].data.filesize;  // 이미지 크기
+                form.createField(input);
+            }
+        }
+
+        var files = editor.getAttachments('file',true);
+        for (i = 0; i < files.length; i++) {
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'filePath';
+            input.value = files[i].data.attachurl;
+            form.createField(input);
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'fileOriginName';
+            input.value = files[i].data.filename  // 파일 원본 이름
+            form.createField(input);
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'fileSize';
+            input.value = files[i].data.filesize;  // 파일 크기
+            form.createField(input);
+        }
+        return true;
+	};//end setForm
+	
+	 
+	//게시글 저장
+	function updateBoard() {
+		
+		if( confirm("수정 하시겠습니까?") ) {
+			
+			//Editor.save();
+			
+			validForm(Editor);
+			
+			setForm(Editor);
+			
+			var param = $("#tx_editor_form").serialize();
+			
+			console.log(param);
+			
+			$.ajax({
+				url: "/board/category/updateBoardProc",
+				method: "post",
+				data: param,
+				success: function(data) {
+					if(data.result == "ok"){
+						alert("수정이 완료되었습니다.");
+					}else{
+						alert("글 수정 실패");
+						return false;
+					}
+					
+					location.href="/board/category/detailContent?bno=" + data.bNo +"&pageNo=" + data.pageNo;
+					
+				}
+			});
+			
+			return false;
+		}
+		
+	};
+		/* $("#updateForm").submit(function(event){
 			event.preventDefault ? event.preventDefault() : (event.returnValue = false);
 			console.log("updateForm");
 			var that = $(this);	//updateForm
@@ -153,7 +396,6 @@
 			
 		});
 		
-		/* Ajax 업로드 방식 */
 		$(".fileDrop").on("dragenter dragover", function(event){
 			//event.preventDefault();	//기본 동작 막음 => 파일 끌어다 놓아도 아무 동작 하지않음
 			event.preventDefault ? event.preventDefault() : (event.returnValue = false);	//브라우저에서 지원을 막은 경우
@@ -173,10 +415,6 @@
 			var formData = new FormData();
 			formData.append("file", file);	//<form> 태그와 동일한 전송받식으로 파일 데이터 전송 (file 객체 생성)
 			
-			/* for(int i=0; i<files.length(); i++){
-				formData.append("file", files[i]);
-			} */
-					
 			$.ajax({
 				url: '/board/uploadAjax',
 				data: formData,
@@ -193,9 +431,7 @@
 							"<a href='/board/displayFile.do?fileName=" + getImageLink(data) + "' target='_blank'>" +
 							"<img src='/board/displayFile.do?fileName=" + data + "' border='1px'/></a>" + 
 							"<small data-src=" + data + ">X</small></span>&nbsp;";
-					}/* else {
-						str="<span><a href='/board/displayFile.do?fileName=" + data + "'>" + getOriginalName(data) + "</a><small data-src=" + data + ">X</small></span>";
-					} */
+					}
 					
 					//$(".uploadedList").append(str);
 					$(".fileDrop").append(str);
@@ -204,7 +440,6 @@
 			
 		});
 		
-		/* 파일 삭제 */
 		$(".fileDrop").on("click", "small", function(event){
 			var that = $(this);		//this = small태그
 			console.log("small");
@@ -225,11 +460,10 @@
 			});
 		});
 		
-		/* href 클릭 함수 */
 		function hrefFunc(fileName){
 			$("#hrefId").attr("target","_blank");
 			location.href="/board/displayFile?fileName=" + getImageLink(fileName);
-		}
+		} */
 	</script>
 	<script>
 		$(document).ready(function(){

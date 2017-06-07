@@ -169,12 +169,21 @@
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
 						<td colspan="3"><pre style="height: 300px;">${boardDTO.bContent}</pre>
-							<c:forEach var="fileName" items="${fileList}">
+							<%-- <c:forEach var="fileName" items="${fileList}">
 							<p>
 								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
 								<img src="/board/displayFile.do?fileName=${fileName}"></img></a></p>
-							</c:forEach>
+							</c:forEach> --%>
 						</td>
+					</tr>
+					<tr>
+						<th style="width: 20%; background: #aaa; text-align: center;">첨부파일</th>
+						<td colspan="3">
+							<c:forEach var="baList" items="${baList}">
+								<c:if test="${baList.attachType == '1'}">
+									<a href="${baList.fileName}" target="_blank">${baList.originName}</a>
+								</c:if>
+							</c:forEach></td>
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">상품가치</th>
@@ -278,7 +287,7 @@
 			//게시글 삭제 버튼 클릭시
 			function deleteContent() {
 				if (confirm("정말 삭제하시겠습니까?")) {
-					location.href = "/board/category/deleteContentProc?bno=${boardDTO.bNo}&cateId=${cateDTO.cateId}";
+					location.href = "/board/category/deleteContentProc?bno=${boardDTO.bNo}&cateId=${cateDTO.cateId}&pageNo=${param.pageNo}";
 				} else {
 					return;
 				}
