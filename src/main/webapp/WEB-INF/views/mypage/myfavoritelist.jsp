@@ -281,7 +281,6 @@
 				var bno = $(this).parent().prev().prev().prev().prev().prev().text();
 				var userId = $(this).parent().prev().prev().text();
 				var cateId = $(this).parent().prev().prev().prev().prev().text();
-				
 				$("#bnoId").val(bno);
 				$("#userIdVal").val(userId);
 				$("#cateIdVal").val(cateId);
