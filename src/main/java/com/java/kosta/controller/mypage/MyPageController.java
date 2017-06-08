@@ -39,7 +39,6 @@ public class MyPageController {
 	@RequestMapping(value="/getCustomer")
 	public @ResponseBody String getCustomer(String bno){
 		String customerId = service.getCustomerId(bno);
-		logger.info("타입 확인 : " + customerId);
 		return customerId;
 	} // end of getCustomer
 	

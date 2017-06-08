@@ -274,7 +274,6 @@
 										"Content-Type":"application/json"
 									},
 									success:function(result){
-										console.log("result 값 : " + result + " 타입 : " + typeof(result));
 										if ( result ){
 											str += "<td><button  disabled=true class='btn btn-default testBtn' data-target='#layerpop' data-toggle='modal'>거래인 지정</button></td>";
 										}else{
@@ -288,9 +287,6 @@
 							str += "</div>";
 							str += "</table>";
 							$("#formWrapper").append(str);
-							if(result.pagingDTO.pageNo !=null){
-							
-							}
 						}
 					}
 				});
