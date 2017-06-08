@@ -52,7 +52,7 @@
 					</tr>
 					<tr>
 						<th style="width: 20%">내용</th>
-						<td colspan="3"><pre style="height:500px;">${boardDTO.bContent}</pre></td>
+						<td colspan="3" style="height:auto;" >${boardDTO.bContent}</td>
 					</tr>
 				</table>
 				<table align="right">
