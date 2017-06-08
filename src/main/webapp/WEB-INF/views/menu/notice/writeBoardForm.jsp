@@ -29,43 +29,38 @@
 		<section class="site-content full-height">
 			<div class="content-frame">
 				<div id="form-contact">
-					<h1 id="hello">${cateDTO.cateName}</h1>
+					<h4><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;공지사항 작성하기</span></h4>
+					<br><br>
 					<form id="insertForm" action="/notice/writeBoardProc" method="post">
 						<table class="table table-bordered">
 							<tr>
-								<th style="width: 20%">카테고리</th>
+								<th style="width: 20%;text-align: center;background-color: #EAEAEA" >카테고리</th>
 								<td>${cateDTO.cateName}<input type="hidden" name="cateId"
 									value="${cateDTO.cateId}" /></td>
 							</tr>
 							<tr>
-								<th style="width: 20%">작성자</th>
+								<th style="width: 20%;text-align: center;background-color: #EAEAEA" >작성자</th>
 								<td>${loginSession.userId }<input
 									style="width: 100%; border: 0;" type="hidden" name="userId"
 									value="${loginSession.userId }" /></td>
 							</tr>
 							<tr>
-								<th style="width: 20%">제목</th>
-								<td><input style="width: 100%; border: 0;" type="text"
-									name="bTitle" required /></td>
+								<th style="width: 20%;text-align: center;background-color: #EAEAEA" >제목</th>
+								<td><input type="text" class ="form-control" name="bTitle" required /></td>
 							</tr>
 							<tr>
-								<th style="width: 20%">내용</th>
-								<td><textarea name="bContent" rows="100"
-										style="width: 100%; border: 0;" required></textarea></td>
+								<th style="width: 20%;text-align: center;background-color: #EAEAEA" >내용</th>
+								<td><textarea name="bContent" rows="100" class ="form-control" required></textarea></td>
 							</tr>
 							<tr>
-								<th style="width: 20%">파일 업로드</th>
-								<td><input style="width: 100%" type="file" /></td>
+								<th style="width: 20%;text-align: center;background-color: #EAEAEA" >첨부파일</th>
+								<td><input style="width: 100%" type="file"/></td>
 							</tr>
 						</table>
-						<table align="center">
-							<tr>
-								<td><input type="submit" value="글쓰기" /></td>
-								<td>&nbsp;&nbsp;
-									<button type="button" onclick="javascript:history.back();">취소</button>
-								</td>
-							</tr>
-						</table>
+						<div align="right">
+							<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
+							<input type="submit" class="btn btn-warning" value="글쓰기" />
+						</div>
 					</form>
 				</div>
 			</div>

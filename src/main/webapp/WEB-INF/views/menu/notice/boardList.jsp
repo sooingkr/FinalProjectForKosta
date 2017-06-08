@@ -31,8 +31,7 @@
 		<section class="site-content full-height">
 		<div class="content-frame">
 			<div id="form-contact">
-				<h1 id="hello">${cateDTO.cateName}</h1>
-				
+				<h2><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;${cateDTO.cateName}</span></h2>
 				<form action="/notice/boardList" >
 				<table align="right">
 				<tr>

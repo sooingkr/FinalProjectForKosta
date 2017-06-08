@@ -28,38 +28,37 @@
 	<section class="site-content full-height">
 		<div class="content-frame">
 			<div id="form-contact">
-				<h1 id="hello">${cateDTO.cateName}</h1>
+				<h4><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;공지사항 수정하기</span></h4>
+				<br><br>
 				<form id="updateForm" action="/notice/updateContentProc" method="post">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 20%">카테고리</th>
+							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >카테고리</th>
 							<td>${cateDTO.cateName}<input type="hidden" name="cateId" value="${boardDTO.cateId}"/></td>
 						</tr>
 						<tr>
-							<th style="width: 20%">작성자</th>
+							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >작성자</th>
 							<td>관리자<input type="hidden" name="userId" value="${boardDTO.userId}"/></td>
 						</tr>
 						<tr>
-							<th style="width: 20%">제목</th>
-							<td><input id="bTitle" style="width: 100%; border: 0;" type="text" name="bTitle" value="${boardDTO.bTitle}" required="required"/></td>
+							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >제목</th>
+							<td><input id="bTitle" class="form-control" type="text" name="bTitle" value="${boardDTO.bTitle}" required="required"/></td>
 						</tr>
 						<tr>
-							<th style="width: 20%">내용</th>
-							<td><textarea id="bContent" name="bContent" rows="100" style="width: 100%; border: 0;" required="required">${boardDTO.bContent}</textarea></td>
+							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >내용</th>
+							<td><textarea id="bContent" name="bContent" rows="100" class="form-control" required="required">${boardDTO.bContent}</textarea></td>
 						</tr>
 						<tr>
-							<th style="width: 20%">파일 업로드</th>
+							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >첨부파일</th>
 							<td><input style="width: 100%" type="file" /></td>
 						</tr>
 					</table>
-					<table align="center">
-					<tr><td>
+					<div align="right">
 						<input type="hidden" name="bNo" value="${boardDTO.bNo}" />
 						<input type="hidden" name="pageNo" value="${param.pageNo}" />
-						<input type="submit" value="수정하기" />
-						<button type="button" onclick="javascript:history.back();">취소</button>
-					</td></tr>
-					</table>
+						<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
+						<input type="submit" class="btn btn-warning" value="수정하기" />
+					</div>
 				</form>
 
 
