@@ -119,7 +119,6 @@ public class NoteController {
          vo.setRecvId(uvo.getUserId());
          //안읽은쪽지 리스트의 정보를 가지고 와서 그 크기를 알림으로 넘겨준다.
          totalCnt = service.totalCntNotOpen(vo);
-         System.out.println("totalCnt : "+totalCnt);
          session.setAttribute("notOpen", totalCnt+"");
       }
       return totalCnt+"";

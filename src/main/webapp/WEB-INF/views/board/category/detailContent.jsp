@@ -134,8 +134,8 @@
 			    </script>
 				<!-- End of GoogleMap API 연동(황영롱) -->
 				
-			
-				<h4 id="hello"><span class="glyphicon glyphicon-book" style="color: #CC723D;">&nbsp;도서/음반</span></h4>
+				<h4 id="hello"><span class="glyphicon glyphicon-book" style="color: #CC723D;">&nbsp;${cateDTO.cateName}</span></h4>
+
 				<table class="table table-bordered">
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">카테고리</th>
@@ -162,7 +162,7 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
-						<td colspan="3"><pre style="height: 300px;">${boardDTO.bContent}</pre>
+						<td colspan="3"><pre>${boardDTO.bContent}</pre>
 							<%-- <c:forEach var="fileName" items="${fileList}">
 							<p>
 								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
@@ -217,7 +217,7 @@
 				</table>
 				<br /><br />
 				
-				
+
 				<!-- GoogleMap API 연동(황영롱) -->
 				<h4><span class="glyphicon glyphicon-map-marker" style="color: #CC723D;">&nbsp;작성자 위치</span></h4>
 			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
