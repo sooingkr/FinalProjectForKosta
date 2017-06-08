@@ -32,13 +32,13 @@ $(document).ready(function(){
 			
 			$(data.list).each(function(){
 		          var html = template(this);
-		          var str = "<pre>"+this.bcontent+"</pre><hr/>";
+		          var str = "<pre style='height:100px;overflow:hidden;'>"+this.bcontent+"</pre>" 
+  		         +"<button type='button' class='moreBtn'>펼쳐보기</button><hr/>";
 		          var btnStr = "<button type='button'>"
 		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
 		        	           +"</button></div></li>";
 		          html += str;
 		          html += btnStr;
-		          console.log("test check : " + html);
 		          placeHolder.append(html);
 		    });
 			
@@ -63,6 +63,8 @@ $(document).ready(function(){
 	         else if(statueFilter == true){// 필터가 적용되면 필터를 계산한 값을 뿌려줌
 	        	 listFilter(page,allData);
 	         }
+	         var height = $(document).scrollTop();
+	         $('html, body').animate({scrollTop : height+400}, 600);
 	       }
 	   });//end of 무한스크롤
 	  
@@ -118,13 +120,13 @@ $(document).ready(function(){
 	                  var temp = "";
 	                  $(data.list).each(function(){
 	     		         var html = template(this);
-	     		         var str = "<pre>"+this.bcontent+"</pre><hr/>";
+	     		         var str = "<pre style='height:100px;overflow:hidden;'>"+this.bcontent+"</pre>" 
+	     		         +"<button type='button' class='moreBtn'>펼쳐보기</button><hr/>";
 	     		         var btnStr = "<button type='button'>"
 	   		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
 	   		        	           +"</button></div></li>";
 	     		         html += str;
 	     		         html += btnStr;
-	     		         console.log("test check : " + html);
 	     		         placeHolder.append(html);
 	                  });// end of each
 	                  
@@ -137,6 +139,24 @@ $(document).ready(function(){
 	               
 	            }); //ajax
 	         }//end of listFilter
+	         
+	         /* 더보기 버튼 클릭 (황영롱) */
+	         $(document).on("click",".moreBtn",function(event){
+	            
+	        	 var content = $(this).prev();
+	        	 var offset = content.prev().prev().parent().offset();
+	 
+	        	 if ( $(this).text() == '펼쳐보기' ){
+	 	        	content.attr("style","overflow:visible;");
+	 	        	$(this).text("접기");
+	        	 }else if($(this).text() == '접기' ){
+	        		 content.attr("style","height:100px;overflow:hidden;");
+	        		 $(this).text("펼쳐보기");
+	        	 }
+	        	 $('html, body').animate({scrollTop : offset.top}, 400);
+
+	         });
+	         
 	
 	         $("#searchBtn").on("click",function(event){
 	             var searchText = $("#searchId").val();
