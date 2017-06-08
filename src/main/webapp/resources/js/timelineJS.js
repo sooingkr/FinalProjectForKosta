@@ -147,7 +147,7 @@ $(document).ready(function(){
 	        	 var offset = content.prev().prev().parent().offset();
 	 
 	        	 if ( $(this).text() == '펼쳐보기' ){
-	 	        	content.attr("style","overflow:visible;");
+	 	        	content.attr("style","overflow:visible;min-height:100px;");
 	 	        	$(this).text("접기");
 	        	 }else if($(this).text() == '접기' ){
 	        		 content.attr("style","height:100px;overflow:hidden;");
