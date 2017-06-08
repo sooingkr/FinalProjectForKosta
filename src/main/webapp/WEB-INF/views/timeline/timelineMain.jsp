@@ -455,7 +455,7 @@
                      <span><b>{{distanceVal distance}}</b></span><br/>
                      <div class='label label-warning'>금액</div>
                      <span><b>{{value}} 원</b></span>
-                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}">{{btitle}}</a></strong></h2>
+                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}&pageNo=1">{{btitle}}</a></strong></h2>
                      <i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
                      <span><b>{{userId}}</b></span>
             </script> 
