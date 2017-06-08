@@ -19,9 +19,7 @@
                 <!-- START SOCIAL ICON -->
                
                <%@include file="/WEB-INF/views/layout/socialIconImport.jsp" %>
-               
                 <!-- END SOCIAL ICON -->
-               
             </header>
             	
                 <!-- END HEADER -->

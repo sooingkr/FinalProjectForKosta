@@ -23,9 +23,7 @@
 	padding: 10px;
 	z-index: 1000;
 }
-/* 
-	구글맵 style 적용
- */
+/* 구글맵 style 적용 */
 #map {
         width: 100%;
         height: 350px;
