@@ -22,6 +22,7 @@ $(document).ready(function(){
     	var str = (d.getFullYear() + " " + (d.getMonth()+1) + " " + d.getDate());
     	return str;
     });
+    
     //////////////////핸들바스//////////////////
     
     
@@ -31,8 +32,14 @@ $(document).ready(function(){
 			
 			$(data.list).each(function(){
 		          var html = template(this);
+		          var str = "<pre>"+this.bcontent+"</pre><hr/>";
+		          var btnStr = "<button type='button'>"
+		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
+		        	           +"</button></div></li>";
+		          html += str;
+		          html += btnStr;
+		          console.log("test check : " + html);
 		          placeHolder.append(html);
-		      //   check(this.bno);
 		    });
 			
 			$("#searchId").val(searchText);
