@@ -32,7 +32,7 @@ $(document).ready(function(){
 			
 			$(data.list).each(function(){
 		          var html = template(this);
-		          var str = "<pre style='height:100px;overflow:hidden;'>"+this.bcontent+"</pre>" 
+		          var str = "<pre style='height:100px;overflow-y:hidden;'>"+this.bcontent+"</pre>" 
   		         +"<button type='button' class='moreBtn'>펼쳐보기</button><hr/>";
 		          var btnStr = "<button type='button'>"
 		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
@@ -120,7 +120,8 @@ $(document).ready(function(){
 	                  var temp = "";
 	                  $(data.list).each(function(){
 	     		         var html = template(this);
-	     		         var str = "<pre style='height:100px;overflow:hidden;'>"+this.bcontent+"</pre>" 
+	     		         var str = "<pre style='height:100px;overflow-y:hidden;'>"+this.bcontent+"</pre>" 
+	     		         /*if(this.bcontent)*/
 	     		         +"<button type='button' class='moreBtn'>펼쳐보기</button><hr/>";
 	     		         var btnStr = "<button type='button'>"
 	   		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
@@ -150,7 +151,7 @@ $(document).ready(function(){
 	 	        	content.attr("style","overflow:visible;min-height:100px;");
 	 	        	$(this).text("접기");
 	        	 }else if($(this).text() == '접기' ){
-	        		 content.attr("style","height:100px;overflow:hidden;");
+	        		 content.attr("style","height:100px;overflow-y:hidden;");
 	        		 $(this).text("펼쳐보기");
 	        	 }
 	        	 $('html, body').animate({scrollTop : offset.top}, 400);
