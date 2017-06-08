@@ -27,7 +27,7 @@
 		<section class="site-content full-height">
 		<div class="content-frame">
 			<div id="form-contact">
-				<h4><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;공지사항 상세보기</span></h4>
+				<h3><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;공지사항 상세보기</span></h3>
 				<br><br>
 				<table class="table table-bordered">
 					<tr>
