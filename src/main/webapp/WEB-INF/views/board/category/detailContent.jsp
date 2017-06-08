@@ -13,23 +13,20 @@
 <style>
 #modDiv {
 	width: 300px;
-	height: 100px;
-	background-color: gray;
+	height: 150px;
+	background-color: #A6A6A6;
 	border-radius: 10px;
-	position: absolute;
-	top: 50%;
+	position: relative;
 	left: 50%;
-	margin-top: -50px;
+	margin-top: -30%;
 	margin-left: -150px;
 	padding: 10px;
 	z-index: 1000;
 }
-/* 
-	구글맵 style 적용
- */
+/* 구글맵 style 적용 */
 #map {
         width: 100%;
-        height: 400px;
+        height: 350px;
         background-color: grey;
       }
 </style>
@@ -52,10 +49,7 @@
 		<div class="content-frame">
 			<div id="form-contact">
 			
-				<!-- GoogleMap API 연동(황영롱) -->
-				<h3>글쓴이 위치</h3>
-			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
-			    <br/><br/>
+				
 			    <script>
 			      var address = null;
 			      function getAddr(){
@@ -141,7 +135,7 @@
 				<!-- End of GoogleMap API 연동(황영롱) -->
 				
 			
-				<h1 id="hello">${cateDTO.cateName}</h1>
+				<h4 id="hello"><span class="glyphicon glyphicon-book" style="color: #CC723D;">&nbsp;${cateDTO.cateName}</span></h4>
 				<table class="table table-bordered">
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">카테고리</th>
@@ -168,7 +162,7 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
-						<td colspan="3"><pre style="height: 300px;">${boardDTO.bContent}</pre>
+						<td colspan="3"><pre>${boardDTO.bContent}</pre>
 							<%-- <c:forEach var="fileName" items="${fileList}">
 							<p>
 								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
@@ -190,6 +184,9 @@
 						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 				</table>
+				<br><br>
+				
+				
 				<table align="right">
 					<tr>
 						<c:if test="${loginSession.userId != null }">
@@ -218,64 +215,59 @@
 						</td>
 					</tr>
 				</table>
-				<br />
-				<br />
+				<br /><br />
+				
+				<!-- GoogleMap API 연동(황영롱) -->
+				<h4><span class="glyphicon glyphicon-map-marker" style="color: #CC723D;">&nbsp;작성자 위치</span></h4>
+			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
+			    <br/><br/>
 
 				<!--------------------------- 댓글 리스트 ---------------------------------->
-				<h1>댓글 LIST</h1>
-				<table class="table table-bordered">
-					<tr style="background: #aaa;">
-						<th style="width: 10%; text-align: center;">작성자</th>
-						<th style="text-align: center;">내용</th>
-						<th style="width: 20%; text-align: center;">작성일</th>
-						<th style="width: 20%; text-align: center;">수정일</th>
-						<th style="width: 7%; text-align: center;">수정</th>
-					</tr>
-					<tbody id="replyTable"></tbody>
-				</table>
+				<div  style="background-color: #F2F2F2; padding: 2%;">
+					<div id="replyTable"></div>
 
-				<table align="center">
-					<tr>
-						<td>
-							<button type="button" id="moreReplyList"
-								onclick="showNextReplyList()">댓글 더보기</button>
-							&nbsp;&nbsp;
-							<button type="button" id="allReplyList"
-								onclick="getAllList()">댓글 전체보기</button>
-						</td>
-					</tr>
-				</table>
-				<br />
-
-				<h4>
-					<b>댓글 작성하기</b>
-				</h4>
-				<table class="table table-bordered">
-					<tr style="background: #aaa;">
-						<th style="width: 15%; text-align: center;">
-							${loginSession.userId } <input style="width: 100%; border: 0;"
-							type="hidden" name="replyId" value="${loginSession.userId }"
-							id="newReplyWriter" />
-						</th>
-						<td><input style="width: 100%; border: 0;" type="text"
-							name="rContent" id="newReplyContent" /></td>
-						<td><input type="checkbox" id="secretReply"/>비밀댓글</td>	
-						<td style="width: 10%"><button style="width: 50px"
-								id="replyAddBtn">작성</button></td>
-					</tr>
-				</table>
+					<table align="right">
+						<tr>
+							<td>
+								<button type="button" id="moreReplyList" class="btn btn-link" onclick="showNextReplyList()">댓글 더보기</button>
+								&nbsp;&nbsp;
+								<button type="button" id="allReplyList" class="btn btn-link" onclick="getAllList()">댓글 전체보기</button>
+							</td>
+						</tr>
+					</table>
+					<hr style="border: solid 1px #FFFFFF;">
+					<table width="100%;">
+						<tr>
+							<th style="width: 10%; text-align: center;">
+								${loginSession.userId } 
+								<input style="width: 100%; border: 0;" type="hidden" name="replyId" value="${loginSession.userId }" id="newReplyWriter" />
+							</th>
+							<td><textarea class="form-control" name="rContent" id="newReplyContent" style="resize: none;background-color: white;border: 0; height:4%;width: 100%;"></textarea></td>
+							<td style="width: 10%" colspan="2">&nbsp;&nbsp;
+								<button style="font-size: 12pt;" class= "btn btn-default btn-lg" id="replyAddBtn">입력</button>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="checkbox" id="secretReply"/>비밀댓글</td>	
+						</tr>
+					</table>
+				</div>
+				
+				
 				<br />
 
 				<!--------------- 댓글 수정 폼 ---------------------->
 				<div id="modDiv" style="display: none;">
-					<div class="modal-title"></div>
+					<div style="float:center; color: white;">댓글수정</div>
+					<input type="hidden" class = "modal-title"/>
 					<div>
-						<input type="text" style="width: 100%" id="replytext" />
+						<br>
+						<input type="text" style="width: 100%" id="replytext" class = "form-control" /><br/>
 					</div>
 					<div align="center">
-						<button type="button" id="replyModBtn">수정</button>
-						<button type="button" id="replyDelBtn">삭제</button>
-						<button type="button" id="closeBtn">닫기</button>
+						<button type="button" id="closeBtn" class ="btn btn-default btn-sm">닫기</button> 
+						<button type="button" id="replyModBtn" class ="btn btn-warning btn-sm">수정</button><br/>
 					</div>
 				</div>
 
@@ -308,7 +300,8 @@
 				// 댓글 등록 클릭했을 때
 	            $("#replyAddBtn").on("click", function() {
 	               // 입력한 댓글 값들을 가져옴
-	               var replyer = $("#newReplyWriter").val();
+	               //var replyer = $("#newReplyWriter").val();
+	               var replyer = "${loginSession.userId }";
 	               var replyText = $("#newReplyContent").val();
 	               var bno = "${boardDTO.bNo}";
 	               var secretReply="N";
@@ -358,21 +351,21 @@
 					//#("#부모id").on("click","그 안의 id",function(event){})
 		
 					// 자신(this:#replyDetail) 의 앞에 있는 태그(prev)의 속성 값 가져오기
-					var rno = $(this).prev().prev().attr("value"); // rNo의 값
+					var rno = $(this).parent().prev().prev().attr("value"); // rNo의 값
 					var bno = "${boardDTO.bNo}";
-					var replytext = $(this).prev().attr("value"); // rContent의 값
+					var replytext = $(this).parent().prev().attr("value"); // rContent의 값
 		
 					// 댓글 수정 버튼을 클릭했을 때, 수정폼에 해당 정보가 미리 입력되어 있을 수 있도록 세팅.
-					$(".modal-title").html(rno);
+					$(".modal-title").val(rno);
 					$("#replytext").val(replytext);
 					$("#modDiv").show("slow");
 				}); // end of 댓글등록 클릭
 		
-				// 댓글 삭제 버튼 클릭시
-				$("#replyDelBtn").on("click", function() {
-					var rno = $(".modal-title").html();
-					var replytext = $("#replytext").val();
-		
+				// 댓글 삭제버튼 클릭시 
+				$("#replyTable").on("click", "#replyDelBtn", function() {
+					
+					alert("rrr");
+					var rno = $(this).parent().prev().prev().attr("value"); // rNo의 값
 					$.ajax({
 						type : 'delete',
 						url : '/replies/' + rno,
@@ -384,18 +377,15 @@
 						success : function(data) {
 							if (data.result == "ok") {
 								alert("삭제되었습니다.");
-								// 삭제가 성공적으로되면 댓글 수정 폼을 다시 hide하고
-								$("#modDiv").hide("slow");
 								getAllList(); //전체 목록 뿌리기
 							}
 						}
 					}); // end of ajax
-		
-				}); // end of del
-		
+				});
+			
 				// 댓글 수정버튼 클릭시
 				$("#replyModBtn").on("click", function() {
-					var rno = $(".modal-title").html();
+					var rno = $(".modal-title").val();
 					var replytext = $("#replytext").val();
 		
 					if (replytext.trim() == "") {
@@ -458,20 +448,21 @@
 							// 댓글 리스트 출력
 							$.each(data.replyList, function(i, rDTO) {
 								
-								var str = "";
-								str += "<tr>";
-								str += "<td width='10%'>" + rDTO.replyId + "</td>";
-								str += "<td>" + rDTO.rContent + "</td>";
-								str += "<td width='20%'>" + rDTO.rRegDate + "</td>";
-								str += "<td width='20%'>" + rDTO.rModifyDate + "</td>";
-								str += "<td><input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
+								var str = "";							
+								str += "<span style='font-size:12pt;font-weight:bold;'>" + rDTO.replyId + "</span><span>&nbsp;&nbsp;" + rDTO.rRegDate + "<br></span>";
+								str += "<span style='font-size:12pt'>" + rDTO.rContent;
+								str += "<input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
 								str += "<input type='hidden' id='rContent' value='" + rDTO.rContent + "'/>";
 								
+								
 								if(data.loginUserId == rDTO.replyId){
-									str += "<button type='button' id='replyDetail'>수정</button>";
+									str += "<span style ='float:right;font-size:8pt'>";
+									str += "<button type='button' class='btn-link' id='replyDetail'>수정</button>|<button type='button' class='btn-link' id='replyDelBtn'>삭제</button>";
+									str += "</span></span>";
 								}
 								
-								str += "</td></tr>"
+								str+="</br></br>";
+
 		
 								$("#replyTable").append(str);
 							});
@@ -514,24 +505,25 @@
 						console.log(data);
 						if (data.result == "ok") {
 							// 댓글 리스트 모두 지우고 다시 출력
-							$("#replyTable").find("tr").remove();
+							$("#replyTable").find("span").remove();
+							$("#replyTable").find("br").remove();
 		
 							// 댓글 리스트 출력
 							$.each(data.replyAllList, function(i, rDTO) {
-								var str = "";
-								str += "<tr>";
-								str += "<td width='10%'>" + rDTO.replyId + "</td>";
-								str += "<td>" + rDTO.rContent + "</td>";
-								str += "<td width='20%'>" + rDTO.rRegDate + "</td>";
-								str += "<td width='20%'>" + rDTO.rModifyDate + "</td>";
-								str += "<td><input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
+								var str = "";							
+								str += "<span style='font-size:12pt;font-weight:bold;'>" + rDTO.replyId + "</span><span>&nbsp;&nbsp;" + rDTO.rRegDate + "<br></span>";
+								str += "<span style='font-size:12pt'>" + rDTO.rContent;
+								str += "<input type='hidden' id='rNo' value='" + rDTO.rNo + "'/>";
 								str += "<input type='hidden' id='rContent' value='" + rDTO.rContent + "'/>";
 								
+								
 								if(data.loginUserId == rDTO.replyId){
-									str += "<button type='button' id='replyDetail'>수정</button>";
+									str += "<span style ='float:right;font-size:8pt'>";
+									str += "<button type='button' class='btn-link' id='replyDetail'>수정</button>|<button type='button' class='btn-link' id='replyDelBtn'>삭제</button>";
+									str += "</span></span>";
 								}
 								
-								str += "</td></tr>"
+								str+="</br></br>";
 								
 								$("#replyTable").append(str);
 							});
