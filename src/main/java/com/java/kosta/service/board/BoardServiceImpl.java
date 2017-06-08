@@ -241,9 +241,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		// temp 폴더 이미지 삭제
 		File images[] = new File(FILE_UPLOAD_PATH + UPLOAD_DAUM_EDITOR_IMAGE_TEMP_PATH).listFiles();
-		for (int i = 0; i < images.length; i++) {
-			System.out.println(images[i].getName());
-			images[i].delete();
+		if(images !=null){
+			for (int i = 0; i < images.length; i++) {
+				System.out.println(images[i].getName());
+				images[i].delete();
+			}
 		}
 		
 		
@@ -285,9 +287,11 @@ public class BoardServiceImpl implements BoardService{
 		}
 		// temp 폴더 이미지 삭제
 		File files[] = new File(FILE_UPLOAD_PATH + UPLOAD_DAUM_EDITOR_FILE_TEMP_PATH).listFiles();
-		for (int i = 0; i < files.length; i++) {
-			System.out.println(files[i].getName());
-			files[i].delete();
+		if(files !=null){
+			for (int i = 0; i < files.length; i++) {
+				System.out.println(files[i].getName());
+				files[i].delete();
+			}
 		}
 	}
 

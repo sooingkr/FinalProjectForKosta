@@ -224,7 +224,6 @@
 							str += "<th style='width: 35%; text-align: center;'>제목</th>"
 							str += "<th style='width: 10%; text-align: center;'>작성자</th>"
 							str += "<th style='width: 20%; text-align: center;''>작성날짜</th>"
-							str += "<th style='text-align:center;'>구매결정</th>";
 							str += "</tr>"
 							$.each(result.MyBoardList, function(i, board) {
 								str += "<tr>";
@@ -234,11 +233,10 @@
 								str += "<td>" + board.userId + "</td>";
 								str += "<td>" + board.bRegDate + "</td>";
 								str += "</tr>";
-								$("#formWrapper").append(str);
 							});
-							str += "<td><button class="btn btn-default" data-target="#layerpop" data-toggle="modal">모달출력버튼</button><br/></td>";
 							str += "</div>";
 							str += "</table>";
+							$("#formWrapper").append(str);
 							if(result.pagingDTO.pageNo !=null){
 							
 							}
