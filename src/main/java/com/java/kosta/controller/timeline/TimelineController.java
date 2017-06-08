@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,24 +16,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.java.kosta.dto.note.NoteVO;
 import com.java.kosta.dto.note.PagingDTO;
 import com.java.kosta.dto.timeline.FilterDTO;
 import com.java.kosta.dto.timeline.TimelineDTO;
 import com.java.kosta.dto.user.UserVO;
+import com.java.kosta.service.note.NoteService;
 import com.java.kosta.service.timeline.TimelineService;
 
 @Controller
 public class TimelineController {
-
+	
 	@Inject
 	TimelineService service;
 
 	Logger logger = LoggerFactory.getLogger(TimelineController.class);
 
+	@Inject
+	NoteService noteService;
 	// 타임라인 메인으로 이동
 	@RequestMapping(value = "/timeline")
-	public String timelineMain() {
+	public String timelineMain(HttpServletRequest req, NoteVO vo) throws Exception {
 		logger.info("타임라인 폼으로 이동");
+		
+		HttpSession session = req.getSession();
+		UserVO uvo = (UserVO) session.getAttribute("loginSession");
+		if(uvo != null){
+			logger.info("타임라인 진입때 안읽은 쪽지함 갯수 뿌려줬나");
+			vo.setRecvId(uvo.getUserId());
+			int NotReadCnt = noteService.totalCntNotOpen(vo);
+			session.setAttribute("notOpen", NotReadCnt);
+		}
+		
 		return "timeline/timelineMain";
 	}
 

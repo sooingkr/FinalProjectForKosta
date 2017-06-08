@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TimeLine</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/css/bootstrap.offcanvas.css" />
     <link rel="stylesheet" href="/resources/css/exindex.css" />
     <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/bootstrap.offcanvas.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
      
      <!-- handlebars 추가 -->
@@ -48,15 +48,18 @@
        function poll(){
           setTimeout(function(){
              $.ajax({
+            	async : false,
                 url : "/note/alarmNote",
                 type : "POST",
-                success : function(){
-                   console.log(new Date());
+                success : function(totalCnt){
+                   console.log("타임라인 : "+new Date());
+                   console.log("notOpen값 : "+totalCnt);
+                   $("#noteBadge").text(totalCnt);
+//                    location.replace("/timeline");
                 },
                 dateType : "json",
                 complete : poll,
                 timeout : 3000
-                
              })
           },5000);
        }
@@ -154,9 +157,9 @@
 							<!-- 로그아웃 -->
 							<c:if test="${loginSession.userId != null}">
 								<span style="font-weight: bold;">${loginSession.userId} </span> 
-								<a href="/note/listNotOpen">
+								<a href="/note/listReceive">
 									<!-- 읽지 않은 쪽지 -->
-									<span class="badge" style="background-color: #CB1C05;">알림:${sessionScope.notOpen}</span>
+									<span id="noteBadge" class="badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
 								</a>&nbsp; ┃ &nbsp;
 								<a href="/user/Logout" style="font-weight: bold;">로그아웃</a>
 							</c:if>
