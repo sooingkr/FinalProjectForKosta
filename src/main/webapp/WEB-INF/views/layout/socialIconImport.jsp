@@ -15,7 +15,6 @@
 		<c:if test="${loginSession.userId != null}">
 			<span style="font-weight: bold;">${loginSession.userId} </span> 
 			<a href="/note/listReceive">
-				
 				<!-- 읽지 않은 쪽지 -->
 				<span id="noteBadge" class="Badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
 			</a>&nbsp; ┃ &nbsp;
@@ -42,7 +41,7 @@
 	         url : "/note/alarmNote",
 	         type : "POST",
 	         success : function(totalCnt){
-// 	            console.log("타임라인 : "+new Date());
+	            console.log("Icon : "+new Date());
 // 	            console.log("notOpen값 : "+totalCnt);
 	            $("#noteBadge").text(totalCnt);
 	//             location.replace("/timeline");
