@@ -12,8 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.socket.TextMessage;
 
@@ -27,7 +30,7 @@ import com.java.kosta.validation.ValidationForNote;
 @Controller
 @RequestMapping("/note/*")
 public class NoteController {
-   
+   String totalCount = 0+""; // 안 읽은 쪽지 알림을 위한 변수
    // Logger 
    Logger logger = LoggerFactory.getLogger(NoteController.class);
    //추가
@@ -104,26 +107,22 @@ public class NoteController {
    } // end of listForReceive
    
    // 알림에 쪽지 띄우기
+   
    @RequestMapping(value="alarmNote")
-   public String alarmNote(HttpServletRequest req , NoteVO vo, PagingDTO page) throws Exception{
-      
+   public @ResponseBody String alarmNote(HttpServletRequest req , NoteVO vo, PagingDTO page) throws Exception{
       HttpSession session = req.getSession();
       //현재 로그인세션정보를 가지고와서 UserVO로 형변환을 해준다.
       UserVO uvo = (UserVO) session.getAttribute("loginSession");
+      int totalCnt=0;
       if(uvo!=null){
          //로그인 정보가 있는 경우 내가 받은 쪽지임으로 setRecvId에 내 아이디를 넣어줌
          vo.setRecvId(uvo.getUserId());
          //안읽은쪽지 리스트의 정보를 가지고 와서 그 크기를 알림으로 넘겨준다.
-         int totalCnt = service.totalCntNotOpen(vo);
+         totalCnt = service.totalCntNotOpen(vo);
+         System.out.println("totalCnt : "+totalCnt);
          session.setAttribute("notOpen", totalCnt+"");
       }
-      else{
-         //로그인 정보가 없는 경우는 session 정보에 0을 전달해서
-         //알림은 0을 임시적으로 가리키게 된다.
-         session.setAttribute("notOpen", "0");
-      }
-      return "redirect:/";
-
+      return totalCnt+"";
    }
 
    
