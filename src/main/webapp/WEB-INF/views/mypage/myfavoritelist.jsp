@@ -50,7 +50,6 @@
 							<th style="width: 35%; text-align: center;">제목</th>
 							<th style="width: 10%; text-align: center;">작성자</th>
 							<th style="width: 20%; text-align: center;">작성날짜</th>
-							<th style="width: 10%; text-align: center;">좋아요</th>
 						</tr>
 						<c:if test="${empty MyFavoriteList}">
 							<tr>
@@ -225,6 +224,7 @@
 							str += "<th style='width: 35%; text-align: center;'>제목</th>"
 							str += "<th style='width: 10%; text-align: center;'>작성자</th>"
 							str += "<th style='width: 20%; text-align: center;''>작성날짜</th>"
+							str += "<th style='text-align:center;'>구매결정</th>";
 							str += "</tr>"
 							$.each(result.MyBoardList, function(i, board) {
 								str += "<tr>";
@@ -236,6 +236,7 @@
 								str += "</tr>";
 								$("#formWrapper").append(str);
 							});
+							str += "<td><button class="btn btn-default" data-target="#layerpop" data-toggle="modal">모달출력버튼</button><br/></td>";
 							str += "</div>";
 							str += "</table>";
 							if(result.pagingDTO.pageNo !=null){
