@@ -10,6 +10,7 @@ import com.java.kosta.dao.mypage.MyPageDAO;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.transaction.TransactionDTO;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
@@ -67,6 +68,16 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId) {
 		return mDAO.selectMyBoardListCount(pagingDTO, userId);
+	}
+
+	@Override
+	public int existIdCheck(TransactionDTO dto) {
+		return mDAO.existIdCheck(dto);
+	}
+
+	@Override
+	public void insertTransaction(TransactionDTO dto) {
+		mDAO.insertTransaction(dto);
 	}
 
 }

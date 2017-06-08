@@ -7,8 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.transaction.TransactionDTO;
 
 public interface MyPageService {
+	
+	public void insertTransaction(TransactionDTO dto);
+	
+	// 구매결정 모달창 존재하는 아이디인지 검색
+	public int existIdCheck(TransactionDTO dto);
 	
 	/** 전체 레코드 갯수 가져옴 */
 	public int selectMyFavoriteListTotalCount(BoardPagingDTO pagingDTO, String userId);	
