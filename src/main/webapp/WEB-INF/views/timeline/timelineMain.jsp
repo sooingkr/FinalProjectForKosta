@@ -52,7 +52,7 @@
                 url : "/note/alarmNote",
                 type : "POST",
                 success : function(totalCnt){
-//                    console.log("타임라인 : "+new Date());
+                   console.log("타임라인 : "+new Date());
 //                    console.log("notOpen값 : "+totalCnt);
                    $("#noteBadge").text(totalCnt);
 //                    location.replace("/timeline");

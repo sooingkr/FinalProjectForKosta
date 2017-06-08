@@ -30,7 +30,6 @@ import com.java.kosta.validation.ValidationForNote;
 @Controller
 @RequestMapping("/note/*")
 public class NoteController {
-   String totalCount = 0+""; // 안 읽은 쪽지 알림을 위한 변수
    // Logger 
    Logger logger = LoggerFactory.getLogger(NoteController.class);
    //추가
@@ -108,19 +107,19 @@ public class NoteController {
    
    // 알림에 쪽지 띄우기
    @RequestMapping(value="alarmNote")
-   public @ResponseBody String alarmNote(HttpServletRequest req , NoteVO vo, PagingDTO page) throws Exception{
+   public @ResponseBody String alarmNote(HttpServletRequest req , NoteVO vo) throws Exception{
       HttpSession session = req.getSession();
       //현재 로그인세션정보를 가지고와서 UserVO로 형변환을 해준다.
       UserVO uvo = (UserVO) session.getAttribute("loginSession");
-      int totalCnt=0;
+      String totalCnt=0+"";
       if(uvo!=null){
          //로그인 정보가 있는 경우 내가 받은 쪽지임으로 setRecvId에 내 아이디를 넣어줌
          vo.setRecvId(uvo.getUserId());
          //안읽은쪽지 리스트의 정보를 가지고 와서 그 크기를 알림으로 넘겨준다.
-         totalCnt = service.totalCntNotOpen(vo);
-         session.setAttribute("notOpen", totalCnt+"");
+         totalCnt = service.totalCntNotOpen(vo)+"";
+         session.setAttribute("notOpen", totalCnt);
       }
-      return totalCnt+"";
+      return totalCnt;
    }
 
    

@@ -55,7 +55,7 @@ a:hover { color: #F78E41; text-decoration: none;}
 	         url : "/note/alarmNote",
 	         type : "POST",
 	         success : function(totalCnt){
-// 	            console.log("타임라인 : "+new Date());
+	            console.log("Icon : "+new Date());
 // 	            console.log("notOpen값 : "+totalCnt);
 	            $("#noteBadge").text(totalCnt);
 	//             location.replace("/timeline");
