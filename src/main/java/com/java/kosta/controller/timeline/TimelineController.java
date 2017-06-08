@@ -45,7 +45,7 @@ public class TimelineController {
 			logger.info("타임라인 진입때 안읽은 쪽지함 갯수 뿌려줬나");
 			vo.setRecvId(uvo.getUserId());
 			int NotReadCnt = noteService.totalCntNotOpen(vo);
-			session.setAttribute("notOpen", NotReadCnt);
+			session.setAttribute("notOpen", NotReadCnt+"");
 		}
 		
 		return "timeline/timelineMain";
