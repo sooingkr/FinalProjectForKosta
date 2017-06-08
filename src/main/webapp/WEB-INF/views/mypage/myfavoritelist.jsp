@@ -28,7 +28,36 @@
 
 
 		<section class="site-content full-height">
+		
+		<!-- 구매결정 모달창 -->
+		<div class="modal fade" id="layerpop" >
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <!-- header -->
+		      <div class="modal-header">
+		        <!-- 닫기(x) 버튼 -->
+		        <button type="button" class="close" data-dismiss="modal">×</button>
+		        <!-- header title -->
+		        <h4 class="modal-title">구매결정 폼</h4>
+		      </div>
+		      <!-- body -->
+		      <div class="modal-body">
+		      	<input type="hidden" id="bnoId" /><br/>
+		      	<input type="hidden" id="userIdVal" /><br/>
+		      	<input type="hidden" id="cateIdVal" />
+		      	<label>거래할 사용자 ID</label>
+				<input type="text" class="determine"/><button type='button' class='determineBtn'>결정</button> 
+		      </div>
+		      <!-- Footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
+		<!-- End of 구매결정 모달창 -->
+		
 		<div class="content-frame">
 			<div id="side_nav" style="float: left; height: 100%; line-height: 6;">
 				<ul style="list-style: none;">
@@ -216,15 +245,16 @@
 						if (result.success == "success") {
 							var str = "";
 							$("#form-contact").remove();
-							str += "<div id='form-contact' style='padding-left: 1%'>"
-							str += "<table class='table table-bordered'>"
-							str += "<tr style='background-color: #FFA800;'>"
-							str += "<th style='width: 5%; text-align: center;'>No</th>"
-							str += "<th style='width: 10%; text-align: center;'>카테고리</th>"
-							str += "<th style='width: 35%; text-align: center;'>제목</th>"
-							str += "<th style='width: 10%; text-align: center;'>작성자</th>"
-							str += "<th style='width: 20%; text-align: center;''>작성날짜</th>"
-							str += "</tr>"
+							str += "<div id='form-contact' style='padding-left: 1%'>";
+							str += "<table class='table table-bordered'>";
+							str += "<tr style='background-color: #FFA800;'>";
+							str += "<th style='width: 5%; text-align: center;'>No</th>";
+							str += "<th style='width: 10%; text-align: center;'>카테고리</th>";
+							str += "<th style='width: 35%; text-align: center;'>제목</th>";
+							str += "<th style='width: 10%; text-align: center;'>작성자</th>";
+							str += "<th style='width: 20%; text-align: center;''>작성날짜</th>";
+							str += "<th>구매결정</th>";
+							str += "</tr>";
 							$.each(result.MyBoardList, function(i, board) {
 								str += "<tr>";
 								str += "<td>" + board.bNo + "</td>";
@@ -232,6 +262,7 @@
 								str += "<td> <a href='/board/category/detailContent?bno='"+board.bNo+"'>'"+ board.bTitle +" </a> </td>";
 								str += "<td>" + board.userId + "</td>";
 								str += "<td>" + board.bRegDate + "</td>";
+								str += "<td><button class='btn btn-default testBtn' data-target='#layerpop' data-toggle='modal'>판매자 지정</button></td>";
 								str += "</tr>";
 							});
 							str += "</div>";
@@ -244,6 +275,51 @@
 					}
 				});
 			} // end of update()
+			
+			
+			$(document).on("click",".testBtn",function(event){
+				var bno = $(this).parent().prev().prev().prev().prev().prev().text();
+				var userId = $(this).parent().prev().prev().text();
+				var cateId = $(this).parent().prev().prev().prev().prev().text();
+				
+				$("#bnoId").val(bno);
+				$("#userIdVal").val(userId);
+				$("#cateIdVal").val(cateId);
+				
+			});
+			
+			// 구매 결정 모달창에서 거래할 사람 아이디가 존재하는지 확인하고 있으면 검색처리 진행
+			$(".determineBtn").on("click",function(event){
+				var txt = $(".determine").val();
+				if ( txt == null || txt == '' ){
+					alert("사용자를 지정하세요.");
+					txt.focus();
+					return;
+				}else{
+					$.ajax({
+						type:'post',
+						url:'/mypage/existIdCheck',
+						headers:{
+							"Content-Type":"application/json"
+						},
+						dataType:'text',
+						data:JSON.stringify({
+							userId:$("#userIdVal").val(),
+							bno:$("#bnoId").val(),
+							cateId:$("#cateIdVal").val(),
+							buyerId:txt
+						}),
+						success:function(data){
+							if ( data == 'FAIL' ){
+								alert("존재하지 않는 사용자 입니다. 다시 확인해주세요.");
+								txt.focus();
+							}else if ( data == 'SUCCESS' ){
+								alert("게시글의 상태가 거래중으로 바꼈습니다.");
+							}
+						}
+					});
+				}
+			});
 		</script>
 
 	</div>

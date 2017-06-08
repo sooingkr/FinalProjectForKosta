@@ -5,6 +5,16 @@
 
 <mapper namespace="com.java.kosta.dao.mypage.MyPageDAO">
 
+	<!-- 구매결정 모달창에서 존재하는 아이디인지 검색 -->
+	<select id="existIdCheck" resultType="int">
+		select count(*) from usertable where userId=#{buyerId}
+	</select>
+
+	<!-- 거래자 지정시 테이블 insert -->
+	<insert id="insertTransaction">
+		insert into eval(userId,bno,cateId,byuerId,pscore) values(#{userId},#{bno},#{cateId},#{buyerId},0)
+	</insert>
+
 	<!-- 전체 레코드 갯수 조회 -->
 	<select id="selectMyFavoriteListTotalCount" resultType="int">
 		SELECT
@@ -14,6 +24,8 @@
 		WHERE
 		userId = #{userId}
 	</select>
+	
+	
 	<!-- 내가 누른 좋아요 가져오기 -->
 	<select id="selectMyFavoriteList" resultType="BoardDTO">
 

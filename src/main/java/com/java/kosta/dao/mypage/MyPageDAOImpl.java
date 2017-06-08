@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.transaction.TransactionDTO;
 
 @Repository
 public class MyPageDAOImpl implements MyPageDAO{
@@ -94,7 +95,14 @@ public class MyPageDAOImpl implements MyPageDAO{
 		return sqlSession.selectOne(NameSpace + ".selectMyBoardListCount",map);
 	}
 
+	@Override
+	public int existIdCheck(TransactionDTO dto) {
+		return sqlSession.selectOne(NameSpace + ".existIdCheck",dto);
+	}
 
-
+	@Override
+	public void insertTransaction(TransactionDTO dto) {
+		sqlSession.insert(NameSpace+".insertTransaction", dto);
+	}
 
 }

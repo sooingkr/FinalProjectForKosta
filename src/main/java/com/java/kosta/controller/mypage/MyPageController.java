@@ -12,14 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.kosta.common.Constants;
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.transaction.TransactionDTO;
 import com.java.kosta.dto.user.UserVO;
 import com.java.kosta.service.board.BoardServiceImpl;
 import com.java.kosta.service.mypage.MyPageServiceImpl;
@@ -35,6 +36,29 @@ public class MyPageController {
 	BoardServiceImpl bservice;
 
 
+	/**
+	 * 	구매 결정 모달창에서 거래할 사용자 지정시 존재하는 아이디인지 확인
+	 * 	황영롱
+	 */
+	@RequestMapping(value="/existIdCheck")
+	public @ResponseBody String existIdCheck(@RequestBody TransactionDTO dto){
+		logger.info("넘어온 값 : " + dto);
+		// 1 이면 있는 사용자 0이면 없는 사용자
+		int checkNum = service.existIdCheck(dto);
+		logger.info("있는사용자 ?? : " + checkNum);
+		String result = "";
+		if ( checkNum == 0 ){
+			result = "FAIL";
+		}else if ( checkNum == 1 ){
+			result = "SUCCESS";
+			// 거래관련 튜플 삽입
+			service.insertTransaction(dto);
+		}
+		
+		return result;
+	}
+	
+	
 	/** 마이페이지 좋아요 보기 */
 	@RequestMapping(value="/myList")
 	public  String boardList(BoardPagingDTO pagingDTO, Model model, HttpServletRequest req){
