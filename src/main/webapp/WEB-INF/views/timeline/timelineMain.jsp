@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TimeLine</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.offcanvas.css" />
     <link rel="stylesheet" href="/resources/css/exindex.css" />
     <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/bootstrap.offcanvas.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
      
      <!-- handlebars 추가 -->
@@ -37,7 +37,7 @@
 	<script type="text/javascript" src="/resources/sockjs.min.js"/>    
 	<script type="text/javascript" src="/resources/js/json2.js"></script>
 <!-- 알림을 위한 polling -->
- <script>
+<script>
  
     if('${loginSession != null}'){
        
@@ -48,7 +48,6 @@
        function poll(){
           setTimeout(function(){
              $.ajax({
-            	async : false,
                 url : "/note/alarmNote",
                 type : "POST",
                 success : function(totalCnt){
@@ -60,7 +59,7 @@
                 dateType : "json",
                 complete : poll,
                 timeout : 3000
-             })
+             });
           },5000);
        }
            
@@ -102,11 +101,6 @@
    
   
 </script>
-<style type="text/css">
-	.bcontentId{
-		height:100px;
-	}
-</style>
 </head>
 
 <body>

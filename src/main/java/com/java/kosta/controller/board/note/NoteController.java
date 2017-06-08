@@ -107,7 +107,6 @@ public class NoteController {
    } // end of listForReceive
    
    // 알림에 쪽지 띄우기
-   
    @RequestMapping(value="alarmNote")
    public @ResponseBody String alarmNote(HttpServletRequest req , NoteVO vo, PagingDTO page) throws Exception{
       HttpSession session = req.getSession();
