@@ -137,38 +137,42 @@
 				<!-- End of GoogleMap API 연동(황영롱) -->
 				
 			
-				<h4 id="hello"><span class="glyphicon glyphicon-book" style="color: #CC723D;">${cateDTO.cateName}</span></h4>
+				<h3><span class="glyphicon glyphicon-list-alt" style="color: #CC723D;">&nbsp;${cateDTO.cateName}</span></h3>
+				<br><br>
 				<table class="table table-bordered">
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">카테고리</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">카테고리</th>
 						<td>${cateDTO.cateName}<input type="hidden" name="bCategory"
 							value="${boardDTO.cateId}" /></td>
-						<th style="width: 20%; background: #aaa; text-align: center;">조회수</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">조회수</th>
 						<td>${boardDTO.viewCnt }</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">작성일</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">작성일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${boardDTO.bRegDate }" /></td>
-						<th style="width: 20%; background: #aaa; text-align: center;">수정일</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">수정일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${boardDTO.bModifyDate }" /></td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">작성자</th>
-						<td colspan="3">${boardDTO.userId}
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">작성자</th>
+						<td>${boardDTO.userId}
 							<!-- 쪽지쓰기 모달창 띄우기 -->
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<span style="box-shadow: 0px 2px 5px 2px #ccc;border-radius:10px">
-								<a href="#login_form" id="login_pop">&nbsp;쪽지 쓰기&nbsp;</a>
-							</span></td>
+							&nbsp;&nbsp;&nbsp;
+								
+								<a href="#login_form" id="login_pop" class="btn btn-link">
+								<span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;쪽지쓰기&nbsp;</span></a>
+							</td>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;color: #EDA900">상품가치</th>
+						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">제목</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">제목</th>
 						<td colspan="3">${boardDTO.bTitle}</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">내용</th>
 						<td colspan="3"><pre style="min-height: 300px">${boardDTO.bContent}</pre>
 							<%-- <c:forEach var="fileName" items="${fileList}">
 							<p>
@@ -178,7 +182,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">첨부파일</th>
+						<th style="width: 20%; background: #EAEAEA; text-align: center;">첨부파일</th>
 						<td colspan="3">
 							<c:forEach var="baList" items="${baList}">
 								<c:if test="${baList.attachType == '1'}">
@@ -186,39 +190,30 @@
 								</c:if>
 							</c:forEach></td>
 					</tr>
-					<tr>
-						<th style="width: 20%; background: #aaa; text-align: center;">상품가치</th>
-						<td colspan="3">${boardDTO.value}원</td>
-					</tr>
+		
 				</table>
-				<table align="right">
-					<tr>
-						<c:if test="${loginSession.userId != null }">
-							<td>
-								<div id="content">
-									<button id="likeButton" type="button" style="width: 70px;">
-										<img id="likeImage" src="" style="width: 10px; height: 10px;" />
-										<span id="likeCount"></span>
-									</button>
-								</div>
-						</c:if>
+				<div align="right">
 
-						<c:if test="${loginSession.userId == boardDTO.userId }">
-							<td>&nbsp;
-								<button type="button" style="width: 70px"
-									onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}&pageNo=${param.pageNo }'">글수정</button>
-							</td>
-							<td>&nbsp;
-								<button style="width: 70px" type="button"
-									onclick="deleteContent()">글삭제</button>
-							</td>
-						</c:if>
-						<td align="right">&nbsp;
-							<button type="button" style="width: 70px"
-								onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}&pageNo=${param.pageNo }'">목록</button>
-						</td>
-					</tr>
-				</table>
+					<c:if test="${loginSession.userId != null }">
+
+						<button id="likeButton" type="button" class="btn btn-default">
+							<img id="likeImage" src="" style="width: 10px; height: 10px;" />
+							<span id="likeCount"></span>
+						</button>
+
+					</c:if>
+					<c:if test="${loginSession.userId == boardDTO.userId }">
+						<button type="button" class="btn btn-warning"
+							onclick="location.href='/board/category/updateContentForm?bNo=${boardDTO.bNo}&pageNo=${param.pageNo }'">글수정</button>
+
+						<button type="button" class="btn btn-danger" onclick="deleteContent()">글삭제</button>
+
+					</c:if>
+
+					<button type="button" class="btn btn-primary"
+						onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}&pageNo=${param.pageNo }'">목록</button>
+
+				</div>
 				<br /><br />
 				
 				<!-------------------------------- 쪽지 쓰기 popup form #1 ---------------------------------->
