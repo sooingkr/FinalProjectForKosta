@@ -22,6 +22,7 @@ $(document).ready(function(){
     	var str = (d.getFullYear() + " " + (d.getMonth()+1) + " " + d.getDate());
     	return str;
     });
+    
     //////////////////핸들바스//////////////////
     
     
@@ -31,8 +32,14 @@ $(document).ready(function(){
 			
 			$(data.list).each(function(){
 		          var html = template(this);
+		          var str = "<pre>"+this.bcontent+"</pre><hr/>";
+		          var btnStr = "<button type='button'>"
+		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
+		        	           +"</button></div></li>";
+		          html += str;
+		          html += btnStr;
+		          console.log("test check : " + html);
 		          placeHolder.append(html);
-		      //   check(this.bno);
 		    });
 			
 			$("#searchId").val(searchText);
@@ -54,7 +61,6 @@ $(document).ready(function(){
 	        	 listAll(page,keywords);
 	         }
 	         else if(statueFilter == true){// 필터가 적용되면 필터를 계산한 값을 뿌려줌
-	            console.log("stateTrue");
 	        	 listFilter(page,allData);
 	         }
 	       }
@@ -86,7 +92,7 @@ $(document).ready(function(){
 	      console.log("fvalue2 : "+fvalue2);
 
 	      /* 필수 필수 */
-	      allData = {"fcateArr" : fcateArr, "fvalue1" : fvalue1, "fvalue2" : fvalue2, "page" :page};
+	      allData = {"fcateArr" : fcateArr, "fvalue1" : fvalue1, "fvalue2" : fvalue2};
 	      console.log("page : "+page);
 
 	      listFilter(page,allData); // ajax로 호출
@@ -100,8 +106,8 @@ $(document).ready(function(){
 	            
 	            $.ajax({
 	               async : false,   
-	               url : "timeline/filterList",
-	               type : 'POST',
+	               url : "timeline/filterList?page="+pageNum,
+	               type : 'GET',
 	               dataType : "json",
 	               data : allData,
 	               success : function(data){
@@ -111,8 +117,15 @@ $(document).ready(function(){
 	                  var bno = "";
 	                  var temp = "";
 	                  $(data.list).each(function(){
-	                	  var html = template(this);
-	     		          placeHolder.append(html);
+	     		         var html = template(this);
+	     		         var str = "<pre>"+this.bcontent+"</pre><hr/>";
+	     		         var btnStr = "<button type='button'>"
+	   		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"
+	   		        	           +"</button></div></li>";
+	     		         html += str;
+	     		         html += btnStr;
+	     		         console.log("test check : " + html);
+	     		         placeHolder.append(html);
 	                  });// end of each
 	                  
 	               },
