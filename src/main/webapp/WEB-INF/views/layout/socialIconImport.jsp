@@ -3,8 +3,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 
- a:visited { color: black; text-decoration: none;}
- a:hover { color: #F78E41; text-decoration: none;}
+.logout { color: black; text-decoration: none;}
+a:hover { color: #F78E41; text-decoration: none;}
+.msg_a {
+		position: relative; 
+    	color:white;
+    	text-decoration: none;
+    	top:-10px;
+    	left:-25px;
+}
+.Badge{
+	background-color: #CB1C05;
+	border-radius:10px;
+	font-weight: bold;
+	padding:0 5px 0 5px;
+}
  
 </style>
 
@@ -14,12 +27,12 @@
 		<!-- 로그아웃 -->
 		<c:if test="${loginSession.userId != null}">
 			<span style="font-weight: bold;">${loginSession.userId} </span> 
-			<a href="/note/listReceive">
-				
+			<img class="msg_img" src="/resources/images/message.png"/> 
+			<a class="msg_a" href="/note/listReceive">
 				<!-- 읽지 않은 쪽지 -->
-				<span id="noteBadge" class="Badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
-			</a>&nbsp; ┃ &nbsp;
-			<a href="/user/Logout" style="font-weight: bold;">로그아웃</a>
+				<span id="noteBadge" class="Badge" >${sessionScope.notOpen}</span>
+			</a>┃ &nbsp;
+			<a class="logout" href="/user/Logout" style="font-weight: bold;">로그아웃</a>
 		</c:if>
 		
 		
@@ -42,7 +55,7 @@
 	         url : "/note/alarmNote",
 	         type : "POST",
 	         success : function(totalCnt){
-// 	            console.log("타임라인 : "+new Date());
+	            console.log("Icon : "+new Date());
 // 	            console.log("notOpen값 : "+totalCnt);
 	            $("#noteBadge").text(totalCnt);
 	//             location.replace("/timeline");

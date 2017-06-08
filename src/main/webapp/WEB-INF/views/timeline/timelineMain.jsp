@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,7 +52,7 @@
                 url : "/note/alarmNote",
                 type : "POST",
                 success : function(totalCnt){
-//                    console.log("타임라인 : "+new Date());
+                   console.log("타임라인 : "+new Date());
 //                    console.log("notOpen값 : "+totalCnt);
                    $("#noteBadge").text(totalCnt);
 //                    location.replace("/timeline");
@@ -101,6 +102,13 @@
    
   
 </script>
+<style>
+	.msg_a {
+		position: absolute;
+    	top: 5px;
+    	left: 65px;
+	}
+</style>
 </head>
 
 <body>
@@ -127,7 +135,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Demo</a>
+                    <a class="navbar-brand" href="#">통합검색</a>
                     <button type="button" class="navbar-toggle offcanvas-toggle pull-right" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas" style="float:left;">
                         <span class="sr-only">Toggle navigation</span>
                         <span>
@@ -139,24 +147,25 @@
                 </div>
                 <div class="navbar-offcanvas navbar-offcanvas-touch" id="js-bootstrap-offcanvas">
                    
-                    <ul class="nav navbar-nav">
+                    <!-- <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Link</a></li>
                         <li><a href="#">Link</a></li>
-                    </ul>
+                    </ul> -->
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
                             <input id="searchId" type="text" class="form-control" placeholder="Search">
                         </div>
                         <button id="searchBtn" type="button" class="btn btn-default">검색</button>
                     </form>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="margin-right:3%">
       					<li>
       				    <!--  -->
-				        <nav class="social-bar" style="margin-right: 3%;">    
+				        <nav class="social-bar" style="margin-right: 0%;">    
 							<!-- 로그아웃 -->
 							<c:if test="${loginSession.userId != null}">
-								<span style="font-weight: bold;">${loginSession.userId} </span> 
-								<a href="/note/listReceive">
+								<span style="font-weight: bold;">${loginSession.userId} </span>
+								<img src="/resources/images/message.png"/> 
+								<a class="msg_a" href="/note/listReceive">
 									<!-- 읽지 않은 쪽지 -->
 									<span id="noteBadge" class="badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
 								</a>&nbsp; ┃ &nbsp;

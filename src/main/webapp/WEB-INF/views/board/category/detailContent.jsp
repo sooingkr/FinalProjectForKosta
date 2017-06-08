@@ -17,7 +17,8 @@
 	height: 150px;
 	background-color: #A6A6A6;
 	border-radius: 10px;
-	position: relative;
+	position: fixed;
+	top: 50%;
 	left: 50%;
 	margin-top: -30%;
 	margin-left: -150px;
