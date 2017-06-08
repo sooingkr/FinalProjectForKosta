@@ -11,6 +11,13 @@ import com.java.kosta.dto.transaction.TransactionDTO;
 
 public interface MyPageService {
 	
+	public String getCustomerId(String bno);
+	
+	//-- 고객이 후기를 쓸 게시글(거래) 수가 몇개인지를 조회 
+	public int countClient(TransactionDTO dto);
+	//고객이 후기를 쓸 게시글 목록 조회
+	public List<BoardDTO> clientTransactionList(TransactionDTO dto);
+	
 	public void insertTransaction(TransactionDTO dto);
 	
 	// 구매결정 모달창 존재하는 아이디인지 검색
@@ -18,6 +25,8 @@ public interface MyPageService {
 	
 	/** 전체 레코드 갯수 가져옴 */
 	public int selectMyFavoriteListTotalCount(BoardPagingDTO pagingDTO, String userId);	
+	
+	public int duplicateId(TransactionDTO dto);
 	
 	/** 나의좋아요 정보를 조회해서 List로 가져온다  */
 //	public List<BoardDTO> selectMyFavoriteList(BoardPagingDTO pagingDTO, String userId);

@@ -80,4 +80,24 @@ public class MyPageServiceImpl implements MyPageService{
 		mDAO.insertTransaction(dto);
 	}
 
+	@Override
+	public int duplicateId(TransactionDTO dto) {
+		return mDAO.duplicateId(dto);
+	}
+
+	@Override
+	public int countClient(TransactionDTO dto) {
+		return mDAO.countClient(dto);
+	}
+
+	@Override
+	public List<BoardDTO> clientTransactionList(TransactionDTO dto) {
+		return mDAO.clientTransactionList(dto);
+	}
+
+	@Override
+	public String getCustomerId(String bno) {
+		return mDAO.getCustomerId(bno);
+	}
+
 }

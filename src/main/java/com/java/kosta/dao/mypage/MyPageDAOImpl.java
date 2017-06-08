@@ -105,4 +105,24 @@ public class MyPageDAOImpl implements MyPageDAO{
 		sqlSession.insert(NameSpace+".insertTransaction", dto);
 	}
 
+	@Override
+	public int duplicateId(TransactionDTO dto) {
+		return sqlSession.selectOne(NameSpace+".duplicateId",dto);
+	}
+
+	@Override
+	public int countClient(TransactionDTO dto) {
+		return sqlSession.selectOne(NameSpace+".countClient",dto);
+	}
+
+	@Override
+	public List<BoardDTO> clientTransactionList(TransactionDTO dto) {
+		return sqlSession.selectList(NameSpace+".clientTransactionList",dto);
+	}
+
+	@Override
+	public String getCustomerId(String bno) {
+		return sqlSession.selectOne(NameSpace+".getCustomerId", bno);
+	}
+
 }

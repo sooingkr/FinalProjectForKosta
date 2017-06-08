@@ -54,12 +54,21 @@
                 success : function(totalCnt){
                    console.log("타임라인 : "+new Date());
 //                    console.log("notOpen값 : "+totalCnt);
-                   $("#noteBadge").text(totalCnt);
+                   $("#noteBadge").html(totalCnt);
 //                    location.replace("/timeline");
                 },
                 dateType : "json",
                 complete : poll,
                 timeout : 3000
+             });
+             
+             // 후기를 쓸 게시글 수가 몇개인지를 조회
+             $.ajax({
+            	 type:'GET',
+            	 url:'/mypage/countClient?buyerId=${loginSession.userId}',
+            	 success:function(result){
+            		 $("#countClientId").html(result);
+            	 }
              });
           },5000);
        }
@@ -165,6 +174,8 @@
 							<c:if test="${loginSession.userId != null}">
 								<span style="font-weight: bold;">${loginSession.userId} </span>
 								<img src="/resources/images/message.png"/> 
+								<span>거래중인 게시글</span>
+								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 								<a class="msg_a" href="/note/listReceive">
 									<!-- 읽지 않은 쪽지 -->
 									<span id="noteBadge" class="badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>

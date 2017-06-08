@@ -5,15 +5,35 @@
 
 <mapper namespace="com.java.kosta.dao.mypage.MyPageDAO">
 
+	<!-- bno값 가지고 eval 테이블에서 해당 거래자 id 가져오기  -->
+	<select id="getCustomerId" resultType="String">
+		select distinct buyerId from eval where bno = #{bno}
+	</select>
+
 	<!-- 구매결정 모달창에서 존재하는 아이디인지 검색 -->
 	<select id="existIdCheck" resultType="int">
 		select count(*) from usertable where userId=#{buyerId}
 	</select>
 
+	<select id="duplicateId" resultType="int">
+		select count(*) from eval where buyerId=#{buyerId} and bno=#{bno}
+	</select>
+
 	<!-- 거래자 지정시 테이블 insert -->
 	<insert id="insertTransaction">
-		insert into eval(userId,bno,cateId,byuerId,pscore) values(#{userId},#{bno},#{cateId},#{buyerId},0)
+		insert into eval(userId,bno,cateId,buyerId,pscore) values(#{userId},#{bno},#{cateId},#{buyerId},0)
 	</insert>
+
+	<!-- 고객이 후기를 쓸 게시글(거래) 수가 몇개인지를 조회 -->
+	<select id="countClient" resultType="int">
+		select count(*) from eval where buyerId=#{buyerId} and pcontent IS NULL
+	</select>
+	
+	<!-- 고객이 후기를 쓸 게시글 목록 조회 -->
+	<select id="clientTransactionList" resultType="BoardDTO">
+		select * from board
+		where bno IN (select bno from eval where buyerId=#{buyerId} and pcontent IS NULL) 
+	</select>
 
 	<!-- 전체 레코드 갯수 조회 -->
 	<select id="selectMyFavoriteListTotalCount" resultType="int">

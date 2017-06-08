@@ -3,7 +3,7 @@ package com.java.kosta.dto.transaction;
 public class TransactionDTO {
 	private String userId;
 	private String bno;
-	private String cateid;
+	private int cateId;
 	private String postNum;
 	private String buyerId;
 	private String pcontent;
@@ -20,11 +20,12 @@ public class TransactionDTO {
 	public void setBno(String bno) {
 		this.bno = bno;
 	}
-	public String getCateid() {
-		return cateid;
+
+	public int getCateId() {
+		return cateId;
 	}
-	public void setCateid(String cateid) {
-		this.cateid = cateid;
+	public void setCateId(int cateId) {
+		this.cateId = cateId;
 	}
 	public String getPostNum() {
 		return postNum;
@@ -52,7 +53,8 @@ public class TransactionDTO {
 	}
 	@Override
 	public String toString() {
-		return "TransactionDTO [userId=" + userId + ", bno=" + bno + ", cateid=" + cateid + ", postNum=" + postNum
+		return "TransactionDTO [userId=" + userId + ", bno=" + bno + ", cateId=" + cateId + ", postNum=" + postNum
 				+ ", buyerId=" + buyerId + ", pcontent=" + pcontent + ", pscore=" + pscore + "]";
 	}
+	
 }
