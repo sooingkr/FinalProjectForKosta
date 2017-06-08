@@ -29,5 +29,9 @@ public interface MyPageService {
 	
 	public List<BoardDTO> searchFavoriteList(String userId);
 
+	/**내가 쓴 목록  조회*/
+	public List<BoardDTO> selectWritedList(String userId) throws Exception;
 
+	/**내가 쓴 목록 갯수 조회*/
+	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId);
 }

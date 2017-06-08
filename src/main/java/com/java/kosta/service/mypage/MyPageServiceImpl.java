@@ -58,5 +58,15 @@ public class MyPageServiceImpl implements MyPageService{
 		return mDAO.selectMyFavoriteList(bno, userId);
 	}
 
+	@Override
+	public List<BoardDTO> selectWritedList(String userId) throws Exception {
+		return mDAO.selectWritedList(userId);
+	}
+
+
+	@Override
+	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId) {
+		return mDAO.selectMyBoardListCount(pagingDTO, userId);
+	}
 
 }

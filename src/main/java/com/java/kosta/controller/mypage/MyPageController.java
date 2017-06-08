@@ -1,7 +1,9 @@
 package com.java.kosta.controller.mypage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -154,6 +156,38 @@ public class MyPageController {
 	}
 
 
+	@RequestMapping(value="/myBoardList")
+	@ResponseBody
+	public Map<String,Object> myBoardList(Model model,HttpServletRequest req,BoardPagingDTO pagingDTO){
+		HashMap<String,Object> res=new HashMap<String, Object>();
+		
+		logger.info("들어옴");
+		UserVO loginSession = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
+		
+		res.put("loginSession", loginSession);
+		String userId = loginSession.getUserId();
+		
+		int totRecord = service.selectMyBoardListCount(pagingDTO, userId);
+		// 페이징 계산
+		pagingDTO.calcPage(totRecord);
+
+		try {
+			List<BoardDTO> list = service.selectWritedList(userId);//내가 쓴 글 목록 조회
+			res.put("success","success"); 
+			res.put("MyBoardList",list);
+			res.put("pagingDTO", pagingDTO);
+			
+			logger.info("asdasd"+list.get(0).getbRegDate());
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	
+	
+	
 	
 
 

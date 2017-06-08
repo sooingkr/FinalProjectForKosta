@@ -80,7 +80,19 @@ public class MyPageDAOImpl implements MyPageDAO{
 //		return sqlSession.selectList(NameSpace+".selectMyFavoriteList", map);
 //	}
 	
+	@Override
+	public List<BoardDTO> selectWritedList(String userId) {
+		return sqlSession.selectList(NameSpace + ".myBoardList", userId);
+		
+	}
 
+	@Override
+	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingDTO", pagingDTO);
+		map.put("userId", userId);
+		return sqlSession.selectOne(NameSpace + ".selectMyBoardListCount",map);
+	}
 
 
 

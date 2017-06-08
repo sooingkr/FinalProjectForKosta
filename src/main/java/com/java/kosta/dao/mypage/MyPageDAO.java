@@ -29,4 +29,9 @@ public interface MyPageDAO {
 	
 	public List<BoardDTO> searchFavoriteList(@Param("userId")String userId);
 
+	/**마이페이지 내가 쓴 목록 가져오기*/
+	public List<BoardDTO> selectWritedList(String userId);
+	
+	/**마이페이지 내가 쓴 목록 갯수 가져오기*/
+	public int selectMyBoardListCount(@Param("pagingDTO")BoardPagingDTO pagingDTO ,@Param("userId")String userId);
 }

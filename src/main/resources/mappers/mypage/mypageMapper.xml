@@ -67,5 +67,27 @@
 		WHERE
 		bno = #{bNo}
 	</select>
+	
+	
+	
+	<!-- 내가 올린 글 조회 -->
+	<select id="myBoardList" resultType="BoardDTO">
+	    SELECT 
+	    	* 
+	    FROM 
+	    	board
+	    WHERE
+	    	userId = #{userId}
+	    	
+	</select>
+		<!-- 내가 올린 글 갯수 조회 -->
+	<select id="selectMyBoardListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		board
+		WHERE
+		userId = #{userId}
+	</select>
+	
 
 </mapper>
