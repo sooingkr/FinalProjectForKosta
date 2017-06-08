@@ -28,6 +28,7 @@
 		<include refid="replyCol" />
 		FROM boardreply
 		WHERE bno = #{bNo}
+		ORDER BY rno
 		LIMIT #{startRow}, 5
 	</select>
 
@@ -37,6 +38,7 @@
 		<include refid="replyCol" />
 		FROM boardreply
 		WHERE bno = #{bNo}
+		ORDER BY rno
 	</select>
 
 	<!-- 댓글 전체 갯수 조회 -->

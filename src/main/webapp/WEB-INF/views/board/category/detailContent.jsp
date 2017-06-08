@@ -10,6 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>${cateDTO.cateName}</title>
 	<script type="text/javascript" src="/resources/js/fileupload.js"></script>
+	<%@include file="/WEB-INF/views/note/includeModalCSS.jsp"%>
 <style>
 #modDiv {
 	width: 300px;
@@ -134,8 +135,8 @@
 			    </script>
 				<!-- End of GoogleMap API 연동(황영롱) -->
 				
-				<h4 id="hello"><span class="glyphicon glyphicon-book" style="color: #CC723D;">&nbsp;${cateDTO.cateName}</span></h4>
-
+			
+				<h4 id="hello"><span class="glyphicon glyphicon-book" style="color: #CC723D;">${cateDTO.cateName}</span></h4>
 				<table class="table table-bordered">
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">카테고리</th>
@@ -154,7 +155,12 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">작성자</th>
-						<td colspan="3">${boardDTO.userId}</td>
+						<td colspan="3">${boardDTO.userId}
+							<!-- 쪽지쓰기 모달창 띄우기 -->
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span style="box-shadow: 0px 2px 5px 2px #ccc;border-radius:10px">
+								<a href="#login_form" id="login_pop">&nbsp;쪽지 쓰기&nbsp;</a>
+							</span></td>
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">제목</th>
@@ -162,7 +168,7 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #aaa; text-align: center;">내용</th>
-						<td colspan="3"><pre>${boardDTO.bContent}</pre>
+						<td colspan="3"><pre style="min-height: 300px">${boardDTO.bContent}</pre>
 							<%-- <c:forEach var="fileName" items="${fileList}">
 							<p>
 								<a id="hrefId" href="javascript:hrefFunc('${fileName}')" target="_blank" >
@@ -184,9 +190,6 @@
 						<td colspan="3">${boardDTO.value}원</td>
 					</tr>
 				</table>
-				<br><br>
-				
-				
 				<table align="right">
 					<tr>
 						<c:if test="${loginSession.userId != null }">
@@ -217,7 +220,42 @@
 				</table>
 				<br /><br />
 				
+				<!-------------------------------- 쪽지 쓰기 popup form #1 ---------------------------------->
+				<a href="#x" class="overlay" id="login_form"></a>
+				<div class="popup">
+					<center> <h3 alicn="center">쪽지 쓰기</h3> </center>
+					<br>
+					<form id="formName" action="/note/insertNote" method="post">
+						<table class="table-bordered">
+							<!-- 세션에서 id를 넣어 놓음(어차피 로그인한 사용자만 가능해야함): 로그인 기능 구현 전까지 임의로 입력해 놓겠음. -->
+							<h5 align = "right" style="color: navy;">[ from: ${loginSession.userId} ]</h5>
+							<tr>
+								<th style="text-align: center; width: 15%; height:34px; background-color: #F6F6F6">받는 사람</th>
+								<td>&nbsp;&nbsp;${boardDTO.userId}
+									<input type="hidden" class="form-control" name="recvId" id="recvId" value="${boardDTO.userId}" />
+								</td>
+							</tr>
+							
+							<tr>
+								<th style="text-align: center; background-color: #F6F6F6">제목</th>
+								<td><input type="text" class="form-control" name="mtitle" id="mtitle" value="${NoteVO.mtitle}" /></td>
+							</tr>
 
+							<tr>
+								<th style="text-align: center; background-color: #F6F6F6">내용</th>
+								<td><textarea rows="10" cols="80" name="mcontent" id="mcontent" class="form-control">${NoteVO.mcontent}</textarea></td>
+							</tr>
+						</table> 
+
+						<br>
+						<div align="right">
+							<button id="cancelBtn" type="button" class="btn btn-default">취소</button>
+							<button id="sendBtn" type="button" class="btn btn-warning">보내기</button>
+						</div>
+					</form>
+					<a class="close" href="#close"></a>
+				</div>
+				
 				<!-- GoogleMap API 연동(황영롱) -->
 				<h4><span class="glyphicon glyphicon-map-marker" style="color: #CC723D;">&nbsp;작성자 위치</span></h4>
 			    <div id="map"></div> <!-- 지도가 붙을 위치 -->
@@ -291,12 +329,37 @@
 		
 			//ready 함수
 			$(function() {
-		
+				
 				//좋아요 체크
 				check();
 		
 				//댓글 리스트 가져와서 뿌려주는 함수
 				showNextReplyList();
+				
+				// 쪽지 쓰기 모달창에 대한 처리
+				var formN = $("#formName");
+				var Esize = $("#errors.errorSize");
+				$("#sendBtn").on("click", function(event) {
+					 if ($('#recvId').val() == "") {
+				         alert("받는 사람 아이디를 입력해주세요.");
+				         return false;
+				      }
+					 
+					 if ($('#mtitle').val() == "") {
+				         alert("제목을 입력해주세요.");
+				         return false;
+				      }
+					 
+					 if ($('#mcontent').val() == "") {
+				         alert("내용을 입력해주세요.");
+				         return false;
+				      }
+					
+					formN.submit();
+				}); // end of sendBtn
+				$("#cancelBtn").on("click", function(evnet) {
+					history.back(); // 뒤로가기
+				}); // end of cancelBtn
 		
 				// 댓글 등록 클릭했을 때
 	            $("#replyAddBtn").on("click", function() {
