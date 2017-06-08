@@ -28,7 +28,7 @@
 	<section class="site-content full-height">
 		<div class="content-frame">
 			<div id="form-contact">
-				<h4><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;공지사항 수정하기</span></h4>
+				<h3><span class="glyphicon glyphicon-volume-up" style="color: #CC723D;">&nbsp;공지사항 수정하기</span></h3>
 				<br><br>
 				<form id="updateForm" action="/notice/updateContentProc" method="post">
 					<table class="table table-bordered">
