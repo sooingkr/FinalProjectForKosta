@@ -30,7 +30,7 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
    
-    <script type="text/javascript" src="/resources/js/timelineJS.js?ver=2"></script>
+    <script type="text/javascript" src="/resources/js/timelineJS.js?ver=3"></script>
     
     <link rel="stylesheet" href="/resources/css/sidebarCSS.css" />
     <!-- socket 사용을 위해 추가 -->
@@ -446,7 +446,7 @@
             <div class="col-sm-12" style="border: solid 1px #DDD !important; margin-top: 3%;">
                
             <ul id="showTimeline" class="timeline" style="width:60%;">
-            <script id="entry-template2" type="text/x-handlebars-template">    
+            <script id="entry-template2" type="text/x-handlebars-template"> 
                   <li class="timeline-event">
                    <label class="timeline-event-icon"></label>
                    <div class="timeline-event-copy">
@@ -458,16 +458,9 @@
                      <span><b>{{distanceVal distance}}</b></span><br/>
                      <div class='label label-warning'>금액</div>
                      <span><b>{{value}} 원</b></span>
-                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}">{{btitle}}</a></strong></h2>
+                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}&pageNo=1">{{btitle}}</a></strong></h2>
                      <i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
                      <span><b>{{userId}}</b></span>
-                        <p><strong><pre style="background:#ffffff;border:0px;">{{bcontent}}</pre></strong><br></p><br/>
-                     <hr/>
-                     <button type="button" onclick="likeBtnClick({{bno}})" src="/resources/images/like1.png" style="border:0px;background-color:#ffffff;">
-                        <img id="img{{bno}}" src="/resources/images/like1.png" style="width:15px;height:15px"/>
-                     </button>
-                   </div>
-                    </li>
             </script> 
               </ul> 
          <!--     <p><ul id="showTimeline"></ul></p>  -->
