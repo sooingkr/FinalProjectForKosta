@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-   <!-- title 설정 안하면 default로 우리조Final Project가 뜨고 입력하면 입력한 내용이 나오게 됨. -->
+<!-- title 설정 안하면 default로 우리조Final Project가 뜨고 입력하면 입력한 내용이 나오게 됨. -->
  <title><decorator:title default="우리조Final Project" /></title>
  
  <!-- META DATA -->
@@ -17,9 +17,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 <script type="text/javascript" src="/resources/sockjs.min.js"/>
-<script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
+<script src="/resources/js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/json2.js"></script>
+<script type="text/javascript" src="/resources/sockjs.min.js"></script>
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -47,6 +48,7 @@
     <!-- Fancybox -->
     <link href="/resources/css/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen">
     <link rel="shortcut icon" href="/resources/images/favicon.ico" />
+    
  <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -207,7 +209,7 @@
     <script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/resources/js/mobicom.custom.js"></script>
     <script type="text/javascript" src="/resources/js/jquery.spritely-0.6.8.js"></script>
-   <script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-1.9.0.min.js"></script>
     <script src="/resources/js/jquery.fancybox.pack.js" type="text/javascript"></script>
     <script type="text/javascript" src="/resources/js/main.js"></script>
 
