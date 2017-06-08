@@ -32,6 +32,7 @@ public class MyPageController {
 	@Inject
 	BoardServiceImpl bservice;
 
+
 	/** 마이페이지 좋아요 보기 */
 	@RequestMapping(value="/myList")
 	public  String boardList(BoardPagingDTO pagingDTO, Model model, HttpServletRequest req){
