@@ -149,11 +149,9 @@
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #EAEAEA; text-align: center;">작성일</th>
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-								value="${boardDTO.bRegDate }" /></td>
+						<td>${boardDTO.bRegDate }</td>
 						<th style="width: 20%; background: #EAEAEA; text-align: center;">수정일</th>
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-								value="${boardDTO.bModifyDate }" /></td>
+						<td>${boardDTO.bModifyDate }</td>
 					</tr>
 					<tr>
 						<th style="width: 20%; background: #EAEAEA; text-align: center;">작성자</th>

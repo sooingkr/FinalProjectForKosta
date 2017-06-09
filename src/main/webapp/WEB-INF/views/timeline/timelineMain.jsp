@@ -137,6 +137,7 @@
 		position: relative;
     	top:-10px;
     	left:-25px;
+    	text-decoration: none;
 	}
 	
 </style>
@@ -197,14 +198,13 @@
 								<span style="font-weight: bold;">${loginSession.userId} </span>
 								<a class="mypage" href="/mypage/myList"><img src="/resources/images/mypage.png"/></a>
 								<img src="/resources/images/message.png"/> 
-								<span>거래중인 게시글</span>
-								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 								<a class="msg_a" href="/note/listReceive">
-								<span>거래중인 게시글</span>
-								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 									<!-- 읽지 않은 쪽지 -->
 									<span id="noteBadge" class="badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
-								</a>&nbsp; ┃ &nbsp;
+								</a>
+								<span>거래중인 게시글</span>
+								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
+								&nbsp; ┃ &nbsp;
 								<a href="/user/Logout" style="font-weight: bold;">로그아웃</a>
 							</c:if>
 					    </nav>

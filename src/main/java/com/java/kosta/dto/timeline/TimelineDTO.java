@@ -1,5 +1,8 @@
 package com.java.kosta.dto.timeline;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimelineDTO{
 	
@@ -89,13 +92,17 @@ public class TimelineDTO{
 		return bmodifydate;
 	}
 	public void setBmodifydate(String bmodifydate) {
-		this.bmodifydate = bmodifydate;
+		String newString = dateFormatting(bmodifydate);
+		this.bmodifydate = newString;
+		//this.bmodifydate = bmodifydate;
 	}
 	public String getBregdate() {
 		return bregdate;
 	}
 	public void setBregdate(String bregdate) {
-		this.bregdate = bregdate;
+		String newString = dateFormatting(bregdate);
+		this.bregdate = newString;
+		//this.bregdate = bregdate;
 	}
 	public String getCateId1() {
 		return cateId1;
@@ -152,6 +159,19 @@ public class TimelineDTO{
 				+ ", bmodifydate=" + bmodifydate + ", bregdate=" + bregdate + ", cateId1=" + cateId1 + ", cateId2="
 				+ cateId2 + ", cateId3=" + cateId3 + ", cateId4=" + cateId4 + ", cateId5=" + cateId5 + ", cateId6="
 				+ cateId6 + ", cateId7=" + cateId7 + ", distance=" + distance + "]";
+	}
+	
+	// 데이트 형식 바꾸는 메서드
+	public String dateFormatting(String oldString){
+		String newString ="";
+		try {
+			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(oldString);
+			newString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return newString;
 	}
 	
 }

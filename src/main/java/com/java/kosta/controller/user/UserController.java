@@ -199,10 +199,6 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> joinProc(UserVO vo, HttpServletRequest req,RedirectAttributes redirectattri) {
 		Map<String, Object> res = new HashMap<String, Object>();
-		//  		logger.info("주소1:"+vo.getAddr1());
-		//  		logger.info("주소2:"+vo.getAddr2());
-		//  		logger.info("유니크 아이디:"+vo.getUniqId());
-		//  		logger.info("유저 아이디:"+vo.getUserId());
 
 		logger.info("회원가입시 저장된 위도경도값 : " + vo.getLat() + " : " + vo.getLon());
 
@@ -219,7 +215,7 @@ public class UserController {
 		//아이디 체크 버튼을 눌렀는지 안눌렀지 여부
 		else if(str.equals("n")){
 			res.put(Constants.RESULT, Constants.RESULT_FAIL);
-			res.put(Constants.RESULT_MSG,"아이디를 체크를 안눌렀습니다");
+			res.put(Constants.RESULT_MSG,"아이디 중복체크를 해주세요.");
 			return res;
 		}
 		else if(vo.getUniqId().equals("")){//일반회원가입 고유아이디가 없을때
@@ -379,15 +375,14 @@ public class UserController {
 			logger.info("패스워드는:"+uservo);
 			if(uservo!=null){
 				res.put(Constants.RESULT, Constants.RESULT_OK);
-				res.put(Constants.RESULT_MSG,"패스워드를 찾음");
 			}else{
 				res.put(Constants.RESULT, Constants.RESULT_FAIL);
-				res.put(Constants.RESULT_MSG,"패스워드를 못찾음");
+				res.put(Constants.RESULT_MSG,"일치하는 정보가 존재하지 않습니다.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.put(Constants.RESULT, Constants.RESULT_FAIL);
-			res.put(Constants.RESULT_MSG,"패스워드를 못찾음");
+			res.put(Constants.RESULT_MSG,"일치하는 정보가 존재하지 않습니다.");
 		}
 	
 		return res;

@@ -79,7 +79,7 @@
 							<td>${status.count }</td>
 							<td><a href="/notice/detailContent?bno=${boardDTO.bNo}&pageNo=${param.pageNo }">${boardDTO.bTitle }</a></td>
 							<td>${boardDTO.userId }</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }"/></td>
+							<td>${boardDTO.bRegDate }</td>
 							<td><span class="badge" style="background-color: #BFC2C3;">${boardDTO.viewCnt}</span></td>
 						</tr>
 					</c:forEach>
