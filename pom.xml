@@ -41,7 +41,6 @@
 			<groupId>org.imgscalr</groupId>
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
-
 		</dependency>
 
 		<!-- JSON2 -->
@@ -69,13 +68,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>
-
-		<!-- Java Mail API -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.3</version>
 		</dependency>
 
 
@@ -249,7 +241,6 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
 
 
 		<!--google api -->
