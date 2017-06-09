@@ -49,7 +49,7 @@ a:hover { color: #F78E41; text-decoration: none;}
 	</nav>
 	
 	<script>
-	$(function(){
+/* 	$(function(){
 	    poll();
 	 });
 	
@@ -62,7 +62,7 @@ a:hover { color: #F78E41; text-decoration: none;}
 	         success : function(totalCnt){
 	            console.log("Icon : "+new Date());
 // 	            console.log("notOpen값 : "+totalCnt);
-	            $("#noteBadge").text(totalCnt);
+	            $("#noteBadge").html(totalCnt);
 	//             location.replace("/timeline");
 	         },
 	         dateType : "json",
@@ -70,6 +70,6 @@ a:hover { color: #F78E41; text-decoration: none;}
 	         timeout : 3000
 	      });
 	   },5000);
-	}
+	} */
 </script>
                  
