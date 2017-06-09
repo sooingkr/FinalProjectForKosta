@@ -142,9 +142,7 @@
 	
 </style>
 </head>
-
 <body>
-
     <header>
         <div class="f-page gray-bkg site-header grey" id="screen-about">
             <!-- START HEADER -->
