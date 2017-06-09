@@ -112,7 +112,7 @@
 </script>
  
 <script>
-/* 
+ 
     var sock = null;
     $(document).ready(function(){
         sock = new SockJS("/echo-ws");
@@ -129,8 +129,8 @@
           }      
        
     });
-    
-   */
+     
+   
 </script>
 <style>
 	.msg_a {
