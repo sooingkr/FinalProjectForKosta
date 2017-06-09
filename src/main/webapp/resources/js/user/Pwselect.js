@@ -46,7 +46,6 @@ $(function(){
 					alert(data.resultMsg);  
 					return;
 				}else{
-					location.replace("/");
 					alert(data.resultMsg);  
 					return;
 				}
