@@ -261,6 +261,7 @@ a:hover {
   border-radius: 3px;
   -webkit-box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 }
 
 .side {
