@@ -38,9 +38,9 @@
 					</tr>
 					<tr>
 						<th style="width: 20%;text-align: center;background-color: #EAEAEA">작성일</th>
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bRegDate }" /> </td>
+						<td>${boardDTO.bRegDate } </td>
 						<th style="width: 20%;text-align: center;background-color: #EAEAEA">수정일</th>
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.bModifyDate }" /> </td>
+						<td>${boardDTO.bModifyDate } </td>
 					</tr>
 					<tr>
 						<th style="width: 20%;text-align: center;background-color: #EAEAEA">작성자</th>
@@ -52,7 +52,7 @@
 					</tr>
 					<tr>
 						<th style="width: 20%;height:200px; text-align: center;background-color: #EAEAEA">내용</th>
-						<td colspan="3">${boardDTO.bContent}</td>
+						<td colspan="3"><pre style="height:500px; border:0px">${boardDTO.bContent}</pre></td>
 					</tr>
 				</table>
 				
