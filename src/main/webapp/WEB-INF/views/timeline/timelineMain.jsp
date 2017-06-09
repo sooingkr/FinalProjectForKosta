@@ -39,7 +39,7 @@
 	<script type="text/javascript" src="/resources/js/json2.js"></script>
 <!-- 알림을 위한 polling -->
 <script>
- 
+ /* 
     if('${loginSession != null}'){
        
        $(function(){
@@ -74,20 +74,32 @@
        }
            
      }//if
-
-     /*
+ */
+     /*    
      // 롱풀링
      function poll(){ 
-       $.ajax({ 
+    	 // 후기를 쓸 게시글 수가 몇개인지를 조회
+         $.ajax({
+        	 type:'GET',
+        	 url:'/mypage/countClient?buyerId=${loginSession.userId}',
+        	dataType:"json",
+        	complete:poll,
+        	timeout:10000,
+        	success:function(result){
+        		 $("#countClientId").html(result);
+        	 }
+         });
+    	 
+    	 $.ajax({ 
        url: "/note/listNotOpen", 
        success: function(){
        }, 
        dataType: "json", 
        complete: poll, 
        timeout: 10000
-       }); 
+       });  
    	 } 
-      */
+     */  
 </script>
  
 <script>
