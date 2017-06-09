@@ -70,6 +70,15 @@
             		 $("#countClientId").html(result);
             	 }
              });
+               
+             // 후기를 쓸 게시글 수가 몇개인지를 조회
+             $.ajax({
+            	 type:'GET',
+            	 url:'/mypage/countClient?buyerId=${loginSession.userId}',
+            	 success:function(result){
+            		 $("#countClientId").html(result);
+            	 }
+             });
           },5000);
        }
            
@@ -125,10 +134,11 @@
 </script>
 <style>
 	.msg_a {
-		position: absolute;
-    	top: 5px;
-    	left: 65px;
+		position: relative;
+    	top:-10px;
+    	left:-25px;
 	}
+	
 </style>
 </head>
 
@@ -145,9 +155,9 @@
             </span>
             <nav class="site-menu">
                 <a id="welcome" href="/">Welcome</a>
-                <a id="team" href="/timeline">TimeLine</a>
+                <a id="team" style="color:#ffa800;" href="/timeline">TimeLine</a>
                 <a id="portfolio" href="/categorySection">Category</a>
-                <a id="talktous" href="/noticeBoardSection?pageNo=1&cateId=1">Notice</a>
+                <a id="talktous" href="/noticeBoardSection?pageNo=1&cateId=0">Notice</a>
                 <a id="about" href="/aboutUsSection">About Us</a>
             </nav>
 
@@ -185,10 +195,13 @@
 							<!-- 로그아웃 -->
 							<c:if test="${loginSession.userId != null}">
 								<span style="font-weight: bold;">${loginSession.userId} </span>
+								<a class="mypage" href="/mypage/myList"><img src="/resources/images/mypage.png"/></a>
 								<img src="/resources/images/message.png"/> 
 								<span>거래중인 게시글</span>
 								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 								<a class="msg_a" href="/note/listReceive">
+								<span>거래중인 게시글</span>
+								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 									<!-- 읽지 않은 쪽지 -->
 									<span id="noteBadge" class="badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
 								</a>&nbsp; ┃ &nbsp;
@@ -208,6 +221,7 @@
                 </div>
             </div>
         </nav>
+	</header>
 
    <div class="col-sm-10 col-sm-offset-1">
       <fieldset class="scheduler-border">
@@ -319,7 +333,7 @@
    	<a href="#above">Top</a>
    </div>
    
-   </header>
+ <!--   </header> -->
 
   
     <!-- 사이드바 추가 -->
