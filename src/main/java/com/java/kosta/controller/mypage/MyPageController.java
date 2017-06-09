@@ -35,6 +35,37 @@ public class MyPageController {
 	@Inject
 	BoardServiceImpl bservice;
 
+	// bno값 가지고 eval 테이블에서 해당 거래자 id 가져오기
+	@RequestMapping(value="/getCustomer")
+	public @ResponseBody String getCustomer(String bno){
+		String customerId = service.getCustomerId(bno);
+		return customerId;
+	} // end of getCustomer
+	
+	
+	/**
+	 * 고객입장에서 상품후기를 남겨야하는 게시글이 몇개인지를 반환함 
+	    작성자 : 황영롱
+	 */
+	@RequestMapping(value="/countClient")
+	public @ResponseBody int countClient(TransactionDTO dto){
+		// 현재 상품후기를 기술해야하는게 몇개인지...
+		int num = service.countClient(dto);
+		// 상품후기를 남겨야하는 게시글 수를 반환함
+		return num;
+	} // end of cuntClient();
+	
+	/**
+	 * 고객입장에서 상품후기를 남겨야하는 게시글이 몇개인지를 반환함 
+	    작성자 : 황영롱
+	 */
+	@RequestMapping(value="/clientTransactionList")
+	public @ResponseBody List<BoardDTO> clientTransactionList(TransactionDTO dto){
+		List<BoardDTO> list = service.clientTransactionList(dto);
+		return list;
+	} // end of clientTransactionList();
+	
+	
 
 	/**
 	 * 	구매 결정 모달창에서 거래할 사용자 지정시 존재하는 아이디인지 확인
@@ -42,17 +73,20 @@ public class MyPageController {
 	 */
 	@RequestMapping(value="/existIdCheck")
 	public @ResponseBody String existIdCheck(@RequestBody TransactionDTO dto){
-		logger.info("넘어온 값 : " + dto);
 		// 1 이면 있는 사용자 0이면 없는 사용자
 		int checkNum = service.existIdCheck(dto);
-		logger.info("있는사용자 ?? : " + checkNum);
+		int duplicateNum = service.duplicateId(dto);
 		String result = "";
 		if ( checkNum == 0 ){
 			result = "FAIL";
 		}else if ( checkNum == 1 ){
-			result = "SUCCESS";
-			// 거래관련 튜플 삽입
-			service.insertTransaction(dto);
+			if ( duplicateNum == 0 ){
+				result = "SUCCESS";
+				// 거래관련 튜플 삽입
+				service.insertTransaction(dto);
+			}else{
+				result = "DUPLICATE";
+			}
 		}
 		
 		return result;
@@ -86,8 +120,6 @@ public class MyPageController {
 			for (int i = 0; i < list1.size(); i++) {
 
 				String bno= list1.get(i).getbNo();
-				logger.info("확인 : " + bno + "," + userId);
-				logger.info("list확인:"+ service.selectMyFavoriteList(bno, userId));
 				list.addAll(service.selectMyFavoriteList(bno, userId));
 				// 내가 가져온 좋아요 리스트의 bno를 통해서 내가 누른 좋아요 게시판 가져오기(말이 이상한가?)
 			}
@@ -111,7 +143,6 @@ public class MyPageController {
 	@RequestMapping(value="/checkFavorite")
 	@ResponseBody
 	public String checkFavorite(@RequestParam(value = "bno") String bNo,@RequestParam(value = "userId") String userId,Model model){
-		logger.info("들어오는지 확인 : " + bNo+"," + userId);
 		int fcnt = bservice.searchFavorite(userId, bNo);
 		int count = bservice.countFavorite(bNo);
 		String result = "";
@@ -134,7 +165,6 @@ public class MyPageController {
 	@ResponseBody
 	public String handlingFavorite(@RequestParam(value = "bno") String bNo,
 			@RequestParam(value = "userId") String userId) {
-		logger.info("handlingFavorite" + bNo + userId);
 
 		/*// 로그인 안되어있으면 좋아요 할 수 없음
 		if (userId == null) {
@@ -185,7 +215,6 @@ public class MyPageController {
 	public Map<String,Object> myBoardList(Model model,HttpServletRequest req,BoardPagingDTO pagingDTO){
 		HashMap<String,Object> res=new HashMap<String, Object>();
 		
-		logger.info("들어옴");
 		UserVO loginSession = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
 		
 		res.put("loginSession", loginSession);
@@ -201,7 +230,6 @@ public class MyPageController {
 			res.put("MyBoardList",list);
 			res.put("pagingDTO", pagingDTO);
 			
-			logger.info("asdasd"+list.get(0).getbRegDate());
 			 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -50,7 +50,7 @@
 		      </div>
 		      <!-- Footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		        <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 		      </div>
 		    </div>
 		  </div>
@@ -167,6 +167,9 @@
 
 		<script>
 		
+			// 거래인 지정용 전역변수
+			var spanCustomer;
+		
 			var tablebno = null; //클릭한 버튼 bno를 저장할 변수
 			var favoriteBtn = null; //버튼객체 하위 이미지 태크를 넣을 변수
 			$(document).on("click", "#likeImage", function(event) {
@@ -221,9 +224,6 @@
 					success : function(data) {
 						check(tablebno, favoriteBtn);
 		
-						if (data == "안뇽") {
-							console.log("찍히나용?");
-						}
 					}
 				}); // end of ajax from likeBoard Btn Click
 			} // end of update()
@@ -253,38 +253,61 @@
 							str += "<th style='width: 35%; text-align: center;'>제목</th>";
 							str += "<th style='width: 10%; text-align: center;'>작성자</th>";
 							str += "<th style='width: 20%; text-align: center;''>작성날짜</th>";
-							str += "<th>구매결정</th>";
+							str += "<th style='text-align:center;'>구매결정</th>";
+							str += "<th>거래인</th>";
 							str += "</tr>";
 							$.each(result.MyBoardList, function(i, board) {
+								
 								str += "<tr>";
 								str += "<td>" + board.bNo + "</td>";
 								str += "<td>" + board.cateId + "</td>";
 								str += "<td> <a href='/board/category/detailContent?bno='"+board.bNo+"'>'"+ board.bTitle +" </a> </td>";
 								str += "<td>" + board.userId + "</td>";
 								str += "<td>" + board.bRegDate + "</td>";
-								str += "<td><button class='btn btn-default testBtn' data-target='#layerpop' data-toggle='modal'>판매자 지정</button></td>";
+								
+								// bno값가지고 eval 테이블에서 해당 거래자 id가져오기
+								$.ajax({
+									type:'GET',
+									async:false,
+									url:'/mypage/getCustomer?bno='+board.bNo,
+									headers:{
+										"Content-Type":"application/json"
+									},
+									success:function(result){
+										if ( result ){
+											str += "<td><button  disabled=true class='btn btn-default testBtn' data-target='#layerpop' data-toggle='modal'>거래인 지정</button></td>";
+										}else{
+											str += "<td><button class='btn btn-default testBtn' data-target='#layerpop' data-toggle='modal'>거래인 지정</button></td>";
+										}
+										str += "<td><span class='customerId'>"+ result +"</span></td>";
+									}
+								}); // end of ajax
 								str += "</tr>";
 							});
 							str += "</div>";
 							str += "</table>";
 							$("#formWrapper").append(str);
-							if(result.pagingDTO.pageNo !=null){
-							
-							}
 						}
 					}
 				});
 			} // end of update()
 			
 			
+			
+			
 			$(document).on("click",".testBtn",function(event){
 				var bno = $(this).parent().prev().prev().prev().prev().prev().text();
 				var userId = $(this).parent().prev().prev().text();
 				var cateId = $(this).parent().prev().prev().prev().prev().text();
+				// 클릭했던 곳의 span 태그 객체를 저장
+				spanCustomer = $(this).parent().next().find(".customerId");
 				$("#bnoId").val(bno);
 				$("#userIdVal").val(userId);
 				$("#cateIdVal").val(cateId);
 				
+			});
+			$(document).on("click","#closeBtn",function(event){
+				$(".determine").val("");
 			});
 			
 			// 구매 결정 모달창에서 거래할 사람 아이디가 존재하는지 확인하고 있으면 검색처리 진행
@@ -311,9 +334,15 @@
 						success:function(data){
 							if ( data == 'FAIL' ){
 								alert("존재하지 않는 사용자 입니다. 다시 확인해주세요.");
-								txt.focus();
+								$(".determine").focus();
 							}else if ( data == 'SUCCESS' ){
 								alert("게시글의 상태가 거래중으로 바꼈습니다.");
+								$("#layerpop").hide();
+								$(".determine").val("");
+								spanCustomer.html(txt);
+							}else if ( data == "DUPLICATE"){
+								alert("이미 거래중인 고객입니다.");
+								$(".determine").focus();
 							}
 						}
 					});
