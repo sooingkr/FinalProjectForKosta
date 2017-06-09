@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 
 public interface MyPageService {
@@ -24,7 +25,7 @@ public interface MyPageService {
 	public int existIdCheck(TransactionDTO dto);
 	
 	/** 전체 레코드 갯수 가져옴 */
-	public int selectMyFavoriteListTotalCount(BoardPagingDTO pagingDTO, String userId);	
+	public 	int selectMyFavoriteListTotalCount(Mypagepaging pagingDTO, String userId);
 	
 	public int duplicateId(TransactionDTO dto);
 	
@@ -48,5 +49,10 @@ public interface MyPageService {
 	public List<BoardDTO> selectWritedList(String userId) throws Exception;
 
 	/**내가 쓴 목록 갯수 조회*/
-	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId);
+	public int selectMyBoardListCount(Mypagepaging pagingDTO, String userId);
+	
+	/**내가 쓴 목록 페이징으로 조회*/
+	public List<BoardDTO> selectFavoriteList(Mypagepaging pagingDTO, String userId);
+
+	
 }

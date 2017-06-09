@@ -20,6 +20,8 @@ public class BoardDTO {
 	private String lat; // 위도
 	private String lon; // 경도
 	
+	private String cateName;//카테고리 아이디를 네임으로 바꿀려고 만듬
+	
 	private String imgPath[];
 	private String imgOriginName[];
 	private String imgSize[];
@@ -160,5 +162,11 @@ public class BoardDTO {
 		}
 		
 		return newString;
+	}
+	public String getCateName() {
+		return cateName;
+	}
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
 }

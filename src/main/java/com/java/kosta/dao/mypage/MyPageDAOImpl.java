@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 
 @Repository
@@ -22,9 +23,9 @@ public class MyPageDAOImpl implements MyPageDAO{
 	private final static String NameSpace ="com.java.kosta.dao.mypage.MyPageDAO";
 
 	@Override
-	public int selectMyFavoriteListTotalCount(BoardPagingDTO pagingDTO, String userId) {
+	public int selectMyFavoriteListTotalCount(Mypagepaging pagingDTO, String userId) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("pagingDTO", pagingDTO);
+		map.put("page", pagingDTO);
 		map.put("userId", userId);
 		return sqlSession.selectOne(NameSpace + ".selectMyFavoriteListTotalCount",map);
 	}
@@ -83,14 +84,14 @@ public class MyPageDAOImpl implements MyPageDAO{
 	
 	@Override
 	public List<BoardDTO> selectWritedList(String userId) {
-		return sqlSession.selectList(NameSpace + ".myBoardList", userId);
-		
+		return sqlSession.selectList(NameSpace + ".myBoardList",userId);
 	}
 
+	
 	@Override
-	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId) {
+	public int selectMyBoardListCount(Mypagepaging pagingDTO, String userId) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("pagingDTO", pagingDTO);
+		map.put("page", pagingDTO);
 		map.put("userId", userId);
 		return sqlSession.selectOne(NameSpace + ".selectMyBoardListCount",map);
 	}
@@ -123,6 +124,22 @@ public class MyPageDAOImpl implements MyPageDAO{
 	@Override
 	public String getCustomerId(String bno) {
 		return sqlSession.selectOne(NameSpace+".getCustomerId", bno);
+	}
+
+	//페이징 처리
+	@Override
+	public List<BoardDTO> selectFavoriteList(Mypagepaging pagingDTO, String userId) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("page", pagingDTO);
+		map.put("userId", userId);
+		return sqlSession.selectList(NameSpace+".selectFavoriteList",map);
+	}
+
+	@Override
+	public int selectFavoritecount(Mypagepaging pagingDTO, String userId) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return sqlSession.selectOne(NameSpace+".selectFavoritecount",map);
 	}
 
 }
