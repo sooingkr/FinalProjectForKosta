@@ -1,5 +1,7 @@
 package com.java.kosta.dto.board;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardDTO {
@@ -11,8 +13,10 @@ public class BoardDTO {
 	String value;		//티켓의 가치
 	String isSwap;		// ENUM('Y','N')
 	String viewCnt;		//조회수
-	Date bRegDate;	//게시 날짜
-	Date bModifyDate;	//수정 날짜
+	//Date bRegDate;	//게시 날짜
+	//Date bModifyDate;	//수정 날짜
+	String bRegDate;	//게시 날짜
+	String bModifyDate;	//수정 날짜
 	private String lat; // 위도
 	private String lon; // 경도
 	
@@ -106,10 +110,10 @@ public class BoardDTO {
 	public String getViewCnt() {
 		return viewCnt;
 	}
-	public Date getbRegDate() {
+	public String getbRegDate() {
 		return bRegDate;
 	}
-	public Date getbModifyDate() {
+	public String getbModifyDate() {
 		return bModifyDate;
 	}
 	public void setbNo(String bNo) {
@@ -136,10 +140,25 @@ public class BoardDTO {
 	public void setViewCnt(String viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	public void setbRegDate(Date bRegDate) {
-		this.bRegDate = bRegDate;
+	public void setbRegDate(String bRegDate) {
+		String newString = dateFormatting(bRegDate);
+		this.bRegDate = newString;
 	}
-	public void setbModifyDate(Date bModifyDate) {
-		this.bModifyDate = bModifyDate;
+	public void setbModifyDate(String bModifyDate) {
+		String newString = dateFormatting(bModifyDate);
+		this.bModifyDate = newString;
+	}
+	
+	// 데이트 형식 바꾸는 메서드
+	public String dateFormatting(String oldString){
+		String newString ="";
+		try {
+			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(oldString);
+			newString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return newString;
 	}
 }

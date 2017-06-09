@@ -39,7 +39,7 @@
 	<script type="text/javascript" src="/resources/js/json2.js"></script>
 <!-- 알림을 위한 polling -->
 <script>
- 
+ /* 
     if('${loginSession != null}'){
        
        $(function(){
@@ -83,20 +83,32 @@
        }
            
      }//if
-
-     /*
+ */
+     /*    
      // 롱풀링
      function poll(){ 
-       $.ajax({ 
+    	 // 후기를 쓸 게시글 수가 몇개인지를 조회
+         $.ajax({
+        	 type:'GET',
+        	 url:'/mypage/countClient?buyerId=${loginSession.userId}',
+        	dataType:"json",
+        	complete:poll,
+        	timeout:10000,
+        	success:function(result){
+        		 $("#countClientId").html(result);
+        	 }
+         });
+    	 
+    	 $.ajax({ 
        url: "/note/listNotOpen", 
        success: function(){
        }, 
        dataType: "json", 
        complete: poll, 
        timeout: 10000
-       }); 
+       });  
    	 } 
-      */
+     */  
 </script>
  
 <script>
@@ -125,6 +137,7 @@
 		position: relative;
     	top:-10px;
     	left:-25px;
+    	text-decoration: none;
 	}
 	
 </style>
@@ -185,14 +198,13 @@
 								<span style="font-weight: bold;">${loginSession.userId} </span>
 								<a class="mypage" href="/mypage/myList"><img src="/resources/images/mypage.png"/></a>
 								<img src="/resources/images/message.png"/> 
-								<span>거래중인 게시글</span>
-								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 								<a class="msg_a" href="/note/listReceive">
-								<span>거래중인 게시글</span>
-								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
 									<!-- 읽지 않은 쪽지 -->
 									<span id="noteBadge" class="badge" style="background-color: #CB1C05;">${sessionScope.notOpen}</span>
-								</a>&nbsp; ┃ &nbsp;
+								</a>
+								<span>거래중인 게시글</span>
+								<a id="countClientId" href="/mypage/clientTransactionList?buyerId=${loginSession.userId}"></a>
+								&nbsp; ┃ &nbsp;
 								<a href="/user/Logout" style="font-weight: bold;">로그아웃</a>
 							</c:if>
 					    </nav>
