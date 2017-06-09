@@ -59,7 +59,24 @@
 		<!-- SELECT board.cateId, board.btitle, board.userId, board.bregdate FROM 
 			board,favorite WHERE favorite.userId = #{userId} ORDER BY bno DESC -->
 	</select>
+	
 
+		<!-- 내가 누른 좋아요 가져오기<용래> -->
+	<select id="selectFavoriteList" resultType="BoardDTO">
+		SELECT b.bno,b.cateId, b.btitle, b.userId, b.bregdate
+		FROM board b LEFT JOIN favorite f ON b.bno = f.bno 
+		WHERE f.userId =#{userId}
+		ORDER BY b.bno DESC
+        limit #{page.pageStart},#{page.perPageNum} 
+	</select>
+	
+	
+	<select id="selectFavoritecount" resultType="int">
+	SELECT COUNT(*)
+	FROM board b LEFT JOIN favorite f ON b.bno = f.bno 
+	WHERE f.userId=#{userId};
+	</select>	
+	
 
 
 	<!-- 좋아요 조회 -->
@@ -70,8 +87,11 @@
 		WHERE
 		bno = #{bNo}
 		AND userId=#{userId}
-
 	</select>
+	
+	
+	
+	
 	<!-- 내가 누른 좋아요 리스트 -->
 	<select id="searchFavoriteList" resultType="BoardDTO">
 		SELECT
@@ -112,6 +132,8 @@
 	    	userId = #{userId}
 	    	
 	</select>
+	
+	
 		<!-- 내가 올린 글 갯수 조회 -->
 	<select id="selectMyBoardListCount" resultType="int">
 		SELECT COUNT(*)

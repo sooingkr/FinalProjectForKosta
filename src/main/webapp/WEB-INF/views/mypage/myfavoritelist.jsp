@@ -79,10 +79,11 @@
 							<th style="width: 35%; text-align: center;">제목</th>
 							<th style="width: 10%; text-align: center;">작성자</th>
 							<th style="width: 20%; text-align: center;">작성날짜</th>
+							<th style="width: 10%; text-align: center;">좋아요</th>
 						</tr>
 						<c:if test="${empty MyFavoriteList}">
 							<tr>
-								<td colspan="5" style="text-align: center">좋아요한 게시글이 없습니다.</td>
+								<td colspan="7" style="text-align: center">좋아요한 게시글이 없습니다.</td>
 							</tr>
 						</c:if>
 						<c:forEach items="${MyFavoriteList}" var="boardDTO"
@@ -90,7 +91,7 @@
 							<tr id="table123" style="text-align: center">
 								<td>${status.count}</td>
 								<td id="tablebNo">${boardDTO.bNo}</td>
-								<td>${boardDTO.cateId}</td>
+								<td>${boardDTO.cateName}</td>
 								<td><a href="/board/category/detailContent?bno=${boardDTO.bNo}">${boardDTO.bTitle }</a></td>
 								<td>${boardDTO.userId }</td>
 								<td>${boardDTO.bRegDate }</td>
@@ -104,19 +105,20 @@
 						</c:forEach>
 					</table>
 
-					<form action="/mypage/myFavoriteList">
+				<%-- 	<form action="/mypage/myFavoriteList">
 						<table align="center">
 							<tr>
 								<td><select name="searchType" class="form-control col-md-3">
 										<option value="titleContent"
-											<c:if test="${pagingDTO.searchType eq 'titleContent'}" > selected="selected" </c:if>>제목+내용</option>
+											<c:if test="${pageMaker.searchType eq 'titleContent'}" > selected="selected" </c:if>>제목+내용</option>
 										<option value="writer"
-											<c:if test="${pagingDTO.searchType eq 'writer'}" > selected="selected" </c:if>>글쓴이</option>
+											<c:if test="${pageMaker.searchType eq 'writer'}" > selected="selected" </c:if>>글쓴이</option>
 										<option value="title"
-											<c:if test="${pagingDTO.searchType eq 'title'}" > selected="selected" </c:if>>제목</option>
+											<c:if test="${pageMaker.searchType eq 'title'}" > selected="selected" </c:if>>제목</option>
 								</select></td>
 								<td>&nbsp;&nbsp;</td>
 								<td>
+								
 									<div class="input-group">
 										<input style="width: 400px" type="text" name="searchText"
 											class="form-control col-md-3"
@@ -128,38 +130,49 @@
 											</button>
 										</span>
 									</div>
+									
 								</td>
 							</tr>
 						</table>
-					</form>
-
-
-
-					<div align="center">
-						<ul class="pagination pagination-sm">
-
-							<c:forEach var="i" begin="${pagingDTO.pageStartNo}"
-								end="${pagingDTO.pageEndNo}">
-								<c:choose>
-									<c:when test="${pagingDTO.pageNo != i}">
-										<li><a href="/mypage/myList?pageNo=${i}&searchType=${param.searchType}&searchText=${param.searchText}">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="#"
-											style="background-color: #085B86; color: white; font-weight: bold;">&nbsp;${i}&nbsp;</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<c:if test="${pagingDTO.groupNo < pagingDTO.totalGroupCount}">
-								<li><a
-									href="/mypage/myList?&pageNo=${pagingDTO.pageEndNo + 1}">▶</a></li>
-								<li><a
-									href="/mypage/myList?pageNo=${pagingDTO.totalPageCount}&searchType=${param.searchType}&searchText=${param.searchText}">마지막</a></li>
-							</c:if>
-						</ul>
-					</div>
+					</form> --%>
+					<!-- 
+                       	[이전][1][2][3]...[10][다음] 부분 작성
+                        -->
+							<!-- [이전] -->
+							<div class="text-center">
+								<ul class="pagination">
+									<li><a
+										href="/mypage/myList${pageMaker.pageQuery(1)}">처음</a>
+									</li>
+									<c:if test="${pageMaker.prev}">
+										<li><a
+											href="/mypage/myList${pageMaker.pageQuery(pageMaker.startPage-1)}">◀</a>
+										</li>
+									</c:if>
+									<!-- [1][2][3]...[10] -->
+									<c:forEach var="index" begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}">
+										<li ${pageMaker.page == index ? 'class=active' : '' }><a
+											href="/mypage/myList${pageMaker.pageQuery(index)}">${index}</a>
+										</li>
+									</c:forEach>
+									<!-- [다음] -->
+									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<li><a
+											href="/mypage/myList${pageMaker.pageQuery(pageMaker.endPage+1)}">▶</a>
+										</li>
+									</c:if>
+									<!-- [마지막] -->
+									<li><a
+										href="/mypage/myList${pageMaker.pageQuery(pageMaker.entireEndPage)}">마지막</a>
+									</li>
+								</ul>
+							</div>
+							<!-- 쪽지 페이징 처리 -->
+					
 				</div>
 			</div>
+
 
 		</div>
 		</section>

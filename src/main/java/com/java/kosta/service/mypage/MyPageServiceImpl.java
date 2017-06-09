@@ -10,6 +10,7 @@ import com.java.kosta.dao.mypage.MyPageDAO;
 import com.java.kosta.dto.board.BoardDTO;
 import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 
 @Service
@@ -19,7 +20,7 @@ public class MyPageServiceImpl implements MyPageService{
 	MyPageDAO mDAO;
 
 	@Override
-	public int selectMyFavoriteListTotalCount(BoardPagingDTO pagingDTO, String userId) {
+	public int selectMyFavoriteListTotalCount(Mypagepaging pagingDTO, String userId) {
 		return mDAO.selectMyFavoriteListTotalCount(pagingDTO, userId);
 	}
 
@@ -66,7 +67,7 @@ public class MyPageServiceImpl implements MyPageService{
 
 
 	@Override
-	public int selectMyBoardListCount(BoardPagingDTO pagingDTO, String userId) {
+	public int selectMyBoardListCount(Mypagepaging pagingDTO, String userId) {
 		return mDAO.selectMyBoardListCount(pagingDTO, userId);
 	}
 
@@ -99,5 +100,16 @@ public class MyPageServiceImpl implements MyPageService{
 	public String getCustomerId(String bno) {
 		return mDAO.getCustomerId(bno);
 	}
+
+	public List<BoardDTO> selectFavoriteList(Mypagepaging pagingDTO, String userId) {
+		return mDAO.selectFavoriteList(pagingDTO,userId);
+	}
+
+	//페이징 처리해서 좋아요 갯수 세기
+	public int selectFavoritecount(Mypagepaging pagingDTO, String userId) {
+		return mDAO.selectFavoritecount(pagingDTO,userId);
+	}
+
+	
 
 }

@@ -1,6 +1,5 @@
 package com.java.kosta.controller.mypage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.kosta.common.Constants;
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.board.CategoryDTO;
+import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 import com.java.kosta.dto.user.UserVO;
 import com.java.kosta.service.board.BoardServiceImpl;
@@ -93,43 +93,44 @@ public class MyPageController {
 	}
 	
 	
+	  /* @RequestMapping(value="listReceive")
+	   public String listForReceive(NoteVO vo,PagingDTO page,Model model,HttpSession session) throws Exception{
+	      UserVO uvo = (UserVO) session.getAttribute("loginSession");
+	      vo.setRecvId(uvo.getUserId());
+	      page.setTotalCount(service.totalCntRecv(vo));
+	      List<NoteVO> list = service.listForReceiver(vo, page);
+	      model.addAttribute("list", list);
+	      model.addAttribute("pageMaker", page);
+	      logger.info("확인 : " + list);
+	      return "note/listForReceive";
+	   } // end of listForReceive
+*/	
+	
 	/** 마이페이지 좋아요 보기 */
 	@RequestMapping(value="/myList")
-	public  String boardList(BoardPagingDTO pagingDTO, Model model, HttpServletRequest req){
+	public  String boardList(Mypagepaging pagingDTO, Model model, HttpServletRequest req){
 		try {
-
 			UserVO loginSession = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
 			model.addAttribute("loginSession", loginSession);
 
 			String userId = loginSession.getUserId();
 			System.out.println(loginSession.getUserId());
 			// 전체 레코드 갯수 획득
-			int totRecord = service.selectMyFavoriteListTotalCount(pagingDTO, userId);
+			int totRecord = service.selectFavoritecount(pagingDTO, userId);
 			// 페이징 계산
-			pagingDTO.calcPage(totRecord);
+			pagingDTO.setTotalCount(totRecord);
 
-			//내가 누른 좋아요 리스트 가져오기
-			List<BoardDTO> list1 = service.searchFavoriteList(userId);
+		/*	logger.info(pagingDTO.getTotalCount()+"개수는 ㅁㄴㅇㅁㄴㅇㅁㄴㅇ");*/
 			
-//			for(BoardDTO dto : list1){
-//				service.selectMyFavoriteList(dto.getbNo(),userId);
-//			}
-			
-		
-			List<BoardDTO> list= new ArrayList<BoardDTO>();
-			for (int i = 0; i < list1.size(); i++) {
-
-				String bno= list1.get(i).getbNo();
-				list.addAll(service.selectMyFavoriteList(bno, userId));
-				// 내가 가져온 좋아요 리스트의 bno를 통해서 내가 누른 좋아요 게시판 가져오기(말이 이상한가?)
-			}
-
-			
-
 			// 내가 좋아요 누른 게시글 리스트로 가져와서 전달하기
-			//List<BoardDTO> list = service.selectMyFavoriteList(pagingDTO, userId);
-			model.addAttribute("MyFavoriteList",list );
-			model.addAttribute("pagingDTO", pagingDTO);
+			List<BoardDTO> list= service.selectFavoriteList(pagingDTO, userId);
+			
+			for (BoardDTO boardDTO : list) {
+				CategoryDTO dto = bservice.selectCategory(boardDTO.getCateId());
+				boardDTO.setCateName(dto.getCateName());
+			}
+			model.addAttribute("MyFavoriteList",list);
+			model.addAttribute("pageMaker", pagingDTO);
 //			model.addAttribute("boardDTO",dto);
 
 		} catch (Exception e) {
@@ -212,7 +213,7 @@ public class MyPageController {
 
 	@RequestMapping(value="/myBoardList")
 	@ResponseBody
-	public Map<String,Object> myBoardList(Model model,HttpServletRequest req,BoardPagingDTO pagingDTO){
+	public Map<String,Object> myBoardList(Model model,HttpServletRequest req,Mypagepaging pagingDTO){
 		HashMap<String,Object> res=new HashMap<String, Object>();
 		
 		UserVO loginSession = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
@@ -222,7 +223,7 @@ public class MyPageController {
 		
 		int totRecord = service.selectMyBoardListCount(pagingDTO, userId);
 		// 페이징 계산
-		pagingDTO.calcPage(totRecord);
+		pagingDTO.setTotalCount(totRecord);
 
 		try {
 			List<BoardDTO> list = service.selectWritedList(userId);//내가 쓴 글 목록 조회

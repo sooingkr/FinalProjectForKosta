@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 
 public interface MyPageDAO {
@@ -27,7 +26,7 @@ public interface MyPageDAO {
 	public int duplicateId(TransactionDTO dto);
 	
 	/** 전체 레코드 갯수 가져옴 */
-	public int selectMyFavoriteListTotalCount(@Param("pagingDTO")BoardPagingDTO pagingDTO, @Param("userId")String userId);	
+	public int selectMyFavoriteListTotalCount(Mypagepaging pagingDTO, @Param("userId")String userId);	
 	
 	/** 나의좋아요 정보를 조회해서 List로 가져온다  */
 	public List<BoardDTO> selectMyFavoriteList(@RequestParam("bNo")String bno, @Param("userId")String userId);
@@ -47,5 +46,11 @@ public interface MyPageDAO {
 	public List<BoardDTO> selectWritedList(String userId);
 	
 	/**마이페이지 내가 쓴 목록 갯수 가져오기*/
-	public int selectMyBoardListCount(@Param("pagingDTO")BoardPagingDTO pagingDTO ,@Param("userId")String userId);
+	public int selectMyBoardListCount(Mypagepaging pagingDTO ,@Param("userId")String userId);
+
+	/**페이징 처리*/
+	public List<BoardDTO> selectFavoriteList(Mypagepaging pagingDTO, String userId);
+	
+	/**페이징 처리해서 갯수세기*/
+	public int selectFavoritecount(Mypagepaging pagingDTO, String userId);
 }
