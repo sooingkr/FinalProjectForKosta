@@ -121,7 +121,6 @@ $(document).ready(function(){
 	                  $(data.list).each(function(){
 	     		         var html = template(this);
 	     		         var str = "<pre style='height:100px;overflow-y:hidden;'>"+this.bcontent+"</pre>" 
-	     		         /*if(this.bcontent)*/
 	     		         +"<button type='button' class='moreBtn'>펼쳐보기</button><hr/>";
 	     		         var btnStr = "<button type='button'>"
 	   		        	  				+"<img src='/resources/images/like1.png' style='width:15px;height:15px'/>"

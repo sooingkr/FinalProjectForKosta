@@ -18,6 +18,10 @@ a:hover { color: #F78E41; text-decoration: none;}
 	font-weight: bold;
 	padding:0 5px 0 5px;
 }
+.mypage:hover{
+	 
+}
+
  
 </style>
 
@@ -26,8 +30,9 @@ a:hover { color: #F78E41; text-decoration: none;}
 	
 		<!-- 로그아웃 -->
 		<c:if test="${loginSession.userId != null}">
-			<span style="font-weight: bold;">${loginSession.userId} </span> 
-			<img class="msg_img" src="/resources/images/message.png"/> 
+			<span style="font-weight: bold;">${loginSession.userId} </span>
+			<a class="mypage" href="/mypage/myList"><img style="padding-bottom: 4px;" src="/resources/images/mypage.png"/></a> 
+			<img class="msg_img" src="/resources/images/message.png"/>
 			<a class="msg_a" href="/note/listReceive">
 				<!-- 읽지 않은 쪽지 -->
 				<span id="noteBadge" class="Badge" >${sessionScope.notOpen}</span>
