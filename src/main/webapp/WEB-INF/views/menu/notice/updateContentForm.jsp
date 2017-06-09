@@ -45,13 +45,13 @@
 							<td><input id="bTitle" class="form-control" type="text" name="bTitle" value="${boardDTO.bTitle}" required="required"/></td>
 						</tr>
 						<tr>
-							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >내용</th>
-							<td><textarea id="bContent" name="bContent" rows="100" class="form-control" required="required">${boardDTO.bContent}</textarea></td>
+							<th style="width: 20%;text-align: center;background-color: #EAEAEA; ">내용</th>
+							<td><textarea id="bContent" name="bContent" rows="300" class="form-control" required="required">${boardDTO.bContent}</textarea></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th style="width: 20%;text-align: center;background-color: #EAEAEA" >첨부파일</th>
 							<td><input style="width: 100%" type="file" /></td>
-						</tr>
+						</tr> -->
 					</table>
 					<div align="right">
 						<input type="hidden" name="bNo" value="${boardDTO.bNo}" />
