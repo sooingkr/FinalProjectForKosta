@@ -142,9 +142,7 @@
 	
 </style>
 </head>
-
 <body>
-
     <header>
         <div class="f-page gray-bkg site-header grey" id="screen-about">
             <!-- START HEADER -->
@@ -337,7 +335,36 @@
 
   
     <!-- 사이드바 추가 -->
-     <section class="app">
+     
+    <!--  -->
+    <a name="above"></a>
+	<div class="col-sm-10 col-sm-offset-1">  
+  
+            <div style="border: solid 1px #DDD !important; margin-top: 3%;">
+               
+            <ul id="showTimeline" class="timeline" style="width:60%;">
+            <script id="entry-template2" type="text/x-handlebars-template"> 
+                  <li class="timeline-event">
+                   <label class="timeline-event-icon"></label>
+                   <div class="timeline-event-copy">
+                     <p class="timeline-event-thumbnail">{{dateVal bregdate}}</p>
+                        <br/>
+                     <div class='label label-danger'>카테고리</div>
+                     <span><b>{{cateName}}</b></span><br/>
+                     <div class='label label-warning'>거리</div>
+                     <span><b>{{distanceVal distance}}</b></span><br/>
+                     <div class='label label-warning'>금액</div>
+                     <span><b>{{value}} 원</b></span>
+                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}&pageNo=1">{{btitle}}</a></strong></h2>
+                     <i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
+                     <span><b>{{userId}}</b></span>
+            </script> 
+              </ul> 
+         <!--     <p><ul id="showTimeline"></ul></p>  -->
+            </div>
+   </div>
+   
+   <section class="app">
             <aside class="side">
                 <ul class="tabs">
                     <li><a href="index.html"><i class="icon-dribbble icon2"></i> Dribbble</a></li>
@@ -484,33 +511,6 @@
                 </article>
             </section>
     </section>
-    <!--  -->
-    <a name="above"></a>
-	<div class="col-sm-10 col-sm-offset-1">  
-  
-            <div style="border: solid 1px #DDD !important; margin-top: 3%;">
-               
-            <ul id="showTimeline" class="timeline" style="width:60%;">
-            <script id="entry-template2" type="text/x-handlebars-template"> 
-                  <li class="timeline-event">
-                   <label class="timeline-event-icon"></label>
-                   <div class="timeline-event-copy">
-                     <p class="timeline-event-thumbnail">{{dateVal bregdate}}</p>
-                        <br/>
-                     <div class='label label-danger'>카테고리</div>
-                     <span><b>{{cateName}}</b></span><br/>
-                     <div class='label label-warning'>거리</div>
-                     <span><b>{{distanceVal distance}}</b></span><br/>
-                     <div class='label label-warning'>금액</div>
-                     <span><b>{{value}} 원</b></span>
-                     <h2><strong><a href="/board/category/detailContent?bno={{bno}}&pageNo=1">{{btitle}}</a></strong></h2>
-                     <i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
-                     <span><b>{{userId}}</b></span>
-            </script> 
-              </ul> 
-         <!--     <p><ul id="showTimeline"></ul></p>  -->
-            </div>
-   </div>
    
 
 

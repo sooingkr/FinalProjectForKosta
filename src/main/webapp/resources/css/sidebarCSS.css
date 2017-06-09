@@ -133,8 +133,6 @@ body {
 
 
 
-
-
 <!-- 사이드바 스타일 -->
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -261,6 +259,7 @@ a:hover {
   border-radius: 3px;
   -webkit-box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 }
 
 .side {
