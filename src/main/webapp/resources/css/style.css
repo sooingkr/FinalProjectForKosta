@@ -79,7 +79,7 @@ img, iframe { vertical-align: middle; }
     -webkit-backface-visibility: hidden;
 }
 #mobile-nav a {
-    color: #fff;
+    color: #FFA800;
     display: block;
     padding: 11px 0px 11px 14px;
 }
@@ -99,6 +99,9 @@ img, iframe { vertical-align: middle; }
     top: 3.91%;
     right: 2.2%;
     z-index: 4;
+    background-color: white;
+    border-radius: 40px;
+
 }
 .site-header .nav-trigger {
     background: #72C9B9 url(../images/trigger-white.png) left top no-repeat;
@@ -128,7 +131,7 @@ img, iframe { vertical-align: middle; }
     width: 32px;
     height: 32px;
     margin-top: -16px;
-
+	
     -webkit-transition: all 20000ms linear;
     -o-transition: all 20000ms linear;
     -moz-transition: all 20000ms linear;
@@ -168,6 +171,7 @@ img, iframe { vertical-align: middle; }
     margin-left: 30px;
     float: left;
     text-transform: uppercase;
+    background-color: white;
 }
 
 .site-header .site-menu a {
@@ -738,7 +742,7 @@ img, iframe { vertical-align: middle; }
 }
 
 .site-header.yellow .site-menu a  { color: #000; }
-.site-header.yellow .site-menu a:hover,.site-header.yellow .site-menu a.active { color: #fff; }
+.site-header.yellow .site-menu a:hover,.site-header.yellow .site-menu a.active { color: #FFA800; }
 .site-header.grey .site-menu a:hover,.site-header.grey .site-menu a.active { color: #ffa800; }
 /* End G */
 
