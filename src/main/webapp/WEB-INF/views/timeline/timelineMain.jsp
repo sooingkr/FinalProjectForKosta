@@ -112,7 +112,7 @@
 </script>
  
 <script>
-
+/* 
     var sock = null;
     $(document).ready(function(){
         sock = new SockJS("/echo-ws");
@@ -122,15 +122,15 @@
         	  	alert("테스트 소켓 : " + evt.data);
          	 	console.log("안들어오나?" + evt.data);
                // notifyMe(evt.data); // notification
-             /* if(${loginSession.userId eq sessionScope.NotiRecvId}){
-             } */
+//               if(${loginSession.userId eq sessionScope.NotiRecvId}){
+//              } 
           }
           sock.onclose = function(){
           }      
        
     });
-   
-  
+    
+   */
 </script>
 <style>
 	.msg_a {
