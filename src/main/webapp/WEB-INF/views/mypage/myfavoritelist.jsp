@@ -120,10 +120,35 @@
 					<li><a href="javascript:favirtelist();">좋아요 목록</a></li>
 					<li><a href="javascript:myWriteList();">내가 올린 글</a></li>
 					<li><a href="#">쪽지 보관함</a></li>
-					<li><a href="#">회원정보 수정</a></li>
+					<li><a data-toggle="modal" data-target="#myModal">회원정보 수정</a></li>
 					<li><a href="javascript:myExchangeList();">거래중인 게시물</a></li>
 				</ul>
 			</div>
+			
+			<!-- 회원수정 페이지로 이동하기 위한 패스워드 입력 모달창 -->
+					<!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">×</button>
+			          <h4 class="modal-title">패스워드 확인창</h4>
+			        </div>
+			        <div class="modal-body">
+			          <form id="form1" action="/user/modifyInfo" method="post">
+				          <p>회원정보를 수정하기 위해 패스워드를 확인해주세요.</p>
+				          <label>비밀번호</label><input id="pwId" type="password" name="password" class="form-control"/><br/>
+			          </form>
+			        </div>
+			        <div class="modal-footer">
+			          <button id="btnClick" type="button">확인</button>
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
 
 			<div id="formWrapper">
 
@@ -233,8 +258,25 @@
 
 		</div>
 		</section>
+		
+		
+		<!-- 회원정보수정 -->
+		<c:if test="${map.msg eq 'FAIL'}">
+			<script>
+		 	  	alert("실패했습니다");
+	 	  	</script>
+		</c:if>
+		
 
 		<script>
+			/* 회원정보수정 */
+			$(document).ready(function(){
+				$("#btnClick").on("click",function(event){
+					var formId = $("#form1");
+					formId.submit();
+				});// end of btnClick
+		  	});// end of ready()
+
 		
 			// 거래인 지정용 전역변수
 			var spanCustomer;

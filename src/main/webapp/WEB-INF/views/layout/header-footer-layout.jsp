@@ -195,7 +195,7 @@
          
   <div id="site-holder">
   
-     <div id="flip" style="padding:0px;" class="container" data-attr-page="0">
+     <div class="container" >
        
            <decorator:body />
  
