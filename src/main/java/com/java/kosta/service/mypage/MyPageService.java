@@ -54,5 +54,9 @@ public interface MyPageService {
 	/**내가 쓴 목록 페이징으로 조회*/
 	public List<BoardDTO> selectFavoriteList(Mypagepaging pagingDTO, String userId);
 
+	/** 나의 거래중인 게시물 갯수 가져오기 */
+	public int selectMyExchangeListCount(BoardPagingDTO pagingDTO, String buyerId);
 	
+	/** 나의 거래중인 게시물 리스트 가져오기 */
+	public List<BoardDTO> selectExchangeList(BoardPagingDTO pagingDTO, String buyerId);
 }

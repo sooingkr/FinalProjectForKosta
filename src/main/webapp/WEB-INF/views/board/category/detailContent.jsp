@@ -209,8 +209,7 @@
 					</c:if>
 
 					<button type="button" class="btn btn-primary"
-						onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}&pageNo=${param.pageNo }'">목록</button>
-
+						onclick="location.href='/board/category/boardList?cateId=${cateDTO.cateId}&pageNo=${param.pageNo == null ? 1 : param.pageNo}'">목록</button>
 				</div>
 				<br /><br />
 				
@@ -672,12 +671,6 @@
 					}
 				}); // end of ajax from likeBoard Btn Clicks
 			}
-			
-			/* href 클릭 함수 */
-			function hrefFunc(fileName){
-				$("#hrefId").attr("target","_blank");
-				location.href="/board/displayFile?fileName=" + getImageLink(fileName);
-			} 
 		</script>
 
 		<script>

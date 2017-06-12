@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.java.kosta.dto.board.BoardDTO;
+import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 
@@ -53,4 +55,10 @@ public interface MyPageDAO {
 	
 	/**페이징 처리해서 갯수세기*/
 	public int selectFavoritecount(Mypagepaging pagingDTO, String userId);
+	
+	/** 나의 거래중인 게시물 갯수 가져오기 */
+	public int selectMyExchangeListCount(@Param("pagingDTO")BoardPagingDTO pagingDTO, @Param("buyerId")String buyerId);
+
+	/** 나의 거래중인 게시물 리스트 */
+	public List<BoardDTO> selectExchangeList(@Param("pagingDTO")BoardPagingDTO pagingDTO, @Param("buyerId")String buyerId);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.java.kosta.dao.mypage.MyPageDAO;
@@ -110,6 +111,13 @@ public class MyPageServiceImpl implements MyPageService{
 		return mDAO.selectFavoritecount(pagingDTO,userId);
 	}
 
+	public int selectMyExchangeListCount(BoardPagingDTO pagingDTO, String buyerId){
+		return mDAO.selectMyExchangeListCount(pagingDTO, buyerId);
+	}
 	
+	public List<BoardDTO> selectExchangeList(BoardPagingDTO pagingDTO, String buyerId){
+		
+		return mDAO.selectExchangeList(pagingDTO, buyerId);
+	}
 
 }

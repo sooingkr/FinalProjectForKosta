@@ -357,7 +357,12 @@
                      <span><b>{{value}} 원</b></span>
                      <h2><strong><a href="/board/category/detailContent?bno={{bno}}&pageNo=1">{{btitle}}</a></strong></h2>
                      <i class='glyphicon glyphicon-time'></i> 등록일 : {{bregdate}}<br/><br/>
-                     <span><b>{{userId}}</b></span>
+                     <span><b>{{userId}}</b></span><br/>
+					<img src='{{imgPath}}'/>
+					<hr/>	
+					<button type='button'>
+						<img src='/resources/images/like1.png' style='width:15px;height:15px'/>
+		        	</button></div></li>
             </script> 
               </ul> 
          <!--     <p><ul id="showTimeline"></ul></p>  -->

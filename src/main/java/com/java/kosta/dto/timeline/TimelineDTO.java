@@ -26,10 +26,19 @@ public class TimelineDTO{
 	private String cateId7;
 	private String distance;
 	private String cateName;
+	private String imgPath;
+	
+	
 //	getter, setter
 	
 	public String getBno() {
 		return bno;
+	}
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 	public String getCateName() {
 		return cateName;

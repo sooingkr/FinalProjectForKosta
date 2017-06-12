@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.kosta.common.Constants;
 import com.java.kosta.dto.board.BoardDTO;
+import com.java.kosta.dto.board.BoardPagingDTO;
 import com.java.kosta.dto.board.CategoryDTO;
+import com.java.kosta.dto.mypage.EvalDTO;
 import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 import com.java.kosta.dto.user.UserVO;
@@ -238,12 +240,49 @@ public class MyPageController {
 		return res;
 	}
 
-	
-	
-	
-	
+	/** 나의 거래중인 리스트 가져오는 AJAX */
+	@RequestMapping("/myExchangeList")
+	@ResponseBody
+	public Map<String,Object> myExchangeList(Model model, HttpServletRequest req, BoardPagingDTO pagingDTO){
+		HashMap<String,Object> res=new HashMap<String, Object>();
+		
+		UserVO loginSession = (UserVO)req.getSession().getAttribute(Constants.LOGINSESSION);
+		
+		res.put("loginSession", loginSession);
+		String loginId = loginSession.getUserId();
+		
+		int totRecord = service.selectMyExchangeListCount(pagingDTO, loginId);	// eval 테이블에 있는 나의 거래중인 게시물(거래자 입장) 총 갯수
+		System.out.println(totRecord);
+		// 페이징 계산
+		pagingDTO.calcPage(totRecord);
 
-
+		try {
+			List<BoardDTO> list = service.selectExchangeList(pagingDTO, loginId);	// eval 테이블에 있는 나의 거래중인(거래자 입장) 게시물 리스트 가져오기
+			res.put(Constants.RESULT, Constants.RESULT_OK); 
+			res.put("MyExchangeList",list);
+			res.put("pagingDTO", pagingDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	/** 구매 후기 작성 처리 */
+	@RequestMapping("/writeReview")
+	@ResponseBody
+	public Map<String,Object> writeReview(Model model, HttpServletRequest req, EvalDTO evalDTO){
+		Map<String,Object> res = new HashMap<String, Object>();
+		
+		try {
+			
+			res.put(Constants.RESULT, Constants.RESULT_OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 
 }

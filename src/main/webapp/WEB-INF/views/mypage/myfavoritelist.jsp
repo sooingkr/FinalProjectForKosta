@@ -5,8 +5,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${loginSession.userId }의마이페이지</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>${loginSession.userId }의마이페이지</title>
+	<%@include file="/WEB-INF/views/note/includeModalCSS.jsp"%>
+	<style>
+		.star_rating {font-size:0; letter-spacing:-4px;}
+		.star_rating a {
+		    font-size:22px;
+		    letter-spacing:0;
+		    display:inline-block;
+		    margin-left:5px;
+		    color:#ccc;
+		    text-decoration:none;
+		}
+		.star_rating a:first-child {margin-left:0;}
+		.star_rating a.on {color:#F78E41;}
+	</style>
+
 </head>
 <body>
 	<!-- START TALK TO US SECTION -->
@@ -55,8 +70,49 @@
 		    </div>
 		  </div>
 		</div>
-
 		<!-- End of 구매결정 모달창 -->
+		
+		<!-- 후기작성 모달창 -->
+		<a href="#x" class="overlay" id="review_form"></a>
+		<div class="popup">
+			<center> <h3 align="center">구매 후기 작성</h3> </center>
+			<br>
+			<form id="formName" action="/mypage/writeReview" method="post">
+				<table class="table-bordered">
+					<tr>
+						<th style="text-align: center; width: 15%; height:34px; background-color: #F6F6F6">판매자</th>
+						<td><span id="userId" style="margin-left:5px;"></span></td>
+					</tr>
+					<tr>
+						<th style="text-align: center; width: 15%; height:34px; background-color: #F6F6F6">거래인</th>
+						<td><span id="buyerId" style="margin-left:5px;" ></span></td>
+					</tr>
+					<tr>
+						<th style="text-align: center; background-color: #F6F6F6">내용</th>
+						<td><textarea rows="10" cols="80" name="pcontent" id="pcontent" class="form-control"></textarea></td>
+					</tr>
+					<tr>
+						<th style="text-align: center; height:34px; background-color: #F6F6F6">별점</th>
+						<td><p class="star_rating">
+    						<a href="#" class="on">★</a>
+    						<a href="#">★</a>
+    						<a href="#">★</a>
+    						<a href="#">★</a>
+    						<a href="#">★</a></p>
+							<input type="hidden" class="form-control" name="pscore" id="pscore"/></td>
+					</tr>
+				</table> 
+
+				<br>
+				<input type="hidden" name="bno" id="bno" />
+				<div align="right">
+					<button id="cancelBtn" type="button" class="btn btn-default">취소</button>
+					<button id="reviewBtn" type="button" class="btn btn-warning">작성하기</button>
+				</div>
+			</form>
+			<a class="close" href="#close"></a>
+		</div>
+		
 		
 		<div class="content-frame">
 			<div id="side_nav" style="float: left; height: 100%; line-height: 6;">
@@ -65,6 +121,7 @@
 					<li><a href="javascript:myWriteList();">내가 올린 글</a></li>
 					<li><a href="#">쪽지 보관함</a></li>
 					<li><a href="#">회원정보 수정</a></li>
+					<li><a href="javascript:myExchangeList();">거래중인 게시물</a></li>
 				</ul>
 			</div>
 
@@ -275,7 +332,7 @@
 								str += "<tr>";
 								str += "<td style='text-align: center;'>" + board.bNo + "</td>";
 								str += "<td>" + board.cateId + "</td>";
-								str += "<td> <a href='/board/category/detailContent?bno='"+board.bNo+"'>"+ board.bTitle +" </a> </td>";
+								str += "<td> <a href='/board/category/detailContent?bno="+board.bNo+"'>"+ board.bTitle +" </a> </td>";
 								str += "<td style='text-align: center;'>" + board.userId + "</td>";
 								str += "<td style='text-align: center;'>" + board.bRegDate + "</td>";
 								
@@ -304,7 +361,7 @@
 						}
 					}
 				});
-			} // end of update()
+			} // end of myWriteList()
 			
 			
 			
@@ -366,6 +423,127 @@
 					});
 				}
 			});
+			
+			
+			function myExchangeList(){
+				var form = $("#form-contact");
+				$.ajax({
+					type : 'get',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "GET"
+					},
+					url : '/mypage/myExchangeList',
+					dataType : 'json',
+					success : function(data) {
+						console.log(data);
+						if (data.result == "ok") {
+							var str = "";
+							
+							$("#form-contact").remove();
+							str += "<div id='form-contact' style='padding-left: 1%'>";
+							str += "<table class='table table-bordered'>";
+							str += "<tr style='background-color: #FFA800;'>";
+							str += "<th style='width: 5%; text-align: center;'>No</th>";
+							str += "<th style='width: 10%; text-align: center;'>카테고리</th>";
+							str += "<th style='width: 45%; text-align: center;'>제목</th>";
+							str += "<th style='width: 10%; text-align: center;'>작성자</th>";
+							str += "<th style='width: 20%; text-align: center;''>작성날짜</th>";
+							str += "<th style='text-align:center;'>구매후기</th>";
+							str += "</tr>";
+							
+							if( data.pagingDTO.totalRecordCount == 0){
+								str +="<tr><td colspan='6' style='text-align:center;'> 거래중인 게시글이 없습니다. </td></tr> ";	
+								$("#formWrapper").append(str);
+								return;
+							}
+							
+							$.each(data.MyExchangeList, function(i, board) {
+								
+								str += "<tr>";
+								str += "<td style='text-align: center;'>" + board.bNo + "</td>";
+								str += "<td>" + board.cateId + "</td>";
+								str += "<td> <a href='/board/category/detailContent?bno="+board.bNo+"'>"+ board.bTitle +" </a> </td>";
+								str += "<td style='text-align: center;'>" + board.userId + "</td>";
+								str += "<td style='text-align: center;'>" + board.bRegDate + "</td>";
+								/* str += "<td style='text-align: center;'><button class='reviewBtn' data-target='#login_form' data-toggle='overlay'>후기 작성</button></td>"; */
+								str += "<td style='text-align: center;'>"
+									+  "<a href='#review_form' id='a_review' class='btn btn-link' style='text-decoration:none;background-color:#eee;border-radius:10px;'><span>후기 작성</span></a></td>";
+								str += "</tr>";
+							});
+							str += "</div>";
+							str += "</table>";
+							
+							// 페이징 처리
+							str += "<div align = 'center'>" +
+										"<ul class='pagination pagination-sm'>";
+										if(data.pagingDTO.groupNo > 1){
+											str += "<li>" 
+												+	"<a href='/mypage/myExchangeList?"+data.pagingDTO.groupNo+"=1'>처음</a>" 
+												+ "</li>" 
+												+ "<li>"
+												+ 	"<a href='/mypage/myExchangeList?pageNo="+data.pagingDTO.pageStartNo - 1+">◀</a>" 
+												+ "</li>";
+										}
+										for(var i=data.pagingDTO.pageStartNo; i <= data.pagingDTO.pageEndNo; i++){
+											if(data.pagingDTO.pageNo != i){
+												str += "<li><a href='/mypage/myExchangeList?pageNo="+i+"'>" +i +"</a></li>";
+											}else{
+												str += "<li><a href='#' style='background-color: #085B86; color: white; font-weight: bold;'>&nbsp;"+ i +"&nbsp;</a></li>";
+											}
+											
+										}
+										if(data.pagingDTO.groupNo < data.pagingDTO.totalGroupCount){
+											str += "<li><a href='/mypage/myExchangeList?pageNo="+data.pagingDTO.pageEndNo + 1 +"'>▶</a></li>"
+												+ "<li><a href='/mypage/myExchangeList?pageNo="+data.pagingDTO.totalPageCount+"'>마지막</a></li>";
+										}		
+									str +="</ul>"
+									+"</div>";
+							
+							$("#formWrapper").append(str);
+						}
+					}
+				});
+			} // end of myExchangeList()
+			
+			// 후기 작성 버튼 눌렀을 때 데이터 저장 처리
+			$(document).on("click","#a_review",function(event){
+				var bno = $(this).parent().prev().prev().prev().prev().prev().text();
+				var userId = $(this).parent().prev().prev().text();
+				var buyerId = "${loginSession.userId }";
+				$("#bno").val(bno);
+				$("#userId").text( userId);
+				$("#buyerId").text( buyerId);
+				
+			});
+			
+			// 별점 클릭했을 때 동작하는 함수
+			$( ".star_rating a" ).click(function() {
+			     $(this).parent().children("a").removeClass("on");
+			     $(this).addClass("on").prevAll("a").addClass("on");
+			     return false;
+			});
+			
+			
+			var formName = $("#formName");
+			// 후기 작성 모달창에서 작성을 누르면 호출되는 이벤트 함수 
+			$("#reviewBtn").on("click",function(event){
+				var bno = $("#bno").val();
+				var score = $(".star_rating").find(".on").length;
+				//alert(bno+"번 : "+score+"점");
+				
+				
+				$("#pcontent").val("");
+				$(".star_rating").children("a").removeClass("on");
+				formName.submit();
+			});
+			
+			$("#cancelBtn").on("click", function(evnet) {
+				$("#pcontent").val("");		// 내용 비우기
+				$(".star_rating").children("a").removeClass("on");	// 별점 지우기
+				history.back(); // 뒤로가기
+			}); // end of cancelBtn
+			
 		</script>
 
 	</div>

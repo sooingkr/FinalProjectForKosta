@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.java.kosta.dto.board.BoardAttachDTO;
 import com.java.kosta.dto.note.NoteVO;
 import com.java.kosta.dto.note.PagingDTO;
 import com.java.kosta.dto.timeline.FilterDTO;
 import com.java.kosta.dto.timeline.TimelineDTO;
 import com.java.kosta.dto.user.UserVO;
+import com.java.kosta.service.board.BoardService;
 import com.java.kosta.service.note.NoteService;
 import com.java.kosta.service.timeline.TimelineService;
 
@@ -29,6 +31,10 @@ public class TimelineController {
 	
 	@Inject
 	TimelineService service;
+	
+	@Inject
+	BoardService bService;
+	
 
 	Logger logger = LoggerFactory.getLogger(TimelineController.class);
 
@@ -67,6 +73,24 @@ public class TimelineController {
 
 			// 관심사, 거리에 따른 게시글 목록 가져오기
 			list = service.listMatch(vo, page, keywords);
+			
+			// 해당 게시물의 파일 테이블을 리스트로 가져와서 첫번째 이미지 파일 경로를 TimelineDTO 에 set해줌
+			// 타임라인에 이미지 하나만 보여주기 위함 (by.이윤지)
+			try {
+				for(TimelineDTO tlDTO : list){
+					List<BoardAttachDTO> files = bService.selectAttach(tlDTO.getBno());
+					for(BoardAttachDTO baDTO : files){
+						if(baDTO.getAttachType().equals("2")){
+							tlDTO.setImgPath(baDTO.getFileName());
+							System.out.println(tlDTO.getBno()+"번 : "+baDTO.getFileName());
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 
 			logger.info("넘어온 값 : keywords : " + keywords + " page : " + page.getPage());
 		}
@@ -123,6 +147,24 @@ public class TimelineController {
 		logger.info("필터 전체 수 : " + service.countFilterList(filter));
 		page.setPerPageNum(5);
 		List<TimelineDTO> list = service.listFilter(filter, page);
+		
+		// 해당 게시물의 파일 테이블을 리스트로 가져와서 첫번째 이미지 파일 경로를 TimelineDTO 에 set해줌
+		// 타임라인에 이미지 하나만 보여주기 위함 (by.이윤지)
+		try {
+			for(TimelineDTO tlDTO : list){
+				List<BoardAttachDTO> files = bService.selectAttach(tlDTO.getBno());
+				for(BoardAttachDTO baDTO : files){
+					if(baDTO.getAttachType().equals("2")){
+						tlDTO.setImgPath(baDTO.getFileName());
+						System.out.println(tlDTO.getBno()+"번 : "+baDTO.getFileName());
+						break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("bno : " + list.get(i).getBno() + ", cateId : " + list.get(i).getCateId() + ", value : "
 					+ list.get(i).getValue());

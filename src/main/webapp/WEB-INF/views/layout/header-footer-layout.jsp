@@ -187,10 +187,10 @@
       <!-- 모바일 화면 전환됐을 때 옆 메뉴바 부분 -->
     <nav id="mobile-nav">
         <a href="#welcome">Welcome</a>
-        <a href="#about">About Us</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#team">Team</a>
-        <a href="#talk-to-us">Talk To US</a>       
+        <a href="/timeline">TimeLine</a>
+        <a href="/categorySection">Category</a>
+        <a href="/noticeBoardSection?cateId=0&pageNo=1">Notice</a>
+        <a href="/aboutUsSection">About Us</a>       
     </nav>
          
   <div id="site-holder">

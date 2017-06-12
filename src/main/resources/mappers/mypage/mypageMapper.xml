@@ -21,7 +21,7 @@
 
 	<!-- 거래자 지정시 테이블 insert -->
 	<insert id="insertTransaction">
-		insert into eval(userId,bno,cateId,buyerId,pscore) values(#{userId},#{bno},#{cateId},#{buyerId},0)
+		insert into eval(userId,bno,cateId,buyerId,pscore) values(#{userId},#{bno},#{cateId},#{buyerId},1)
 	</insert>
 
 	<!-- 고객이 후기를 쓸 게시글(거래) 수가 몇개인지를 조회 -->
@@ -143,5 +143,19 @@
 		userId = #{userId}
 	</select>
 	
+	<!-- 나의 거래중인 게시물 갯수 조회 -->
+	<select id="selectMyExchangeListCount" resultType="int">
+	    SELECT COUNT(*)
+		FROM eval
+		WHERE buyerId = #{buyerId}
+	</select>
+	
+	<!-- 나의 거래중인 게시물 리스트 -->
+	<select id="selectExchangeList" resultType="BoardDTO">
+	    select * 
+	    from board 
+	    where bno in (select bno from eval where eval.buyerId = #{buyerId})
+	    LIMIT #{pagingDTO.startRow}, #{pagingDTO.endRow}
+	</select>
 
 </mapper>

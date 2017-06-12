@@ -9,8 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.java.kosta.dto.board.BoardDTO;
-import com.java.kosta.dto.board.BoardFavoriteDTO;
 import com.java.kosta.dto.board.BoardPagingDTO;
+import com.java.kosta.dto.mypage.EvalDTO;
 import com.java.kosta.dto.mypage.Mypagepaging;
 import com.java.kosta.dto.transaction.TransactionDTO;
 
@@ -140,6 +140,22 @@ public class MyPageDAOImpl implements MyPageDAO{
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
 		return sqlSession.selectOne(NameSpace+".selectFavoritecount",map);
+	}
+
+	@Override
+	public int selectMyExchangeListCount(BoardPagingDTO pagingDTO, String buyerId) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingDTO", pagingDTO);
+		map.put("buyerId", buyerId);
+		return sqlSession.selectOne(NameSpace +".selectMyExchangeListCount", map);
+	}
+
+	@Override
+	public List<BoardDTO> selectExchangeList(BoardPagingDTO pagingDTO, String buyerId) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("pagingDTO", pagingDTO);
+		map.put("buyerId", buyerId);
+		return sqlSession.selectList(NameSpace + ".selectExchangeList", map);
 	}
 
 }
