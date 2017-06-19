@@ -13,14 +13,13 @@ public class BoardDTO {
 	String value;		//티켓의 가치
 	String isSwap;		// ENUM('Y','N')
 	String viewCnt;		//조회수
-	//Date bRegDate;	//게시 날짜
-	//Date bModifyDate;	//수정 날짜
 	String bRegDate;	//게시 날짜
 	String bModifyDate;	//수정 날짜
 	private String lat; // 위도
 	private String lon; // 경도
 	
 	private String cateName;//카테고리 아이디를 네임으로 바꿀려고 만듬
+	private String pcontent;	//해당 게시글의 구매후기
 	
 	private String imgPath[];
 	private String imgOriginName[];
@@ -32,9 +31,17 @@ public class BoardDTO {
 	
 //	private String[] files;	// 파일 업로드 배열
 	
+	String BuyerId;
+	
 	
 	public String[] getImgPath() {
 		return imgPath;
+	}
+	public String getPcontent() {
+		return pcontent;
+	}
+	public void setPcontent(String pcontent) {
+		this.pcontent = pcontent;
 	}
 	public String[] getImgOriginName() {
 		return imgOriginName;
@@ -151,6 +158,12 @@ public class BoardDTO {
 		this.bModifyDate = newString;
 	}
 	
+	public String getBuyerId() {
+		return BuyerId;
+	}
+	public void setBuyerId(String buyerId) {
+		BuyerId = buyerId;
+	}
 	// 데이트 형식 바꾸는 메서드
 	public String dateFormatting(String oldString){
 		String newString ="";
